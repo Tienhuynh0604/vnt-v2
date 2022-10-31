@@ -1,0 +1,39 @@
+{
+  "collectionName": "components_common_banners",
+  "info": {
+    "displayName": "Banner",
+    "icon": "file-powerpoint"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "text"
+    },
+    "subTitle": {
+      "type": "text"
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "bgImage": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "ctaText": {
+      "type": "string"
+    },
+    "ctaLink": {
+      "type": "string"
+    },
+    "bannerStyle": {
+      "type": "string"
+    }
+  }
+}

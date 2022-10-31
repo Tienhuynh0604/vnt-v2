@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_common_social_items",
+  "info": {
+    "displayName": "ContactItem",
+    "icon": "globe-africa",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "displayText": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "Phone",
+        "Email",
+        "Link"
+      ]
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_common_features",
+  "info": {
+    "displayName": "feature",
+    "icon": "align-justify"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subTitle": {
+      "type": "text"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "optionValue": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    }
+  }
+}
