@@ -7,7 +7,6 @@ WORKDIR /opt/app
 COPY ./package.json /opt/app
 COPY ./yarn.lock /opt/app
 RUN yarn config set network-timeout 600000 -g
-COPY ./lib ./lib
 RUN yarn install
 COPY . /opt/app
 RUN yarn build
