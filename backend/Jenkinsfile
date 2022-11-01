@@ -1,0 +1,23 @@
+pipeline {
+   agent any
+   stages {
+        stage('Copy config') {
+             steps {
+                 configFileProvider([
+                             configFile(fileId: 'vnt-qn-env',
+                             targetLocation: 'backend/.env')
+                             ]) {}
+             }
+        }
+        stage('Build'){
+            steps{
+                script {
+                    dir("backend"){
+                        docker.build("vnt/backend:${env.BUILD_ID}")
+                        docker.build("vnt/backend:latest")
+                    }
+                }
+            }
+        }
+    }
+}
