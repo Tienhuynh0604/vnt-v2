@@ -19,7 +19,7 @@ const Error = ({statusCode}) => {
 
 export default Error
 
-export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
     const {locale = "vi", res, err} = context;
     console.log("err", err);
     try {
