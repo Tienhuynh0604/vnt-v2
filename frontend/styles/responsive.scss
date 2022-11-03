@@ -1,0 +1,101 @@
+/**
+MOBILE FIX
+ */
+$section-padding-height-sm: 40px;
+$section-padding-height-md: 50px;
+
+
+@include media-breakpoint-down(sm) {
+
+  .navbar-brand img{
+    width: auto;
+    height: 70px;
+  }
+
+  .page-section{
+    padding: 3rem 0;
+  }
+
+  .header-navbar {
+    position: relative;
+  }
+
+  .main-slider-item .carousel-caption {
+    top: 2rem;
+    left: 7%;
+    text-align: left;
+    width: 50%;
+  }
+
+  .main-slider-item .sub-title {
+    font-size: 13px;
+  }
+
+  .main-slider-item .title {
+    font-size: 24px;
+    line-height: 24px;
+  }
+
+  .slick-arrow.app-slick-arrow {
+    display: none !important;
+  }
+
+  .aboutus-section .decor-bg{
+    width: 300px;
+    height: 300px;
+    margin-top: 0;
+    margin-left: 80px;
+  }
+  .aboutus-section .decor-bg-2{
+    height: 300px;
+    width: 350px;
+    margin-top: -250px;
+  }
+}
+
+/**
+IPAD
+ */
+
+@include media-breakpoint-between(sm, lg) {
+  .navbar-brand img{
+    width: auto;
+    height: 70px;
+  }
+
+  .header-navbar {
+    position: relative;
+  }
+
+  .main-slider-item .carousel-caption {
+    top: 4rem;
+    left: 7%;
+    text-align: left;
+    width: 50%;
+  }
+
+  .main-slider-item .title {
+    font-size: 50px;
+    line-height: 50px;
+  }
+
+  .aboutus-section .decor-bg{
+    height: 450px;
+    width: 450px;
+    margin-top: 0;
+    margin-left: 270px;
+  }
+  .aboutus-section .decor-bg-2{
+    height: auto;
+    width: 100%;
+    margin-top: -425px;
+  }
+}
+
+@include media-breakpoint-down(xl) {
+
+}
+
+@include media-breakpoint-up(xl) {
+
+}

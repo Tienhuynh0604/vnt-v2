@@ -1,0 +1,516 @@
+:root {
+  /* The intrinsic width of the underline stroke (in pixels). This is
+   * the same as the height of the cap images. Don't specify the
+   * units! This is because of some of the calculations we do later on. */
+  --underline-intrinsic-width: 8;
+
+  /* The actual width of the underline stroke we want to render (in pixels).
+   * You can modify this, and the sizing and positioning should be calculated
+   * accordingly. Again, Don't specify the units! */
+  --underline-width: 10;
+
+  /* The colour used to draw the underline. It should match the colour
+   * used in the cap images... unfortunately we can't modify the SVG
+   * fill via CSS because it's a background image. */
+  --underline-color: #FBBE00;
+
+  /* We need to know the width of the cap images so that we
+   * can position everything on the x axis accordingly. */
+  --underline-cap-width: 4px;
+
+  /* The border is positioned relative to the bottom of the line.
+   * We can move it upwards a little to create an overlap effect. */
+  --underline-offset-y: -10px;
+
+  /* The padding to add to the x axis. By default, the caps would be
+   * aligned with the beginning and end of the line. */
+  --underline-padding-x: 0.12em;
+}
+
+$navbar-bg: rgba(250, 250, 250, 0.9);
+$bg-white: #F4F4F4;
+$yellow: #FBBE00;
+$cyan: #0D9FCA;
+$blue: #2D4796;
+$blue-2: #162A66;
+$red: #CF0000;
+$font-family-base: 'Nunito', sans-serif;
+$font-family-monospace: 'Nunito', sans-serif;
+$font-family-sans-serif: 'Nunito', sans-serif;
+$bg-grey: #F4F4F4;
+$grey: #AEAEAE;
+
+/**
+BOOTSTRAPS
+ */
+@import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;700&display=swap');
+
+body {
+  background-color: white;
+}
+
+hr {
+  color: #EEEEEE;
+  opacity: 1;
+}
+
+a {
+  text-decoration: none;
+}
+
+button.btn {
+  padding: 13px 32px;
+  border-radius: 40px;
+  min-width: 170px;
+  font-weight: bold;
+}
+
+.header-navbar {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.header-1 {
+  background-color: $navbar-bg;
+}
+
+.header-1 a {
+  color: #6C6C6C;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.header-1 ul.list-inline {
+  margin-bottom: 0;
+}
+
+.header-1 ul.list-inline li {
+  margin-right: 20px;
+}
+
+.header-1 ul.list-inline li svg {
+  font-size: 18px;
+}
+
+.main-navbar {
+  background-color: $navbar-bg;
+}
+
+.main-navbar ul.navbar-nav {
+  column-gap: 60px;
+}
+
+.main-navbar a {
+  font-weight: bold;
+}
+
+.main-navbar .show > .nav-link, .main-navbar .nav-link.active {
+  color: $blue;
+}
+
+/**
+MAIN SLIDER
+ */
+
+.main-slider-item .sub-title {
+  font-size: 18px;
+  color: white;
+  text-shadow: 2px 1px 4px rgb(0, 0, 0);
+}
+
+.main-slider-item .title {
+  font-size: 70px;
+  line-height: 70px;
+  color: white;
+  font-weight: bold;
+  text-shadow: 2px 1px 4px rgb(0, 0, 0);
+}
+
+.main-slider-item .carousel-caption {
+  top: 22rem;
+  left: 20%;
+  text-align: left;
+  width: 35%;
+}
+
+/**
+Page section
+ */
+.page-section {
+  position: relative;
+  padding: 6rem 0;
+}
+
+.bg-grey {
+  background-color: $bg-grey;
+}
+
+
+.page-section h1 {
+  color: $blue;
+  font-weight: bold;
+  z-index: 100;
+  display: block;
+}
+
+.page-section h1 span {
+  position: relative;
+  z-index: 100;
+}
+
+
+.page-section h1 {
+  display: inline;
+  --underline-width-scale: calc(var(--underline-width) / var(--underline-intrinsic-width));
+  padding: 0 calc(var(--underline-padding-x) + calc(var(--underline-cap-width) * var(--underline-width-scale)));
+  box-decoration-break: clone;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(180deg, var(--underline-color), var(--underline-color));
+  background-position-x: calc(var(--underline-cap-width) * var(--underline-width-scale)),
+  0,
+  100%;
+  background-position-y: calc(100% - var(--underline-offset-y) * -1);
+  background-size: calc(100% - calc(var(--underline-cap-width) * var(--underline-width-scale) * 2)) calc(var(--underline-width) * 1px),
+  auto calc(var(--underline-width) * 1px),
+  auto calc(var(--underline-width) * 1px);
+}
+
+//.page-section h1 span:after {
+//  position: absolute;
+//  height: 10px;
+//  width: 100%;
+//  left: 0;
+//  bottom: 10px;
+//  background: $yellow;
+//  display: block;
+//  content: "";
+//  z-index: -1;
+//}
+
+.page-section h2 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0;
+  text-transform: uppercase;
+}
+
+/**
+Product card Item
+ */
+
+.product-card-item .card {
+  border-radius: 10px;
+  border: none;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.19);
+  position: relative;
+}
+
+.product-card-item .card-body {
+  position: relative;
+}
+
+.product-card-item .card .card-img-top {
+
+}
+
+.product-card-item .card .card-title {
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.product-card-item .card ul.price {
+  list-style: none;
+  display: flex;
+  justify-content: start;
+  padding: 0;
+}
+
+.product-card-item .card ul.price li {
+  padding: 0 10px;
+  border-right: 1px solid $grey;
+  font-size: 1rem;
+}
+
+.product-card-item .card ul.price li strong {
+  color: $red;
+}
+
+.product-card-item .card ul.price li:first-child {
+  padding-left: 0;
+}
+
+.product-card-item .card ul.price li:last-child {
+  padding-right: 0;
+  border-right: none;
+}
+
+.product-card-item .card ul.feature {
+  list-style: none;
+  padding: 0;
+  color: #444444;
+  font-size: 1rem;
+}
+
+.product-card-item .card .btn {
+  width: 126px;
+  min-width: 120px;
+  padding: 10px 10px;
+  font-size: 1rem;
+  text-transform: capitalize;
+}
+
+ul.tag-list-1, ul.tag-list-2 {
+  position: absolute;
+  list-style: none;
+  padding: 0;
+}
+
+.product-card-item ul.tag-list-1 {
+  top: 20px;
+  left: -5px;
+}
+
+.product-card-item ul.tag-list-2 {
+  top: -15px;
+}
+
+ul.tag-list-1 li {
+  margin-bottom: 15px;
+}
+
+.p-tag {
+  padding: 8px 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-size: 0.8rem;
+  border-radius: 20px;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.p-tag-top {
+  border-radius: 0 20px 20px 0;
+  font-size: 16px;
+  padding: 10px 15px;
+}
+
+/**
+Slick section
+ */
+.slick-prev.app-slick-arrow:before, .slick-next.app-slick-arrow:before {
+  font-size: 0;
+}
+
+.slick-prev.app-slick-arrow {
+  left: -40px;
+}
+
+.slick-next.app-slick-arrow {
+  right: -40px;
+}
+
+.app-slick-arrow {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  color: #534B4B;
+}
+
+.slick-prev:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus {
+  color: $blue;
+}
+
+.slick-prev {
+  left: -40px;
+}
+
+ul.slick-dots {
+  bottom: -40px;
+}
+
+.slick-dots li {
+  width: 30px;
+  height: 30px;
+  margin: 0;
+}
+
+.slick-dots li.slick-active button:before {
+  font-size: 15px;
+  color: $blue;
+  opacity: 1;
+}
+
+/**
+Footer
+ */
+footer {
+  background-color: $blue-2;
+  color: white;
+}
+
+footer h4 {
+  color: $yellow;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+footer a {
+  color: white;
+}
+
+/**
+DESTINATION
+ */
+
+ul.destination li {
+  padding: 0 15px;
+  position: relative;
+}
+
+ul.destination li:after {
+  content: "/";
+  position: absolute;
+  right: -8px;
+}
+
+ul.destination li:last-child:after {
+  content: "";
+}
+
+ul.destination li.active .btn {
+  color: $blue;
+  font-weight: bold;
+}
+
+ul.destination .btn {
+  min-width: auto;
+  padding: 0;
+  color: black;
+  text-decoration: none;
+}
+
+/**
+ABOUT US SECTION
+ */
+.aboutus-section {
+  background-image: url("/images/about-bg-2.jpg");
+  background-size: cover;
+  padding: 0;
+  color: white;
+}
+
+.aboutus-section .aboutus-cover {
+  background-color: rgba(45, 71, 150, 0.8);
+  width: 100%;
+  height: 100%;
+  padding: 6rem 0;
+}
+
+.aboutus-section .social-items a {
+  font-size: 2.5rem;
+  color: white;
+}
+
+.aboutus-section .social-items li {
+  margin-right: 1.5rem;
+}
+
+.aboutus-section .decor-bg {
+  display: block;
+  background: url("/images/about-us.png") center repeat,
+  $yellow;
+  width: 800px;
+  height: 600px;
+  margin-top: -155px;
+  margin-left: 139px;
+}
+
+.aboutus-section .decor-bg-2 {
+  margin-top: -443px;
+  max-width: 100%;
+}
+
+/**
+New item
+ */
+.news-item {
+  padding: 10px;
+}
+
+.news-item .info {
+  display: flex;
+  column-gap: 30px;
+}
+
+.news-item .detail h4 {
+  display: flex;
+  font-size: 1.1rem;
+}
+
+.news-item .detail p {
+  color: #898989;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+.news-item .date {
+  flex: 0 0 80px;
+  height: 80px;
+  background-color: #F5F5F5;
+  text-align: center;
+}
+
+.news-item .date .day {
+  height: 50px;
+  line-height: 50px;
+}
+
+.news-item .date .month {
+  background-color: $yellow;
+  color: white;
+  height: 30px;
+  line-height: 30px;
+  font-weight: bold;
+}
+
+/**
+Testimonial
+ */
+
+.testimonial-item {
+  display: flex;
+  column-gap: 30px;
+  padding: 5px;
+}
+
+.testimonial-item .rating {
+  color: $yellow;
+}
+
+.testimonial-item .avatar {
+  flex: 0 0 160px;
+  border-radius: 160px;
+}
+
+.testimonial-item h6 {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.testimonial-item p{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+@import "ck-style";
+@import "responsive.scss";
