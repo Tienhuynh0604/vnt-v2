@@ -1,0 +1,15 @@
+pipeline {
+   agent any
+   stages {
+        stage('Build'){
+            steps{
+                script {
+                    dir("frontend"){
+                        docker.build("vnt/frontend:${env.BUILD_ID}")
+                        docker.build("vnt/frontend:latest")
+                    }
+                }
+            }
+        }
+    }
+}
