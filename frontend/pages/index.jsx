@@ -59,5 +59,4 @@ export const getServerSideProps = async (context) => {
             ...(await serverSideTranslations(locale, ['common'])),
         },
     }
-
 };

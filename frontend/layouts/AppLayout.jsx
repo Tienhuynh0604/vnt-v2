@@ -17,9 +17,7 @@ const AppLayout = (props) => {
 
     return (
         <AppContext.Provider value={sharedState}>
-            <MainLayout {...props}>
-                {children}
-            </MainLayout>
+            {children}
         </AppContext.Provider>
     )
 };

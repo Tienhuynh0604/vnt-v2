@@ -2,11 +2,14 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {Container, Button} from "react-bootstrap";
 import React from "react";
 import Link from "next/link";
+import EmptyLayout from "../layouts/EmptyLayouts";
 
-const Error = ({statusCode}) => {
+const Error = (props) => {
+    console.log("Error: ", props);
+    const {statusCode} = props;
     return (
         <Container>
-            <div className="d-flex align-items-center flex-column py-5" >
+            <div className="d-flex align-items-center flex-column py-5">
                 <h1> {statusCode ? statusCode : '404'} </h1>
                 <div className="mb-5">Có lỗi xảy ra, xin vui lòng quay về trang chủ để bắt đầu lại</div>
                 <Link href={'/'}>
@@ -17,18 +20,22 @@ const Error = ({statusCode}) => {
     )
 };
 
+Error.getLayout = (page, props) => {
+    return <EmptyLayout {...props}>
+        {page}
+    </EmptyLayout>
+};
+
 export default Error
 
 export const getServerSideProps = async (context) => {
     const {locale = "vi", res, err} = context;
-    console.log("err", err);
+    console.log("Error getServerSideProps", err);
     try {
-        // const initProps = await initialProps(context);
         const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
         return {
             props: {
                 statusCode,
-                // ...initProps,
                 ...(await serverSideTranslations(locale, ['common'])),
             },
         }

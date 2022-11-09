@@ -62,7 +62,6 @@ a {
 button.btn {
   padding: 13px 32px;
   border-radius: 40px;
-  min-width: 170px;
   font-weight: bold;
 }
 
@@ -512,5 +511,7 @@ Testimonial
   -webkit-box-orient: vertical;
 }
 
+@import "Page";
+@import "TourDetail";
 @import "ck-style";
 @import "responsive.scss";

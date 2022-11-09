@@ -4,10 +4,19 @@ import qs from "qs";
 import getConfig from "next/config";
 import numeral from 'numeral';
 import moment from "moment";
-import {SPECIALIST} from "./appConst";
 import absoluteUrl from "next-absolute-url";
+import NodeCache from "node-cache";
+import md5 from 'md5';
 
 const {publicRuntimeConfig} = getConfig();
+
+const appCache = new NodeCache();
+
+const getCacheKey = (text) => {
+    const ret = md5(text);
+    console.log("Cache key", ret);
+    return ret;
+};
 
 export const moneyFormat = (value, locale = 'vi') => {
     return numeral(value).format('0,0.00');
@@ -72,7 +81,7 @@ export const callPost = async (urlPath, dataObj, locale = 'vi', queryObj = {}) =
     }
 };
 
-export const callGet = async (urlPath, queryObj, locale) => {
+export const callGet = async (urlPath, queryObj, locale, cache = false) => {
     try {
         let baseUrl = getBaseUrl();
         locale = getLocale(locale);
@@ -85,16 +94,36 @@ export const callGet = async (urlPath, queryObj, locale) => {
         });
 
         const url = `${baseUrl}${urlPath}?${query}`;
-        if (process.env && process.env.NODE_ENV === "development") {
-            console.log(url, queryObj);
+
+        let data = null;
+        let isCached = false;
+        const canProcessCache = cache && process?.env?.CACHED_ENABLED === "true";
+        if (canProcessCache) {
+            const cacheData = appCache.get(getCacheKey(url));
+            if (cacheData) {
+                data = cacheData;
+                isCached = true;
+            }
         }
-        const res = await axios.get(url);
-        if (process.env && process.env.NODE_ENV === "development") {
-            console.log(res.data);
+
+        if (!isCached) {
+            if (process.env && process.env.NODE_ENV === "development") {
+                console.log(url, queryObj);
+            }
+            const res = await axios.get(url);
+            if (process.env && process.env.NODE_ENV === "development") {
+                // console.log(res.data);
+            }
+            data = res.data;
+            if (canProcessCache) {
+                appCache.set(getCacheKey(url),
+                    data,
+                    process?.env?.CACHED_ENABLED ? process.env.CACHED_TTL : 3600);
+            }
         }
-        return res.data;
+        return data;
     } catch (e) {
-        console.error(url);
+        console.error(e);
         throw e;
     }
 };
@@ -147,13 +176,13 @@ export const initialProps = async (ctx) => {
             }
         };
 
-        const p1 = callGet("/global", query, locale);
+        const p1 = callGet("/global", query, locale, true);
         const p2 = callGet(`/navigation/render/main-navigation`, {
             type: 'TREE'
-        }, locale);
+        }, locale, true);
         const p3 = callGet(`/navigation/render/footer`, {
             type: 'TREE'
-        }, locale);
+        }, locale, true);
 
         const [data1, data2, data3] = await Promise.all([p1, p2, p3]);
 
@@ -231,9 +260,9 @@ export const fixUrlStrapiContentImg = (content) => {
 export const defaultSeo = (req) => {
     const {origin} = absoluteUrl(req, 'localhost:3000');
     return {
-        metaTitle: 'Vietlife',
+        metaTitle: 'Need add default seo',
         metaDescription: 'Create seo in admin',
-        keywords: 'vietlife',
+        keywords: 'Need add default seo',
         metaRobots: 'noindex',
         structuredData: null,
         metaViewport: null,

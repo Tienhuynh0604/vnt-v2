@@ -3,7 +3,8 @@ import {useTranslation} from "react-i18next";
 import {Col, Row, Container, Button} from "react-bootstrap";
 import ProductCard from "../ProductCard";
 import {Icon} from "@iconify/react";
-import Image from "next/image";
+import DecorComponent from "../DecorComponent";
+import {OurTourData} from "../../data/FakeData";
 
 const destinations = () => {
     return [
@@ -38,128 +39,7 @@ const destinations = () => {
     ]
 };
 
-const data = [
-    {
-        id: 1,
-        attributes: {
-            thumbnail: {
-                url: "/images/products/sp1.jpg",
-                width: 342,
-                height: 250,
-                name: "sss"
-            },
-            title: "Ha Noi food tour 1 day by Motocycle",
-            slug: "ha-noi-food-tour-1-day-by-motocycle",
-            prices: [
-                {
-                    price: 10.00,
-                    type: "Adult",
-                },
-                {
-                    price: 8.00,
-                    type: "Child",
-                }
-            ],
-            type: "Food Tour",
-            isHot: true,
-            discount: 10,
-            features: [
-                {
-                    displayText: "English tour guide",
-                    iconClass: "ion:mail"
-                },
-                {
-                    displayText: "Take all best food in Ha Noi",
-                    iconClass: "ion:mail"
-                },
-                {
-                    displayText: "Easy to change date",
-                    iconClass: "ion:mail"
-                },
-            ]
-        }
-    },
-    {
-        id: 2,
-        attributes: {
-            thumbnail: {
-                url: "/images/products/sp1.jpg",
-                width: 342,
-                height: 250,
-                name: "sss"
-            },
-            title: "Ha Noi food tour 1 day by Motocycle",
-            slug: "ha-noi-food-tour-1-day-by-motocycle",
-            prices: [
-                {
-                    price: 10.00,
-                    type: "Adult",
-                },
-                {
-                    price: 8.00,
-                    type: "Child",
-                }
-            ],
-            type: "Trekking Tour",
-            isHot: true,
-            discount: 20,
-            features: [
-                {
-                    displayText: "English tour guide",
-                    iconClass: "ion:mail"
-                },
-                {
-                    displayText: "Take all best food in Ha Noi",
-                    iconClass: "ion:mail"
-                },
-                {
-                    displayText: "Easy to change date",
-                    iconClass: "ion:mail"
-                },
-            ]
-        }
-    },
-    {
-        id: 1,
-        attributes: {
-            thumbnail: {
-                url: "/images/products/sp1.jpg",
-                width: 342,
-                height: 250,
-                name: "sss"
-            },
-            title: "Ha Noi food tour 1 day by Motocycle",
-            slug: "ha-noi-food-tour-1-day-by-motocycle",
-            prices: [
-                {
-                    price: 10.00,
-                    type: "Adult",
-                },
-                {
-                    price: 8.00,
-                    type: "Child",
-                }
-            ],
-            type: "Bus Tour",
-            isHot: false,
-            discount: 0,
-            features: [
-                {
-                    displayText: "English tour guide",
-                    iconClass: "ion:mail"
-                },
-                {
-                    displayText: "Take all best food in Ha Noi",
-                    iconClass: "ion:mail"
-                },
-                {
-                    displayText: "Easy to change date",
-                    iconClass: "ion:mail"
-                },
-            ]
-        }
-    }
-];
+const data = OurTourData;
 
 const OurTours = ({dataSource = {}}) => {
     const {t} = useTranslation("common");
@@ -172,11 +52,6 @@ const OurTours = ({dataSource = {}}) => {
             </div>
             <div className="d-flex justify-content-center text-center py-3">
                 <ul className="destination list-inline">
-                    <li key={`d_l_all`} className="list-inline-item active">
-                        <Button variant={"link"}>
-                            Tất cả
-                        </Button>
-                    </li>
                     {destinations().map((item, idx) => {
                         return <li key={`d_l_${idx}`} className="list-inline-item">
                             <Button variant={"link"}>
@@ -188,7 +63,7 @@ const OurTours = ({dataSource = {}}) => {
             </div>
             <Row>
                 {data.map((item, idx) => (
-                    <Col key={`p-c${idx}`} xs={12} md={6} lg={3}>
+                    <Col key={`p-c${idx}`} xs={12} md={6} lg={4} xxl={3}>
                         <ProductCard item={item}/>
                     </Col>
                 ))}
@@ -197,32 +72,7 @@ const OurTours = ({dataSource = {}}) => {
                 <Button variant="primary">View all <Icon icon={"bi:chevron-right"}/> </Button>
             </div>
         </Container>
-        <Image src="/images/Frame-2.png"
-               width={658}
-               height={522}
-               className="position-absolute"
-               alt={"vn-sightseeing"}
-               style={{
-                   left: 0,
-                   bottom: 0,
-                   maxWidth: "50%",
-                   zIndex: -1,
-                   height: "auto"
-               }}
-        />
-        <Image src="/images/Frame-1.png"
-               width={658}
-               height={522}
-               className="position-absolute"
-               alt={"vn-sightseeing"}
-               style={{
-                   right: 0,
-                   bottom: 0,
-                   maxWidth: "50%",
-                   zIndex: -1,
-                   height: "auto"
-               }}
-        />
+        <DecorComponent/>
     </section>
 };
 

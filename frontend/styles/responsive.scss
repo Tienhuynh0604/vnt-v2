@@ -4,15 +4,69 @@ MOBILE FIX
 $section-padding-height-sm: 40px;
 $section-padding-height-md: 50px;
 
+/**
+IPAD landscape
+ */
+@include media-breakpoint-down(xl) {
 
-@include media-breakpoint-down(sm) {
+}
 
-  .navbar-brand img{
+/**
+IPAD air
+ */
+@include media-breakpoint-down(lg) {
+
+}
+
+/**
+IPAD portrait, mobile landscape
+ */
+@include media-breakpoint-down(md) {
+  .navbar-brand img {
     width: auto;
     height: 70px;
   }
 
-  .page-section{
+  .header-navbar {
+    position: relative;
+  }
+
+  .main-slider-item .carousel-caption {
+    top: 4rem;
+    left: 7%;
+    text-align: left;
+    width: 50%;
+  }
+
+  .main-slider-item .title {
+    font-size: 50px;
+    line-height: 50px;
+  }
+
+  .aboutus-section .decor-bg {
+    height: 450px;
+    width: 450px;
+    margin-top: 0;
+    margin-left: 270px;
+  }
+  .aboutus-section .decor-bg-2 {
+    height: auto;
+    width: 100%;
+    margin-top: -425px;
+  }
+}
+
+/**
+Mobile protrail
+ */
+@include media-breakpoint-down(sm) {
+
+  .navbar-brand img {
+    width: auto;
+    height: 70px;
+  }
+
+  .page-section {
     padding: 3rem 0;
   }
 
@@ -40,62 +94,23 @@ $section-padding-height-md: 50px;
     display: none !important;
   }
 
-  .aboutus-section .decor-bg{
+  .aboutus-section .decor-bg {
     width: 300px;
     height: 300px;
     margin-top: 0;
     margin-left: 80px;
   }
-  .aboutus-section .decor-bg-2{
+  .aboutus-section .decor-bg-2 {
     height: 300px;
     width: 350px;
     margin-top: -250px;
   }
-}
 
-/**
-IPAD
- */
-
-@include media-breakpoint-between(sm, lg) {
-  .navbar-brand img{
-    width: auto;
-    height: 70px;
+  .title-section .cover {
+    height: 150px;
   }
 
-  .header-navbar {
-    position: relative;
+  .title-section .cover .nav-block {
+    margin-top: 40px;
   }
-
-  .main-slider-item .carousel-caption {
-    top: 4rem;
-    left: 7%;
-    text-align: left;
-    width: 50%;
-  }
-
-  .main-slider-item .title {
-    font-size: 50px;
-    line-height: 50px;
-  }
-
-  .aboutus-section .decor-bg{
-    height: 450px;
-    width: 450px;
-    margin-top: 0;
-    margin-left: 270px;
-  }
-  .aboutus-section .decor-bg-2{
-    height: auto;
-    width: 100%;
-    margin-top: -425px;
-  }
-}
-
-@include media-breakpoint-down(xl) {
-
-}
-
-@include media-breakpoint-up(xl) {
-
 }

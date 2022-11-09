@@ -1,0 +1,72 @@
+/**
+TOUR DETAIL
+ */
+
+.tour-detail h1 {
+  font-size: 2rem;
+}
+
+.tour-detail .price-list {
+  --bs-breadcrumb-divider: '|';
+}
+
+.tour-detail .price-list strong {
+  color: $red;
+}
+
+.tour-detail .btn-book {
+  height: 45px;
+  padding: 5px 20px;
+}
+
+.tour-detail .image-slider-item .big-thumb, .tour-detail .image-slider-item .small-thumb {
+  width: 100%;
+  height: 560px;
+  position: relative;
+  overflow: hidden;
+}
+
+.tour-detail .image-slider-item .small-thumb {
+  height: 270px;
+}
+
+.tour-detail .image-slider-item .small-thumb:first-child {
+  margin-bottom: 20px;
+}
+
+.tour-detail button.btn-icon {
+  text-decoration: none;
+}
+
+.tour-detail hr.bold {
+  border-top: 2px solid $blue;
+}
+
+.tour-detail .highlight-item {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  font-size: 1rem;
+}
+
+.tour-detail .highlight-item svg {
+  margin-right: 10px;
+  flex-basis: 24px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.tour-detail div.icon-flex-wrap {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-wrap: wrap;
+  column-gap: 10px;
+  row-gap: 10px;
+}
+
+.tour-detail div.icon-flex-wrap .btn-icon{
+  display: inline-block;
+  flex-basis: 100px;
+  text-align: center;
+}

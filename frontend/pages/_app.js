@@ -3,10 +3,13 @@ import AppLayout from "../layouts/AppLayout";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "react-modal-video/scss/modal-video.scss";
+import 'lightgallery/scss/lightgallery.scss';
+import 'lightgallery/scss/lg-zoom.scss';
 import '../styles/App.scss';
 import SSRProvider from 'react-bootstrap/SSRProvider';
 import {appWithTranslation} from 'next-i18next';
 import Seo from "../components/Seo";
+import MainLayout from "../layouts/MainLayout";
 
 const MyApp = ({Component, pageProps}) => {
 
@@ -14,10 +17,16 @@ const MyApp = ({Component, pageProps}) => {
         import("bootstrap/dist/js/bootstrap");
     }, []);
 
+    const getLayout = Component.getLayout || ((page) => {
+        return <MainLayout {...pageProps}>
+            {page}
+        </MainLayout>
+    });
+
     return <SSRProvider>
         <Seo {...pageProps}/>
         <AppLayout {...pageProps}>
-            <Component {...pageProps} />
+            {getLayout(<Component {...pageProps} />)}
         </AppLayout>
     </SSRProvider>
 };

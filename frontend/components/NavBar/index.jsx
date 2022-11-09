@@ -87,7 +87,7 @@ const NavBar = (props) => {
         <NavHeader/>
         <hr className="m-0"/>
         <NavBarBs expand="lg" className="main-navbar" expanded={expanded} onToggle={onToggle}>
-            <Container className="d-flex align-items-center">
+            <Container className="d-flex align-items-end">
                 <NavbarBrand href="/">
                     {renderImage(common.logo)}
                 </NavbarBrand>

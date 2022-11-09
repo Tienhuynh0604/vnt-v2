@@ -10,7 +10,7 @@ if(resourceDomains){
 const nextConfig = {
     experimental: {
         appDir: false,
-        transpilePackages: ['react-modal-video'],
+        transpilePackages: ['react-modal-video', "react-image-gallery"],
     },
     i18n,
     images: {
