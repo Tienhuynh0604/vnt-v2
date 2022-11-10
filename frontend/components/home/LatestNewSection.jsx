@@ -90,7 +90,7 @@ const LatestNewBlock = () => {
     const LatestSlider = () => {
         return <Slider {...settings}>
             {data && data.map((item, idx) => {
-                return <div className="news-item">
+                return <div key={`lns_${idx}`} className="news-item">
                     <Image src={item.attributes.thumb.url}
                            alt={item.attributes.thumb.name}
                            width={item.attributes.thumb.width}

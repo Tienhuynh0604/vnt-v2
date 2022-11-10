@@ -58,18 +58,15 @@ const NavBar = (props) => {
         });
 
         return <li className="nav-item dropdown" key={`navc${item.id}`}>
-            <Link href={item.path && item.path.length > 0 ? item.path : "#"}
-                  className={`nav-link dropdown-toggle ${activeRoute && `/${activeRoute}` === item.path ? "active" : ""}`}
-                  id={`navbarDropdown${item.id}`}
-                  role="button"
-                  data-bs-hover="dropdown" aria-expanded="false"
-            >
-                {item.title}
-            </Link>
-            <ul className={`dropdown-menu ${childItems.length >= 8 ? "ul-xl-2-col" : ""}`}
-                aria-labelledby={`navbarDropdown${item.id}`}>
+            {/*<Link href={item.path && item.path.length > 0 ? item.path : "#"}*/}
+            {/*      className={`nav-link dropdown-toggle ${activeRoute && `/${activeRoute}` === item.path ? "active" : ""}`}*/}
+            {/*      id={`navbarDropdown${item.id}`}*/}
+            {/*      role="button"*/}
+            {/*      data-bs-hover="dropdown" aria-expanded="false"*/}
+            {/*>*/}
+            <NavDropdown title={item.title} id={`navbarDropdown${item.id}`}>
                 {childItems.map(i => i)}
-            </ul>
+            </NavDropdown>
         </li>
     };
 

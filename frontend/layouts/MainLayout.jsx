@@ -1,6 +1,7 @@
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import React from "react";
+import BookingModal from "../components/booking/BookingModal";
 
 const MainLayout = ({children}) => {
 
@@ -10,6 +11,7 @@ const MainLayout = ({children}) => {
             <main>
                 {children}
             </main>
+            <BookingModal/>
             <Footer/>
         </>
     )

@@ -8,14 +8,67 @@ $section-padding-height-md: 50px;
 IPAD landscape
  */
 @include media-breakpoint-down(xl) {
+  .aboutus-section .decor-bg {
+    height: 350px;
+    width: 350px;
+    margin-top: 0px;
+    margin-left: 140px;
+  }
 
+  .aboutus-section .decor-bg-2 {
+    height: auto;
+    width: 100%;
+    margin-top: -325px;
+  }
+
+  .product-card-item .card .btn{
+    padding: 5px 15px;
+    width: auto;
+    min-width: auto;
+  }
+
+  .tour-detail .image-slider-item .big-thumb{
+    height: 380px;
+  }
+
+  .tour-detail .image-slider-item .small-thumb {
+    height: 180px;
+  }
 }
 
 /**
 IPAD air
  */
 @include media-breakpoint-down(lg) {
+  .booking-form-wrap .booking-btn-list button {
+    padding: 0;
+  }
 
+  .booking-form-wrap .booking-btn-list button.cart-btn {
+    border-radius: 5px;
+    padding: 5px;
+  }
+
+  .aboutus-section .decor-bg {
+    height: 450px;
+    width: 450px;
+    margin-top: 0;
+    margin-left: 270px;
+  }
+
+  .aboutus-section .decor-bg-2 {
+    height: auto;
+    width: 100%;
+    margin-top: -425px;
+  }
+
+  .tour-detail .image-slider-item .big-thumb{
+    height: 300px;
+  }
+
+  .tour-detail .image-slider-item .small-thumb {
+    height: 140px;
+  }
 }
 
 /**
@@ -53,6 +106,14 @@ IPAD portrait, mobile landscape
     height: auto;
     width: 100%;
     margin-top: -425px;
+  }
+
+  .tour-detail .image-slider-item .big-thumb{
+    height: 200px;
+  }
+
+  .tour-detail .image-slider-item .small-thumb {
+    height: 90px;
   }
 }
 
@@ -113,4 +174,13 @@ Mobile protrail
   .title-section .cover .nav-block {
     margin-top: 40px;
   }
+
+  .tour-detail .control{
+    flex-wrap: wrap;
+  }
+
+  .booking-form-wrap .booking-btn-list button {
+    padding: 5px 10px;
+  }
+
 }

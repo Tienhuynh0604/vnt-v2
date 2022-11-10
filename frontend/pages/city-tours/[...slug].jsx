@@ -12,13 +12,15 @@ import TourFeatureDetail from "../../components/city-tours/TourFeatureDetail";
 import Image from "next/image";
 import LightGallery from "lightgallery/react";
 import DecorComponent from "../../components/DecorComponent";
+import {useAppContext} from "../../layouts/AppLayout";
 
 const Page = ({}) => {
     const {t} = useTranslation("common");
+    const {setBookingModal} = useAppContext();
 
     return <PageLayout>
         <Container className="tour-detail">
-            <div className="d-flex justify-content-between">
+            <div className="control d-flex justify-content-sm-start justify-content-md-between mb-3">
                 <div>
                     <div>
                         <h1>Hà Nội Double - Decker Bus</h1>
@@ -37,7 +39,12 @@ const Page = ({}) => {
                         </ol>
                     </nav>
                 </div>
-                <Button className="btn btn-primary btn-book">{t('Book now')}</Button>
+                <Button type="button" onClick={() => setBookingModal({
+                    isVisible: true,
+                    item: {
+                        id: 1
+                    }
+                })} className="btn btn-primary btn-book">{t('Book now')}</Button>
             </div>
             <ImageSlider/>
             <div className='mt-3'>
@@ -160,7 +167,7 @@ const Page = ({}) => {
                             <Image src={`/images/time-table.jpg`}
                                    width={1070}
                                    height={730}
-                                   className="w-100"
+                                   className="w-100 h-auto"
                                    alt={""}/>
                         </Link>
                     </LightGallery>
@@ -190,7 +197,7 @@ const Page = ({}) => {
                             <Image src={`/images/map.jpg`}
                                    width={1070}
                                    height={533}
-                                   className="w-100"
+                                   className="w-100 h-auto"
                                    alt={""}/>
                         </Link>
                     </LightGallery>

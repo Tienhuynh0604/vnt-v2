@@ -323,15 +323,23 @@ export const OurTourData = [
 
 export const imgGalleries = [
     {
-        original: 'https://picsum.photos/id/1018/1000/600/',
-        thumbnail: 'https://picsum.photos/id/1018/250/150/',
+        url: '/images/tours/img1.jpg',
+        title: "Hồ gươm lake",
+        description: "Unique opens, on the other hand, are calculated by counting the first time a single subscriber opens an email. All subsequent opens from that subscriber are ..."
     },
     {
-        original: 'https://picsum.photos/id/1015/1000/600/',
-        thumbnail: 'https://picsum.photos/id/1015/250/150/',
+        url: '/images/tours/img2.jpg',
+        title: "Hỏa Lò Prison",
+        description: "Hỏa lò description ..."
     },
     {
-        original: 'https://picsum.photos/id/1019/1000/600/',
-        thumbnail: 'https://picsum.photos/id/1019/250/150/',
+        url: '/images/tours/img1.jpg',
+        title: "Hồ gươm lake",
+        description: "HỒ gươm lake"
+    },
+    {
+        url: '/images/tours/img2.jpg',
+        title: "Hỏa Lò Prison",
+        description: "Unique opens, on the other hand, are calculated by counting the first time a single subscriber opens an email. All subsequent opens from that subscriber are ..."
     },
 ];

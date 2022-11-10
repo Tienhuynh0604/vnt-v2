@@ -4,9 +4,11 @@ import {moneyFormat} from "../ulti/helper";
 import {Icon} from "@iconify/react";
 import Link from "next/link";
 import {useTranslation} from "react-i18next";
+import {useAppContext} from "../layouts/AppLayout";
 
 const ProductCard = ({item}) => {
     const {t} = useTranslation("common");
+    const {setBookingModal} = useAppContext();
 
     const renderTypeTag = (type) => {
         let colorType = "";
@@ -41,9 +43,9 @@ const ProductCard = ({item}) => {
                 }
                 {
                     item.attributes.discount > 0 &&
-                <li>
-                    <span className="p-tag p-tag-top bg-danger text-light">{item.attributes.discount}%</span>
-                </li>
+                    <li>
+                        <span className="p-tag p-tag-top bg-danger text-light">{item.attributes.discount}%</span>
+                    </li>
                 }
             </ul>
             <Card.Img variant="top" src={item.attributes.thumbnail?.url}/>
@@ -62,7 +64,6 @@ const ProductCard = ({item}) => {
                             {pI.type}: <strong>{moneyFormat(pI.price)}</strong>
                         </li>
                     })}
-
                 </ul>
                 <ul className="feature">
                     {item.attributes.features.map((f, idx) => {
@@ -75,7 +76,18 @@ const ProductCard = ({item}) => {
                     <Link href={`/city-tours/ha-noi/${item.attributes.slug}`}>
                         <Button type={"button"} variant={'outline-primary'}>{t("discover")}</Button>
                     </Link>
-                    <Button type={"button"} variant={'primary'}>{t("book now")}</Button>
+                    <Button type={"button"}
+                            onClick={() => {
+                                setBookingModal({
+                                    isVisible: true,
+                                    item: {
+                                        id: 1
+                                    }
+                                });
+                            }}
+                            variant={'primary'}>
+                        {t("book now")}
+                    </Button>
                 </div>
             </Card.Body>
         </Card>

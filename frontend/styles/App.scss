@@ -39,12 +39,37 @@ $font-family-monospace: 'Nunito', sans-serif;
 $font-family-sans-serif: 'Nunito', sans-serif;
 $bg-grey: #F4F4F4;
 $grey: #AEAEAE;
+$grey-2: #EDEDED;
 
 /**
 BOOTSTRAPS
  */
 @import "~bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;700&display=swap');
+
+.modal {
+  --bs-modal-border-radius: 0;
+  --bs-modal-border-width: 0;
+}
+
+.nav-tabs {
+  --bs-nav-tabs-border-width: 0;
+  --bs-nav-tabs-border-radius: 0;
+  --bs-nav-tabs-link-active-color: #fff;
+  --bs-nav-tabs-link-active-bg: $blue;
+}
+
+.nav-tabs .nav-item{
+  background-color: #EDEDED;
+}
+
+.nav-tabs .nav-item .nav-link{
+  padding: 10px 30px;
+}
+
+.nav-tabs .nav-item .nav-link.active{
+  background-color: $blue;
+}
 
 body {
   background-color: white;
@@ -140,7 +165,7 @@ Page section
  */
 .page-section {
   position: relative;
-  padding: 6rem 0;
+  padding: 3rem 0;
 }
 
 .bg-grey {
@@ -148,20 +173,20 @@ Page section
 }
 
 
-.page-section h1 {
+.page-section h1, .h1-title {
   color: $blue;
   font-weight: bold;
   z-index: 100;
   display: block;
 }
 
-.page-section h1 span {
+.page-section h1 span, .h1-title span {
   position: relative;
   z-index: 100;
 }
 
 
-.page-section h1 {
+.page-section h1, .h1-title {
   display: inline;
   --underline-width-scale: calc(var(--underline-width) / var(--underline-intrinsic-width));
   padding: 0 calc(var(--underline-padding-x) + calc(var(--underline-cap-width) * var(--underline-width-scale)));
@@ -503,12 +528,61 @@ Testimonial
   font-weight: bold;
 }
 
-.testimonial-item p{
+.testimonial-item p {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
+}
+
+/**
+Input number
+ */
+
+.input-number button{
+  border-radius: 0;
+  border: none;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background-color: #F1F1F1;
+  color: black;
+}
+
+.input-number span{
+  min-width: 24px;
+  text-align: center;
+}
+
+/**
+Booking table
+ */
+.booking-table td, .booking-table th{
+  padding: 10px 0;
+}
+.booking-table tr:first-child, .booking-table tr:last-child{
+  border-bottom: 1px solid $grey-2;
+}
+
+.booking-form-wrap{
+  padding: 20px;
+}
+
+.booking-form-wrap input.form-control{
+  width: auto;
+}
+
+.booking-form-wrap .sub-total{
+  color: $red;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+.booking-form-wrap .h1-title{
+  font-size: 1.5rem;
+  --underline-offset-y: -5px;
+  --underline-width: 7;
 }
 
 @import "Page";

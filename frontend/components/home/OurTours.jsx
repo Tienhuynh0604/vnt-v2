@@ -5,6 +5,7 @@ import ProductCard from "../ProductCard";
 import {Icon} from "@iconify/react";
 import DecorComponent from "../DecorComponent";
 import {OurTourData} from "../../data/FakeData";
+import Link from "next/link";
 
 const destinations = () => {
     return [
@@ -69,7 +70,9 @@ const OurTours = ({dataSource = {}}) => {
                 ))}
             </Row>
             <div className="d-flex justify-content-center mt-5">
-                <Button variant="primary">View all <Icon icon={"bi:chevron-right"}/> </Button>
+                <Link href={"/city-tours/ha-noi"}>
+                    <Button variant="primary">View all <Icon icon={"bi:chevron-right"}/> </Button>
+                </Link>
             </div>
         </Container>
         <DecorComponent/>

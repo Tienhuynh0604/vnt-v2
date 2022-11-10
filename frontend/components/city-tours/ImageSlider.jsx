@@ -13,7 +13,7 @@ const ImageSlider = ({images}) => {
     return <>
         <div className="image-slider-item">
             <Row>
-                <Col xs={12} md={8}>
+                <Col xs={8} md={8} className="px-1 px-lg-1">
                     <div className="big-thumb">
                         <LightGallery
                             onInit={onInit}
@@ -28,7 +28,7 @@ const ImageSlider = ({images}) => {
                         </LightGallery>
                     </div>
                 </Col>
-                <Col xs={6} md={4}>
+                <Col xs={4} md={4} className="px-1 px-lg-1">
                     <div className="small-thumb">
                         <LightGallery
                             onInit={onInit}
