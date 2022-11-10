@@ -233,7 +233,6 @@ Page section
 /**
 Product card Item
  */
-
 .product-card-list {
   display: flex;
   justify-content: center;
@@ -429,9 +428,14 @@ ul.destination li:last-child:after {
   content: "";
 }
 
+ul.destination li .btn {
+  transition: all 0.25s ease-out;
+}
+
 ul.destination li.active .btn {
   color: $blue;
   font-weight: bold;
+  transform: scale(1.2);
 }
 
 ul.destination .btn {

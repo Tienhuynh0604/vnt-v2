@@ -59,7 +59,7 @@ const OurTours = ({dataSource = {}}) => {
             </div>
             <div className="d-flex justify-content-center text-center py-3">
                 <ul className="destination list-inline">
-                    <li key={`d_l_all`} className="list-inline-item">
+                    <li key={`d_l_all`} className={`list-inline-item ${!currentTag ? "active" : ""}`}>
                         <Button variant={"link"}
                                 type="button"
                                 onClick={() => onClickFilter(null)}
@@ -68,7 +68,8 @@ const OurTours = ({dataSource = {}}) => {
                         </Button>
                     </li>
                     {destinations().map((item, idx) => {
-                        return <li key={`d_l_${idx}`} className="list-inline-item">
+                        return <li key={`d_l_${idx}`}
+                                   className={`list-inline-item ${currentTag && currentTag === item.attributes.slug ? "active" : ""}`}>
                             <Button type="button"
                                     onClick={() => onClickFilter(item.attributes.slug)}
                                     variant={"link"}>
