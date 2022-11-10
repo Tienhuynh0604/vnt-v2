@@ -6,6 +6,8 @@ import Link from "next/link";
 import {Navbar as NavBarBs, NavbarBrand, Nav, Container, NavDropdown} from "react-bootstrap";
 import {renderImage} from "../../ulti/appUtil";
 import {useTranslation} from "react-i18next";
+import Image from "next/image";
+import {Icon} from "@iconify/react";
 
 const NavBar = (props) => {
 
@@ -81,10 +83,10 @@ const NavBar = (props) => {
     };
 
     return <div className="header-navbar">
-        <NavHeader/>
-        <hr className="m-0"/>
+        {/*<NavHeader/>*/}
+        {/*<hr className="m-0"/>*/}
         <NavBarBs expand="lg" className="main-navbar" expanded={expanded} onToggle={onToggle}>
-            <Container className="d-flex align-items-end">
+            <Container className="d-flex align-items-center">
                 <NavbarBrand href="/">
                     {renderImage(common.logo)}
                 </NavbarBrand>
@@ -101,6 +103,28 @@ const NavBar = (props) => {
                             </Link>
                         </li>
                         {renderMenuItems()}
+                        <li className="nav-item">
+                            <NavDropdown
+                                title={<><Image alt={"English"} src="/images/vi.jpg" width={27} height={21}/> Tiếng
+                                    việt</>}
+                                className="d-inline-block me-3">
+                                <NavDropdown.Item href="/vi">
+                                    <Image alt={"English"} src="/images/en.jpg" width={27} height={21}/> English
+                                </NavDropdown.Item>
+                                <NavDropdown.Item href="/en">
+                                    <Image alt={"Tiếng Việt"} src="/images/vi.jpg" width={27} height={21}/> Tiếng Việt
+                                </NavDropdown.Item>
+                            </NavDropdown>
+                        </li>
+                        <li className="nav-item">
+                            <Link href="/cart"
+                                  className={`nav-link ${!activeRoute || activeRoute === "/" ? "active" : ""}`}
+                                  onClick={closeNav}
+                                  aria-current="page"
+                            >
+                                <Icon icon={"bi:cart-fill"} height={24}/>
+                            </Link>
+                        </li>
                     </ul>
                 </NavBarBs.Collapse>
             </Container>

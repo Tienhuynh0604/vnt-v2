@@ -6,7 +6,7 @@ import Link from "next/link";
 import {useTranslation} from "react-i18next";
 import {useAppContext} from "../layouts/AppLayout";
 
-const ProductCard = ({item}) => {
+const ProductCard = ({item, className}) => {
     const {t} = useTranslation("common");
     const {setBookingModal} = useAppContext();
 
@@ -33,7 +33,7 @@ const ProductCard = ({item}) => {
         </span>
     };
 
-    return <div className="product-card-item p-2">
+    return <div className={`product-card-item p-2 ${className}`}>
         <Card>
             <ul className="tag-list-1">
                 {item.attributes.isHot &&

@@ -57,7 +57,7 @@ const TestimonialBlock = ({dataSource = {}}) => {
     const TestimonialSlider = () => {
         return <Slider {...settings}>
             {data && data.map((item, idx) => {
-                return <div>
+                return <div key={`t_s_${idx}`}>
                     <div className="testimonial-item">
                         <Image src={item.attributes.avatar} alt={"vn-sightseeing"}
                                width={160}

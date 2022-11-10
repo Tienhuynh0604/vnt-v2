@@ -2,6 +2,7 @@ export const OurTourData = [
     {
         id: 1,
         attributes: {
+            destination: "ha-noi",
             thumbnail: {
                 url: "/images/products/sp1.jpg",
                 width: 342,
@@ -42,6 +43,7 @@ export const OurTourData = [
     {
         id: 2,
         attributes: {
+            destination: "ha-noi",
             thumbnail: {
                 url: "/images/products/sp1.jpg",
                 width: 342,
@@ -82,6 +84,7 @@ export const OurTourData = [
     {
         id: 1,
         attributes: {
+            destination: "ha-noi",
             thumbnail: {
                 url: "/images/products/sp1.jpg",
                 width: 342,
@@ -122,6 +125,7 @@ export const OurTourData = [
     {
         id: 1,
         attributes: {
+            destination: "ho-chi-minh",
             thumbnail: {
                 url: "/images/products/sp1.jpg",
                 width: 342,
@@ -162,6 +166,7 @@ export const OurTourData = [
     {
         id: 1,
         attributes: {
+            destination: "hue",
             thumbnail: {
                 url: "/images/products/sp1.jpg",
                 width: 342,
@@ -202,6 +207,7 @@ export const OurTourData = [
     {
         id: 1,
         attributes: {
+            destination: "ho-chi-minh",
             thumbnail: {
                 url: "/images/products/sp1.jpg",
                 width: 342,
@@ -242,6 +248,7 @@ export const OurTourData = [
     {
         id: 1,
         attributes: {
+            destination: "ha-long",
             thumbnail: {
                 url: "/images/products/sp1.jpg",
                 width: 342,
@@ -282,6 +289,48 @@ export const OurTourData = [
     {
         id: 1,
         attributes: {
+            destination: "hue",
+            thumbnail: {
+                url: "/images/products/sp1.jpg",
+                width: 342,
+                height: 250,
+                name: "sss"
+            },
+            title: "Ha Noi food tour 1 day by Motocycle",
+            slug: "ha-noi-food-tour-1-day-by-motocycle",
+            prices: [
+                {
+                    price: 10.00,
+                    type: "Adult",
+                },
+                {
+                    price: 8.00,
+                    type: "Child",
+                }
+            ],
+            type: "Bus Tour",
+            isHot: false,
+            discount: 0,
+            features: [
+                {
+                    displayText: "English tour guide",
+                    iconClass: "ion:mail"
+                },
+                {
+                    displayText: "Take all best food in Ha Noi",
+                    iconClass: "ion:mail"
+                },
+                {
+                    displayText: "Easy to change date",
+                    iconClass: "ion:mail"
+                },
+            ]
+        }
+    },
+    {
+        id: 1,
+        attributes: {
+            destination: "hue",
             thumbnail: {
                 url: "/images/products/sp1.jpg",
                 width: 342,

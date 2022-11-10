@@ -1,4 +1,4 @@
-import React, {memo} from "react";
+import React, {memo, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {Col, Row, Container, Button} from "react-bootstrap";
 import ProductCard from "../ProductCard";
@@ -44,6 +44,12 @@ const data = OurTourData;
 
 const OurTours = ({dataSource = {}}) => {
     const {t} = useTranslation("common");
+    const [currentTag, setCurrentTag] = useState(null);
+
+    const onClickFilter = (desSlug) => {
+        console.log(desSlug);
+        setCurrentTag(desSlug);
+    };
 
     return <section className="page-section our-tours-section">
         <Container style={{zIndex: 100}}>
@@ -53,24 +59,33 @@ const OurTours = ({dataSource = {}}) => {
             </div>
             <div className="d-flex justify-content-center text-center py-3">
                 <ul className="destination list-inline">
+                    <li key={`d_l_all`} className="list-inline-item">
+                        <Button variant={"link"}
+                                type="button"
+                                onClick={() => onClickFilter(null)}
+                        >
+                            <span className="text-capitalize"> {t("all")}</span>
+                        </Button>
+                    </li>
                     {destinations().map((item, idx) => {
                         return <li key={`d_l_${idx}`} className="list-inline-item">
-                            <Button variant={"link"}>
+                            <Button type="button"
+                                    onClick={() => onClickFilter(item.attributes.slug)}
+                                    variant={"link"}>
                                 {item.attributes.name}
                             </Button>
                         </li>
                     })}
                 </ul>
             </div>
-            <Row>
+            <div className="product-card-list">
                 {data.map((item, idx) => (
-                    <Col key={`p-c${idx}`} xs={12} md={6} lg={4} xxl={3}>
-                        <ProductCard item={item}/>
-                    </Col>
+                    <ProductCard key={`p_c_${idx}`} item={item} className={
+                        !currentTag || item.attributes.destination === currentTag ? "" : "hide-product"}/>
                 ))}
-            </Row>
+            </div>
             <div className="d-flex justify-content-center mt-5">
-                <Link href={"/city-tours/ha-noi"}>
+                <Link href={`/city-tours${currentTag ? `/${currentTag}` : ""}`}>
                     <Button variant="primary">View all <Icon icon={"bi:chevron-right"}/> </Button>
                 </Link>
             </div>
