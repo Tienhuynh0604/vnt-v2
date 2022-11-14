@@ -11,7 +11,10 @@ const BookingModal = () => {
     return <Modal show={bookingModal.isVisible}
                   centered
                   size="lg"
-                  onHide={() => setBookingModal(false)}>
+                  onHide={() => setBookingModal({
+                      ...bookingModal,
+                      isVisible: false
+                  })}>
         <TicketBookingStep/>
     </Modal>
 };

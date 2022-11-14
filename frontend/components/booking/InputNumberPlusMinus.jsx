@@ -12,7 +12,7 @@ const InputNumberPlusMinus = ({value = 0, onChange}) => {
         setCount(count - 1);
     };
 
-    return <div className="d-flex justify-content-center input-number">
+    return <div className="d-flex justify-content-start input-number">
         <Button type="button" disabled={count===0} onClick={decrementCount}>-</Button>
         <span>{count}</span>
         <Button type="button" onClick={incrementCount}>+</Button>

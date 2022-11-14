@@ -1,8 +1,10 @@
 import React, {memo} from "react";
 import {useTranslation} from "react-i18next";
-import {Container, Row, Col} from "react-bootstrap";
+import {Button, Container, Row, Col} from "react-bootstrap";
 import {nl2br, renderContactItem, renderImage} from "../../ulti/appUtil";
 import {useAppContext} from "../../layouts/AppLayout";
+import Link from "next/link";
+import {PATH_ABOUT_US} from "../../ulti/appConst";
 
 const AboutUsBlock = ({dataSource = {}}) => {
 
@@ -25,6 +27,9 @@ const AboutUsBlock = ({dataSource = {}}) => {
                                 </li>
                             ))}
                         </ul>
+                        <Link href={PATH_ABOUT_US}>
+                            <Button variant="primary">{t("view more")}</Button>
+                        </Link>
                     </Col>
                     <Col xs={12} lg={6}>
                         <div className="decor-bg"/>

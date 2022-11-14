@@ -40,6 +40,7 @@ $font-family-sans-serif: 'Nunito', sans-serif;
 $bg-grey: #F4F4F4;
 $grey: #AEAEAE;
 $grey-2: #EDEDED;
+$grey-3: #F2F2F2;
 
 /**
 BOOTSTRAPS
@@ -88,6 +89,14 @@ button.btn {
   padding: 13px 32px;
   border-radius: 40px;
   font-weight: bold;
+}
+
+.text-grey{
+  color: $grey;
+}
+
+hr.dashed{
+  border-style: dashed;
 }
 
 .header-navbar {
@@ -475,14 +484,14 @@ ABOUT US SECTION
   display: block;
   background: url("/images/about-us.png") center repeat,
   $yellow;
-  width: 800px;
-  height: 600px;
-  margin-top: -155px;
-  margin-left: 139px;
+  width: 550px;
+  height: 550px;
+  margin-top: -130px;
+  margin-left: 120px;
 }
 
 .aboutus-section .decor-bg-2 {
-  margin-top: -443px;
+  margin-top: -450px;
   max-width: 100%;
 }
 
@@ -588,10 +597,41 @@ Booking table
  */
 .booking-table td, .booking-table th {
   padding: 10px 0;
+  text-transform: capitalize;
+}
+
+.booking-table tr {
+  height: 1px;
+}
+
+.booking-table tbody, .booking-table td{
+  height: inherit;
 }
 
 .booking-table tr:first-child, .booking-table tr:last-child {
   border-bottom: 1px solid $grey-2;
+}
+
+.booking-table .image-thumb{
+  width: 173px;
+  height: 107px;
+  position: relative;
+  overflow: hidden;
+}
+
+.booking-table .image-thumb.small{
+  width: 100px;
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+.booking-table .center-cell{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 20px;
 }
 
 .booking-form-wrap {
@@ -614,7 +654,41 @@ Booking table
   --underline-width: 7;
 }
 
+.ellipsis-1{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.ellipsis-2{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.ellipsis-3{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.ellipsis-4{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
 @import "Page";
 @import "TourDetail";
+@import "AboutUs";
+@import "Cart";
 @import "ck-style";
 @import "responsive.scss";

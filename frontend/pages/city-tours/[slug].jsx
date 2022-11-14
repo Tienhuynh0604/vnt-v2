@@ -1,6 +1,6 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { callGet, featurePopulate, imagePopulate, initialProps } from "../../ulti/helper";
+import { initialProps } from "../../ulti/helper";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import PageLayout from "../../layouts/PageLayout";
 import DecorComponent from "../../components/DecorComponent";
@@ -42,25 +42,25 @@ const Index = (props) => {
                 <h1 className="text-capitalize">{t("post about")} Ha Noi</h1>
                 <Row>
                     <Col xs={12} md={4}>
-                        <Icon icon={"ci:dot-02-s"} className="text-warning" height={16}/> City Sightseeing partners with Volkswagen for the European Championship
+                        <Icon icon={"ci:dot-02-s"} className="text-warning" height={16} /> City Sightseeing partners with Volkswagen for the European Championship
                     </Col>
                     <Col xs={12} md={4}>
-                        <Icon icon={"ci:dot-02-s"} className="text-warning" height={16}/> City Sightseeing partners with Volkswagen for the European Championship
+                        <Icon icon={"ci:dot-02-s"} className="text-warning" height={16} /> City Sightseeing partners with Volkswagen for the European Championship
                     </Col>
                     <Col xs={12} md={4}>
-                        <Icon icon={"ci:dot-02-s"} className="text-warning" height={16}/> City Sightseeing 
+                        <Icon icon={"ci:dot-02-s"} className="text-warning" height={16} /> City Sightseeing
                     </Col>
                     <Col xs={12} md={4}>
-                        <Icon icon={"ci:dot-02-s"} className="text-warning" height={16}/> City Sightseeing partners hip
+                        <Icon icon={"ci:dot-02-s"} className="text-warning" height={16} /> City Sightseeing partners hip
                     </Col>
                     <Col xs={12} md={4}>
-                        <Icon icon={"ci:dot-02-s"} className="text-warning" height={16}/> City Sightseeing partners with Volkswagen for the European Championship
+                        <Icon icon={"ci:dot-02-s"} className="text-warning" height={16} /> City Sightseeing partners with Volkswagen for the European Championship
                     </Col>
                     <Col xs={12} md={4}>
-                        <Icon icon={"ci:dot-02-s"} className="text-warning" height={16}/> City Sightseeing partners with Volkswagen for the European Championship
+                        <Icon icon={"ci:dot-02-s"} className="text-warning" height={16} /> City Sightseeing partners with Volkswagen for the European Championship
                     </Col>
                     <Col xs={12} md={4}>
-                        <Icon icon={"ci:dot-02-s"} className="text-warning" height={16}/> City Sightseeing partners with Volkswagen for the European Championship
+                        <Icon icon={"ci:dot-02-s"} className="text-warning" height={16} /> City Sightseeing partners with Volkswagen for the European Championship
                     </Col>
                 </Row>
             </Container>
@@ -70,15 +70,11 @@ const Index = (props) => {
 
 export const getServerSideProps = async (context) => {
     const { locale = "vi" } = context;
-    let initProps = {};
     try {
-        initProps = await initialProps(context);
-
     } catch (e) {
     }
     return {
         props: {
-            ...initProps,
             ...(await serverSideTranslations(locale, ['common'])),
         },
     }

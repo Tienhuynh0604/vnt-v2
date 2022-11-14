@@ -1,14 +1,14 @@
-import React, {memo, useState} from "react";
-import {useTranslation} from "react-i18next";
-import {Button, Col, Form, Row, Tab, Table, Tabs} from "react-bootstrap";
+import React, { memo, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Button, Col, Form, Row, Tab, Table, Tabs } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import InputNumberPlusMinus from "./InputNumberPlusMinus";
-import {Icon} from "@iconify/react";
+import { Icon } from "@iconify/react";
 import Link from "next/link";
 import BookingConfirmStep from "./BookingConfirmStep";
 
 const TicketBookingStep = () => {
-    const {t} = useTranslation("common");
+    const { t } = useTranslation("common");
     const [selectedTab, setSelectedTab] = useState("step-1");
     const onClickNext = () => {
         setSelectedTab("step-confirm");
@@ -73,40 +73,44 @@ const TicketBookingStep = () => {
                         </Col>
                     </Form.Group>
                     <Table className="booking-table" striped responsive>
-                        <tr>
-                            <th>Ticket</th>
-                            <th>Price</th>
-                            <th className="text-center">Quantity</th>
-                            <th></th>
-                        </tr>
-                        <tr>
-                            <td>
-                                Adult (13+)
-                            </td>
-                            <td>
-                                $23.00
-                            </td>
-                            <td>
-                                <InputNumberPlusMinus value={2}/>
-                            </td>
-                            <td className="text-end">
-                                $46.00
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Child (4-12)
-                            </td>
-                            <td>
-                                $8.00
-                            </td>
-                            <td>
-                                <InputNumberPlusMinus value={1}/>
-                            </td>
-                            <td className="text-end">
-                                $8.00
-                            </td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>Ticket</th>
+                                <th>Price</th>
+                                <th className="text-center">Quantity</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Adult (13+)
+                                </td>
+                                <td>
+                                    $23.00
+                                </td>
+                                <td>
+                                    <InputNumberPlusMinus value={2} />
+                                </td>
+                                <td className="text-end">
+                                    $46.00
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Child (4-12)
+                                </td>
+                                <td>
+                                    $8.00
+                                </td>
+                                <td>
+                                    <InputNumberPlusMinus value={1} />
+                                </td>
+                                <td className="text-end">
+                                    $8.00
+                                </td>
+                            </tr>
+                        </tbody>
                     </Table>
                 </Form>
                 <div className="text-end">
@@ -118,7 +122,7 @@ const TicketBookingStep = () => {
             </div>
         </Tab>
         <Tab eventKey="step-confirm" title={<>2. Verify information</>}>
-            <BookingConfirmStep/>
+            <BookingConfirmStep />
         </Tab>
     </Tabs>
 };

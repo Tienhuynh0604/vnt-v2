@@ -1,0 +1,36 @@
+.payment-item {
+  display: flex;
+  padding: 20px;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border-radius: 10px;
+  background-color: $grey-3;
+  border: 1px solid $grey;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.check-out-section .product-item{
+  width: 100%;
+}
+
+.check-out-section .product-item .check-out-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.check-out-section .product-item .check-out-row span.title {
+  color: $grey;
+  text-transform: capitalize;
+}
+
+.check-out-section .product-item .check-out-row span.value {
+  font-weight: bold;
+}
+
+.booking-table .sub-variant{
+  display: flex;
+  justify-content: space-between;
+  column-gap: 10px;
+}

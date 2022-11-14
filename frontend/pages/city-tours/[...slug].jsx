@@ -213,15 +213,11 @@ const Page = ({}) => {
 
 export const getServerSideProps = async (context) => {
     const {locale = "vi"} = context;
-    let initProps = {};
     try {
-        initProps = await initialProps(context);
     } catch (e) {
-        initProps = {};
     }
     return {
         props: {
-            ...initProps,
             ...(await serverSideTranslations(locale, ['common'])),
         },
     }

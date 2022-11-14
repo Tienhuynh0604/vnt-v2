@@ -3,7 +3,7 @@ import NavHeader from "./nav-header";
 import {useRouter} from 'next/router'
 import {useAppContext} from "../../layouts/AppLayout";
 import Link from "next/link";
-import {Navbar as NavBarBs, NavbarBrand, Nav, Container, NavDropdown} from "react-bootstrap";
+import {Navbar as NavBarBs, NavbarBrand, Badge, Container, NavDropdown} from "react-bootstrap";
 import {renderImage} from "../../ulti/appUtil";
 import {useTranslation} from "react-i18next";
 import Image from "next/image";
@@ -12,7 +12,7 @@ import {Icon} from "@iconify/react";
 const NavBar = (props) => {
 
     const {t} = useTranslation("common");
-    const {headerMenus, common} = useAppContext();
+    const {headerMenus, common, cartModal, setCartModal} = useAppContext();
     const router = useRouter();
     const {asPath} = router;
     const [expanded, setExpanded] = useState(false);
@@ -29,6 +29,13 @@ const NavBar = (props) => {
 
     const closeNav = () => {
         setExpanded(false);
+    };
+
+    const onShowCart = () => {
+        setCartModal({
+            ...cartModal,
+            isVisible: true,
+        })
     };
 
     const renderMenuItems = () => {
@@ -117,13 +124,17 @@ const NavBar = (props) => {
                             </NavDropdown>
                         </li>
                         <li className="nav-item">
-                            <Link href="/cart"
+                            <a
                                   className={`nav-link ${!activeRoute || activeRoute === "/" ? "active" : ""}`}
-                                  onClick={closeNav}
+                                  onClick={()=>{
+                                      closeNav();
+                                      onShowCart();
+                                  }}
                                   aria-current="page"
                             >
                                 <Icon icon={"bi:cart-fill"} height={24}/>
-                            </Link>
+                                <Badge pill bg="danger">{cartModal.items.length}</Badge>
+                            </a>
                         </li>
                     </ul>
                 </NavBarBs.Collapse>

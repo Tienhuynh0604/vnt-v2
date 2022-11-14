@@ -20,7 +20,7 @@
     "lightgallery": "^2.7.0",
     "md5": "^2.3.0",
     "moment": "^2.29.4",
-    "next": "13.0.2",
+    "next": "13.0.3",
     "next-absolute-url": "^1.2.2",
     "next-i18next": "^12.1.0",
     "node-cache": "^5.1.2",

@@ -8,8 +8,8 @@ import AboutUsBlock from "../components/home/AboutUsBlock";
 import LatestNewBlock from "../components/home/LatestNewSection";
 import TestimonialBlock from "../components/home/TestimonialBlock";
 
-const Home = ({homeData = {}}) => {
-    console.log(homeData);
+const Home = (props) => {
+    const {homeData = {}} = props;
     return (
         <>
             <SliderBlock dataSource={homeData.attributes.banners}/>
@@ -25,11 +25,10 @@ const Home = ({homeData = {}}) => {
 export default Home;
 
 export const getServerSideProps = async (context) => {
+    console.log("Home.getServerSideProps");
     const {locale = "vi"} = context;
-    let initProps = {};
     let homeData = {};
     try {
-        initProps = await initialProps(context);
         const p2 = callGet("/home-page", {
             populate: {
                 banners: {
@@ -50,11 +49,10 @@ export const getServerSideProps = async (context) => {
         const [homeRes] = await Promise.all([p2]);
         homeData = homeRes.data;
     } catch (e) {
-        initProps = {};
+        console.error(e);
     }
     return {
         props: {
-            ...initProps,
             homeData,
             ...(await serverSideTranslations(locale, ['common'])),
         },
