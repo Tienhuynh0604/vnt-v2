@@ -122,7 +122,7 @@ const TicketBookingStep = () => {
             </div>
         </Tab>
         <Tab eventKey="step-confirm" title={<>2. Verify information</>}>
-            <BookingConfirmStep />
+            <BookingConfirmStep onBack={backToStep1}/>
         </Tab>
     </Tabs>
 };

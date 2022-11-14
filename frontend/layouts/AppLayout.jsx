@@ -5,6 +5,7 @@ import {createContext, useContext} from 'react';
 import FacebookChatScript from "../components/AppScript/FacebookChatScript";
 import GaScript from "../components/AppScript/GaScript";
 import {isVisible} from "bootstrap/js/src/util";
+import {ToastContainer} from "react-toastify";
 
 const AppContext = createContext({});
 
@@ -46,6 +47,7 @@ const AppLayout = (props) => {
             {children}
             <FacebookChatScript facebookPageId={common.fbId}/>
             <GaScript gaTags={common.gaId ? common.gaId.split(",") : []}/>
+            <ToastContainer/>
         </AppContext.Provider>
     )
 };

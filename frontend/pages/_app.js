@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "react-modal-video/scss/modal-video.scss";
 import 'lightgallery/scss/lightgallery.scss';
 import 'lightgallery/scss/lg-zoom.scss';
+import 'react-toastify/dist/ReactToastify.css';
 import "react-datepicker/dist/react-datepicker.css";
 import '../styles/App.scss';
 import SSRProvider from 'react-bootstrap/SSRProvider';
