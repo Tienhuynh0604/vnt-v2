@@ -16,7 +16,7 @@
     "@strapi/plugin-i18n": "4.5.0",
     "@strapi/plugin-seo": "^1.7.5",
     "@strapi/plugin-users-permissions": "4.5.0",
-    "@strapi/strapi": "4.5.0strapi develop --watch-admin",
+    "@strapi/strapi": "4.5.0",
     "mysql": "2.18.1",
     "strapi-plugin-email-designer": "^2.1.1",
     "strapi-plugin-navigation": "^2.2.2",
