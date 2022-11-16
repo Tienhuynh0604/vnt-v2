@@ -16,7 +16,7 @@ module.exports = ({env}) => {
           useDefaults: true,
           directives: {
             'script-src': ["'self'", "'unsafe-inline'", 'cdn.jsdelivr.net', "maps.googleapis.com", "editor.unlayer.com"],
-            'img-src': ["'self'", 'data:', 'blob:', 'cdn.jsdelivr.net', 'strapi.io', "maps.gstatic.com", "maps.googleapis.com", "editor.unlayer.com"],
+            'img-src': ["'self'", 'data:', 'blob:', 'cdn.jsdelivr.net', 'strapi.io', "maps.gstatic.com", "maps.googleapis.com", "editor.unlayer.com","dl.airtable.com"],
             'media-src': ["'self'", 'data:', 'blob:', "maps.gstatic.com", "maps.googleapis.com", "editor.unlayer.com"],
             'frame-src': ["'self'", "editor.unlayer.com"],
             upgradeInsecureRequests: null,
