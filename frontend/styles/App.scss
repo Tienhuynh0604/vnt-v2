@@ -259,6 +259,10 @@ Product card Item
   width: 330px;
 }
 
+.product-card-item.unique-item {
+  width: 100%;
+}
+
 .product-card-item.hide-product {
   display: none;
 }
