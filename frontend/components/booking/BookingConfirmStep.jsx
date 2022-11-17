@@ -56,7 +56,14 @@ const BookingConfirmStep = ({onBack}) => {
                 <span className="d-none d-md-block">Back</span>
                 <Icon icon={"eva:arrow-ios-back-fill"} className="d-sm-block d-md-none" height={24}/>
             </Button>
-            <Link href="/check-out">
+            <Link href="/check-out"
+                  onClick={() => {
+                      setBookingModal(prevState => ({
+                          ...prevState,
+                          isVisible: false
+                      }))
+                  }}
+            >
                 <Button type="button" variant="outline-primary" className="px-md-3 py-md-2">Check out
                     now</Button>
             </Link>

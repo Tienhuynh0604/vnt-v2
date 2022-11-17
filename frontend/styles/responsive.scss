@@ -80,6 +80,11 @@ IPAD landscape
   .title-section .cover .nav-block{
     margin-top: 190px;
   }
+
+  .payment-item{
+    font-size: 0.8rem;
+    padding: 10px;
+  }
 }
 
 /**
@@ -139,6 +144,10 @@ IPAD air
   }
 
   .product-card-item.unique-item{
+    width: 100%;
+  }
+
+  .payment-item{
     width: 100%;
   }
 }

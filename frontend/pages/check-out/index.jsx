@@ -19,7 +19,7 @@ const Page = () => {
             <div>
                 <h1><span className="text-capitalize">{t("payment")}</span></h1>
             </div>
-            <Row>
+            <Row className="gy-3">
                 <Col xs={12} md={7}>
                     <h5 className="mt-5 text-capitalize fw-bold">{t("booking information")}</h5>
                     <Form className="text-capitalize">
@@ -57,7 +57,7 @@ const Page = () => {
                                                alt={"Paypal"}
                                                width={75}
                                                height={20}
-                                               className="h-100 w-auto"
+                                               className=""
                                         />
                                     </div>
                                     <div className="payment-item">
@@ -72,7 +72,7 @@ const Page = () => {
                                                alt={"Paypal"}
                                                width={84}
                                                height={20}
-                                               className="h-100 w-auto"
+                                               className=""
                                         />
                                     </div>
                                 </div>
@@ -90,7 +90,7 @@ const Page = () => {
                         </Row>
                     </Form>
                 </Col>
-                <Col xs={12} md={5} className="bg-grey p-5 rounded-3">
+                <Col xs={12} md={5} className="bg-grey p-3 p-xl-5 rounded-3">
                     <h5 className="text-capitalize">{t("booking summary")}</h5>
                     <hr className="text-grey"/>
                     <div className='product-item'>
