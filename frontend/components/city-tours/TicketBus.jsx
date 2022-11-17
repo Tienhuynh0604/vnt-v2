@@ -23,7 +23,7 @@ const TicketBus = ({}) => {
         <Row>
             {data.map((item, idx) => (
                 <Col key={`p-c${idx}`} xs={12} md={6} lg={4} xxl={3}>
-                    <ProductCard item={item}/>
+                    <ProductCard item={item} className="city-tour-item"/>
                 </Col>
             ))}
             <ul className="pagination justify-content-center mt-4">

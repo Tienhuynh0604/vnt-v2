@@ -154,7 +154,7 @@ const UniqueTourSlider = () => {
 
     return <Slider {...settings}>
         {data && data.map((item, idx) => {
-            return <ProductCard key={`p_i${idx}`} item={item}/>
+            return <ProductCard key={`p_i${idx}`} item={item} className="unique-item"/>
         })}
     </Slider>
 };
