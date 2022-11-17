@@ -81,6 +81,10 @@ IPAD air
   .navbar-toggler-icon {
     --bs-navbar-toggler-icon-bg: #{escape-svg($navbar-dark-toggler-icon-bg)};
   }
+
+  .galleries .gallery-item{
+    height: 150px;
+  }
 }
 
 /**
@@ -199,4 +203,12 @@ Mobile protrail
     width: 100%;
   }
 
+  .gallery-section select{
+    height: 40px;
+    max-width: 100px;
+  }
+
+  .galleries .gallery-item{
+    height: 80px;
+  }
 }

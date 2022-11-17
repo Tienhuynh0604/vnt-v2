@@ -2456,7 +2456,7 @@
     "@strapi/utils" "4.5.1"
     lodash "4.17.21"
 
-"@strapi/plugin-graphql@^4.5.0":
+"@strapi/plugin-graphql@^4.5.1":
   version "4.5.1"
   resolved "https://registry.yarnpkg.com/@strapi/plugin-graphql/-/plugin-graphql-4.5.1.tgz#74a2541a0a9ff575c83009caf14f83d7e92229c5"
   integrity sha512-R1ywC2XfiN0+AZD+A12lEk+QPEjP5vTpD8p/YzuiEuAIlrRclQPNdanpjWbpcmBZ5dfYZYM008ET5UStKhKi5Q==
@@ -2478,7 +2478,7 @@
     pluralize "^8.0.0"
     subscriptions-transport-ws "0.9.19"
 
-"@strapi/plugin-i18n@^4.5.0":
+"@strapi/plugin-i18n@^4.5.1":
   version "4.5.1"
   resolved "https://registry.yarnpkg.com/@strapi/plugin-i18n/-/plugin-i18n-4.5.1.tgz#a2e0ce1dbab2c5b8cecda0d587baa577cdbcb1ee"
   integrity sha512-DENqruoZSopKVWjBcFXVP3ukIDiiccfhKtq5CF82J2X+nAJpxbdHCnUyaW3vOGPBzCXsJsT6Se8fxeQkyRJwbg==
@@ -2521,7 +2521,7 @@
     react-router-dom "5.2.0"
     sharp "0.31.0"
 
-"@strapi/plugin-users-permissions@^4.5.0":
+"@strapi/plugin-users-permissions@^4.5.1":
   version "4.5.1"
   resolved "https://registry.yarnpkg.com/@strapi/plugin-users-permissions/-/plugin-users-permissions-4.5.1.tgz#c16b665a9bd00ee9c4b92ca6c3de1e5ae11961fc"
   integrity sha512-18rIVN7RymQBszLlz2TljbPzHleWVsk0rKAzomj3UDydcKhjvtlpF671Qxpiv+Ao0PtQNKwYLlrKdfMVXt88fQ==
@@ -2560,7 +2560,7 @@
     "@strapi/utils" "4.5.1"
     fs-extra "10.0.0"
 
-"@strapi/strapi@^4.5.0":
+"@strapi/strapi@^4.5.1":
   version "4.5.1"
   resolved "https://registry.yarnpkg.com/@strapi/strapi/-/strapi-4.5.1.tgz#3308f8e827d95769b6254e897c3c3dd36f699923"
   integrity sha512-dbGvucbtBIa0xK2MHXj3+buIVmY39h8i3/oRckTN1N2Uj3qObv/iFTs+z2bRND+ynkNlyrpchdIqzyO3wOyWqw==

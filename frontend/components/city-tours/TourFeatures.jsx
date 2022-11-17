@@ -1,7 +1,6 @@
 import React, {memo} from "react";
 import {Button} from "react-bootstrap";
 import {Icon} from "@iconify/react";
-import LightGallery from 'lightgallery/react';
 
 const TourFeatures = ({}) => {
     return <div className="icon-flex-wrap justify-content-sm-start justify-content-md-between">

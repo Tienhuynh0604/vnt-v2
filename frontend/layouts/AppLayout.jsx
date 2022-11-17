@@ -38,7 +38,7 @@ const AppLayout = (props) => {
     useEffect(() => {
         setCartModal(prevState => ({
             ...prevState,
-            isVisible: true,
+            isVisible: false,
         }));
     }, []);
 

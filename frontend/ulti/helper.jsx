@@ -151,7 +151,7 @@ export const featurePopulate = () => {
 
 export const imagePopulate = () => {
     return {
-        fields: ['name', 'url', 'width', 'height']
+        fields: ['caption', 'alternativeText', 'url', 'width', 'height', 'formats']
     }
 };
 
@@ -177,7 +177,7 @@ export const initialProps = async (ctx) => {
         };
 
         const p1 = callGet("/global", query, locale, true);
-        const p2 = callGet(`/navigation/render/main-navigation`, {
+        const p2 = callGet(`/navigation/render/header`, {
             type: 'TREE'
         }, locale, true);
         const p3 = callGet(`/navigation/render/footer`, {
@@ -207,6 +207,7 @@ export const initialProps = async (ctx) => {
         // }, locale);
         headerMenus = data2;
         footerMenus = data3;
+        console.log("initialProps SEO", seo);
     } catch (e) {
         console.error("initialProps", e);
         throw new Error(e.message);

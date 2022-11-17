@@ -686,6 +686,67 @@ Booking table
   -webkit-box-orient: vertical;
 }
 
+.gallery-section select{
+  height: 40px;
+  max-width: 200px;
+}
+
+.galleries{
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+}
+
+.galleries .gallery-item{
+  height: 200px;
+  width: 33%;
+  border: 2px solid white;
+  overflow: hidden;
+  position: relative;
+}
+
+.galleries .gallery-item.portrait{
+  width: 11%;
+}
+
+.accordion {
+  --bs-accordion-bg: #fff;
+  --bs-accordion-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, border-radius 0.15s ease;
+  --bs-accordion-btn-color: $blue;
+  --bs-accordion-btn-focus-border-color: $blue;
+  --bs-accordion-active-color: $blue;
+  --bs-accordion-active-bg: white;
+}
+
+.accordion .accordion-item{
+  border-bottom-left-radius: var(--bs-accordion-border-radius);
+  border-bottom-right-radius: var(--bs-accordion-border-radius);
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+}
+
+.accordion-item:not(:first-of-type){
+  border-top: 1px solid var(--bs-border-color);
+  border-top-right-radius: var(--bs-accordion-border-radius);
+  border-top-left-radius: var(--bs-accordion-border-radius);
+}
+
+.accordion-item:first-of-type .accordion-button
+, .accordion-item:last-of-type .accordion-button.collapsed
+, .accordion-button:not(.collapsed){
+  border-radius: var(--bs-accordion-inner-border-radius);
+}
+
+.accordion-item:first-of-type .accordion-button:not(.collapsed),.accordion-button:not(.collapsed){
+  border-bottom-right-radius: 0 ;
+  border-bottom-left-radius: 0 ;
+}
+
+.accordion-button, .accordion-button:focus{
+  color: $blue;
+  font-weight: bold;
+}
+
 @import "Page";
 @import "TourDetail";
 @import "AboutUs";
