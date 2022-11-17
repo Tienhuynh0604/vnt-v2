@@ -2,6 +2,8 @@ import {Row, Carousel, Container, Col, Button} from 'react-bootstrap';
 import Link from "next/link";
 import React, {memo} from "react";
 import {nl2br, renderImage} from "../../ulti/appUtil";
+import {getImageUrl} from "../../ulti/helper";
+import Image from "next/image";
 
 const SliderBlock = ({dataSource = []}) => {
 
@@ -15,10 +17,16 @@ const SliderBlock = ({dataSource = []}) => {
                 <div className="main-slider-item">
                     {item.image
                     && <div className="slider-img">
-                        {renderImage(item.image, {
-                            priority: true,
-                            className: "d-block w-100 h-auto"
-                        })}
+                        <Image alt={item.image.data.attributes.name}
+                               src={getImageUrl(item.image.data.attributes.url)}
+                               fill
+                               objectFit="cover"
+                               priority
+                        />
+                        {/*{renderImage(item.image, {*/}
+                        {/*    priority: true,*/}
+                        {/*    className: "d-block w-100 h-auto"*/}
+                        {/*})}*/}
                     </div>}
                     <Carousel.Caption>
                         <div className="sub-title" dangerouslySetInnerHTML={{__html: nl2br(item.subTitle)}}/>

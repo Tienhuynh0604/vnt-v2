@@ -157,6 +157,11 @@ hr.dashed{
 /**
 MAIN SLIDER
  */
+.main-slider-item .slider-img{
+  height: 650px;
+  position: relative;
+  overflow: hidden;
+}
 
 .main-slider-item .sub-title {
   font-size: 18px;
@@ -173,7 +178,7 @@ MAIN SLIDER
 }
 
 .main-slider-item .carousel-caption {
-  top: 22rem;
+  top: 12rem;
   left: 20%;
   text-align: left;
   width: 35%;
