@@ -32,7 +32,7 @@ const AboutUsBlock = ({dataSource = {}}) => {
                         </Link>
                     </Col>
                     <Col xs={12} lg={6}>
-                        <div className="decor-bg"/>
+                        {/*<div className="decor-bg"/>*/}
                         {renderImage(dataSource.image, {
                             className: "decor-bg-2"
                         })}

@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_common_custom_ck_editors",
+  "info": {
+    "displayName": "Custom CKEditor",
+    "icon": "grip-vertical",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "customField",
+      "options": {
+        "preset": "rich"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    }
+  }
+}

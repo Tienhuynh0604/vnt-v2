@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_order_order_items",
+  "info": {
+    "displayName": "OrderItem",
+    "icon": "box-open"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "ticketNumber": {
+      "type": "integer"
+    },
+    "ticketId": {
+      "type": "text"
+    },
+    "billPhone": {
+      "type": "string"
+    },
+    "address": {
+      "type": "text"
+    },
+    "priceId": {
+      "type": "integer"
+    },
+    "routerId": {
+      "type": "integer"
+    },
+    "price": {
+      "type": "string"
+    }
+  }
+}

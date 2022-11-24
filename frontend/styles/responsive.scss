@@ -49,7 +49,7 @@ IPAD landscape
   .aboutus-section .decor-bg-2 {
     height: auto;
     width: 100%;
-    margin-top: -325px;
+    //margin-top: -325px;
   }
 
   .product-card-item .card .btn {
@@ -111,6 +111,10 @@ IPAD air
  */
 @include media-breakpoint-down(lg) {
 
+  .main-navbar ul{
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
   .main-navbar a {
     font-size: 1rem;
   }
@@ -148,7 +152,7 @@ IPAD air
   .aboutus-section .decor-bg-2 {
     height: auto;
     width: 100%;
-    margin-top: -425px;
+    //margin-top: -425px;
   }
 
   .tour-detail .image-slider-item .big-thumb {
@@ -161,6 +165,7 @@ IPAD air
 
   .navbar-toggler {
     color: white;
+    margin-top: 10px;
   }
 
   .navbar-toggler-icon {
@@ -215,7 +220,7 @@ IPAD portrait, mobile landscape
   .aboutus-section .decor-bg-2 {
     height: auto;
     width: 100%;
-    margin-top: -425px;
+    margin-top: 20px;
   }
 
   .tour-detail .image-slider-item .big-thumb {
@@ -284,7 +289,7 @@ Mobile protrail
   .aboutus-section .decor-bg-2 {
     height: 300px;
     width: 350px;
-    margin-top: -250px;
+    //margin-top: -250px;
   }
 
   .title-section .cover {

@@ -1,0 +1,66 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "singularName": "order",
+    "pluralName": "orders",
+    "displayName": "Order",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "customerName": {
+      "type": "string"
+    },
+    "customerEmail": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "totalItem": {
+      "type": "integer",
+      "private": true,
+      "default": 0
+    },
+    "grandTotal": {
+      "type": "biginteger"
+    },
+    "grandTotalUsd": {
+      "type": "decimal"
+    },
+    "paymentToken": {
+      "type": "text"
+    },
+    "paymentTokenRaw": {
+      "type": "json"
+    },
+    "customerPhone": {
+      "type": "string"
+    },
+    "paymentType": {
+      "type": "string"
+    },
+    "note": {
+      "type": "text"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "Waiting",
+        "Success",
+        "Error",
+        "Cancel"
+      ],
+      "default": "Waiting"
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "order.order-item"
+    }
+  }
+}

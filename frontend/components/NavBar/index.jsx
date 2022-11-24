@@ -92,8 +92,8 @@ const NavBar = (props) => {
     return <div className="header-navbar">
         {/*<NavHeader/>*/}
         {/*<hr className="m-0"/>*/}
-        <NavBarBs expand="lg" className="main-navbar" expanded={expanded} onToggle={onToggle}>
-            <Container className="d-flex align-items-center">
+        <NavBarBs expand="lg" className="main-navbar py-0" expanded={expanded} onToggle={onToggle}>
+            <Container className="d-flex align-items-start">
                 <NavbarBrand href="/">
                     {renderImage(common.logo)}
                 </NavbarBrand>

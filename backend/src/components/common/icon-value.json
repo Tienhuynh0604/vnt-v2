@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_common_icon_values",
+  "info": {
+    "displayName": "Icon & Value",
+    "icon": "align-left",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "iconClass": {
+      "type": "string"
+    },
+    "displayText": {
+      "type": "string"
+    },
+    "value": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_tour_tour_cards",
+  "info": {
+    "displayName": "Tour Card",
+    "icon": "bus",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "adultPrice": {
+      "type": "decimal"
+    },
+    "childPrice": {
+      "type": "decimal"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "features": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.icon-value",
+      "max": 3
+    }
+  }
+}
