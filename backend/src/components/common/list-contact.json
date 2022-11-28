@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_common_list_contacts",
+  "info": {
+    "displayName": "List Contact",
+    "icon": "air-freshener",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "values": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.social-item"
+    },
+    "style": {
+      "type": "string"
+    }
+  }
+}

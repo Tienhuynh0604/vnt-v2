@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_common_list_with_icon_values",
+  "info": {
+    "displayName": "List with IconValue",
+    "icon": "bars",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "values": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.icon-value"
+    },
+    "style": {
+      "type": "string"
+    }
+  }
+}

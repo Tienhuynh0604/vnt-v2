@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_common_list_features",
+  "info": {
+    "displayName": "List Features",
+    "icon": "border-all",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "values": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.feature"
+    },
+    "type": {
+      "type": "string"
+    }
+  }
+}
