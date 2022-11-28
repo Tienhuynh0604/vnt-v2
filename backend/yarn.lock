@@ -10916,6 +10916,11 @@ strapi-plugin-email-designer@^2.1.1:
     react-syntax-highlighter "^15.4.3"
     striptags "^3.2.0"
 
+strapi-plugin-multi-select@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/strapi-plugin-multi-select/-/strapi-plugin-multi-select-1.1.0.tgz#80085ed81b789dc76901bf8cc172de561131afd7"
+  integrity sha512-h8Ar/BwOyjjBd9xPWtmNC/qrcaUNRtmy9Upkr8BOTY5rg3gvkWgVHhaW/YMB7gENUU8esBHoImb4WdrO4NuNOA==
+
 strapi-plugin-navigation@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/strapi-plugin-navigation/-/strapi-plugin-navigation-2.2.2.tgz#0975e330caf751bb1c30794d069e416dbd6f2c60"

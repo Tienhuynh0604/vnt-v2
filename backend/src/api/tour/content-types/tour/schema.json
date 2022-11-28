@@ -30,7 +30,7 @@
           "localized": true
         }
       },
-      "type": "string"
+      "type": "text"
     },
     "brochure": {
       "type": "media",
@@ -91,13 +91,7 @@
       "type": "enumeration",
       "enum": [
         "Bus Tour",
-        "City Tour",
-        "Trekking Tour",
-        "Art Tour",
-        "Safari Tour",
-        "Photographic Tour",
-        "Motorcycle Tour",
-        "Sport Tour"
+        "City Tour"
       ],
       "default": "Bus Tour"
     },
@@ -124,6 +118,34 @@
         "common.social-item",
         "common.custom-ck-editor"
       ]
+    },
+    "slug": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "uid",
+      "targetField": "title"
+    },
+    "tags": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "customField",
+      "options": [
+        "Bus Tour",
+        "City Tour",
+        "Trekking Tour",
+        "Art Tour",
+        "Safari Tour",
+        "Photographic Tour",
+        "Motorcycle Tour",
+        "Sport Tour"
+      ],
+      "customField": "plugin::multi-select.multi-select"
     }
   }
 }
