@@ -9,6 +9,10 @@ module.exports = ({env}) => {
     navigation: {
       enabled: true,
     },
+    'payment-vns': {
+      enabled: true,
+      resolve: './src/plugins/payment-vns'
+    },
     "rest-cache": {
       enabled: env("CACHED_ENABLED", "false") === "true",
       config: {

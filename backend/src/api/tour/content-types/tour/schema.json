@@ -100,11 +100,6 @@
       "relation": "oneToOne",
       "target": "api::destination.destination"
     },
-    "syncProduct": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::sync-product.sync-product"
-    },
     "slug": {
       "pluginOptions": {
         "i18n": {
@@ -202,6 +197,11 @@
         }
       },
       "type": "text"
+    },
+    "paymentProduct": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::payment-vns.payment-product"
     }
   }
 }
