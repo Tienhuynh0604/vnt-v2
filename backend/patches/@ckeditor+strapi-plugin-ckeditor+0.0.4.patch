@@ -1,0 +1,22 @@
+diff --git a/node_modules/@ckeditor/strapi-plugin-ckeditor/admin/src/index.js b/node_modules/@ckeditor/strapi-plugin-ckeditor/admin/src/index.js
+index bb20a59..ef54c48 100644
+--- a/node_modules/@ckeditor/strapi-plugin-ckeditor/admin/src/index.js
++++ b/node_modules/@ckeditor/strapi-plugin-ckeditor/admin/src/index.js
+@@ -91,7 +91,7 @@ export default {
+             sectionTitle: null,
+             items: [
+               {
+-                name: 'required',
++                name: 'options.required',
+                 type: 'checkbox',
+                 intlLabel: {
+                   id:  'ckeditor.required.label',
+@@ -107,7 +107,7 @@ export default {
+               // We want to apply this to the number of characters in the editor,
+               // hence – a unique name.
+               {
+-                name: 'maxLengthCharacters',
++                name: 'options.maxLengthCharacters',
+                 type: 'checkbox-with-number-field',
+                 intlLabel: {
+                   id: 'ckeditor.maxLength.label',
