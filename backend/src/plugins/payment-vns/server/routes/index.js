@@ -33,7 +33,7 @@ module.exports = {
     routes: [
       {
         method: 'GET',
-        path: '/',
+        path: '/settings',
         handler: 'paymentVnsController.getSettings',
         config: {
           policies: [],
@@ -41,7 +41,7 @@ module.exports = {
       },
       {
         method: 'PUT',
-        path: '/',
+        path: '/settings',
         handler: 'paymentVnsController.setSettings',
         config: {
           policies: [],
