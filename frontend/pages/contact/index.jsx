@@ -8,9 +8,14 @@ import {callGet} from "../../ulti/helper";
 
 const Page = ({models = []}) => {
     const {t} = useTranslation("common");
-    const [faqs, setFaqs] = useState(models);
 
-    return <PageLayout>
+    return <PageLayout title={t("contact")}
+                       breadcrumbs={[
+                           {
+                               title: t("contact"),
+                               link: "/contact"
+                           }
+                       ]}>
         <Container className="gallery-section">
             <div className="mt-4">
                 <Row>
@@ -100,7 +105,7 @@ const Page = ({models = []}) => {
                                 <Col xs={12} md={12}>
                                     <Form.Group className="mb-3" controlId="formMessage">
                                         <Form.Label>Message</Form.Label>
-                                        <Form.Control  as="textarea" rows={5} placeholder="Enter your message"/>
+                                        <Form.Control as="textarea" rows={5} placeholder="Enter your message"/>
                                     </Form.Group>
                                 </Col>
                             </Row>
@@ -118,20 +123,8 @@ const Page = ({models = []}) => {
 
 export const getServerSideProps = async (context) => {
     const {locale = 'vi'} = context;
-
-    let models = [];
-    try {
-        const res = await callGet("/faqs", {
-            sortBy: ['id:desc'],
-        });
-        models = res.data;
-    } catch (e) {
-        console.error(e);
-    }
-
     return {
         props: {
-            models,
             ...(await serverSideTranslations(locale, ['common'])),
         },
     }

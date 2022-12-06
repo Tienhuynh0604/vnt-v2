@@ -5,20 +5,26 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useTranslation} from "next-i18next";
 import DecorComponent from "../../components/DecorComponent";
 import {callGet} from "../../ulti/helper";
+import AppPagination from "../../components/AppPagination";
 
-const Page = ({models}) => {
+const Page = ({model, query = {}}) => {
     const {t} = useTranslation("common");
 
-    return <PageLayout>
+    return <PageLayout title={t("faq")} breadcrumbs={[
+        {
+            title: t("faq"),
+            link: "/faq"
+        }
+    ]}>
         <Container className="gallery-section">
             <div className="d-flex justify-content-between">
                 <h1><span className="text-uppercase">{t("faq")}</span></h1>
             </div>
             <div className="mt-4">
                 <Accordion defaultActiveKey="0">
-                    {models.data.map((item, idx) => (
+                    {model.data.map((item, idx) => (
                         <Accordion.Item key={`faq_${idx}`} eventKey={`faq_${idx}`}>
-                            <Accordion.Header><span>Q.</span> {item.attributes.question}</Accordion.Header>
+                            <Accordion.Header>{`Q. ${item.attributes.question}`}</Accordion.Header>
                             <Accordion.Body>
                                 <div dangerouslySetInnerHTML={{
                                     __html: item.attributes.answer
@@ -27,6 +33,9 @@ const Page = ({models}) => {
                         </Accordion.Item>
                     ))}
                 </Accordion>
+                <div className='d-flex justify-content-end mt-3'>
+                    <AppPagination {...model.meta.pagination} query={query} baseUrl={"/faq"}/>
+                </div>
             </div>
         </Container>
         <DecorComponent/>
@@ -62,6 +71,7 @@ export const getServerSideProps = async (context) => {
     return {
         props: {
             model,
+            query,
             ...(await serverSideTranslations(locale, ['common'])),
         },
     }

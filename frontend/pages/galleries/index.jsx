@@ -55,7 +55,14 @@ const Page = ({galleries = {}, destinations = [], query = {}}) => {
         })
     };
 
-    return <PageLayout>
+    return <PageLayout title={t("galleries")}
+                       breadcrumbs={[
+                           {
+                               title: t("galleries"),
+                               link: "/galleries"
+                           }
+                       ]}
+    >
         <Container className="gallery-section">
             <div className="d-flex justify-content-between">
                 <h1><span className="text-capitalize">{t("our galleries")}</span></h1>
