@@ -10,10 +10,18 @@ import lgThumbnail from 'lightgallery/plugins/thumbnail';
 import lgZoom from 'lightgallery/plugins/zoom';
 import {callGet, getImageUrl, imagePopulate} from "../../ulti/helper";
 import {nl2br} from "../../ulti/appUtil";
+import {useAppContext} from "../../layouts/AppLayout";
+import AppPagination from "../../components/AppPagination";
+import Router from 'next/router';
 
-const Page = ({galleries = []}) => {
+const Page = ({galleries = {}, destinations = [], query = {}}) => {
     const {t} = useTranslation("common");
     const [images, setImages] = useState([]);
+    const [pagination, setPagination] = useState({
+        page: 1,
+        pageCount: 0
+    });
+    const {locale} = useAppContext();
 
     const lightGallery = useRef(null);
     const onInit = useCallback((detail) => {
@@ -24,7 +32,7 @@ const Page = ({galleries = []}) => {
 
     useEffect(() => {
         if (galleries) {
-            setImages(galleries);
+            setImages(galleries.data);
         }
     }, [galleries]);
 
@@ -32,13 +40,32 @@ const Page = ({galleries = []}) => {
         lightGallery.current.refresh();
     }, [images]);
 
+    const handleChange = async (value) => {
+        let query = {
+            page: 1,
+        };
+
+        if (value && value !== 'all') {
+            query.destination = value;
+        }
+
+        await Router.push({
+            pathname: '/galleries',
+            query
+        })
+    };
 
     return <PageLayout>
         <Container className="gallery-section">
             <div className="d-flex justify-content-between">
                 <h1><span className="text-capitalize">{t("our galleries")}</span></h1>
-                <Form.Select size={"sm"}>
-                    <option>{t("all")}</option>
+                <Form.Select size={"sm"} className="text-capitalize" onChange={e => handleChange(e.target.value)}>
+                    <option value="all">{t("all")}</option>
+                    {destinations.map((item, idx) => {
+                        return <option key={`d_opt${idx}`} value={item.attributes.slug}>
+                            {item.attributes.name}
+                        </option>
+                    })}
                 </Form.Select>
             </div>
             <div className="mt-4">
@@ -50,7 +77,9 @@ const Page = ({galleries = []}) => {
                 >
                     {images.map((item, idx) => {
                         const img = item.attributes.image.data;
-                        const smallImg = img.attributes.formats.small;
+                        const smallImg = img.attributes?.formats?.small ?
+                            img.attributes.formats.small : img.attributes
+                        ;
                         const isPortrait = smallImg.width < smallImg.height;
                         const isUltraWide = smallImg.width / smallImg.height >= 21 / 9;
                         let caption = item.attributes.caption;
@@ -68,28 +97,75 @@ const Page = ({galleries = []}) => {
                                 // height={smallImg.height}
                                    fill
                                    objectFit={"cover"}
-                                   alt={item.attributes.alternativeText}/>
+                                   alt={item.attributes.alternativeText ? item.attributes.alternativeText : item.attributes.name}/>
                         </div>
                     })}
                 </LightGallery>
+                <div className='d-flex justify-content-end mt-3'>
+                    <AppPagination {...galleries.meta.pagination} query={query} baseUrl={"/galleries"}/>
+                </div>
             </div>
         </Container>
         <DecorComponent/>
     </PageLayout>
 };
 
-export const getServerSideProps = async (context) => {
-    const {locale = 'vi'} = context;
-
-    let galleries = [];
+const getGalleries = async (locale, filters = {}, pagination = {
+    page: 1,
+    pageSize: 20
+}) => {
     try {
-        const res = await callGet("/galleries", {
+        return await callGet("/galleries", {
+            filters,
             sortBy: ['id:desc'],
             populate: {
                 image: imagePopulate()
+            },
+            pagination
+        }, locale, true);
+    } catch (e) {
+        return {
+            data: [],
+            meta: {
+                pagination: {
+                    page: 1,
+                    pageSize: 20,
+                    pageCount: 1,
+                    total: 4
+                }
+            }
+        }
+    }
+};
+
+export const getServerSideProps = async (context) => {
+    const {locale = 'vi', query = {}} = context;
+
+    let galleries = {};
+    let destinations = [];
+    try {
+        const resDestinations = await callGet("/destinations", {
+            sortBy: ['name:asc'],
+            fields: ['name', 'slug'],
+            filters: {
+                locale
             }
         });
-        galleries = res.data;
+
+        let filters = {};
+        if (query.destination) {
+            filters.destination = {
+                slug: query.destination
+            };
+        }
+
+        galleries = await getGalleries(locale,
+            filters,
+            {
+                page: query.page ? query.page : 1,
+                pageSize: query.pageSize ? query.pageSize : 20
+            });
+        destinations = resDestinations.data;
     } catch (e) {
         console.error(e);
     }
@@ -97,6 +173,8 @@ export const getServerSideProps = async (context) => {
     return {
         props: {
             galleries,
+            destinations,
+            query,
             ...(await serverSideTranslations(locale, ['common'])),
         },
     }
