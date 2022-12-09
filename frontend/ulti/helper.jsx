@@ -11,6 +11,7 @@ import md5 from 'md5';
 const {publicRuntimeConfig} = getConfig();
 
 const appCache = new NodeCache();
+const fullUrlReg = new RegExp('^(?:[a-z+]+:)?//', 'i');
 
 const getCacheKey = (text) => {
     const ret = md5(text);
@@ -151,7 +152,7 @@ export const featurePopulate = () => {
 
 export const imagePopulate = () => {
     return {
-        fields: ['caption', 'alternativeText', 'url', 'width', 'height', 'formats']
+        fields: ['caption', 'alternativeText', 'name', 'url', 'width', 'height', 'formats']
     }
 };
 
@@ -224,6 +225,9 @@ export const initialProps = async (ctx) => {
 };
 
 export const getImageUrl = (path) => {
+    if(fullUrlReg.test(path)){
+        return path;
+    }
     return `${process.env.NEXT_PUBLIC_RESOURCE_URL}${path}`;
 };
 

@@ -28,6 +28,7 @@ export const getServerSideProps = async (context) => {
     console.log("Home.getServerSideProps");
     const {locale = "vi"} = context;
     let homeData = {};
+    let bannerData = {};
     try {
         const p2 = callGet("/home-page", {
             populate: {
@@ -45,15 +46,26 @@ export const getServerSideProps = async (context) => {
                     }
                 }
             }
-        }, locale);
-        const [homeRes] = await Promise.all([p2]);
+        }, locale, true);
+        const p3 = callGet("/articles", {
+            populate: {
+                thumbnail: imagePopulate(),
+            },
+            pagination: {
+                page: 1,
+                pageSize: 6
+            }
+        }, locale, true);
+        const [homeRes, bannerRes] = await Promise.all([p2, p3]);
         homeData = homeRes.data;
+        bannerData = bannerRes.data;
     } catch (e) {
         console.error(e);
     }
     return {
         props: {
             homeData,
+            bannerData,
             ...(await serverSideTranslations(locale, ['common'])),
         },
     }

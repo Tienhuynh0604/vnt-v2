@@ -1,11 +1,13 @@
 import React, {memo, useEffect, useState} from "react";
 import {useAppContext} from "../../layouts/AppLayout";
-import {Container} from "react-bootstrap";
+import {Button, Container} from "react-bootstrap";
 import {useTranslation} from "next-i18next";
 import {nl2br, SlickNextArrow, SlickPrevArrow} from "../../ulti/appUtil";
 import Slider from "@ant-design/react-slick";
 import Image from "next/image";
 import {formatDate} from "../../ulti/helper";
+import {PATH_NEWS} from "../../ulti/appConst";
+import Link from "next/link";
 
 const settings = {
     dots: true,
@@ -81,11 +83,10 @@ const data = [
     }
 ];
 
-const LatestNewBlock = () => {
+const LatestNewBlock = ({dataSource = []}) => {
 
     const {t} = useTranslation("common");
     const {locale = 'vi'} = useAppContext();
-    const [articles, setArticles] = useState([]);
 
     const LatestSlider = () => {
         return <Slider {...settings}>
@@ -116,8 +117,13 @@ const LatestNewBlock = () => {
         <Container>
             <h2>{t("our new feeds")}</h2>
             <h1 className="text-capitalize">{t("latest news update")}</h1>
-            <div className="mb-5"/>
+            <div className="mb-4"/>
             <LatestSlider/>
+            <div className="d-flex justify-content-center mt-3">
+                <Link href={PATH_NEWS}>
+                    <Button className="text-capitalize" variant="primary">{t("view more")}</Button>
+                </Link>
+            </div>
         </Container>
     </section>
 };

@@ -28,7 +28,7 @@ const AboutUsBlock = ({dataSource = {}}) => {
                             ))}
                         </ul>
                         <Link href={PATH_ABOUT_US}>
-                            <Button variant="primary">{t("view more")}</Button>
+                            <Button className="text-capitalize" variant="primary">{t("view more")}</Button>
                         </Link>
                     </Col>
                     <Col xs={12} lg={6}>

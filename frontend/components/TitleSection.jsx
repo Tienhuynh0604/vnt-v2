@@ -25,7 +25,7 @@ const TitleSection = ({
                             </Link>
                         </li>
                         {breadcrumbs.map((item, idx) => {
-                            return <li className={`breadcrumb-item ${idx === breadcrumbs.length - 1 ? "active" : ""}`}
+                            return <li key={`brc_${idx}`} className={`breadcrumb-item ${idx === breadcrumbs.length - 1 ? "active" : ""}`}
                                        aria-current="page">
                                 <Link href={item.link}>
                                     <span className="text-light text-capitalize">{item.title}</span>

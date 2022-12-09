@@ -4,80 +4,66 @@ import PageLayout from "../../layouts/PageLayout";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useTranslation} from "next-i18next";
 import Image from "next/image";
+import {callGet, imagePopulate} from "../../ulti/helper";
+import Error from "../_error";
+import {strapiImg} from "../../ulti/strapiHelper";
 
-const Page = () => {
+const Page = ({model}) => {
     const {t} = useTranslation("common");
 
-    return <PageLayout title="About us">
+    if (!model) {
+        return <Error statusCode={404}/>
+    }
+
+    const renderImagesColumn = () => {
+        let colLeft = [];
+        let colRight = [];
+        if (model.attributes.images) {
+            model.attributes.images.data.forEach((item, idx) => {
+                if (idx % 2 === 0) {
+                    colLeft.push(item);
+                } else {
+                    colRight.push(item);
+                }
+            });
+        }
+        return <Row>
+            <Col>
+                {colLeft.map((item, idx) => {
+                    console.log(item);
+                    return <div key={`cl${idx}`} className="image-thumb">
+                        {strapiImg(item, 'rounded-4', true)}
+                    </div>
+                })}
+            </Col>
+            <Col>
+                {colRight.map((item, idx) => {
+                    return <div key={`cr${idx}`} className={`image-thumb ${idx === 0 ? "mt-5" : ""}`}>
+                        {strapiImg(item, 'rounded-4', true)}
+                    </div>
+                })}
+            </Col>
+        </Row>
+    };
+
+    return <PageLayout title="About us" breadcrumbs={[
+        {
+            link: "#",
+            title: t("about us"),
+        }
+    ]}>
         <Container className="about-us-page">
             <Row>
                 <Col xs={12} md={7}>
                     <h2 className="my-4">
-                        Established in January 2018, Vietnam Sightseeing Limited is an open-top
+                        {model.attributes.title}
                     </h2>
-                    <p>
-                        double-decker sightseeing tour bus operator. We provide Thang Long – Ha Noi City Tour bus
-                        service
-                        with 11 stops which are famous attractions in Hanoi; Ha Long City Tour with 9 stops in Ha Long
-                        City.
-                        Not only support tourists transport to historical sites, famous landmarks of the destinations,
-                        Vietnam Sightseeing also gives visitors a new experience when watching the panorama of the City
-                        from above, finding out useful information about Hanoi, Ha Long right on board. Keeping up with
-                        the world trend and tastes of travelers, the open-top double-decker Vietnam Sightseeing bus in
-                        general will follow a youthful, friendly yet secure service, professional and prestigious.
-
-                        This is also the important difference of the route when we put into operation.
-                        In addition, with competitive rates and many incentive programs, Vietnam Sightseeing will be a
-                        reasonable choice for tourists to visit Vietnam.
-                        We are registered in Vietnam under company number 0108149809 and have our registered office at
-                        43 Trang Tien street, Hoan Kiem district, Hanoi.
-                        Our VAT number is 0108149809
-                        VIETNAM SIGHTSEEING
-                    </p>
+                    <div className="ck-content" dangerouslySetInnerHTML={{
+                        __html: model.attributes.content
+                    }}/>
                 </Col>
                 <Col xs={12} md={5}>
-                    <Row>
-                        <Col>
-                            <div className="image-thumb">
-                                <Image
-                                    src={"/images/about-us/about-us1.jpg"}
-                                    fill
-                                    objectFit="cover"
-                                    className="rounded-4"
-                                    alt={"a"}
-                                />
-                            </div>
-                            <div className="image-thumb">
-                                <Image
-                                    src={"/images/about-us/about-us2.jpg"}
-                                    fill
-                                    objectFit="cover"
-                                    className="rounded-4"
-                                    alt={"a"}
-                                />
-                            </div>
-                        </Col>
-                        <Col>
-                            <div className="image-thumb mt-5">
-                                <Image
-                                    src={"/images/about-us/about-us3.jpg"}
-                                    fill
-                                    objectFit="cover"
-                                    className="rounded-4"
-                                    alt={"a"}
-                                />
-                            </div>
-                            <div className="image-thumb">
-                                <Image
-                                    src={"/images/about-us/about-us4.jpg"}
-                                    fill
-                                    objectFit="cover"
-                                    className="rounded-4"
-                                    alt={"a"}
-                                />
-                            </div>
-                        </Col>
-                    </Row>
+                    {renderImagesColumn()}
                 </Col>
             </Row>
         </Container>
@@ -86,8 +72,18 @@ const Page = () => {
 
 export const getServerSideProps = async (context) => {
     const {locale = 'vi'} = context;
+
+    const res = await callGet("/about-us", {
+        populate: {
+            images: imagePopulate()
+        }
+    });
+
+    console.log(res);
+
     return {
         props: {
+            model: res?.data,
             ...(await serverSideTranslations(locale, ['common'])),
         },
     }
