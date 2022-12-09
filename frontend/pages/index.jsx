@@ -9,14 +9,14 @@ import LatestNewBlock from "../components/home/LatestNewSection";
 import TestimonialBlock from "../components/home/TestimonialBlock";
 
 const Home = (props) => {
-    const {homeData = {}} = props;
+    const {homeData = {}, articlesData = []} = props;
     return (
         <>
             <SliderBlock dataSource={homeData.attributes.banners}/>
             <UniqueTour dataSource={homeData}/>
             <OurTours/>
             <AboutUsBlock dataSource={homeData.attributes.aboutUs}/>
-            <LatestNewBlock/>
+            <LatestNewBlock dataSource={articlesData}/>
             <TestimonialBlock/>
         </>
     )
@@ -28,7 +28,7 @@ export const getServerSideProps = async (context) => {
     console.log("Home.getServerSideProps");
     const {locale = "vi"} = context;
     let homeData = {};
-    let bannerData = {};
+    let articlesData = {};
     try {
         const p2 = callGet("/home-page", {
             populate: {
@@ -48,24 +48,27 @@ export const getServerSideProps = async (context) => {
             }
         }, locale, true);
         const p3 = callGet("/articles", {
+            fields: ['title', 'slug', 'shortDescription', 'createdAt'],
+            sort: ['id:desc'],
             populate: {
-                thumbnail: imagePopulate(),
+                thumb: imagePopulate(),
             },
             pagination: {
                 page: 1,
                 pageSize: 6
             }
         }, locale, true);
-        const [homeRes, bannerRes] = await Promise.all([p2, p3]);
+        const [homeRes, articlesRes] = await Promise.all([p2, p3]);
         homeData = homeRes.data;
-        bannerData = bannerRes.data;
+        articlesData = articlesRes.data;
+        console.log(articlesData);
     } catch (e) {
         console.error(e);
     }
     return {
         props: {
             homeData,
-            bannerData,
+            articlesData,
             ...(await serverSideTranslations(locale, ['common'])),
         },
     }

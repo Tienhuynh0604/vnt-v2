@@ -4,6 +4,7 @@ import React, {memo} from "react";
 import {nl2br, renderImage} from "../../ulti/appUtil";
 import {getImageUrl} from "../../ulti/helper";
 import Image from "next/image";
+import {strapiImg} from "../../ulti/strapiHelper";
 
 const SliderBlock = ({dataSource = []}) => {
 
@@ -17,16 +18,7 @@ const SliderBlock = ({dataSource = []}) => {
                 <div className="main-slider-item">
                     {item.image
                     && <div className="slider-img">
-                        <Image alt={item.image.data.attributes.name}
-                               src={getImageUrl(item.image.data.attributes.url)}
-                               fill
-                               objectFit="cover"
-                               priority
-                        />
-                        {/*{renderImage(item.image, {*/}
-                        {/*    priority: true,*/}
-                        {/*    className: "d-block w-100 h-auto"*/}
-                        {/*})}*/}
+                        {strapiImg(item.image.data, '', true)}
                     </div>}
                     <Carousel.Caption>
                         <div className="sub-title" dangerouslySetInnerHTML={{__html: nl2br(item.subTitle)}}/>

@@ -8,6 +8,7 @@ import Image from "next/image";
 import {formatDate} from "../../ulti/helper";
 import {PATH_NEWS} from "../../ulti/appConst";
 import Link from "next/link";
+import {strapiImg} from "../../ulti/strapiHelper";
 
 const settings = {
     dots: true,
@@ -90,22 +91,24 @@ const LatestNewBlock = ({dataSource = []}) => {
 
     const LatestSlider = () => {
         return <Slider {...settings}>
-            {data && data.map((item, idx) => {
+            {dataSource && dataSource.map((item, idx) => {
                 return <div key={`lns_${idx}`} className="news-item">
-                    <Image src={item.attributes.thumb.url}
-                           alt={item.attributes.thumb.name}
-                           width={item.attributes.thumb.width}
-                           height={item.attributes.thumb.height}
-                           className="w-100"
-                    />
+                    <div className={"thumb"}>
+                        <Link href={`${PATH_NEWS}/${item.attributes.slug}`}>
+                            {strapiImg(item.attributes.thumb.data, 'hvr-grow-rotate', true)}
+                        </Link>
+                    </div>
                     <div className="info mt-4">
                         <div className="date">
                             <div className="day">{formatDate(item.attributes.createdAt, "DD")}</div>
                             <div className="month">{formatDate(item.attributes.createdAt, "MM")}</div>
                         </div>
                         <div className="detail">
-                            <h4>{item.attributes.title}</h4>
-                            <p dangerouslySetInnerHTML={{__html: nl2br(item.attributes.description)}}/>
+                            <Link href={`${PATH_NEWS}/${item.attributes.slug}`}>
+                                <h4 className="text-black">{item.attributes.title}</h4>
+                            </Link>
+                            <div className="des"
+                                 dangerouslySetInnerHTML={{__html: nl2br(item.attributes.shortDescription)}}/>
                         </div>
                     </div>
                 </div>

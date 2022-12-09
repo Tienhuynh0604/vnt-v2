@@ -2,7 +2,10 @@ import {getImageUrl} from "./helper";
 import Image from "next/image";
 import React from "react";
 
-export const strapiImg = (img, className = '', fill = false, size = "default"
+export const strapiImg = (img, className = ''
+    , fill = false
+    , priority = false
+    , size = "default"
     , staticWidth = null, staticHeight = null) => {
 
     if (!img) {
@@ -46,6 +49,7 @@ export const strapiImg = (img, className = '', fill = false, size = "default"
     let props = {
         alt: img.attributes?.alternativeText ? img.attributes?.alternativeText : img.attributes?.name,
         src: getImageUrl(url),
+        priority,
     };
     if (fill) {
         props = {

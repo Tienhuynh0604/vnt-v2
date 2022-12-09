@@ -519,6 +519,12 @@ New item
   padding: 10px;
 }
 
+.news-item .thumb{
+  position: relative;
+  height: 325px;
+  overflow: hidden;
+}
+
 .news-item .info {
   display: flex;
   column-gap: 30px;
@@ -527,14 +533,20 @@ New item
 .news-item .detail h4 {
   display: flex;
   font-size: 1.1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  min-height: 45px;
 }
 
-.news-item .detail p {
+.news-item .detail div.des {
   color: #898989;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
 

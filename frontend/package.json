@@ -16,6 +16,7 @@
     "clsx": "^1.2.1",
     "date-fns": "^2.29.3",
     "formik": "^2.2.9",
+    "hover.css": "^2.3.2",
     "http-errors": "^2.0.0",
     "i18next": "^22.0.8",
     "lightgallery": "^2.7.0",
