@@ -6,6 +6,7 @@ export const strapiImg = (img, className = ''
     , fill = false
     , priority = false
     , size = "default"
+    , quality = 75
     , staticWidth = null, staticHeight = null) => {
 
     if (!img) {
@@ -50,12 +51,12 @@ export const strapiImg = (img, className = ''
         alt: img.attributes?.alternativeText ? img.attributes?.alternativeText : img.attributes?.name,
         src: getImageUrl(url),
         priority,
+        quality
     };
     if (fill) {
         props = {
             ...props,
-            fill,
-            objectFit: "cover"
+            fill
         }
     } else {
         props = {

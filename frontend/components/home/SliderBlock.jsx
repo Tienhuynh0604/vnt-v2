@@ -18,7 +18,7 @@ const SliderBlock = ({dataSource = []}) => {
                 <div className="main-slider-item">
                     {item.image
                     && <div className="slider-img">
-                        {strapiImg(item.image.data, '', true)}
+                        {strapiImg(item.image.data, '', true, true, 'default', 100)}
                     </div>}
                     <Carousel.Caption>
                         <div className="sub-title" dangerouslySetInnerHTML={{__html: nl2br(item.subTitle)}}/>
