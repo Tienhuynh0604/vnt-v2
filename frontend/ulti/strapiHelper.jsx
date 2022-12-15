@@ -56,7 +56,8 @@ export const strapiImg = (img, className = ''
     if (fill) {
         props = {
             ...props,
-            fill
+            fill,
+            objectFit: "cover"
         }
     } else {
         props = {
