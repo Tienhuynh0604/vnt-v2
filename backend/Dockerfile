@@ -11,7 +11,7 @@ RUN yarn install
 COPY . /opt/app
 RUN yarn build
 EXPOSE 1337
-CMD ["yarn", "run", "start"]
+CMD ["yarn", "run", "develop"]
 
 #FROM node:16-alpine
 #WORKDIR /opt/app
