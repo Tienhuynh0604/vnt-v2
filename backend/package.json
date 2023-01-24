@@ -24,7 +24,6 @@
     "strapi-plugin-multi-select": "^1.1.0",
     "strapi-plugin-navigation": "^2.2.3",
     "strapi-plugin-rest-cache": "^4.2.6",
-    "strapi-plugin-slugify": "^2.2.3",
     "strapi-provider-rest-cache-memory": "^4.2.6"
   },
   "author": {
