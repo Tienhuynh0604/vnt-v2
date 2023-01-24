@@ -91,7 +91,7 @@
       "type": "enumeration",
       "enum": [
         "Bus Tour",
-        "City Tour"
+        "Custom Tour"
       ],
       "default": "Bus Tour"
     },
