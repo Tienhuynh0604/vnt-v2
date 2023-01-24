@@ -201,6 +201,14 @@
         "Bus tour",
         "City tour"
       ]
+    },
+    "category": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
     }
   }
 }
