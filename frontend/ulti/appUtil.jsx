@@ -41,7 +41,7 @@ export const createSeoFromFaq = (req, originalSeo, basePath = null, model = null
             canonicalURL: seo.canonicalURL
         };
     }
-    seo.metaTitle = `Vietlife - ${model.attributes.title}`;
+    seo.metaTitle = `${model.attributes.title}`;
     seo.metaDescription = originalSeo.metaDescription;
     seo.metaSocial = null;
     return seo;
@@ -60,7 +60,7 @@ export const createSeoFromCategory = (req, originalSeo, basePath = null, model =
         };
     }
 
-    seo.metaTitle = `Vietlife - ${model.attributes.name}`;
+    seo.metaTitle = `${model.attributes.name}`;
     seo.metaDescription = model.attributes.description ? model.attributes.description : originalSeo.metaDescription;
     if (model.attributes.thumb && model.attributes.thumb.data) {
         seo.metaImage = model.attributes.thumb;
@@ -87,7 +87,7 @@ export const createSeoFromArticle = (req, originalSeo, basePath = null, model = 
         };
     }
 
-    seo.metaTitle = `Vietlife - ${model.title}`;
+    seo.metaTitle = `${model.title}`;
     seo.metaDescription = model.shortDescription ? model.shortDescription : originalSeo.metaDescription;
 
     if (model.thumbnail && model.thumbnail.data) {
