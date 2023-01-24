@@ -82,19 +82,6 @@
       },
       "component": "tour.tour-card"
     },
-    "type": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": false
-        }
-      },
-      "type": "enumeration",
-      "enum": [
-        "Bus Tour",
-        "Custom Tour"
-      ],
-      "default": "Bus Tour"
-    },
     "destination": {
       "type": "relation",
       "relation": "oneToOne",
@@ -190,6 +177,11 @@
       },
       "component": "common.feature"
     },
+    "paymentProduct": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::payment-vns.payment-product"
+    },
     "byg": {
       "pluginOptions": {
         "i18n": {
@@ -198,10 +190,17 @@
       },
       "type": "text"
     },
-    "paymentProduct": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::payment-vns.payment-product"
+    "tourType": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "enumeration",
+      "enum": [
+        "Bus tour",
+        "City tour"
+      ]
     }
   }
 }
