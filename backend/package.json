@@ -11,21 +11,21 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "@ckeditor/strapi-plugin-ckeditor": "^0.0.4",
-    "@strapi/plugin-color-picker": "^4.5.3",
-    "@strapi/plugin-graphql": "^4.5.3",
-    "@strapi/plugin-i18n": "^4.5.3",
-    "@strapi/plugin-seo": "^1.7.5",
-    "@strapi/plugin-users-permissions": "^4.5.3",
-    "@strapi/strapi": "^4.5.3",
+    "@ckeditor/strapi-plugin-ckeditor": "^0.0.5",
+    "@strapi/plugin-color-picker": "^4.5.6",
+    "@strapi/plugin-graphql": "^4.5.6",
+    "@strapi/plugin-i18n": "^4.5.6",
+    "@strapi/plugin-seo": "^1.7.7",
+    "@strapi/plugin-users-permissions": "^4.5.6",
+    "@strapi/strapi": "^4.5.6",
     "mysql": "2.18.1",
-    "patch-package": "^6.5.0",
-    "strapi-plugin-email-designer": "^2.1.1",
+    "patch-package": "^6.5.1",
+    "strapi-plugin-email-designer": "^2.1.2",
     "strapi-plugin-multi-select": "^1.1.0",
-    "strapi-plugin-navigation": "^2.2.2",
-    "strapi-plugin-rest-cache": "^4.2.4",
+    "strapi-plugin-navigation": "^2.2.3",
+    "strapi-plugin-rest-cache": "^4.2.6",
     "strapi-plugin-slugify": "^2.2.3",
-    "strapi-provider-rest-cache-memory": "^4.2.4"
+    "strapi-provider-rest-cache-memory": "^4.2.6"
   },
   "author": {
     "name": "A Strapi developer"
