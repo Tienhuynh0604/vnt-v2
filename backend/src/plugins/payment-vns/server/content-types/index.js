@@ -3,5 +3,5 @@
 const paymentProduct = require('./payment-product.js');
 
 module.exports = {
-  'payment-product': {schema: paymentProduct}
+  'payment-product': {schema: paymentProduct},
 };

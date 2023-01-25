@@ -158,11 +158,6 @@
       },
       "component": "common.feature"
     },
-    "paymentProduct": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::payment-vns.payment-product"
-    },
     "byg": {
       "pluginOptions": {
         "i18n": {
@@ -180,6 +175,17 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::category.category"
+    },
+    "paymentProduct": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::payment-vns.payment-product",
+      "private": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     }
   }
 }
