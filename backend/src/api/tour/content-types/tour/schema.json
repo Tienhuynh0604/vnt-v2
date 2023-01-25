@@ -96,25 +96,6 @@
       "type": "uid",
       "targetField": "title"
     },
-    "tags": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": false
-        }
-      },
-      "type": "customField",
-      "options": [
-        "Bus Tour",
-        "City Tour",
-        "Trekking Tour",
-        "Art Tour",
-        "Safari Tour",
-        "Photographic Tour",
-        "Motorcycle Tour",
-        "Sport Tour"
-      ],
-      "customField": "plugin::multi-select.multi-select"
-    },
     "scheduleImage": {
       "type": "media",
       "multiple": false,
@@ -190,25 +171,15 @@
       },
       "type": "text"
     },
-    "tourType": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": false
-        }
-      },
-      "type": "enumeration",
-      "enum": [
-        "Bus tour",
-        "City tour"
-      ]
+    "tags": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tag.tag"
     },
     "category": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "string"
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::category.category"
     }
   }
 }
