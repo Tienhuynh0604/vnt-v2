@@ -18,5 +18,29 @@ module.exports = createCoreService('api::tour.tour', ({strapi}) => ({
     const relation = rows[0];
     return await strapi.entityService.findOne('plugin::payment-vns.payment-product'
       , relation.payment_product_id);
-  }
+  },
+  async getPlaces(tourId) {
+    let results1 = await strapi.db.connection.raw(
+      `select * from tours_places_links where tour_id = ${tourId} ORDER BY place_order ASC`
+    );
+    const [rows] = results1;
+
+    if (rows.length === 0) {
+      return [];
+    }
+
+    const placeIds = rows.map(item => item.place_id);
+
+    return await strapi.entityService.findMany('api::place.place'
+      , {
+        filters: {
+          id: placeIds
+        },
+        populate: {
+          thumb: {
+            fields: ['url', 'name', 'width', 'height']
+          }
+        }
+      });
+}
 }));

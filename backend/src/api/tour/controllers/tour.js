@@ -18,4 +18,15 @@ module.exports = createCoreController('api::tour.tour', ({strapi}) => ({
     }
 
   },
+  async getPlacesAction(ctx) {
+    const {id} = ctx.params;
+    try {
+      const entities = await strapi.service('api::tour.tour').getPlaces(id);
+      ctx.body = {
+        data: entities
+      }
+    } catch (e) {
+      throw e;
+    }
+  },
 }));
