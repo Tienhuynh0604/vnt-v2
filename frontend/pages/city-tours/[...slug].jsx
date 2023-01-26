@@ -17,6 +17,7 @@ import Error from "../_error";
 import {AGE_GROUP_ADULT, AGE_GROUP_CHILD} from "../../ulti/appConst";
 import {getMinPriceMaxPrice, renderDynamicFeature, renderImage} from "../../ulti/appUtil";
 import slugify from "slugify";
+import MainStopSlider from "../../components/city-tours/MainStopSlider";
 
 const Page = ({model, paymentProduct}) => {
     const {t} = useTranslation("common");
@@ -99,7 +100,7 @@ const Page = ({model, paymentProduct}) => {
                     }
                 })} className="btn btn-primary btn-book">{t('Book now')}</Button>
             </div>
-            <ImageSlider/>
+            <ImageSlider images={model.attributes.images.data}/>
             <div className='mt-3'>
                 <TourFeatures id={"tour-feature"} features={model.attributes?.features}/>
             </div>
@@ -148,6 +149,7 @@ const Page = ({model, paymentProduct}) => {
                 <Button className="text-uppercase">{t("live tracking")}</Button>
             </TourFeatureDetail>
             <TourFeatureDetail name={"main stop"}>
+                <MainStopSlider tourId={model.id}/>
             </TourFeatureDetail>
         </Container>
         <DecorComponent/>

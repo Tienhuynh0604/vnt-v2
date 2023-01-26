@@ -208,7 +208,8 @@ export const getMinPriceMaxPrice = (type, priceList, locale) => {
 };
 
 export const renderListWithIconValue = (mainItem) => {
-    switch (mainItem.style) {
+    const mainClass = mainItem.style?.split(" ")[0] ? mainItem.style?.split(" ")[0] : "";
+    switch (mainClass) {
         case 'check-block': {
             return <Row>
                 {mainItem.values?.map((item, idx) => {

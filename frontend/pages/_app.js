@@ -10,6 +10,7 @@ import 'lightgallery/scss/lg-thumbnail.scss';
 import 'react-toastify/dist/ReactToastify.css';
 import "react-datepicker/dist/react-datepicker.css";
 import 'hover.css/scss/hover.scss';
+import "react-image-gallery/styles/scss/image-gallery.scss";
 import '../styles/App.scss';
 import SSRProvider from 'react-bootstrap/SSRProvider';
 import {appWithTranslation} from 'next-i18next';

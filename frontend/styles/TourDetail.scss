@@ -65,16 +65,50 @@ TOUR DETAIL
   row-gap: 10px;
 }
 
-.tour-detail div.icon-flex-wrap .btn-icon{
+.tour-detail div.icon-flex-wrap .btn-icon {
   display: inline-block;
   flex-basis: 100px;
   text-align: center;
 }
 
-.tour-detail .highlight-item.check-block svg{
+.tour-detail .highlight-item.check-block svg {
   color: $green;
 }
 
-.tour-detail #Excluded .highlight-item.check-block svg{
+.tour-detail .highlight-item.check-block.exclude-block svg {
   color: $red;
+}
+
+.main-stops .main-stops-item {
+  width: 310px;
+  height: 230px;
+  padding: 10px 0;
+  position: relative;
+}
+
+.main-stops .main-stops-item h5 {
+  position: absolute;
+  bottom: 0;
+  background-color: $blue;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tour-detail .image-gallery-slide-wrapper.left, .image-gallery-slide-wrapper.right {
+  width: calc(100% - 310px);
+}
+
+.tour-detail .image-gallery-thumbnails-wrapper.left, .image-gallery-thumbnails-wrapper.right {
+  width: 300px;
+}
+
+.tour-detail .image-gallery-thumbnail {
+  width: 300px;
 }
