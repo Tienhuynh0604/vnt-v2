@@ -70,3 +70,11 @@ TOUR DETAIL
   flex-basis: 100px;
   text-align: center;
 }
+
+.tour-detail .highlight-item.check-block svg{
+  color: $green;
+}
+
+.tour-detail #Excluded .highlight-item.check-block svg{
+  color: $red;
+}

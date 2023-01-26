@@ -4,6 +4,8 @@ import absoluteUrl from 'next-absolute-url'
 import React from "react";
 import {Icon} from "@iconify/react";
 import Link from "next/link";
+import {AGE_GROUP_ADULT, AGE_GROUP_CHILD} from "./appConst";
+import {Col, Row} from "react-bootstrap";
 
 export const renderUrl = (basePath, item) => {
     if (item.attributes.categories
@@ -134,6 +136,7 @@ export const renderImage = (image, props = {}) => {
         return "";
     }
 
+
     return <Image alt={image.data.attributes.name}
                   src={getImageUrl(image.data.attributes.url)}
                   width={image.data.attributes.width}
@@ -166,4 +169,103 @@ export const SlickPrevArrow = (props) => {
             <Icon icon={"bi:chevron-left"}/>
         </div>
     );
+};
+
+export const getMinPriceMaxPrice = (type, priceList, locale) => {
+    let minAdultPrice = 0;
+    let minChildPrice = 0;
+
+    try {
+
+        priceList.forEach((item) => {
+            if (item.age_group === AGE_GROUP_ADULT) {
+                if (locale === "vi") {
+                    if (minAdultPrice === 0 || item.price < minAdultPrice) {
+                        minAdultPrice = item.price;
+                    }
+                } else if (locale === "en") {
+                    if (minAdultPrice === 0 || item.usd_price < minAdultPrice) {
+                        minAdultPrice = item.usd_price;
+                    }
+                }
+            } else if (item.age_group === AGE_GROUP_CHILD) {
+                if (locale === "vi") {
+                    if (minChildPrice === 0 || item.price < minChildPrice) {
+                        minChildPrice = item.price;
+                    }
+                } else if (locale === "en") {
+                    if (minChildPrice === 0 || item.usd_price < minChildPrice) {
+                        minChildPrice = item.usd_price;
+                    }
+                }
+            }
+        });
+    } catch (e) {
+        console.error(e.message);
+    }
+
+    return [minChildPrice, minAdultPrice];
+};
+
+export const renderListWithIconValue = (mainItem) => {
+    switch (mainItem.style) {
+        case 'check-block': {
+            return <Row>
+                {mainItem.values?.map((item, idx) => {
+                    return <Col xs={12} md={6}
+                                className={`highlight-item ${mainItem.style}`}
+                                key={`cb_${mainItem.id}${idx}`}>
+                        <Icon icon={item.iconClass} height={24}/>
+                        {item.displayText}
+                    </Col>
+                })}
+            </Row>
+        }
+        case 'wtb-block': {
+            return <div className="icon-flex-wrap">
+                {mainItem.values?.map((item, idx) => {
+                    return <div className={`btn-icon ${mainItem.style}`}
+                                key={`wtb_${mainItem.id}${idx}`}>
+                        <Icon icon={item.iconClass} height={45}/>
+                        <br/>
+                        <span>{item.displayText}</span>
+
+                    </div>
+                })}
+            </div>
+        }
+        case 'cancellation-block': {
+            return <div>
+                {mainItem.values?.map((item, idx) => {
+                    return <Row key={`canb_${mainItem.id}${idx}`} className={mainItem.style}>
+                        <Col xs={6}>{item.displayText}</Col>
+                        <Col xs={6} className="fw-bold">{item.value}</Col>
+                    </Row>
+                })}
+            </div>
+        }
+        case 'check-in-block': {
+            return <ul className={mainItem.style}>
+                {mainItem.values?.map((item, idx) => {
+                    return <li key={`cib_${mainItem.id}${idx}`}>{item.displayText}</li>
+                })}
+            </ul>
+        }
+        default:
+            return <i className="text-muted">Unsupported item</i>
+    }
+};
+
+export const renderDynamicFeature = (item) => {
+    if (!item) return "";
+    switch (item.__component) {
+        case "common.custom-ck-editor":
+            return <div dangerouslySetInnerHTML={{
+                __html: item.content
+            }}/>;
+        case "common.list-with-icon-value":
+            return renderListWithIconValue(item);
+        default:
+            return <i className="text-muted">Unsupported item</i>
+    }
 };

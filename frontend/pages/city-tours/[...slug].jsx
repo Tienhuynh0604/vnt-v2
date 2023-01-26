@@ -1,5 +1,5 @@
 import React from "react";
-import {initialProps} from "../../ulti/helper";
+import {callGet, featurePopulate, getImageUrl, imagePopulate, initialProps, moneyFormat} from "../../ulti/helper";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {Button, Col, Container, Row} from "react-bootstrap";
 import PageLayout from "../../layouts/PageLayout";
@@ -13,194 +13,137 @@ import Image from "next/image";
 import LightGallery from "lightgallery/react";
 import DecorComponent from "../../components/DecorComponent";
 import {useAppContext} from "../../layouts/AppLayout";
+import Error from "../_error";
+import {AGE_GROUP_ADULT, AGE_GROUP_CHILD} from "../../ulti/appConst";
+import {getMinPriceMaxPrice, renderDynamicFeature, renderImage} from "../../ulti/appUtil";
+import slugify from "slugify";
 
-const Page = ({}) => {
+const Page = ({model, paymentProduct}) => {
     const {t} = useTranslation("common");
     const {setBookingModal} = useAppContext();
+    const {common = {}, locale} = useAppContext();
 
-    return <PageLayout>
+    if (!model) {
+        return <Error statusCode={404}/>
+    }
+
+    const renderPrices = () => {
+        const ret = [];
+        if (!paymentProduct || !paymentProduct.attributes.priceList) {
+            ret.push(<li className="breadcrumb-item">
+                <Link href={common?.email?.link ? `mailto: ${common?.email?.link}`
+                    : "#"}>
+                    <i>{t("Liên hệ với chúng tôi")}</i>
+                </Link>
+            </li>);
+        }
+
+
+        try {
+            const [minChildPrice, minAdultPrice] = getMinPriceMaxPrice(
+                paymentProduct.attributes?.type,
+                paymentProduct.attributes?.priceList,
+                locale
+            );
+            ret.push(<li className="breadcrumb-item">
+                {t("Adults")}: <strong>{moneyFormat(minAdultPrice, locale)}</strong>
+            </li>);
+            ret.push(<li className="breadcrumb-item">
+                {t("Child")}: <strong>{moneyFormat(minChildPrice, locale)}</strong>
+            </li>);
+        } catch (e) {
+            console.error(e);
+            ret.push(<li className="breadcrumb-item">
+                <Link href={common?.email?.link ? `mailto: ${common?.email?.link}`
+                    : "#"}>
+                    <i>{t("Liên hệ với chúng tôi")}</i>
+                </Link>
+            </li>);
+        }
+
+        return <ol className="breadcrumb">
+            {ret.map(item => item)}
+        </ol>
+    };
+
+    return <PageLayout
+        title={model.attributes.title}
+        breadcrumbs={[
+            {
+                title: model.attributes?.destination?.data.attributes.name,
+                link: `/city-tours/${model.attributes?.destination?.data.attributes.slug}`
+            }
+        ]}
+        coverImage={getImageUrl(model?.attributes?.cover.data.attributes.url)}
+    >
         <Container className="tour-detail">
             <div className="control d-flex justify-content-sm-start justify-content-md-between mb-3">
                 <div>
                     <div>
-                        <h1>Hà Nội Double - Decker Bus</h1>
-                        <Link href={"#"}>
-                            <Icon icon={"ant-design:download-outlined"}/> Download Brochue
-                        </Link>
+                        <h1>{model.attributes.title}</h1>
+                        {model.attributes.brochure?.data &&
+                        <Link href={getImageUrl(model.attributes.brochure?.data.attributes.url)}
+                              target="_blank"
+                              className="ms-3">
+                            <Icon icon={"ant-design:download-outlined"}/> Download Brochure
+                        </Link>}
                     </div>
                     <nav className="price-list" aria-label="breadcrumb">
-                        <ol className="breadcrumb">
-                            <li className="breadcrumb-item">
-                                {t("Adults")}: <strong>$10.00</strong>
-                            </li>
-                            <li className="breadcrumb-item" aria-current="page">
-                                {t("Child")}: <strong>$8.00</strong>
-                            </li>
-                        </ol>
+                        {renderPrices()}
                     </nav>
                 </div>
                 <Button type="button" onClick={() => setBookingModal({
                     isVisible: true,
                     item: {
-                        id: 1
+                        id: model.id
                     }
                 })} className="btn btn-primary btn-book">{t('Book now')}</Button>
             </div>
             <ImageSlider/>
             <div className='mt-3'>
-                <TourFeatures/>
+                <TourFeatures id={"tour-feature"} features={model.attributes?.features}/>
             </div>
             <hr className="bold"/>
-            <TourFeatureDetail name={"Overview"}>
-                <p>
-                    Thang Long – Hanoi City Tour with a route of about 90 minutes will take visitors across scenic
-                    places, works, historical relics, cultural and religious major of Hanoi such as Ly Thai Flower
-                    Garden, Sofitel Metropole Hotel, Vietnam Military History Museum, Thang Long Imperial Citadel, Quan
-                    Thanh Temple, Tran Quoc Pagoda, Ho Chi Minh Complex, Temple of Literature, Hoa Lo Prison, Hanoi
-                    Cathedral, Hanoi Old Quarter, Hoan Kiem Lake
-                    or Opera House
-                </p>
-            </TourFeatureDetail>
-            <TourFeatureDetail name={"DESCRIPTION"}>
-                <p>
-                    As one of the first companies that bring double-decker bus to Thang Long – Hanoi, the city tour aims
-                    to give you an overview of this thousand year old capital and provide an understanding of prominent
-                    attractions as well as historical and cultural sites of Hanoi
-                </p>
-            </TourFeatureDetail>
-            <TourFeatureDetail name={"HIGHLIGHT"}>
-                <Row>
-                    <Col xs={12} md={6} className="highlight-item">
-                        <Icon className="text-success" icon={"akar-icons:check"} height={24}/> Vietnam Sightseeing
-                        Double – decker bus in Hanoi
-                    </Col>
-                    <Col xs={12} md={6} className="highlight-item">
-                        <Icon className="text-success" icon={"akar-icons:check"} height={24}/> Unlimited access to key
-                        sightseeing in Hanoi
-                        (ticket valid in 4 hour)
-                    </Col>
-                    <Col xs={12} md={6} className="highlight-item">
-                        <Icon className="text-success" icon={"akar-icons:check"} height={24}/> Tour Hanoi at your own
-                        pace and see the best of
-                        Hanoi’s iconic landmarks
-                    </Col>
-                </Row>
-            </TourFeatureDetail>
-            <TourFeatureDetail name={"INCLUDED"}>
-                <Row>
-                    <Col xs={12} md={6} className="highlight-item">
-                        <Icon className="text-success" icon={"akar-icons:check"} height={24}/> Entrance fees
-                    </Col>
-                    <Col xs={12} md={6} className="highlight-item">
-                        <Icon className="text-success" icon={"akar-icons:check"} height={24}/> Food and other drinks
-                    </Col>
-                    <Col xs={12} md={6} className="highlight-item">
-                        <Icon className="text-success" icon={"akar-icons:check"} height={24}/> Hotel pickup and drop-off
-                    </Col>
-                    <Col xs={12} md={6} className="highlight-item">
-                        <Icon className="text-success" icon={"akar-icons:check"} height={24}/> Gratuities (optional)
-                    </Col>
-                </Row>
-            </TourFeatureDetail>
-            <TourFeatureDetail name={"EXCLUDED"}>
-                <Row>
-                    <Col xs={12} md={6} className="highlight-item">
-                        <Icon className="text-danger" icon={"ep:close-bold"} height={24}/> Entrance fees
-                    </Col>
-                    <Col xs={12} md={6} className="highlight-item">
-                        <Icon className="text-danger" icon={"ep:close-bold"} height={24}/> Food and other drinks
-                    </Col>
-                    <Col xs={12} md={6} className="highlight-item">
-                        <Icon className="text-danger" icon={"ep:close-bold"} height={24}/> Hotel pickup and drop-off
-                    </Col>
-                    <Col xs={12} md={6} className="highlight-item">
-                        <Icon className="text-danger" icon={"ep:close-bold"} height={24}/> Gratuities (optional)
-                    </Col>
-                </Row>
-            </TourFeatureDetail>
-            <TourFeatureDetail name={"WHAT TO BRING"}>
-                <div className="icon-flex-wrap">
-                    <div className="btn-icon">
-                        <Icon icon={"fluent-mdl2:shirt"} height={45}/>
-                        <br/>
-                        <span>Comfortable clothes</span>
-                    </div>
-                    <div className="btn-icon">
-                        <Icon icon={"emojione-monotone:running-shoe"} height={45}/>
-                        <br/>
-                        <span>Shoes</span>
-                    </div>
-                    <div className="btn-icon">
-                        <Icon icon={"mdi:sunglasses"} height={45}/>
-                        <br/>
-                        <span>Sunglasses</span>
-                    </div>
-                    <div className="btn-icon">
-                        <Icon icon={"bi:sun"} height={45}/>
-                        <br/>
-                        <span>Sun cream</span>
-                    </div>
-                </div>
-            </TourFeatureDetail>
-            <TourFeatureDetail name={"CANCELLATION POLICY"}>
-                <Row>
-                    <Col xs={6}>Time before starting tour</Col>
-                    <Col xs={6} className="fw-bold">Expense</Col>
-                    <Col xs={6}>Before 24 hours</Col>
-                    <Col xs={6} className="fw-bold">0% Combo value</Col>
-                    <Col xs={6}>After 24 hours</Col>
-                    <Col xs={6} className="fw-bold">50% Combo value</Col>
-                </Row>
-            </TourFeatureDetail>
-            <TourFeatureDetail name={"CHECK-IN INFORMATION"}>
-                <ul>
-                    <li>Guests are to check-in 15 minutes prior to Doubler - Decker Bus</li>
-                    <li>Simply present your e-Receipt to staff for exchange of tickets.</li>
-                </ul>
-            </TourFeatureDetail>
+            {model.attributes.tourCustom?.map((item, idx) => {
+                return (
+                    <TourFeatureDetail key={`tfd_${idx}`}
+                                       id={slugify(item.title)}
+                                       name={item.title}>
+                        {renderDynamicFeature(item)}
+                    </TourFeatureDetail>
+                )
+            })}
             <TourFeatureDetail name={"BEFORE YOU GO"}>
-                <p>Buses depart for Vietnam Sightseeing following timings:</p>
-                <b>Times are subject to change due to local traffic conditions.</b>
+                <p>{t("byg.text1")}</p>
+                <b>{t("byg.text2")}</b>
                 <div className="position-relative py-3">
-                    <LightGallery speed={500}>
-                        <Link href={`/images/time-table.jpg`}>
-                            <Image src={`/images/time-table.jpg`}
-                                   width={1070}
-                                   height={730}
-                                   className="w-100 h-auto"
-                                   alt={""}/>
-                        </Link>
-                    </LightGallery>
+                    {model.attributes.scheduleImage?.data && (
+                        <LightGallery speed={500}>
+                            <Link href={getImageUrl(model.attributes.scheduleImage?.data?.attributes.url)}>
+                                {renderImage(model.attributes.scheduleImage, {
+                                    className:"w-100 h-auto"
+                                })}
+                            </Link>
+                        </LightGallery>
+                    )}
                 </div>
                 <ul>
-                    <li>Confirmation will be received at time of booking</li>
-                    <li>Redeem your voucher at kiosk at 51 Ly Thai To street</li>
-                    <li>During the weekend, the bus does not pick up at stop 02 due to the walking street (From 6:00 pm
-                        Friday night to 12:00 am Sunday every week)
-                    </li>
-                    <li>Wheelchair accessible on lower deck</li>
-                    <li>Recorded commentary available in English, Vietnamese, Chinese, Japanese, Korean, French, Spain,
-                        Germany
-                    </li>
-                    <li>During road closures, some bus stops may be skipped; in the event that this occurs, notices will
-                        be posted on buses
-                    </li>
-                    <li>Times of activities may very slightly. Itinerary and program subject to change when necessary
-                    </li>
-                    <li>Tips, personal expenses not included;</li>
+                    {model.attributes.byg?.split("\n").map((item,idx) => (
+                        <li key={`byg.li${idx}`}>{item}</li>
+                    ))}
                 </ul>
             </TourFeatureDetail>
             <TourFeatureDetail name={"MAP"}>
                 <div className="position-relative py-3">
-                    <LightGallery speed={500}>
-                        <Link href={`/images/map.jpg`}>
-                            <Image src={`/images/map.jpg`}
-                                   width={1070}
-                                   height={533}
-                                   className="w-100 h-auto"
-                                   alt={""}/>
-                        </Link>
-                    </LightGallery>
+                    {model.attributes.mapImage?.data && (
+                        <LightGallery speed={500}>
+                            <Link href={getImageUrl(model.attributes.mapImage?.data?.attributes.url)}>
+                                {renderImage(model.attributes.mapImage, {
+                                    className:"w-100 h-auto"
+                                })}
+                            </Link>
+                        </LightGallery>
+                    )}
                 </div>
                 <Button className="text-uppercase">{t("live tracking")}</Button>
             </TourFeatureDetail>
@@ -212,12 +155,64 @@ const Page = ({}) => {
 };
 
 export const getServerSideProps = async (context) => {
-    const {locale = "vi"} = context;
+    const {locale = "vi", query, req} = context;
+    const {slug} = query;
+    const [param1, param2] = slug;
+    console.log("City tours detail:", param2);
+    // const {}
+    let model = null;
+    let paymentProduct = null;
     try {
+        const res = await callGet("/tours", {
+            filters: {
+                slug: param2
+            },
+            populate: {
+                category: {
+                    fields: ['name', 'slug']
+                },
+                tags: {
+                    fields: ['name', 'className', 'slug']
+                },
+                destination: {
+                    fields: ['name', 'slug']
+                },
+                brochure: "*",
+                cover: imagePopulate(),
+                images: imagePopulate(),
+                scheduleImage: imagePopulate(),
+                mapImage: imagePopulate(),
+                features: featurePopulate(),
+                tourCustom: {
+                    populate: "*"
+                },
+                places: {
+                    populate: {
+                        thumb: imagePopulate()
+                    }
+                }
+            },
+            pagination: {
+                page: 1,
+                pageSize: 1
+            },
+        }, locale, true);
+
+        if (res.data.length > 0) {
+            model = res.data[0];
+            console.log(model);
+            const res2 = await callGet(`/tours/payment-product/${model.id}`);
+            paymentProduct = res2.data;
+        }
+
     } catch (e) {
+        console.error(e.message);
     }
+
     return {
         props: {
+            model,
+            paymentProduct,
             ...(await serverSideTranslations(locale, ['common'])),
         },
     }

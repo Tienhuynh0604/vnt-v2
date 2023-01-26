@@ -9,12 +9,12 @@ import LatestNewBlock from "../components/home/LatestNewSection";
 import TestimonialBlock from "../components/home/TestimonialBlock";
 
 const Home = (props) => {
-    const {homeData = {}, articlesData = []} = props;
+    const {homeData = {}, articlesData = [], tours = [], hotTours = []} = props;
     return (
         <>
             <SliderBlock dataSource={homeData.attributes.banners}/>
-            <UniqueTour dataSource={homeData}/>
-            <OurTours/>
+            <UniqueTour dataSource={homeData} tours={hotTours}/>
+            <OurTours tours={tours}/>
             <AboutUsBlock dataSource={homeData.attributes.aboutUs}/>
             <LatestNewBlock dataSource={articlesData}/>
             <TestimonialBlock/>
@@ -29,6 +29,8 @@ export const getServerSideProps = async (context) => {
     const {locale = "vi"} = context;
     let homeData = {};
     let articlesData = {};
+    let hotTours = [];
+    let tours = [];
     try {
         const p2 = callGet("/home-page", {
             populate: {
@@ -58,10 +60,65 @@ export const getServerSideProps = async (context) => {
                 pageSize: 6
             }
         }, locale, true);
-        const [homeRes, articlesRes] = await Promise.all([p2, p3]);
+
+        const p4 = callGet("/tours", {
+            filters: {
+                isHot: true
+            },
+            populate: {
+                tourCard: {
+                    populate: {
+                        image: imagePopulate(),
+                        features: "*"
+                    }
+                },
+                category: {
+                    fields: ['name', 'slug']
+                },
+                tags: {
+                    fields: ['name', 'className', 'slug']
+                },
+                destination: {
+                    fields: ['name', 'slug']
+                }
+            },
+            pagination: {
+                page: 1,
+                pageSize: 12
+            },
+            sort: ['id:desc']
+        }, locale, true);
+
+        const p5 = callGet("/tours", {
+            populate: {
+                tourCard: {
+                    populate: {
+                        image: imagePopulate(),
+                        features: "*"
+                    }
+                },
+                category: {
+                    fields: ['name', 'slug']
+                },
+                tags: {
+                    fields: ['name', 'className', 'slug']
+                },
+                destination: {
+                    fields: ['name', 'slug']
+                }
+            },
+            pagination: {
+                page: 1,
+                pageSize: 12
+            },
+            sort: ['id:desc']
+        }, locale, true);
+
+        const [homeRes, articlesRes, hotToursRes, toursRes] = await Promise.all([p2, p3, p4, p5]);
         homeData = homeRes.data;
         articlesData = articlesRes.data;
-        console.log(articlesData);
+        hotTours = hotToursRes.data;
+        tours = toursRes.data;
     } catch (e) {
         console.error(e);
     }
@@ -69,6 +126,8 @@ export const getServerSideProps = async (context) => {
         props: {
             homeData,
             articlesData,
+            tours,
+            hotTours,
             ...(await serverSideTranslations(locale, ['common'])),
         },
     }

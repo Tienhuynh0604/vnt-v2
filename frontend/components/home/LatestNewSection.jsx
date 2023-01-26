@@ -11,7 +11,7 @@ import Link from "next/link";
 import {strapiImg} from "../../ulti/strapiHelper";
 
 const settings = {
-    dots: true,
+    dots: false,
     arrows: true,
     infinite: true,
     speed: 500,
@@ -38,51 +38,6 @@ const settings = {
         }
     ]
 };
-
-const data = [
-    {
-        id: 1,
-        attributes: {
-            title: "Vaccination & Parasite control",
-            description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-            createdAt: "2022-10-05",
-            thumb: {
-                url: "/images/news/new1.jpg",
-                name: "new1",
-                width: 431,
-                height: 344
-            }
-        }
-    },
-    {
-        id: 1,
-        attributes: {
-            title: "Vaccination & Parasite control",
-            description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-            createdAt: "2022-10-05",
-            thumb: {
-                url: "/images/news/new2.jpg",
-                name: "new1",
-                width: 431,
-                height: 344
-            }
-        }
-    },
-    {
-        id: 1,
-        attributes: {
-            title: "Vaccination & Parasite control",
-            description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-            createdAt: "2022-10-05",
-            thumb: {
-                url: "/images/news/new3.jpg",
-                name: "new1",
-                width: 431,
-                height: 344
-            }
-        }
-    }
-];
 
 const LatestNewBlock = ({dataSource = []}) => {
 

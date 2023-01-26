@@ -54,7 +54,7 @@ const CartModal = () => {
                         <td className="">
                             <div className="ms-1">
                                 <div className="">
-                                    <Link href={"/citi-tours/ha-noi/ha-noi-double-decker-bus"}>
+                                    <Link href={"/city-tours/ha-noi/ha-noi-double-decker-bus"}>
                                         <h6 className="ellipsis-1 mb-0"><strong>Ha Noi Double – Decker Bus</strong></h6>
                                     </Link>
                                     <small>4 hours</small>

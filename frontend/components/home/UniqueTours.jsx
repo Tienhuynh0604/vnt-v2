@@ -5,161 +5,40 @@ import {renderImage, SlickNextArrow, SlickPrevArrow} from "../../ulti/appUtil";
 import ProductCard from "../ProductCard";
 import Image from "next/image";
 
-const settings = {
-    dots: true,
-    arrows: true,
-    infinite: true,
-    speed: 500,
-    lazyLoad: true,
-    slidesToShow: 2,
-    slidesToScroll: 2,
-    autoplay: true,
-    nextArrow: <SlickNextArrow/>,
-    prevArrow: <SlickPrevArrow/>,
-    responsive: [
-        {
-            breakpoint: 1024,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
+const UniqueTourSlider = ({tours = []}) => {
+
+    const settings = {
+        dots: true,
+        arrows: true,
+        infinite: true,
+        speed: 500,
+        lazyLoad: true,
+        slidesToShow: tours.length > 1 ? 2 : 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        nextArrow: <SlickNextArrow/>,
+        prevArrow: <SlickPrevArrow/>,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
             }
-        }
-    ]
-};
-
-const data = [
-    {
-        id: 1,
-        attributes: {
-            thumbnail: {
-                url: "/images/products/sp1.jpg",
-                width: 342,
-                height: 250,
-                name: "sss"
-            },
-            title: "Ha Noi food tour 1 day by Motocycle",
-            slug: "ha-noi-food-tour-1-day-by-motocycle",
-            prices: [
-                {
-                    price: 10.00,
-                    type: "Adult",
-                },
-                {
-                    price: 8.00,
-                    type: "Child",
-                }
-            ],
-            type: "Food Tour",
-            isHot: true,
-            discount: 10,
-            features: [
-                {
-                    displayText: "English tour guide",
-                    iconClass: "ion:mail"
-                },
-                {
-                    displayText: "Take all best food in Ha Noi",
-                    iconClass: "ion:mail"
-                },
-                {
-                    displayText: "Easy to change date",
-                    iconClass: "ion:mail"
-                },
-            ]
-        }
-    },
-    {
-        id: 2,
-        attributes: {
-            thumbnail: {
-                url: "/images/products/sp1.jpg",
-                width: 342,
-                height: 250,
-                name: "sss"
-            },
-            title: "Ha Noi food tour 1 day by Motocycle",
-            slug: "ha-noi-food-tour-1-day-by-motocycle",
-            prices: [
-                {
-                    price: 10.00,
-                    type: "Adult",
-                },
-                {
-                    price: 8.00,
-                    type: "Child",
-                }
-            ],
-            type: "Trekking Tour",
-            isHot: true,
-            discount: 20,
-            features: [
-                {
-                    displayText: "English tour guide",
-                    iconClass: "ion:mail"
-                },
-                {
-                    displayText: "Take all best food in Ha Noi",
-                    iconClass: "ion:mail"
-                },
-                {
-                    displayText: "Easy to change date",
-                    iconClass: "ion:mail"
-                },
-            ]
-        }
-    },
-    {
-        id: 1,
-        attributes: {
-            thumbnail: {
-                url: "/images/products/sp1.jpg",
-                width: 342,
-                height: 250,
-                name: "sss"
-            },
-            title: "Ha Noi food tour 1 day by Motocycle",
-            slug: "ha-noi-food-tour-1-day-by-motocycle",
-            prices: [
-                {
-                    price: 10.00,
-                    type: "Adult",
-                },
-                {
-                    price: 8.00,
-                    type: "Child",
-                }
-            ],
-            type: "Bus Tour",
-            isHot: false,
-            discount: 0,
-            features: [
-                {
-                    displayText: "English tour guide",
-                    iconClass: "ion:mail"
-                },
-                {
-                    displayText: "Take all best food in Ha Noi",
-                    iconClass: "ion:mail"
-                },
-                {
-                    displayText: "Easy to change date",
-                    iconClass: "ion:mail"
-                },
-            ]
-        }
-    }
-];
-
-const UniqueTourSlider = () => {
+        ]
+    };
 
     return <Slider {...settings}>
-        {data && data.map((item, idx) => {
-            return <ProductCard key={`p_i${idx}`} item={item} className="unique-item"/>
+        {tours?.map((item, idx) => {
+            return <ProductCard key={`p_i${idx}`}
+                                destination={item.attributes.destination?.data}
+                                item={item} className="unique-item"/>
         })}
     </Slider>
 };
 
-const UniqueTour = ({dataSource = {}}) => {
+const UniqueTour = ({dataSource = {}, tours = []}) => {
 
     const {hotFeature = {}} = dataSource.attributes;
 
@@ -175,7 +54,7 @@ const UniqueTour = ({dataSource = {}}) => {
                     }}/>
                 </Col>
                 <Col xs={12} md={7} style={{zIndex: 100}}>
-                    <UniqueTourSlider/>
+                    <UniqueTourSlider tours={tours}/>
                 </Col>
             </Row>
         </Container>

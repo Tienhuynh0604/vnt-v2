@@ -6,11 +6,12 @@ import FacebookChatScript from "../components/AppScript/FacebookChatScript";
 import GaScript from "../components/AppScript/GaScript";
 import {isVisible} from "bootstrap/js/src/util";
 import {ToastContainer} from "react-toastify";
+import FloatingButton from "../components/FloatingButton";
 
 const AppContext = createContext({});
 
 const AppLayout = (props) => {
-    const {headerMenus, footerMenus, seo, common, locale = "vi", children} = props;
+    const {headerMenus, footerMenus, seo, common, locale = "vi", children, destinations} = props;
     const [bookingModal, setBookingModal] = useState({
         isVisible: false,
         item: {
@@ -27,6 +28,7 @@ const AppLayout = (props) => {
         headerMenus,
         footerMenus,
         seo,
+        destinations,
         common,
         locale,
         bookingModal,
@@ -47,6 +49,10 @@ const AppLayout = (props) => {
             {children}
             <FacebookChatScript facebookPageId={common.fbId}/>
             <GaScript gaTags={common.gaId ? common.gaId.split(",") : []}/>
+            <FloatingButton icon={"material-symbols:shopping-cart-outline"} onClick={() => setCartModal(prevState => ({
+                ...prevState,
+                isVisible: true,
+            }))}/>
             <ToastContainer/>
         </AppContext.Provider>
     )

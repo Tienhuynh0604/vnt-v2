@@ -14,13 +14,18 @@ const appCache = new NodeCache();
 const fullUrlReg = new RegExp('^(?:[a-z+]+:)?//', 'i');
 
 const getCacheKey = (text) => {
-    const ret = md5(text);
-    console.log("Cache key", ret);
-    return ret;
+    return md5(text);
 };
 
 export const moneyFormat = (value, locale = 'vi') => {
-    return numeral(value).format('0,0.00');
+
+    let currency = "VNĐ";
+    let format = '0,0';
+    if (locale === "en") {
+        currency = "$";
+        format = '0,0.00';
+    }
+    return numeral(value).format(format) + " " + currency;
 };
 
 export const formatNumber = (value, format = '0,0') => {
@@ -32,9 +37,10 @@ export const formatDate = (value, format = 'DD/MM/YYYY') => {
 };
 
 const getBaseUrl = () => {
-    if (process) {
-        const {API_LOCAL_URL, NEXT_PUBLIC_API_URL} = process.env;
-        return API_LOCAL_URL ? API_LOCAL_URL : NEXT_PUBLIC_API_URL;
+    if (process.env.API_LOCAL_URL) {
+        return process.env.API_LOCAL_URL;
+    } else if (process.env.NEXT_PUBLIC_API_URL) {
+        return process.env.NEXT_PUBLIC_API_URL;
     } else {
         const {NEXT_PUBLIC_API_URL} = publicRuntimeConfig;
         return NEXT_PUBLIC_API_URL;
@@ -85,6 +91,7 @@ export const callPost = async (urlPath, dataObj, locale = 'vi', queryObj = {}) =
 export const callGet = async (urlPath, queryObj, locale, cache = false) => {
     try {
         let baseUrl = getBaseUrl();
+        console.log(baseUrl);
         locale = getLocale(locale);
 
         const query = qs.stringify({
@@ -163,6 +170,7 @@ export const initialProps = async (ctx) => {
     let commonData = {};
     let headerMenus = [];
     let footerMenus = [];
+    let destinations = [];
 
     try {
         const query = {
@@ -184,8 +192,15 @@ export const initialProps = async (ctx) => {
         const p3 = callGet(`/navigation/render/footer`, {
             type: 'TREE'
         }, locale, true);
+        const p4 = callGet("/destinations", {
+            fields: ['name', 'slug'],
+            pagination: {
+                page: 1,
+                pageSize: 100
+            }
+        }, locale, true);
 
-        const [data1, data2, data3] = await Promise.all([p1, p2, p3]);
+        const [data1, data2, data3, data4] = await Promise.all([p1, p2, p3, p4]);
 
         // const res = callGet("/site-name", query, locale);
         const {data} = data1;
@@ -208,6 +223,7 @@ export const initialProps = async (ctx) => {
         // }, locale);
         headerMenus = data2;
         footerMenus = data3;
+        destinations = data4.data;
         console.log("initialProps SEO", seo);
     } catch (e) {
         console.error("initialProps", e);
@@ -219,13 +235,14 @@ export const initialProps = async (ctx) => {
         headerMenus,
         seo,
         footerMenus,
+        destinations,
         ...initialProps,
     };
     return initialProps;
 };
 
 export const getImageUrl = (path) => {
-    if(fullUrlReg.test(path)){
+    if (fullUrlReg.test(path)) {
         return path;
     }
     return `${process.env.NEXT_PUBLIC_RESOURCE_URL}${path}`;

@@ -51,7 +51,7 @@ const Page = () => {
                                 />
                             </div>
                             <div className="ms-3">
-                                <Link href={"/citi-tours/ha-noi/ha-noi-double-decker-bus"}>
+                                <Link href={"/city-tours/ha-noi/ha-noi-double-decker-bus"}>
                                     <h6><strong>Ha Noi Double – Decker Bus</strong></h6>
                                     <small>4 hours</small>
                                 </Link>

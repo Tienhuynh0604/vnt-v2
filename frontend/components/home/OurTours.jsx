@@ -4,47 +4,13 @@ import {Col, Row, Container, Button} from "react-bootstrap";
 import ProductCard from "../ProductCard";
 import {Icon} from "@iconify/react";
 import DecorComponent from "../DecorComponent";
-import {OurTourData} from "../../data/FakeData";
 import Link from "next/link";
+import {useAppContext} from "../../layouts/AppLayout";
 
-const destinations = () => {
-    return [
-        {
-            id: 1,
-            attributes: {
-                name: "Hà Nội",
-                slug: "ha-noi",
-            }
-        },
-        {
-            id: 2,
-            attributes: {
-                name: "Huế",
-                slug: "hue",
-            }
-        },
-        {
-            id: 3,
-            attributes: {
-                name: "Hạ Long",
-                slug: "ha-long",
-            }
-        },
-        {
-            id: 4,
-            attributes: {
-                name: "Hồ chí minh",
-                slug: "ho-chi-minh",
-            }
-        }
-    ]
-};
-
-const data = OurTourData;
-
-const OurTours = ({dataSource = {}}) => {
+const OurTours = ({tours = []}) => {
     const {t} = useTranslation("common");
     const [currentTag, setCurrentTag] = useState(null);
+    const {destinations = []} = useAppContext();
 
     const onClickFilter = (desSlug) => {
         console.log(desSlug);
@@ -67,7 +33,7 @@ const OurTours = ({dataSource = {}}) => {
                             <span className="text-capitalize"> {t("all")}</span>
                         </Button>
                     </li>
-                    {destinations().map((item, idx) => {
+                    {destinations.map((item, idx) => {
                         return <li key={`d_l_${idx}`}
                                    className={`list-inline-item ${currentTag && currentTag === item.attributes.slug ? "active" : ""}`}>
                             <Button type="button"
@@ -80,15 +46,20 @@ const OurTours = ({dataSource = {}}) => {
                 </ul>
             </div>
             <div className="product-card-list">
-                {data.map((item, idx) => (
-                    <ProductCard key={`p_c_${idx}`} item={item} className={
-                        !currentTag || item.attributes.destination === currentTag ? "" : "hide-product"}/>
+                {tours?.map((item, idx) => (
+                    <ProductCard key={`p_c_${idx}`}
+                                 item={item}
+                                 destination={item.attributes?.destination?.data}
+                                 className={
+                                     !currentTag || item.attributes?.destination?.data.attributes.slug === currentTag ? "" : "hide-product"
+                                 }
+                    />
                 ))}
             </div>
             <div className="d-flex justify-content-center mt-5">
-                <Link href={`/city-tours${currentTag ? `/${currentTag}` : ""}`}>
+                {currentTag && <Link href={`/city-tours${currentTag ? `/${currentTag}` : ""}`}>
                     <Button variant="primary">View all <Icon icon={"bi:chevron-right"}/> </Button>
-                </Link>
+                </Link>}
             </div>
         </Container>
         <DecorComponent/>

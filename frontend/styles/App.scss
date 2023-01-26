@@ -48,7 +48,7 @@ BOOTSTRAPS
 @import "~bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;700&display=swap');
 
-.navbar{
+.navbar {
   --bs-navbar-color: rgba(255, 255, 255, 1);
   --bs-navbar-hover-color: rgba(255, 255, 255, 1);
 }
@@ -78,6 +78,10 @@ BOOTSTRAPS
   height: 100%;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: white;
 }
@@ -97,11 +101,11 @@ button.btn {
   font-weight: bold;
 }
 
-.text-grey{
+.text-grey {
   color: $grey;
 }
 
-hr.dashed{
+hr.dashed {
   border-style: dashed;
 }
 
@@ -164,7 +168,7 @@ hr.dashed{
 /**
 MAIN SLIDER
  */
-.main-slider-item .slider-img{
+.main-slider-item .slider-img {
   height: 600px;
   position: relative;
   overflow: hidden;
@@ -349,6 +353,13 @@ ul.tag-list-1, ul.tag-list-2 {
 
 .product-card-item ul.tag-list-2 {
   top: -15px;
+  display: inline-flex;
+  flex-wrap: wrap;
+}
+
+ul.tag-list-2 li {
+  margin-right: 8px;
+  margin-bottom: 16px;
 }
 
 ul.tag-list-1 li {
@@ -362,6 +373,10 @@ ul.tag-list-1 li {
   border-radius: 20px;
   font-weight: bold;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.p-tag-sm {
+
 }
 
 .p-tag-top {
@@ -519,7 +534,7 @@ New item
   padding: 10px;
 }
 
-.news-item .thumb{
+.news-item .thumb {
   position: relative;
   height: 325px;
   overflow: hidden;
@@ -633,7 +648,7 @@ Booking table
   height: 1px;
 }
 
-.booking-table tbody, .booking-table td{
+.booking-table tbody, .booking-table td {
   height: inherit;
 }
 
@@ -641,21 +656,21 @@ Booking table
   border-bottom: 1px solid $grey-2;
 }
 
-.booking-table .image-thumb{
+.booking-table .image-thumb {
   width: 173px;
   height: 107px;
   position: relative;
   overflow: hidden;
 }
 
-.booking-table .image-thumb.small{
+.booking-table .image-thumb.small {
   width: 100px;
   height: 100px;
   position: relative;
   overflow: hidden;
 }
 
-.booking-table .center-cell{
+.booking-table .center-cell {
   height: 100%;
   display: flex;
   justify-content: center;
@@ -683,7 +698,7 @@ Booking table
   --underline-width: 7;
 }
 
-.ellipsis-1{
+.ellipsis-1 {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -691,7 +706,7 @@ Booking table
   -webkit-box-orient: vertical;
 }
 
-.ellipsis-2{
+.ellipsis-2 {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -699,7 +714,7 @@ Booking table
   -webkit-box-orient: vertical;
 }
 
-.ellipsis-3{
+.ellipsis-3 {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -707,7 +722,7 @@ Booking table
   -webkit-box-orient: vertical;
 }
 
-.ellipsis-4{
+.ellipsis-4 {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -715,18 +730,18 @@ Booking table
   -webkit-box-orient: vertical;
 }
 
-.gallery-section select{
+.gallery-section select {
   height: 40px;
   max-width: 200px;
 }
 
-.galleries{
+.galleries {
   display: flex;
   justify-content: start;
   flex-wrap: wrap;
 }
 
-.galleries .gallery-item{
+.galleries .gallery-item {
   height: 200px;
   width: 33%;
   border: 2px solid white;
@@ -735,7 +750,7 @@ Booking table
   cursor: pointer;
 }
 
-.galleries .gallery-item.portrait{
+.galleries .gallery-item.portrait {
   width: 11%;
 }
 
@@ -748,33 +763,47 @@ Booking table
   --bs-accordion-active-bg: white;
 }
 
-.accordion .accordion-item{
+.accordion .accordion-item {
   border-bottom-left-radius: var(--bs-accordion-border-radius);
   border-bottom-right-radius: var(--bs-accordion-border-radius);
   margin-bottom: 1.5rem;
   padding: 1.5rem;
 }
 
-.accordion-item:not(:first-of-type){
+.accordion-item:not(:first-of-type) {
   border-top: 1px solid var(--bs-border-color);
   border-top-right-radius: var(--bs-accordion-border-radius);
   border-top-left-radius: var(--bs-accordion-border-radius);
 }
 
-.accordion-item:first-of-type .accordion-button
-, .accordion-item:last-of-type .accordion-button.collapsed
-, .accordion-button:not(.collapsed){
+.accordion-item:first-of-type .accordion-button, .accordion-item:last-of-type .accordion-button.collapsed, .accordion-button:not(.collapsed) {
   border-radius: var(--bs-accordion-inner-border-radius);
 }
 
-.accordion-item:first-of-type .accordion-button:not(.collapsed),.accordion-button:not(.collapsed){
-  border-bottom-right-radius: 0 ;
-  border-bottom-left-radius: 0 ;
+.accordion-item:first-of-type .accordion-button:not(.collapsed), .accordion-button:not(.collapsed) {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
-.accordion-button, .accordion-button:focus{
+.accordion-button, .accordion-button:focus {
   color: $blue;
   font-weight: bold;
+}
+
+.btn.btn-floating {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 86px;
+  right: 24px;
+  background-color: $blue;
+  color: #FFF;
+  border-radius: 60px;
+  text-align: center;
+  box-shadow: 1px 1px 1px #999;
+  padding: 0;
+  z-index: 1000000;
+  font-size: 30px;
 }
 
 @import "Page";

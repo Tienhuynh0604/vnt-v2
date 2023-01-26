@@ -1,35 +1,32 @@
 import React from "react";
 import {Button, Card} from "react-bootstrap";
-import {moneyFormat} from "../ulti/helper";
+import {getImageUrl, moneyFormat} from "../ulti/helper";
 import {Icon} from "@iconify/react";
 import Link from "next/link";
 import {useTranslation} from "react-i18next";
 import {useAppContext} from "../layouts/AppLayout";
 
-const ProductCard = ({item, className}) => {
+const ProductCard = ({destination, item, className}) => {
     const {t} = useTranslation("common");
-    const {setBookingModal} = useAppContext();
+    const {setBookingModal, locale} = useAppContext();
+    console.log(item);
 
-    const renderTypeTag = (type) => {
-        let colorType = "";
-
-        switch (type) {
-            case "Trekking Tour":
-                colorType = "bg-warning";
+    const renderTypeTag = (category) => {
+        let color = "";
+        switch (category?.data?.attributes.slug) {
+            case "ticket-bus": {
+                color = "bg-primary";
                 break;
-            case "Bus Tour":
-                colorType = "bg-primary";
+            }
+            case "city-tour": {
+                color = "bg-info";
                 break;
-            case "Motorcycle Tour":
-                colorType = "bg-danger";
-                break;
+            }
             default:
-                colorType = "bg-info";
-                break;
+                color = "bg-warning";
         }
-
-        return <span className={`p-tag text-light ${colorType}`}>
-            {t(type)}
+        return <span className={`p-tag text-light ${color}`}>
+            {t(category?.data?.attributes.name)}
         </span>
     };
 
@@ -42,38 +39,53 @@ const ProductCard = ({item, className}) => {
                 </li>
                 }
                 {
-                    item.attributes.discount > 0 &&
+                    item.attributes.discountLabel &&
                     <li>
-                        <span className="p-tag p-tag-top bg-danger text-light">{item.attributes.discount}%</span>
+                        <span className="p-tag p-tag-top bg-danger text-light">
+                            {item.attributes.discountLabel}
+                        </span>
                     </li>
                 }
             </ul>
-            <Card.Img variant="top" src={item.attributes.thumbnail?.url}/>
+            <Card.Img variant="top"
+                      alt={item.attributes.tourCard?.image?.data?.attributes?.name}
+                      src={getImageUrl(item.attributes.tourCard?.image?.data?.attributes?.url)}/>
             <Card.Body>
                 <ul className="tag-list-2">
                     <li>
-                        {renderTypeTag(item.attributes.type)}
+                        {renderTypeTag(item.attributes.category)}
                     </li>
-                </ul>
-                <Card.Title className="pt-2">
-                    {item.attributes.title}
-                </Card.Title>
-                <ul className="price">
-                    {item.attributes.prices.map((pI, idx) => {
-                        return <li key={`u_p${idx}`}>
-                            {pI.type}: <strong>{moneyFormat(pI.price)}</strong>
-                        </li>
+                    {item?.attributes?.tags?.data.map((tag, idx) => {
+                        return (<li key={`t_p${idx}`}>
+                            <span
+                                className={`p-tag text-light ${tag?.attributes.className}`}>
+                            {t(tag?.attributes.name)}
+                        </span>
+                        </li>)
                     })}
                 </ul>
+                <Card.Title className="pt-2">
+                    <Link href={`/city-tours/${destination.attributes.slug}/${item.attributes.slug}`}>
+                        {item.attributes.tourCard?.title}
+                    </Link>
+                </Card.Title>
+                <ul className="price">
+                    <li>
+                        {t("Child")}: <strong>{moneyFormat(item.attributes.tourCard?.childPrice, locale)}</strong>
+                    </li>
+                    <li>
+                        {t("Adult")}: <strong>{moneyFormat(item.attributes.tourCard?.adultPrice, locale)}</strong>
+                    </li>
+                </ul>
                 <ul className="feature">
-                    {item.attributes.features.map((f, idx) => {
+                    {item.attributes.tourCard?.features.map((f, idx) => {
                         return <li key={`uhf${idx}`}>
                             <Icon icon={f.iconClass}/> {f.displayText}
                         </li>
                     })}
                 </ul>
                 <div className="d-flex justify-content-between pt-2">
-                    <Link href={`/city-tours/ha-noi/${item.attributes.slug}`}>
+                    <Link href={`/city-tours/${destination.attributes.slug}/${item.attributes.slug}`}>
                         <Button type={"button"} variant={'outline-primary'}>{t("discover")}</Button>
                     </Link>
                     <Button type={"button"}
@@ -81,7 +93,7 @@ const ProductCard = ({item, className}) => {
                                 setBookingModal({
                                     isVisible: true,
                                     item: {
-                                        id: 1
+                                        id: item.id
                                     }
                                 });
                             }}
