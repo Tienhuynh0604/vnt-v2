@@ -148,16 +148,6 @@
       },
       "component": "common.feature"
     },
-    "mainStops": {
-      "type": "component",
-      "repeatable": true,
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "component": "common.feature"
-    },
     "byg": {
       "pluginOptions": {
         "i18n": {
@@ -180,12 +170,16 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::payment-vns.payment-product",
-      "private": false,
       "pluginOptions": {
         "i18n": {
           "localized": false
         }
       }
+    },
+    "places": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::place.place"
     }
   }
 }
