@@ -2549,7 +2549,7 @@
     lodash "4.17.21"
     sift "16.0.0"
 
-"@strapi/plugin-color-picker@^4.5.6":
+"@strapi/plugin-color-picker@^4.6.0":
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/@strapi/plugin-color-picker/-/plugin-color-picker-4.6.0.tgz#662bf80f58db3deaa13908777c7adf6d5e0119a7"
   integrity sha512-jzUjaHNxCcauXKEiuEKLEwcVXrrkeU6EFPr99JB/5iUCSjTMPZoP4tHSQ9UAKuChlWdUj+gU54Nw2Tu/Yackfw==
@@ -2598,7 +2598,7 @@
     "@strapi/utils" "4.6.0"
     lodash "4.17.21"
 
-"@strapi/plugin-graphql@^4.5.6":
+"@strapi/plugin-graphql@^4.6.0":
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/@strapi/plugin-graphql/-/plugin-graphql-4.6.0.tgz#8df14514f79172b95dd26c2049ec10aa6f7732b3"
   integrity sha512-Lko67aao1w0VBiUhFES3/L8iQYNiWTuX2eaJ/ANuUiIh+dC3mXjJGn/5wd6dxRdXrKpKVOtaEqrtVQRTaTFIFQ==
@@ -2620,7 +2620,7 @@
     pluralize "^8.0.0"
     subscriptions-transport-ws "0.9.19"
 
-"@strapi/plugin-i18n@^4.5.6":
+"@strapi/plugin-i18n@^4.6.0":
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/@strapi/plugin-i18n/-/plugin-i18n-4.6.0.tgz#4b548670161f0f0ec2045517cf3e76c7a49097b3"
   integrity sha512-+o9PJCWxQOCs7dBAaBqKTtUMYwSk87noWkD1EMzP76zwEzcOVnV4aE855kHhTW3bxNsMrFm4uaAocGHGzhIQOw==
@@ -2663,7 +2663,7 @@
     react-router-dom "5.3.4"
     sharp "0.31.2"
 
-"@strapi/plugin-users-permissions@^4.5.6":
+"@strapi/plugin-users-permissions@^4.6.0":
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/@strapi/plugin-users-permissions/-/plugin-users-permissions-4.6.0.tgz#52396c1f4f81e36f228f8a9d048345e1eed73c3e"
   integrity sha512-60igsM/kMjt8p8m0UKgO797Z9PCviWCvVKGVwWs/om+oz98x1hQhralmyy/Yp+jfzxCn4YFGhmrjTpYsAuHjKw==
@@ -2708,7 +2708,7 @@
     "@strapi/utils" "4.6.0"
     fs-extra "10.0.0"
 
-"@strapi/strapi@4.6.0", "@strapi/strapi@^4.5.6":
+"@strapi/strapi@4.6.0", "@strapi/strapi@^4.6.0":
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/@strapi/strapi/-/strapi-4.6.0.tgz#a51e2361594d3a0eb80f6551c2e2ae24d2fe10be"
   integrity sha512-RVHCwtdP5GVPcaNrUr5/Y863UjnKmKXDnnIiPr0GWPMZdwno4IZxIz1R4XgP8no9XpCbVJK1HsEmzrLcavAOMg==
