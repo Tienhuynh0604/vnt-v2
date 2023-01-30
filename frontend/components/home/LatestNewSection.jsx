@@ -42,7 +42,7 @@ const settings = {
 const LatestNewBlock = ({dataSource = []}) => {
 
     const {t} = useTranslation("common");
-    const {locale = 'vi'} = useAppContext();
+    const {locale} = useAppContext();
 
     const LatestSlider = () => {
         return <Slider {...settings}>

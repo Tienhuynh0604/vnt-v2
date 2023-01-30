@@ -62,7 +62,7 @@ const Index = (props) => {
 };
 
 export const getServerSideProps = async (context) => {
-    const {locale = "vi", query, req} = context;
+    const {locale, query, req} = context;
     const {slug} = query;
     console.log(`City tours: `, slug, locale);
     let model = null;

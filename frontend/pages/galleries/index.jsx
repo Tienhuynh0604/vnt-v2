@@ -146,7 +146,7 @@ const getGalleries = async (locale, filters = {}, pagination = {
 };
 
 export const getServerSideProps = async (context) => {
-    const {locale = 'vi', query = {}} = context;
+    const {locale = 'en', query = {}} = context;
 
     let galleries = {};
     let destinations = [];

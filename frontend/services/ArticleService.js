@@ -2,7 +2,7 @@ import {callGet, imagePopulate, seoPopulate} from "../ulti/helper";
 
 export const getAllArticleModelByCats = async (categorySlugs,
                                                page = 1,
-                                               locale = 'vi',
+                                               locale = 'en',
                                                sortOrder = ['sortOrder:asc', 'id:desc'],
                                                pageSize = 12) => {
     const modelQuery = {
@@ -44,7 +44,7 @@ export const callGetArticles = async (modelQuery, locale) => {
     }
 };
 
-export const getArticleModels = async (categorySlug, page = 1, locale = 'vi') => {
+export const getArticleModels = async (categorySlug, page = 1, locale = 'en') => {
     const modelQuery = {
         fields: ['title', 'slug', 'shortDescription'],
         filters: {
@@ -64,7 +64,7 @@ export const getArticleModels = async (categorySlug, page = 1, locale = 'vi') =>
     return await callGetArticles(modelQuery, locale);
 };
 
-export const getSingleArticle = async (slug, locale = 'vi') => {
+export const getSingleArticle = async (slug, locale = 'en') => {
     let model = null;
     try {
         const modelQuery = {

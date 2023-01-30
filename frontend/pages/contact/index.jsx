@@ -122,7 +122,7 @@ const Page = ({models = []}) => {
 };
 
 export const getServerSideProps = async (context) => {
-    const {locale = 'vi'} = context;
+    const {locale = 'en'} = context;
     return {
         props: {
             ...(await serverSideTranslations(locale, ['common'])),

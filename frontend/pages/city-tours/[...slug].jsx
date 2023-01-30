@@ -9,12 +9,10 @@ import {useTranslation} from "next-i18next";
 import ImageSlider from "../../components/city-tours/ImageSlider";
 import TourFeatures from "../../components/city-tours/TourFeatures";
 import TourFeatureDetail from "../../components/city-tours/TourFeatureDetail";
-import Image from "next/image";
 import LightGallery from "lightgallery/react";
 import DecorComponent from "../../components/DecorComponent";
 import {useAppContext} from "../../layouts/AppLayout";
 import Error from "../_error";
-import {AGE_GROUP_ADULT, AGE_GROUP_CHILD} from "../../ulti/appConst";
 import {getMinPriceMaxPrice, renderDynamicFeature, renderImage} from "../../ulti/appUtil";
 import slugify from "slugify";
 import MainStopSlider from "../../components/city-tours/MainStopSlider";
@@ -95,6 +93,7 @@ const Page = ({model, paymentProduct}) => {
                 </div>
                 <Button type="button" onClick={() => setBookingModal({
                     isVisible: true,
+                    productId: model.id,
                     item: {
                         id: model.id
                     }
@@ -115,21 +114,23 @@ const Page = ({model, paymentProduct}) => {
                 )
             })}
             <TourFeatureDetail name={"BEFORE YOU GO"}>
-                <p>{t("byg.text1")}</p>
-                <b>{t("byg.text2")}</b>
-                <div className="position-relative py-3">
-                    {model.attributes.scheduleImage?.data && (
-                        <LightGallery speed={500}>
-                            <Link href={getImageUrl(model.attributes.scheduleImage?.data?.attributes.url)}>
-                                {renderImage(model.attributes.scheduleImage, {
-                                    className:"w-100 h-auto"
-                                })}
-                            </Link>
-                        </LightGallery>
-                    )}
-                </div>
+                {model.attributes.scheduleImage?.data && (<>
+                        <p>{t("byg.text1")}</p>
+                        <b>{t("byg.text2")}</b>
+                        <div className="position-relative py-3">
+
+                            <LightGallery speed={500}>
+                                <Link href={getImageUrl(model.attributes.scheduleImage?.data?.attributes.url)}>
+                                    {renderImage(model.attributes.scheduleImage, {
+                                        className: "w-100 h-auto"
+                                    })}
+                                </Link>
+                            </LightGallery>
+                        </div>
+                    </>
+                )}
                 <ul>
-                    {model.attributes.byg?.split("\n").map((item,idx) => (
+                    {model.attributes.byg?.split("\n").map((item, idx) => (
                         <li key={`byg.li${idx}`}>{item}</li>
                     ))}
                 </ul>
@@ -140,7 +141,7 @@ const Page = ({model, paymentProduct}) => {
                         <LightGallery speed={500}>
                             <Link href={getImageUrl(model.attributes.mapImage?.data?.attributes.url)}>
                                 {renderImage(model.attributes.mapImage, {
-                                    className:"w-100 h-auto"
+                                    className: "w-100 h-auto"
                                 })}
                             </Link>
                         </LightGallery>
@@ -148,7 +149,7 @@ const Page = ({model, paymentProduct}) => {
                 </div>
                 <Button className="text-uppercase">{t("live tracking")}</Button>
             </TourFeatureDetail>
-            <TourFeatureDetail name={"main stop"}>
+            <TourFeatureDetail name={"main stops"}>
                 <MainStopSlider tourId={model.id}/>
             </TourFeatureDetail>
         </Container>
@@ -157,7 +158,7 @@ const Page = ({model, paymentProduct}) => {
 };
 
 export const getServerSideProps = async (context) => {
-    const {locale = "vi", query, req} = context;
+    const {locale, query, req} = context;
     const {slug} = query;
     const [param1, param2] = slug;
     console.log("City tours detail:", param2);

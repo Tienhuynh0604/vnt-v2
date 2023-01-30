@@ -1,6 +1,6 @@
 import {callGet, callPost} from "../ulti/helper";
 
-export const createFaq = async (formData, locale = 'vi') => {
+export const createFaq = async (formData, locale = 'en') => {
     try {
         return await callPost(`/faqs/client-submit`, formData, locale);
     } catch (e) {
@@ -9,7 +9,7 @@ export const createFaq = async (formData, locale = 'vi') => {
     }
 };
 
-export const getFaqModels = async (page = 1, locale = 'vi') => {
+export const getFaqModels = async (page = 1, locale = 'en') => {
     try {
         const modelQuery = {
             fields: ['name', 'title', 'question', 'slug', 'createdAt'],
@@ -34,7 +34,7 @@ export const getFaqModels = async (page = 1, locale = 'vi') => {
     }
 };
 
-export const getSingleFaq = async (slug, locale = 'vi') => {
+export const getSingleFaq = async (slug, locale = 'en') => {
     let model = null;
     try {
         const modelQuery = {

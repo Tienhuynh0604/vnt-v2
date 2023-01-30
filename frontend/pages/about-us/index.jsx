@@ -71,7 +71,7 @@ const Page = ({model}) => {
 };
 
 export const getServerSideProps = async (context) => {
-    const {locale = 'vi'} = context;
+    const {locale = 'en'} = context;
 
     const res = await callGet("/about-us", {
         populate: {

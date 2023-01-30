@@ -26,7 +26,7 @@ export default Home;
 
 export const getServerSideProps = async (context) => {
     console.log("Home.getServerSideProps");
-    const {locale = "vi"} = context;
+    const {locale} = context;
     let homeData = {};
     let articlesData = {};
     let hotTours = [];

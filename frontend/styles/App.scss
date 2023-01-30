@@ -290,7 +290,7 @@ Product card Item
 }
 
 .product-card-item .card .card-img-top {
-
+  height: 240px;
 }
 
 .product-card-item .card .card-title {
@@ -330,6 +330,7 @@ Product card Item
   padding: 0;
   color: #444444;
   font-size: 1rem;
+  min-height: 150px;
 }
 
 .product-card-item .card .btn {

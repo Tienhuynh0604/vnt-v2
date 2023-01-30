@@ -11,9 +11,10 @@ import FloatingButton from "../components/FloatingButton";
 const AppContext = createContext({});
 
 const AppLayout = (props) => {
-    const {headerMenus, footerMenus, seo, common, locale = "vi", children, destinations} = props;
+    const {headerMenus, footerMenus, seo, common, locale, children, destinations} = props;
     const [bookingModal, setBookingModal] = useState({
         isVisible: false,
+        productId: null,
         item: {
             id: 1,
         }

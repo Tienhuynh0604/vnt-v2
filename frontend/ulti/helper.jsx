@@ -17,7 +17,7 @@ const getCacheKey = (text) => {
     return md5(text);
 };
 
-export const moneyFormat = (value, locale = 'vi') => {
+export const moneyFormat = (value, locale = 'en') => {
 
     let currency = "VNĐ";
     let format = '0,0';
@@ -57,7 +57,7 @@ const getLocale = (locale) => {
     }
 };
 
-export const callPost = async (urlPath, dataObj, locale = 'vi', queryObj = {}) => {
+export const callPost = async (urlPath, dataObj, locale = 'en', queryObj = {}) => {
     try {
         let baseUrl = getBaseUrl();
         locale = getLocale(locale);
@@ -164,8 +164,10 @@ export const imagePopulate = () => {
 };
 
 export const initialProps = async (ctx) => {
-    let initialProps = {};
-    const {locale = "vi", req} = ctx;
+    const {locale, req} = ctx;
+    let initialProps = {
+        locale
+    };
     let seo = defaultSeo(req);
     let commonData = {};
     let headerMenus = [];
@@ -236,6 +238,7 @@ export const initialProps = async (ctx) => {
         seo,
         footerMenus,
         destinations,
+        locale,
         ...initialProps,
     };
     return initialProps;

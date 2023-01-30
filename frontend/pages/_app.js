@@ -37,7 +37,6 @@ const MyApp = ({Component, pageProps}) => {
 
 MyApp.getInitialProps = async (context) => {
     const appInitialProps = await App.getInitialProps(context);
-    const {locale = "vi"} = context;
     let initProps = {};
     try {
         const data = await initialProps(context.ctx);

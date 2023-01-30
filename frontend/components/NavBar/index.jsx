@@ -12,7 +12,7 @@ import {Icon} from "@iconify/react";
 const NavBar = (props) => {
 
     const {t} = useTranslation("common");
-    const {headerMenus, common, cartModal, setCartModal} = useAppContext();
+    const {headerMenus, common, cartModal, setCartModal, locale} = useAppContext();
     const router = useRouter();
     const {asPath} = router;
     const [expanded, setExpanded] = useState(false);
@@ -112,14 +112,13 @@ const NavBar = (props) => {
                         {renderMenuItems()}
                         <li className="nav-item">
                             <NavDropdown
-                                title={<><Image alt={"English"} src="/images/vi.jpg" width={27} height={21}/> Tiếng
-                                    việt</>}
+                                title={<span className="text-uppercase"><Image alt={locale} src={`/images/${locale}.jpg`} width={27} height={21}/> {locale}</span>}
                                 className="d-inline-block me-3">
-                                <NavDropdown.Item href="/vi">
-                                    <Image alt={"English"} src="/images/en.jpg" width={27} height={21}/> English
-                                </NavDropdown.Item>
                                 <NavDropdown.Item href="/en">
-                                    <Image alt={"Tiếng Việt"} src="/images/vi.jpg" width={27} height={21}/> Tiếng Việt
+                                    <Image alt={"English"} src="/images/en.jpg" width={27} height={21}/> EN
+                                </NavDropdown.Item>
+                                <NavDropdown.Item href="/vi">
+                                    <Image alt={"Tiếng Việt"} src="/images/vi.jpg" width={27} height={21}/> VI
                                 </NavDropdown.Item>
                             </NavDropdown>
                         </li>

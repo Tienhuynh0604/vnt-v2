@@ -29,7 +29,7 @@ Error.getLayout = (page, props) => {
 export default Error
 
 export const getServerSideProps = async (context) => {
-    const {locale = "vi", res, err} = context;
+    const {locale = "en", res, err} = context;
     console.log("Error getServerSideProps", err);
     try {
         const statusCode = res ? res.statusCode : err ? err.statusCode : 404;

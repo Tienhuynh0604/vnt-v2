@@ -9,7 +9,6 @@ import {useAppContext} from "../layouts/AppLayout";
 const ProductCard = ({destination, item, className}) => {
     const {t} = useTranslation("common");
     const {setBookingModal, locale} = useAppContext();
-    console.log(item);
 
     const renderTypeTag = (category) => {
         let color = "";
@@ -92,6 +91,7 @@ const ProductCard = ({destination, item, className}) => {
                             onClick={() => {
                                 setBookingModal({
                                     isVisible: true,
+                                    productId: item.id,
                                     item: {
                                         id: item.id
                                     }

@@ -43,7 +43,7 @@ const Page = ({model, query = {}}) => {
 };
 
 export const getServerSideProps = async (context) => {
-    const {locale = 'vi', query} = context;
+    const {locale = 'en', query} = context;
 
     let model = {};
     try {

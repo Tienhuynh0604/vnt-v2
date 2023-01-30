@@ -10,7 +10,7 @@ import {renderContactItem, renderImage} from "../../ulti/appUtil";
 const NavHeader = () => {
 
     const {t} = useTranslation("common");
-    const {common} = useAppContext();
+    const {common, locale} = useAppContext();
 
     return <div className="header-1">
         <div className="container d-none d-md-block">
@@ -30,12 +30,12 @@ const NavHeader = () => {
                     </ul>
                 </div>
                 <div className="col-lg-6 col-12 nav-r d-flex justify-content-lg-end justify-content-center align-items-center">
-                    <NavDropdown title={<>Tiếng việt</>} className="d-inline-block me-3">
-                        <NavDropdown.Item href="/vi">
-                            <Image alt={"English"} src="/images/vi.jpg" width={27} height={21}/> English
-                        </NavDropdown.Item>
+                    <NavDropdown title={t(locale)} className="d-inline-block me-3 text-capitalize">
                         <NavDropdown.Item href="/en">
-                            <Image alt={"Tiếng Việt"} src="/images/vi.jpg" width={27} height={21}/> Tiếng Việt
+                            <Image alt={"English"} src="/images/en.jpg" width={27} height={21}/> EN
+                        </NavDropdown.Item>
+                        <NavDropdown.Item href="/vi">
+                            <Image alt={"Tiếng Việt"} src="/images/vi.jpg" width={27} height={21}/> VI
                         </NavDropdown.Item>
                     </NavDropdown>
                     <ul className="list-inline d-inline-block">
