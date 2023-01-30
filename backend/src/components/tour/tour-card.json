@@ -29,6 +29,12 @@
       "repeatable": true,
       "component": "common.icon-value",
       "max": 3
+    },
+    "adultPrice_en": {
+      "type": "decimal"
+    },
+    "childPrice_en": {
+      "type": "decimal"
     }
   }
 }
