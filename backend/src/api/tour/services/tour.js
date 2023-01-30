@@ -20,10 +20,12 @@ module.exports = createCoreService('api::tour.tour', ({strapi}) => ({
       , relation.payment_product_id);
   },
   async getPlaces(tourId) {
+    const sql = `select * from tours_places_links where tour_id = ${tourId} ORDER BY place_order ASC`;
     let results1 = await strapi.db.connection.raw(
-      `select * from tours_places_links where tour_id = ${tourId} ORDER BY place_order ASC`
+      sql
     );
     const [rows] = results1;
+    console.log(sql, rows);
 
     if (rows.length === 0) {
       return [];
@@ -34,13 +36,14 @@ module.exports = createCoreService('api::tour.tour', ({strapi}) => ({
     return await strapi.entityService.findMany('api::place.place'
       , {
         filters: {
-          id: placeIds
+          id: placeIds,
         },
         populate: {
           thumb: {
             fields: ['url', 'name', 'width', 'height']
           }
-        }
+        },
+        locale: "all"
       });
-}
+  }
 }));

@@ -58,10 +58,14 @@
       "type": "string"
     },
     "shortDescription_en": {
-      "type": "string"
+      "type": "text"
     },
     "content_en": {
-      "type": "string"
+      "type": "customField",
+      "options": {
+        "preset": "standard"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
     }
   }
 }
