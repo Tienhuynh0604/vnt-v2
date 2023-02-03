@@ -12,11 +12,11 @@ const Footer = () => {
         <div className="bg-primary py-5">
             <Container>
                 <Row className="g-3">
-                    <Col xs={12} className="pb-5">
-                        {renderImage(common.logoFooter)}
-                    </Col>
+                    {/*<Col xs={12} className="pb-5">*/}
+                    {/*    {renderImage(common.logoFooter)}*/}
+                    {/*</Col>*/}
                     <Col xs={12} md={3}>
-                        {common.slogan}
+                        {renderImage(common.logoFooter)}
                     </Col>
                     <Col xs={12} md={3}>
                         <h4 className="mb-4">Contact us</h4>

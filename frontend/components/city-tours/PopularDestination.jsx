@@ -12,6 +12,7 @@ const settingDes = {
     arrows: false,
     infinite: true,
     speed: 500,
+    fade: true,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: false,
@@ -32,7 +33,7 @@ const settings = {
         {
             breakpoint: 1024,
             settings: {
-                slidesToShow: 2,
+                slidesToShow: 3,
                 slidesToScroll: 1
             }
         },
@@ -64,7 +65,7 @@ const PopularDestination = ({places = []}) => {
     }, [slider1, slider2]);
 
     return <Row className="popular-destination">
-        <Col xs={12} md={3}>
+        <Col xs={12} lg={3}>
             <h1 className="text-capitalize">{t("popular destination")}</h1>
             <Slider {...settingDes} ref={slider => slider1 = slider} asNavFor={sliders.nav2}>
                 {places && places.map((item, idx) => (
@@ -77,7 +78,7 @@ const PopularDestination = ({places = []}) => {
                 ))}
             </Slider>
         </Col>
-        <Col xs={12} md={9}>
+        <Col xs={12} lg={9}>
             <Slider {...settings} ref={slider => slider2 = slider} asNavFor={sliders.nav1}>
                 {places && places.map((item, idx) => (
                     <div key={`si-${idx}`}>

@@ -16,7 +16,7 @@ const AboutUsBlock = ({dataSource = {}}) => {
         <div className="aboutus-cover">
             <Container>
                 <Row>
-                    <Col xs={12} lg={6}>
+                    <Col xs={12} lg={7}>
                         <h1 className="text-light">{dataSource.title}</h1>
                         <p className="mt-3" dangerouslySetInnerHTML={{__html: nl2br(dataSource.subTitle)}}/>
                         <h6 className="mt-4 fw-bold text-capitalize">{t('follow us')}:</h6>
@@ -31,7 +31,7 @@ const AboutUsBlock = ({dataSource = {}}) => {
                             <Button className="text-capitalize" variant="primary">{t("view more")}</Button>
                         </Link>
                     </Col>
-                    <Col xs={12} lg={6}>
+                    <Col xs={12} lg={5}>
                         {/*<div className="decor-bg"/>*/}
                         {renderImage(dataSource.image, {
                             className: "decor-bg-2"

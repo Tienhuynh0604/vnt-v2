@@ -18,7 +18,7 @@ IPAD landscape
   }
 
   .main-slider-item .slider-img {
-    height: 450px;
+    height: 350px;
   }
 
   .main-slider-item .carousel-caption {
@@ -44,12 +44,6 @@ IPAD landscape
     width: 350px;
     margin-top: 0px;
     margin-left: 140px;
-  }
-
-  .aboutus-section .decor-bg-2 {
-    height: auto;
-    width: 100%;
-    //margin-top: -325px;
   }
 
   .product-card-item .card .btn {
@@ -83,8 +77,8 @@ IPAD landscape
   }
 
   .popular-destination-item, .main-stops .main-stops-item {
-    width: 220px;
-    height: 165px;
+    width: 210px;
+    height: 140px;
   }
 
   .ticket-bus-block .breadcrumb .breadcrumb-item.active span {
@@ -131,7 +125,7 @@ IPAD air
   }
 
   .main-slider-item .slider-img {
-    height: 350px;
+    height: 300px;
   }
 
   .main-slider-item .carousel-caption {
@@ -160,12 +154,6 @@ IPAD air
     margin-left: 270px;
   }
 
-  .aboutus-section .decor-bg-2 {
-    height: auto;
-    width: 100%;
-    //margin-top: -425px;
-  }
-
   .tour-detail .image-slider-item .big-thumb {
     height: 300px;
   }
@@ -188,8 +176,8 @@ IPAD air
   }
 
   .popular-destination-item, .main-stops .main-stops-item {
-    width: 250px;
-    height: 180px;
+    width: 210px;
+    height: 140px;
   }
 
   .payment-item {
@@ -240,11 +228,6 @@ IPAD portrait, mobile landscape
     margin-top: 0;
     margin-left: 270px;
   }
-  .aboutus-section .decor-bg-2 {
-    height: auto;
-    width: 100%;
-    margin-top: 20px;
-  }
 
   .tour-detail .image-slider-item .big-thumb {
     height: 200px;
@@ -266,7 +249,7 @@ Mobile protrail
   }
 
   .page-section {
-    padding: 3rem 0;
+    padding: 1.5rem 0 3rem;
   }
 
   //.header-navbar {
@@ -309,11 +292,6 @@ Mobile protrail
     margin-top: 0;
     margin-left: 80px;
   }
-  .aboutus-section .decor-bg-2 {
-    height: 300px;
-    width: 350px;
-    //margin-top: -250px;
-  }
 
   .title-section .cover {
     height: 170px;
@@ -347,5 +325,14 @@ Mobile protrail
   .main-stops .main-stops-item {
     width: 100%;
     height: 250px;
+  }
+
+  .product-card-item .card ul.feature{
+    min-height: 110px;
+  }
+
+  .popular-destination-item{
+    width: 100%;
+    height: 200px;
   }
 }

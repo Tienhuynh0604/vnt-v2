@@ -145,6 +145,21 @@ export const renderImage = (image, props = {}) => {
     />
 };
 
+export const renderFillImage = (image, props = {}) => {
+    if (!image || !image.data) {
+        return "";
+    }
+
+
+    return <Image alt={image.data.attributes.name}
+                  src={getImageUrl(image.data.attributes.url)}
+                  fill
+                  objectFit={"cover"}
+                  {...props}
+    />
+};
+
+
 export const SlickNextArrow = (props) => {
     const {className, style, onClick} = props;
     return (

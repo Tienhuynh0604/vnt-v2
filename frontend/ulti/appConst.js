@@ -1,5 +1,5 @@
 export const PATH_ABOUT_US = "about-us";
-export const PATH_NEWS = "news";
+export const PATH_NEWS = "articles";
 
 export const PAYMENT_PRODUCT_TYPE_TICKET = "TICKET";
 

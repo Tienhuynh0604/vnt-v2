@@ -10,6 +10,7 @@ import PopularDestination from "../../components/city-tours/PopularDestination";
 import {Icon} from "@iconify/react";
 import Link from "next/link";
 import Error from "../_error";
+import {PATH_NEWS} from "../../ulti/appConst";
 
 const Index = (props) => {
 
@@ -36,12 +37,12 @@ const Index = (props) => {
             </Container>
             <DecorComponent/>
         </div>
-        <div className="bg-grey pt-5">
+        <div className="bg-grey py-sm-4 py-lg-5">
             <Container>
                 <PopularDestination places={model?.attributes?.places}/>
             </Container>
         </div>
-        <div className="pt-5">
+        <div className="py-sm-4 py-lg-5">
             <Container>
                 <h1 className="text-capitalize">{t("post about")} {model?.attributes?.name}</h1>
                 <Row>
@@ -50,7 +51,7 @@ const Index = (props) => {
                             <Icon icon={"ci:dot-02-s"}
                                   className="text-warning"
                                   height={16}/>
-                            <Link href={`/articles/${item.attributes.slug}`}>
+                            <Link href={`/${PATH_NEWS}/${item.attributes.slug}`}>
                                 {item.attributes.title}
                             </Link>
                         </Col>

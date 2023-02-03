@@ -5,7 +5,7 @@ TITLE SECTION
 .title-section .cover {
   position: relative;
   overflow: hidden;
-  height: 500px;
+  height: 300px;
 }
 
 .title-section .cover img {
@@ -26,12 +26,19 @@ TITLE SECTION
 }
 
 .title-section .cover .nav-block {
-  margin-top: 350px;
+  margin-top: 9rem;
 }
 
 .title-section .cover .nav-block h1 {
   text-align: center;
   color: white;
+  max-width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  margin: auto;
 }
 
 .title-section .cover .breadcrumb {
@@ -103,8 +110,8 @@ POPULAR DESTINAION
 }
 
 .popular-destination-item {
-  width: 310px;
-  height: 230px;
+  width: 270px;
+  height: 180px;
   padding: 10px 0;
   position: relative;
 }
