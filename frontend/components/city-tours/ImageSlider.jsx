@@ -33,7 +33,6 @@ const ImageSlider = ({images = []}) => {
             >
                 <Link href={`${getImageUrl(image.attributes.url)}`}>
                     <Image src={`${getImageUrl(image.attributes.url)}`}
-                           objectFit="cover"
                            fill
                            alt={getImageUrl(image.attributes.name)}/>
                 </Link>

@@ -92,7 +92,6 @@ const MainStopSlider = ({tourId}) => {
                             <Image
                                 alt={item.thumb?.name}
                                 fill
-                                objectFit="cover"
                                 src={getImageUrl(item.thumb?.url)}
                             />
                             <h5>{item.name}</h5>

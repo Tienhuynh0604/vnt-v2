@@ -159,7 +159,13 @@ export const featurePopulate = () => {
 
 export const imagePopulate = () => {
     return {
-        fields: ['caption', 'alternativeText', 'name', 'url', 'width', 'height', 'formats']
+        fields: [
+            'name',
+            'url',
+            'width',
+            'height',
+            'formats'
+        ]
     }
 };
 

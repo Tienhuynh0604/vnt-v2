@@ -10,6 +10,36 @@ const ProductCard = ({destination, item, className}) => {
     const {t} = useTranslation("common");
     const {setBookingModal, locale} = useAppContext();
 
+    const renderBookingButton = (hideBookingButton) => {
+        if (!hideBookingButton) {
+            return <Button type={"button"}
+                           onClick={() => {
+                               setBookingModal({
+                                   isVisible: true,
+                                   productId: item.id,
+                                   item: {
+                                       id: item.id
+                                   }
+                               });
+                           }}
+                           variant={'primary'}>
+                {t("book now")}
+            </Button>
+        } else {
+            return <Button type={"button"}
+                           onClick={() => {
+                               setBookingModal({
+                                   isVisible: true,
+                                   bookingType: "contact",
+                                   productName: item.attributes.tourCard?.title
+                               });
+                           }}
+                           variant={'primary'}>
+                {t("Contact us")}
+            </Button>
+        }
+    };
+
     const renderTypeTag = (category) => {
         let color = "";
         switch (category?.data?.attributes.slug) {
@@ -78,7 +108,7 @@ const ProductCard = ({destination, item, className}) => {
                 </ul>
                 <ul className="feature">
                     {item.attributes.tourCard?.features.map((f, idx) => {
-                        return <li key={`uhf${idx}`}>
+                        return <li key={`uhf${idx}`} className='line-2br'>
                             <Icon icon={f.iconClass}/> {f.displayText}
                         </li>
                     })}
@@ -87,19 +117,7 @@ const ProductCard = ({destination, item, className}) => {
                     <Link href={`/city-tours/${destination?.attributes.slug}/${item.attributes.slug}`}>
                         <Button type={"button"} variant={'outline-primary'}>{t("discover")}</Button>
                     </Link>
-                    <Button type={"button"}
-                            onClick={() => {
-                                setBookingModal({
-                                    isVisible: true,
-                                    productId: item.id,
-                                    item: {
-                                        id: item.id
-                                    }
-                                });
-                            }}
-                            variant={'primary'}>
-                        {t("book now")}
-                    </Button>
+                    {renderBookingButton(item.attributes.hideBookingButton)}
                 </div>
             </Card.Body>
         </Card>

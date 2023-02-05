@@ -339,4 +339,18 @@ Mobile protrail
   .title-section .cover .nav-block h1, .title-section .cover .nav-block .h1 {
     font-size: 1.5rem;
   }
+
+  .booking-contact{
+    border: none;
+  }
+
+  .booking-contact .booking-contact-item{
+    display: flex;
+    column-gap: 0.5rem;
+    align-items: center;
+  }
+
+  .booking-contact .booking-contact-item .bci-svg{
+    height: 30px;
+  }
 }

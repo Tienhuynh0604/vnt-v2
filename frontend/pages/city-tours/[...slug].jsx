@@ -65,6 +65,34 @@ const Page = ({model, paymentProduct}) => {
         </ol>
     };
 
+    const renderBookingButton = (hideBookingButton) => {
+        if (!hideBookingButton) {
+            return <Button type="button"
+                           onClick={() => setBookingModal({
+                               isVisible: true,
+                               productId: model.id,
+                               item: {
+                                   id: model.id
+                               }
+                           })}
+                           className="btn btn-primary btn-book">
+                {t('Book now')}
+            </Button>
+        } else {
+            return <Button type={"button"}
+                           onClick={() => {
+                               setBookingModal({
+                                   isVisible: true,
+                                   bookingType: "contact",
+                                   productName: model.attributes.title
+                               });
+                           }}
+                           className="btn btn-primary btn-book">
+                {t("Contact us")}
+            </Button>
+        }
+    };
+
     return <PageLayout
         title={model.attributes.title}
         breadcrumbs={[
@@ -84,20 +112,14 @@ const Page = ({model, paymentProduct}) => {
                         <Link href={getImageUrl(model.attributes.brochure?.data.attributes.url)}
                               target="_blank"
                               className="ms-3">
-                            <Icon icon={"ant-design:download-outlined"}/> Download Brochure
+                            <Icon icon={"ant-design:download-outlined"}/> Brochure
                         </Link>}
                     </div>
                     <nav className="price-list" aria-label="breadcrumb">
                         {renderPrices()}
                     </nav>
                 </div>
-                <Button type="button" onClick={() => setBookingModal({
-                    isVisible: true,
-                    productId: model.id,
-                    item: {
-                        id: model.id
-                    }
-                })} className="btn btn-primary btn-book">{t('Book now')}</Button>
+                {renderBookingButton(model.attributes.hideBookingButton)}
             </div>
             <ImageSlider images={model.attributes.images.data}/>
             <div className='mt-3'>
@@ -193,7 +215,7 @@ export const getServerSideProps = async (context) => {
                     populate: {
                         thumb: imagePopulate()
                     }
-                }
+                },
             },
             pagination: {
                 page: 1,

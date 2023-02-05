@@ -84,7 +84,7 @@ const TicketBus = ({destination, query = {}}) => {
             setLoadingTour(true);
             const res = await callGet("/tours", {
                 fields: [
-                    'title', 'slug', 'adultPrice', 'childPrice', 'isHot', 'discountLabel'
+                    'title', 'slug', 'adultPrice', 'childPrice', 'isHot', 'discountLabel','hideBookingButton'
                 ],
                 filters: {
                     destination: {

@@ -15,6 +15,7 @@ const AppLayout = (props) => {
     const [bookingModal, setBookingModal] = useState({
         isVisible: false,
         productId: null,
+        bookingType: null,
         item: {
             id: 1,
         }
@@ -24,6 +25,15 @@ const AppLayout = (props) => {
         isVisible: false,
         items: []
     });
+
+    const openContactBooking = (productName) => {
+        setBookingModal(prev => ({
+            ...prev,
+            isVisible: true,
+            bookingType: "contact",
+            productName
+        }))
+    };
 
     let sharedState = {
         headerMenus,
@@ -36,6 +46,7 @@ const AppLayout = (props) => {
         setBookingModal,
         cartModal,
         setCartModal,
+        openContactBooking,
     };
 
     useEffect(() => {

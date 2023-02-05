@@ -62,6 +62,9 @@ export const getServerSideProps = async (context) => {
         }, locale, true);
 
         const p4 = callGet("/tours", {
+            fields: [
+                'title', 'slug', 'adultPrice', 'childPrice', 'isHot', 'discountLabel','hideBookingButton'
+            ],
             filters: {
                 isHot: true
             },
@@ -90,6 +93,9 @@ export const getServerSideProps = async (context) => {
         }, locale, true);
 
         const p5 = callGet("/tours", {
+            fields: [
+                'title', 'slug', 'adultPrice', 'childPrice', 'isHot', 'discountLabel','hideBookingButton'
+            ],
             populate: {
                 tourCard: {
                     populate: {
