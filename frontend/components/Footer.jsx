@@ -15,7 +15,7 @@ const Footer = () => {
                     {/*<Col xs={12} className="pb-5">*/}
                     {/*    {renderImage(common.logoFooter)}*/}
                     {/*</Col>*/}
-                    <Col xs={12} md={3}>
+                    <Col xs={12} md={3} className="position-relative">
                         {renderImage(common.logoFooter)}
                     </Col>
                     <Col xs={12} md={3}>

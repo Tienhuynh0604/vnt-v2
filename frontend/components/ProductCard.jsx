@@ -64,7 +64,7 @@ const ProductCard = ({destination, item, className}) => {
                     })}
                 </ul>
                 <Card.Title className="pt-2">
-                    <Link href={`/city-tours/${destination.attributes.slug}/${item.attributes.slug}`}>
+                    <Link href={`/city-tours/${destination?.attributes.slug}/${item.attributes.slug}`}>
                         {item.attributes.tourCard?.title}
                     </Link>
                 </Card.Title>
@@ -84,7 +84,7 @@ const ProductCard = ({destination, item, className}) => {
                     })}
                 </ul>
                 <div className="d-flex justify-content-between pt-2">
-                    <Link href={`/city-tours/${destination.attributes.slug}/${item.attributes.slug}`}>
+                    <Link href={`/city-tours/${destination?.attributes.slug}/${item.attributes.slug}`}>
                         <Button type={"button"} variant={'outline-primary'}>{t("discover")}</Button>
                     </Link>
                     <Button type={"button"}

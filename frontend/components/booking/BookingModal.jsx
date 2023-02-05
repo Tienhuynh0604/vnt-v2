@@ -1,22 +1,16 @@
-import React, {memo, useEffect} from "react";
+import React, {memo, useEffect, useState} from "react";
 import {useTranslation} from "next-i18next";
 import {Modal} from "react-bootstrap";
 import {useAppContext} from "../../layouts/AppLayout";
 import TicketBookingStep from "./TicketBookingStep";
+import {callGet} from "../../ulti/helper";
+import Skeleton from 'react-loading-skeleton';
+import {toast} from "react-toastify";
 
 const BookingModal = (props) => {
     const {t} = useTranslation("common");
+    const {} = props;
     const {bookingModal, setBookingModal} = useAppContext();
-
-    useEffect(() => {
-        if (bookingModal.productId) {
-
-        }
-    }, bookingModal);
-
-    const getPaymentDetail = async () => {
-
-    };
 
     return <Modal show={bookingModal.isVisible}
                   centered
@@ -25,7 +19,7 @@ const BookingModal = (props) => {
                       ...bookingModal,
                       isVisible: false
                   })}>
-        <TicketBookingStep/>
+        <TicketBookingStep productId={bookingModal?.productId}/>
     </Modal>
 };
 
