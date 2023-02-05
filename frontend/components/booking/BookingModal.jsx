@@ -29,10 +29,10 @@ const BookingModal = (props) => {
     return <Modal show={bookingModal.isVisible}
                   centered
                   size="lg"
-                  onHide={() => setBookingModal({
-                      ...bookingModal,
+                  onHide={() => setBookingModal(prev => ({
+                      ...prev,
                       isVisible: false
-                  })}>
+                  }))}>
         {renderStep()}
     </Modal>
 };

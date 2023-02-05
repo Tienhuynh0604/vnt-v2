@@ -112,7 +112,9 @@ const NavBar = (props) => {
                         {renderMenuItems()}
                         <li className="nav-item">
                             <NavDropdown
-                                title={<span className="text-uppercase"><Image alt={locale} src={`/images/${locale}.jpg`} width={27} height={21}/> {locale}</span>}
+                                title={<span className="text-uppercase"><Image alt={locale}
+                                                                               src={`/images/${locale}.jpg`} width={27}
+                                                                               height={21}/> {locale}</span>}
                                 className="d-inline-block me-3">
                                 <NavDropdown.Item href="/en">
                                     <Image alt={"English"} src="/images/en.jpg" width={27} height={21}/> EN
@@ -124,15 +126,16 @@ const NavBar = (props) => {
                         </li>
                         <li className="nav-item">
                             <a
-                                  className={`nav-link ${!activeRoute || activeRoute === "/" ? "active" : ""}`}
-                                  onClick={()=>{
-                                      closeNav();
-                                      onShowCart();
-                                  }}
-                                  aria-current="page"
+                                className={`nav-link ${!activeRoute || activeRoute === "/" ? "active" : ""}`}
+                                onClick={() => {
+                                    closeNav();
+                                    onShowCart();
+                                }}
+                                aria-current="page"
                             >
                                 <Icon icon={"bi:cart-fill"} height={24}/>
-                                <Badge pill bg="danger">{cartModal.items.length}</Badge>
+                                {cartModal.items?.length > 0 &&
+                                <Badge pill bg="danger">{cartModal.items.length}</Badge>}
                             </a>
                         </li>
                     </ul>

@@ -17,24 +17,21 @@ import Router from 'next/router';
 const Page = ({galleries = {}, destinations = [], query = {}}) => {
     const {t} = useTranslation("common");
     const [images, setImages] = useState([]);
-    const [pagination, setPagination] = useState({
-        page: 1,
-        pageCount: 0
-    });
-    const {locale} = useAppContext();
 
     const lightGallery = useRef(null);
-    const onInit = useCallback((detail) => {
-        if (detail) {
-            lightGallery.current = detail.instance;
-        }
-    }, []);
+
 
     useEffect(() => {
         if (galleries) {
             setImages(galleries.data);
         }
     }, [galleries]);
+
+    const onInit = useCallback((detail) => {
+        if (detail) {
+            lightGallery.current = detail.instance;
+        }
+    }, []);
 
     useEffect(() => {
         lightGallery.current.refresh();
@@ -148,15 +145,18 @@ const getGalleries = async (locale, filters = {}, pagination = {
 export const getServerSideProps = async (context) => {
     const {locale = 'en', query = {}} = context;
 
-    let galleries = {};
+    let galleries = {
+        data: [],
+        meta: {
+            page: 1,
+            pageSize: 1
+        }
+    };
     let destinations = [];
     try {
         const resDestinations = await callGet("/destinations", {
             sortBy: ['name:asc'],
             fields: ['name', 'slug'],
-            filters: {
-                locale
-            }
         });
 
         let filters = {};
