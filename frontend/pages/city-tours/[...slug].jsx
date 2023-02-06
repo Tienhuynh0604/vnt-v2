@@ -16,6 +16,7 @@ import Error from "../_error";
 import {getMinPriceMaxPrice, renderDynamicFeature, renderImage} from "../../ulti/appUtil";
 import slugify from "slugify";
 import MainStopSlider from "../../components/city-tours/MainStopSlider";
+import Image from "next/image";
 
 const Page = ({model, paymentProduct}) => {
     const {t} = useTranslation("common");
@@ -93,6 +94,35 @@ const Page = ({model, paymentProduct}) => {
         }
     };
 
+    const renderMapImage = () => {
+        if (!model.attributes.mapImage?.data) {
+            return "";
+        }
+        console.log(model.attributes.mapImage);
+        let img = "";
+        if (model.attributes.mapImage?.data?.attributes?.formats?.large) {
+            const {large} = model.attributes.mapImage?.data?.attributes?.formats;
+            img = <Image src={getImageUrl(large.url)}
+                         alt={model.attributes.mapImage?.data?.attributes.name}
+                         className="w-100 h-auto"
+                         width={large.width}
+                         height={large.height}
+            />
+        } else {
+            img = renderImage(model.attributes.mapImage, {
+                className: "w-100 h-auto"
+            })
+        }
+
+        return (
+            <LightGallery speed={500}>
+                <Link href={getImageUrl(model.attributes.mapImage?.data?.attributes.url)}>
+                    {img}
+                </Link>
+            </LightGallery>
+        )
+    };
+
     return <PageLayout
         title={model.attributes.title}
         breadcrumbs={[
@@ -159,15 +189,7 @@ const Page = ({model, paymentProduct}) => {
             </TourFeatureDetail>
             <TourFeatureDetail name={"MAP"}>
                 <div className="position-relative py-3">
-                    {model.attributes.mapImage?.data && (
-                        <LightGallery speed={500}>
-                            <Link href={getImageUrl(model.attributes.mapImage?.data?.attributes.url)}>
-                                {renderImage(model.attributes.mapImage, {
-                                    className: "w-100 h-auto"
-                                })}
-                            </Link>
-                        </LightGallery>
-                    )}
+                    {renderMapImage()}
                 </div>
                 <Button className="text-uppercase">{t("live tracking")}</Button>
             </TourFeatureDetail>

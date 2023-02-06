@@ -11,9 +11,10 @@ import {Icon} from "@iconify/react";
 import Link from "next/link";
 import Error from "../_error";
 import {PATH_NEWS} from "../../ulti/appConst";
+import {useAppContext} from "../../layouts/AppLayout";
 
 const Index = (props) => {
-
+    const {locale} = useAppContext();
     const {t} = useTranslation("common");
     const {model, articles = []} = props;
 
@@ -21,13 +22,13 @@ const Index = (props) => {
         return <Error statusCode={404}/>
     }
 
-    return <PageLayout title={model.attributes.name}
+    return <PageLayout title={locale === "en" ? model.attributes.name_en : model.attributes.name}
                        coverImage={getImageUrl(model?.attributes?.thumb.data.attributes.url)}
     >
         <div className="position-relative">
             <Container>
                 <div className="text-center">
-                    <h1 className="">{model.attributes.name} Traveling</h1>
+                    <h1 className="">{locale === "en" ? model.attributes.name_en : model.attributes.name} Traveling</h1>
                 </div>
                 <hr/>
                 <div className="" dangerouslySetInnerHTML={{
