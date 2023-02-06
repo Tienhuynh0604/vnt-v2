@@ -3,7 +3,7 @@ import {Icon} from "@iconify/react";
 import Link from "next/link";
 
 const TourFeatures = ({id = "", features = []}) => {
-    return <div id={id}  className="icon-flex-wrap justify-content-sm-start justify-content-md-between">
+    return <div id={id}  className="icon-flex-wrap justify-content-between">
         {features.map((item, idx) => {
             return (
                 <Link href={item.link ? item.link : `#${id}`} scroll key={`fl_${idx}`}>
