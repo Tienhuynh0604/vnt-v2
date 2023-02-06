@@ -151,7 +151,7 @@ const TicketBusStep = ({
     };
 
     return <div className="booking-form-wrap">
-        {isLoading ? <Skeleton/> : <>
+        {isLoading ? <p><Skeleton count={3}/></p> : <>
             <Form>
                 <Form.Group as={Row} className="mb-3" controlId="bookingDate">
                     <h5>{productData.rawProduct?.attributes.name}</h5>

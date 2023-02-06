@@ -825,7 +825,7 @@ Booking table
   text-align: center;
   box-shadow: 1px 1px 1px #999;
   padding: 0;
-  z-index: 1000000;
+  z-index: 200;
   font-size: 30px;
 }
 
@@ -864,6 +864,17 @@ Booking table
   height: 40px;
   display: block;
   color: $blue;
+}
+
+.btn.btn-floating .badge{
+  font-size: 1rem;
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+}
+
+.disabled-link {
+  pointer-events: none;
 }
 
 @import "Page";

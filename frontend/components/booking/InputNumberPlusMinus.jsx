@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useCallback} from "react";
 import {Button} from "react-bootstrap";
 
 const InputNumberPlusMinus = ({value = 0, onChange, product}) => {

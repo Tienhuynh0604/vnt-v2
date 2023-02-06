@@ -9,10 +9,50 @@ import Link from "next/link";
 import InputNumberPlusMinus from "../../components/booking/InputNumberPlusMinus";
 import {Icon} from "@iconify/react";
 import DecorComponent from "../../components/DecorComponent";
+import moment from "moment";
+import {moneyFormat} from "../../ulti/helper";
 
 const Page = () => {
-    const {carts = [], setCarts} = useAppContext();
+    const {checkOutItems, locale} = useAppContext();
+    console.log("Checkout", checkOutItems);
     const {t} = useTranslation("common");
+
+    const renderItem = (item, idx) => {
+        return <div className='product-item' key={`pi${idx}`}>
+            <h6 className="fw-bold">{item.tour.attributes.title}</h6>
+            <div className="check-out-row">
+                <span className="title">{t("date")}</span>
+                <span className="value">{moment().format("DD/MM/YYYY")}</span>
+            </div>
+            <div className="check-out-row">
+                <span className="title">{t("ticket type")}</span>
+                <span className="value">{item.itemAttrs.join(" ")}</span>
+            </div>
+            <div className="check-out-row">
+                <span className="title">{t("quantity")}</span>
+            </div>
+            {item.priceList.map(pl => {
+                return <div className="check-out-row">
+                    <span className="title">- {t(`ageGroup${pl.ageGroup}`)}</span>
+                    <span className="value">
+                        {pl.quantity} x {moneyFormat(locale === "en" ? pl.usdPrice : pl.price, locale)}
+                    </span>
+                </div>
+            })}
+        </div>
+    };
+
+    const getSubTotal = () => {
+        let total = 0;
+        checkOutItems.map(item => {
+            let childTotal = 0;
+            item.priceList.map(item2 => {
+                childTotal += (locale === 'en' ? item2.usdPrice : item2.price) * item2.quantity;
+            });
+            total += childTotal;
+        });
+        return total;
+    };
 
     return <PageLayout>
         <Container className="check-out-section">
@@ -93,41 +133,22 @@ const Page = () => {
                 <Col xs={12} md={5} className="bg-grey p-3 p-xl-5 rounded-3">
                     <h5 className="text-capitalize">{t("booking summary")}</h5>
                     <hr className="text-grey"/>
-                    <div className='product-item'>
-                        <h6 className="fw-bold">Ha Noi Double - Decker Bus</h6>
-                        <div className="check-out-row">
-                            <span className="title">{t("date")}</span>
-                            <span className="value">30/10/2022</span>
-                        </div>
-                        <div className="check-out-row">
-                            <span className="title">{t("ticket type")}</span>
-                            <span className="value">24 hours</span>
-                        </div>
-                        <div className="check-out-row">
-                            <span className="title">{t("quantity")}</span>
-                        </div>
-                        <div className="check-out-row">
-                            <span className="title">- {t("adult")}</span>
-                            <span className="value">1 x $23.00</span>
-                        </div>
-                        <div className="check-out-row">
-                            <span className="title">- {t("child")}</span>
-                            <span className="value">2 x $23.00</span>
-                        </div>
-                    </div>
+                    {checkOutItems?.map((item, idx) => {
+                        return renderItem(item, idx)
+                    })}
                     <hr className="text-grey dashed"/>
                     <div className='product-item'>
                         <div className="check-out-row">
                             <span className="title">{t("subtotal")}</span>
-                            <span className="value">$60.00</span>
+                            <span className="value">{moneyFormat(getSubTotal(), locale)}</span>
                         </div>
                         <div className="check-out-row">
                             <span className="title">{t("discount")}</span>
-                            <span className="value">$00.00</span>
+                            <span className="value">0.00 $</span>
                         </div>
                         <div className="check-out-row">
                             <span className="title">{t("taxes&fees")}</span>
-                            <span className="value">$00.00</span>
+                            <span className="value">0.00 $</span>
                         </div>
 
                     </div>
@@ -135,7 +156,7 @@ const Page = () => {
                     <div className='product-item'>
                         <div className="check-out-row">
                             <span className="title text-black">{t("total")}</span>
-                            <span className="value text-danger">$60.00</span>
+                            <span className="value text-danger">{moneyFormat(getSubTotal(), locale)}</span>
                         </div>
                     </div>
                     <div className="d-flex justify-content-center mt-5">

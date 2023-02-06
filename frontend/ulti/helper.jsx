@@ -91,7 +91,6 @@ export const callPost = async (urlPath, dataObj, locale = 'en', queryObj = {}) =
 export const callGet = async (urlPath, queryObj, locale, cache = false) => {
     try {
         let baseUrl = getBaseUrl();
-        console.log(baseUrl);
         locale = getLocale(locale);
 
         const query = qs.stringify({
