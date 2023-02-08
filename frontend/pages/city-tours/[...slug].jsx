@@ -159,13 +159,13 @@ const Page = ({model, paymentProduct}) => {
             {model.attributes.tourCustom?.map((item, idx) => {
                 return (
                     <TourFeatureDetail key={`tfd_${idx}`}
-                                       id={slugify(item.title)}
+                                       id={`tfd-${idx+1}`}
                                        name={item.title}>
                         {renderDynamicFeature(item)}
                     </TourFeatureDetail>
                 )
             })}
-            <TourFeatureDetail name={"BEFORE YOU GO"}>
+            <TourFeatureDetail name={"BEFORE YOU GO"} id={"before-you-go"}>
                 {model.attributes.scheduleImage?.data && (<>
                         <p>{t("byg.text1")}</p>
                         <b>{t("byg.text2")}</b>
@@ -187,13 +187,13 @@ const Page = ({model, paymentProduct}) => {
                     ))}
                 </ul>
             </TourFeatureDetail>
-            <TourFeatureDetail name={"MAP"}>
+            <TourFeatureDetail id={"map"} name={"MAP"}>
                 <div className="position-relative py-3">
                     {renderMapImage()}
                 </div>
                 <Button className="text-uppercase">{t("live tracking")}</Button>
             </TourFeatureDetail>
-            <TourFeatureDetail name={"main stops"}>
+            <TourFeatureDetail id={"main-stop"} name={"main stops"}>
                 <MainStopSlider tourId={model.id}/>
             </TourFeatureDetail>
         </Container>

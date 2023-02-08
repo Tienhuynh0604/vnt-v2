@@ -8,6 +8,7 @@ TOUR DETAIL
   top: 0;
   box-shadow: rgb(0 0 0 / 5%) 0px 1px 2px 0px;
   padding-bottom: 10px;
+  z-index: 10;
 }
 
 .tour-detail h1 {
@@ -79,6 +80,7 @@ TOUR DETAIL
   background-color: white;
   overflow-y: hidden;
   overflow-x: auto;
+  padding-top: 0.5rem;
 }
 
 .tour-detail div.icon-flex-wrap .btn-icon {
