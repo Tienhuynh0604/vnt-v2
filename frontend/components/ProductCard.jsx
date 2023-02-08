@@ -93,7 +93,7 @@ const ProductCard = ({destination, item, className}) => {
                         </li>)
                     })}
                 </ul>
-                <Card.Title className="pt-2">
+                <Card.Title className="pt-2 line-1br">
                     <Link href={`/city-tours/${destination?.attributes.slug}/${item.attributes.slug}`}>
                         {item.attributes.tourCard?.title}
                     </Link>
@@ -103,12 +103,15 @@ const ProductCard = ({destination, item, className}) => {
                         {t("Child")}: <strong>{moneyFormat(item.attributes.tourCard?.childPrice, locale)}</strong>
                     </li>
                     <li>
+                        <div className="vr" style={{height: "100%"}}/>
+                    </li>
+                    <li>
                         {t("Adult")}: <strong>{moneyFormat(item.attributes.tourCard?.adultPrice, locale)}</strong>
                     </li>
                 </ul>
                 <ul className="feature">
                     {item.attributes.tourCard?.features.map((f, idx) => {
-                        return <li key={`uhf${idx}`} className='line-2br'>
+                        return <li key={`uhf${idx}`} className={`${idx === 0 ? "line-2br": "line-1br"}`}>
                             <Icon icon={f.iconClass}/> {f.displayText}
                         </li>
                     })}

@@ -10,5 +10,9 @@
   "time_using_24": "24 giờ",
   "time_using_48": "48 giờ",
   "ageGroup1": "Người lớn 13+",
-  "ageGroup2": "Trẻ con (4-12)"
+  "ageGroup2": "Trẻ con (4-12)",
+  "seatGOLD": "Hạng vàng",
+  "seatSILVER": "Hạng bạc",
+  "groupPRIVATE": "Lẻ",
+  "groupGROUP": "Nhóm"
 }

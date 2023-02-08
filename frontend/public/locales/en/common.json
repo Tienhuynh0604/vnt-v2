@@ -10,5 +10,9 @@
   "time_using_24": "24 hours",
   "time_using_48": "48 hours",
   "ageGroup1": "Adult 13+",
-  "ageGroup2": "Child (4-12)"
+  "ageGroup2": "Child (4-12)",
+  "seatGOLD": "Gold",
+  "seatSILVER": "Sliver",
+  "groupPRIVATE": "Private",
+  "groupGROUP": "Group"
 }

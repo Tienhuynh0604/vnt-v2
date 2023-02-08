@@ -134,7 +134,7 @@ const Page = ({model, paymentProduct}) => {
         coverImage={getImageUrl(model?.attributes?.cover.data.attributes.url)}
     >
         <Container className="tour-detail">
-            <div className="control d-flex justify-content-sm-start justify-content-md-between mb-3">
+            <div className="control mb-3">
                 <div>
                     <div>
                         <h1>{model.attributes.title}</h1>
@@ -152,10 +152,10 @@ const Page = ({model, paymentProduct}) => {
                 {renderBookingButton(model.attributes.hideBookingButton)}
             </div>
             <ImageSlider images={model.attributes.images.data}/>
-            <div className='mt-3'>
+            <div className='mt-3 tour-detail-sticky'>
                 <TourFeatures id={"tour-feature"} features={model.attributes?.features}/>
             </div>
-            <hr className="bold"/>
+            <hr className="bold" style={{marginTop: 0}}/>
             {model.attributes.tourCustom?.map((item, idx) => {
                 return (
                     <TourFeatureDetail key={`tfd_${idx}`}

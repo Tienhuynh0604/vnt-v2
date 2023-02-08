@@ -2,50 +2,9 @@ import Slider from "@ant-design/react-slick";
 import {useTranslation} from "next-i18next";
 import Image from "next/image";
 import React, {memo, useEffect, useState} from "react";
-import {imgGalleries} from "../../data/FakeData";
 import {nl2br, SlickNextArrow, SlickPrevArrow} from "../../ulti/appUtil";
 import {Col, Row} from "react-bootstrap";
 import {getImageUrl} from "../../ulti/helper";
-
-const settingDes = {
-    dots: false,
-    arrows: false,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: false,
-};
-
-const settings = {
-    dots: true,
-    arrows: true,
-    infinite: true,
-    speed: 500,
-    lazyLoad: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    nextArrow: <SlickNextArrow/>,
-    prevArrow: <SlickPrevArrow/>,
-    responsive: [
-        {
-            breakpoint: 1024,
-            settings: {
-                slidesToShow: 3,
-                slidesToScroll: 1
-            }
-        },
-        {
-            breakpoint: 480,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-            }
-        }
-    ]
-};
 
 const PopularDestination = ({places = []}) => {
     const {t} = useTranslation("common");
@@ -64,14 +23,55 @@ const PopularDestination = ({places = []}) => {
         })
     }, [slider1, slider2]);
 
+    const settingDes = {
+        dots: false,
+        arrows: false,
+        infinite: true,
+        speed: 500,
+        fade: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: false,
+    };
+    
+    const settings = {
+        dots: true,
+        arrows: true,
+        infinite: true,
+        speed: 500,
+        lazyLoad: true,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        nextArrow: <SlickNextArrow/>,
+        prevArrow: <SlickPrevArrow/>,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ]
+    };
+
     return <Row className="popular-destination">
         <Col xs={12} lg={3}>
             <h1 className="text-capitalize">{t("popular destination")}</h1>
+            <div className="mb-3"/>
             <Slider {...settingDes} ref={slider => slider1 = slider} asNavFor={sliders.nav2}>
                 {places && places.map((item, idx) => (
                     <div key={`si2-${idx}`}>
-                        <h4>{item.title}</h4>
-                        <p>
+                        <h4 className="line-1br">{item.title}</h4>
+                        <p className="line-3br">
                             {item.subTitle}
                         </p>
                     </div>
@@ -86,7 +86,6 @@ const PopularDestination = ({places = []}) => {
                             <Image
                                 alt={item.image.data.attributes.name}
                                 fill
-                                objectFit="cover"
                                 src={getImageUrl(item.image.data.attributes.url)}
                             />
                         </div>

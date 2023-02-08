@@ -12,7 +12,7 @@
   /* The colour used to draw the underline. It should match the colour
    * used in the cap images... unfortunately we can't modify the SVG
    * fill via CSS because it's a background image. */
-  --underline-color: #FBBE00;
+  --underline-color: #fbbe00;
 
   /* We need to know the width of the cap images so that we
    * can position everything on the x axis accordingly. */
@@ -27,26 +27,26 @@
   --underline-padding-x: 0.12em;
 }
 
-$navbar-bg: rgba(250, 250, 250, 0.0);
-$bg-white: #F4F4F4;
-$yellow: #FBBE00;
-$cyan: #0D9FCA;
-$blue: #2D4796;
-$blue-2: #162A66;
-$red: #CF0000;
-$font-family-base: 'Nunito', sans-serif;
-$font-family-monospace: 'Nunito', sans-serif;
-$font-family-sans-serif: 'Nunito', sans-serif;
-$bg-grey: #F4F4F4;
-$grey: #AEAEAE;
-$grey-2: #EDEDED;
-$grey-3: #F2F2F2;
+$navbar-bg: rgba(250, 250, 250, 0);
+$bg-white: #f4f4f4;
+$yellow: #fbbe00;
+$cyan: #0d9fca;
+$blue: #2d4796;
+$blue-2: #162a66;
+$red: #cf0000;
+$font-family-base: "Nunito", sans-serif;
+$font-family-monospace: "Nunito", sans-serif;
+$font-family-sans-serif: "Nunito", sans-serif;
+$bg-grey: #f4f4f4;
+$grey: #aeaeae;
+$grey-2: #ededed;
+$grey-3: #f2f2f2;
 
 /**
 BOOTSTRAPS
  */
 @import "~bootstrap/scss/bootstrap";
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;700&display=swap");
 
 .navbar {
   --bs-navbar-color: rgba(255, 255, 255, 1);
@@ -66,7 +66,7 @@ BOOTSTRAPS
 }
 
 .nav-tabs .nav-item {
-  background-color: #EDEDED;
+  background-color: #ededed;
 }
 
 .nav-tabs .nav-item .nav-link {
@@ -87,7 +87,7 @@ body {
 }
 
 hr {
-  color: #EEEEEE;
+  color: #eeeeee;
   opacity: 1;
 }
 
@@ -121,7 +121,7 @@ hr.dashed {
 }
 
 .header-1 a {
-  color: #6C6C6C;
+  color: #6c6c6c;
   text-decoration: none;
   font-size: 14px;
 }
@@ -161,7 +161,8 @@ hr.dashed {
   font-size: 1.1rem;
 }
 
-.main-navbar .show > .nav-link, .main-navbar .nav-link.active {
+.main-navbar .show > .nav-link,
+.main-navbar .nav-link.active {
   color: $yellow;
 }
 
@@ -207,34 +208,46 @@ Page section
   background-color: $bg-grey;
 }
 
-
-.page-section h1, .h1-title {
+.page-section h1,
+.h1-title {
   color: $blue;
   font-weight: bold;
   z-index: 100;
   display: block;
 }
 
-.page-section h1 span, .h1-title span {
+.page-section h1 span,
+.h1-title span {
   position: relative;
   z-index: 100;
 }
 
-
-.page-section h1, .h1-title {
+.page-section h1,
+.h1-title {
   display: inline;
-  --underline-width-scale: calc(var(--underline-width) / var(--underline-intrinsic-width));
+  --underline-width-scale: calc(
+    var(--underline-width) / var(--underline-intrinsic-width)
+  );
   padding: 0;
   box-decoration-break: clone;
   background-repeat: no-repeat;
-  background-image: linear-gradient(180deg, var(--underline-color), var(--underline-color));
-  background-position-x: calc(var(--underline-cap-width) * var(--underline-width-scale)),
-  0,
-  100%;
+  background-image: linear-gradient(
+    180deg,
+    var(--underline-color),
+    var(--underline-color)
+  );
+  background-position-x: calc(
+      var(--underline-cap-width) * var(--underline-width-scale)
+    ),
+    0, 100%;
   background-position-y: calc(100% - var(--underline-offset-y) * -1);
-  background-size: calc(100% - calc(var(--underline-cap-width) * var(--underline-width-scale) * 2)) calc(var(--underline-width) * 1px),
-  auto calc(var(--underline-width) * 1px),
-  auto calc(var(--underline-width) * 1px);
+  background-size: calc(
+        100% -
+          calc(var(--underline-cap-width) * var(--underline-width-scale) * 2)
+      )
+      calc(var(--underline-width) * 1px),
+    auto calc(var(--underline-width) * 1px),
+    auto calc(var(--underline-width) * 1px);
 }
 
 //.page-section h1 span:after {
@@ -259,18 +272,28 @@ Page section
 .page-section h2.h2-title {
   font-size: 1.5rem;
   display: inline;
-  --underline-width-scale: calc(var(--underline-width) / var(--underline-intrinsic-width));
+  --underline-width-scale: calc(
+    var(--underline-width) / var(--underline-intrinsic-width)
+  );
   padding: 0;
   box-decoration-break: clone;
   background-repeat: no-repeat;
-  background-image: linear-gradient(180deg, var(--underline-color), var(--underline-color));
-  background-position-x: calc(var(--underline-cap-width) * var(--underline-width-scale)),
-  0,
-  100%;
+  background-image: linear-gradient(
+    180deg,
+    var(--underline-color),
+    var(--underline-color)
+  );
+  background-position-x: calc(
+      var(--underline-cap-width) * var(--underline-width-scale)
+    ),
+    0, 100%;
   background-position-y: calc(100% - var(--underline-offset-y) * -1);
-  background-size: calc(100% - calc(var(--underline-cap-width) * var(--underline-width-scale) * 2)) calc(5px),
-  auto calc(1px),
-  auto calc(1px);
+  background-size: calc(
+        100% -
+          calc(var(--underline-cap-width) * var(--underline-width-scale) * 2)
+      )
+      calc(5px),
+    auto calc(1px), auto calc(1px);
 }
 
 /**
@@ -285,10 +308,6 @@ Product card Item
 .product-card-item {
   transition: all 0.5s ease-out;
   width: 330px;
-}
-
-.product-card-item.unique-item {
-  width: 100%;
 }
 
 .product-card-item.hide-product {
@@ -312,20 +331,22 @@ Product card Item
 
 .product-card-item .card .card-title {
   font-weight: bold;
-  font-size: 20px;
+  font-size: 1.25rem;
   line-height: 30px;
+  margin-bottom: 0.5rem;
 }
 
 .product-card-item .card ul.price {
   list-style: none;
   display: flex;
-  justify-content: start;
+  justify-content: space-evenly;
   padding: 0;
+  margin-bottom: 0.5rem;
 }
 
 .product-card-item .card ul.price li {
   padding: 0 10px;
-  border-right: 1px solid $grey;
+  // border-right: 1px solid $grey;
   font-size: 1rem;
 }
 
@@ -347,7 +368,7 @@ Product card Item
   padding: 0;
   color: #444444;
   font-size: 1rem;
-  min-height: 9rem;
+  min-height: 6rem;
 }
 
 .product-card-item .card .btn {
@@ -358,7 +379,12 @@ Product card Item
   text-transform: capitalize;
 }
 
-ul.tag-list-1, ul.tag-list-2 {
+.product-card-item.unique-item {
+  width: 100%;
+}
+
+ul.tag-list-1,
+ul.tag-list-2 {
   position: absolute;
   list-style: none;
   padding: 0;
@@ -394,7 +420,6 @@ ul.tag-list-1 li {
 }
 
 .p-tag-sm {
-
 }
 
 .p-tag-top {
@@ -406,7 +431,8 @@ ul.tag-list-1 li {
 /**
 Slick section
  */
-.slick-prev.app-slick-arrow:before, .slick-next.app-slick-arrow:before {
+.slick-prev.app-slick-arrow:before,
+.slick-next.app-slick-arrow:before {
   font-size: 0;
 }
 
@@ -422,10 +448,13 @@ Slick section
   font-size: 40px;
   width: 40px;
   height: 40px;
-  color: #534B4B;
+  color: #534b4b;
 }
 
-.slick-prev:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus {
+.slick-prev:hover,
+.slick-prev:focus,
+.slick-next:hover,
+.slick-next:focus {
   color: $blue;
 }
 
@@ -518,7 +547,7 @@ ABOUT US SECTION
   background-color: rgba(45, 71, 150, 0.8);
   width: 100%;
   height: 100%;
-  padding: 6rem 0;
+  padding: 3rem 0;
 }
 
 .aboutus-section .social-items a {
@@ -532,8 +561,7 @@ ABOUT US SECTION
 
 .aboutus-section .decor-bg {
   display: block;
-  background: url("/images/about-us.png") center repeat,
-  $yellow;
+  background: url("/images/about-us.png") center repeat, $yellow;
   width: 550px;
   height: 550px;
   margin-top: -130px;
@@ -591,7 +619,7 @@ New item
 .news-item .date {
   flex: 0 0 80px;
   height: 80px;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   text-align: center;
 }
 
@@ -650,7 +678,7 @@ Input number
   width: 24px;
   height: 24px;
   padding: 0;
-  background-color: #F1F1F1;
+  background-color: #f1f1f1;
   color: black;
 }
 
@@ -662,7 +690,8 @@ Input number
 /**
 Booking table
  */
-.booking-table td, .booking-table th {
+.booking-table td,
+.booking-table th {
   padding: 10px 0;
   text-transform: capitalize;
 }
@@ -671,11 +700,13 @@ Booking table
   height: 1px;
 }
 
-.booking-table tbody, .booking-table td {
+.booking-table tbody,
+.booking-table td {
   height: inherit;
 }
 
-.booking-table tr:first-child, .booking-table tr:last-child {
+.booking-table tr:first-child,
+.booking-table tr:last-child {
   border-bottom: 1px solid $grey-2;
 }
 
@@ -779,7 +810,9 @@ Booking table
 
 .accordion {
   --bs-accordion-bg: #fff;
-  --bs-accordion-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, border-radius 0.15s ease;
+  --bs-accordion-transition: color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out, border-radius 0.15s ease;
   --bs-accordion-btn-color: $blue;
   --bs-accordion-btn-focus-border-color: $blue;
   --bs-accordion-active-color: $blue;
@@ -799,16 +832,20 @@ Booking table
   border-top-left-radius: var(--bs-accordion-border-radius);
 }
 
-.accordion-item:first-of-type .accordion-button, .accordion-item:last-of-type .accordion-button.collapsed, .accordion-button:not(.collapsed) {
+.accordion-item:first-of-type .accordion-button,
+.accordion-item:last-of-type .accordion-button.collapsed,
+.accordion-button:not(.collapsed) {
   border-radius: var(--bs-accordion-inner-border-radius);
 }
 
-.accordion-item:first-of-type .accordion-button:not(.collapsed), .accordion-button:not(.collapsed) {
+.accordion-item:first-of-type .accordion-button:not(.collapsed),
+.accordion-button:not(.collapsed) {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-.accordion-button, .accordion-button:focus {
+.accordion-button,
+.accordion-button:focus {
   color: $blue;
   font-weight: bold;
 }
@@ -820,7 +857,7 @@ Booking table
   bottom: 86px;
   right: 24px;
   background-color: $blue;
-  color: #FFF;
+  color: #fff;
   border-radius: 60px;
   text-align: center;
   box-shadow: 1px 1px 1px #999;
@@ -857,16 +894,16 @@ Booking table
   border-right: 1px solid $grey-2;
 }
 
-.booking-contact .booking-contact-item{
+.booking-contact .booking-contact-item {
   text-align: center;
 }
-.booking-contact .booking-contact-item .bci-svg{
+.booking-contact .booking-contact-item .bci-svg {
   height: 40px;
   display: block;
   color: $blue;
 }
 
-.btn.btn-floating .badge{
+.btn.btn-floating .badge {
   font-size: 1rem;
   position: absolute;
   top: -0.5rem;

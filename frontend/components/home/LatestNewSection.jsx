@@ -49,7 +49,7 @@ const LatestNewBlock = ({dataSource = []}) => {
             {dataSource && dataSource.map((item, idx) => {
                 return <div key={`lns_${idx}`} className="news-item">
                     <div className={"thumb"}>
-                        <Link href={`${PATH_NEWS}/${item.attributes.slug}`}>
+                        <Link href={`/${PATH_NEWS}/${item.attributes.slug}`}>
                             {strapiImg(item.attributes.thumb.data, 'w-100 h-100 hvr-grow-rotate', true)}
                         </Link>
                     </div>
@@ -59,7 +59,7 @@ const LatestNewBlock = ({dataSource = []}) => {
                             <div className="month">{formatDate(item.attributes.createdAt, "MM")}</div>
                         </div>
                         <div className="detail">
-                            <Link href={`${PATH_NEWS}/${item.attributes.slug}`}>
+                            <Link href={`/${PATH_NEWS}/${item.attributes.slug}`}>
                                 <h4 className="text-black">{item.attributes.title}</h4>
                             </Link>
                             <div className="des"
@@ -78,7 +78,7 @@ const LatestNewBlock = ({dataSource = []}) => {
             <div className="mb-4"/>
             <LatestSlider/>
             <div className="d-flex justify-content-center mt-3">
-                <Link href={PATH_NEWS}>
+                <Link href={`/${PATH_NEWS}`}>
                     <Button className="text-capitalize" variant="primary">{t("view more")}</Button>
                 </Link>
             </div>

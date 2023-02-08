@@ -13,7 +13,7 @@ const UniqueTourSlider = ({tours = []}) => {
         infinite: true,
         speed: 500,
         lazyLoad: true,
-        slidesToShow: tours.length > 1 ? 2 : 1,
+        slidesToShow: tours.length > 2 ? 3 : tours.length,
         slidesToScroll: 1,
         autoplay: true,
         nextArrow: <SlickNextArrow/>,
@@ -45,7 +45,7 @@ const UniqueTour = ({dataSource = {}, tours = []}) => {
     return <section className="page-section unique-section bg-grey">
         <Container>
             <Row>
-                <Col xs={12} md={5} className="pe-4">
+                <Col xs={12} md={5} lg={4} className="pe-4">
                     {renderImage(hotFeature.image)}
                     <h2 className="mt-4">{hotFeature.subTitle}</h2>
                     <h1 className="mb-4"><span>{hotFeature.title}</span></h1>
@@ -53,7 +53,7 @@ const UniqueTour = ({dataSource = {}, tours = []}) => {
                         __html: hotFeature.content
                     }}/>
                 </Col>
-                <Col xs={12} md={7} style={{zIndex: 100}}>
+                <Col xs={12} md={7} lg={8} style={{zIndex: 100}}>
                     <UniqueTourSlider tours={tours}/>
                 </Col>
             </Row>

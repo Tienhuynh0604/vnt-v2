@@ -10,9 +10,9 @@ import moment from "moment";
 const Footer = () => {
     const {common = {}} = useAppContext();
     return <footer className="footer-section">
-        <div className="bg-primary py-5">
+        <div className="bg-primary py-3 py-md-4">
             <Container>
-                <Row className="g-3">
+                <Row className="gy-2">
                     {/*<Col xs={12} className="pb-5">*/}
                     {/*    {renderImage(common.logoFooter)}*/}
                     {/*</Col>*/}
@@ -20,7 +20,7 @@ const Footer = () => {
                         {renderImage(common.logoFooter)}
                     </Col>
                     <Col xs={12} md={3}>
-                        <h4 className="mb-4">Contact us</h4>
+                        <h4 className="">Contact us</h4>
                         <ul className="list-unstyled">
                             <li className={"mb-2"} key={`f_c_add`}>
                                 <Icon icon="ion:map"/> {common.address}
@@ -33,7 +33,7 @@ const Footer = () => {
                             </li>}
                         </ul>
                     </Col>
-                    <Col xs={12} md={3}>
+                    <Col xs={6} md={3}>
                         <h4>Information</h4>
                         <ul className="list-unstyled">
                             <li>
@@ -53,8 +53,8 @@ const Footer = () => {
                             </li>
                         </ul>
                     </Col>
-                    <Col xs={12} md={3}>
-                        <h4 className="mb-3">Follow us</h4>
+                    <Col xs={6} md={3}>
+                        <h4 className="">Follow us</h4>
                         <ul className="list-inline list-unstyled" style={{fontSize: "2rem"}}>
                             {common.socials.map(item => (
                                 <li className="list-inline-item mb-2" key={`f_s_i${item.id}`}>

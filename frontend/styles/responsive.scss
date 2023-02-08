@@ -4,11 +4,55 @@ MOBILE FIX
 $section-padding-height-sm: 40px;
 $section-padding-height-md: 50px;
 
+@include media-breakpoint-up(lg) {
+  .product-card-item.unique-item .card .card-img-top {
+    height: 10rem;
+  }
+
+  .product-card-item.unique-item .p-tag {
+    padding: 4px 10px;
+    font-size: 0.7rem;
+  }
+
+  .product-card-item.unique-item .card ul.feature {
+    min-height: 5.5rem;
+  }
+
+  .product-card-item.unique-item .card .card-title {
+    font-size: 1rem;
+    line-height: 24px;
+  }
+
+  .product-card-item.unique-item .card ul.price{
+    justify-content: space-evenly;
+  }
+
+  .product-card-item.unique-item .card ul.price strong{
+    display: block;
+  }
+
+  .product-card-item.unique-item .card ul.price,
+  .product-card-item.unique-item .card ul.feature {
+    margin-bottom: 0.5rem;
+  }
+
+  .product-card-item.unique-item .card ul.price li,
+  .product-card-item.unique-item .card ul.feature {
+    font-size: 0.9rem;
+  }
+
+  .product-card-item.unique-item .card .btn {
+    width: 95px;
+    min-width: 88px;
+    padding: 5px 4px;
+    font-size: 0.9rem;
+  }
+}
+
 /**
 IPAD landscape
  */
 @include media-breakpoint-down(xl) {
-
   :root {
     --underline-width: 5;
   }
@@ -35,7 +79,9 @@ IPAD landscape
     padding: 5px 20px;
   }
 
-  .page-section h1, .page-section .h1, .h1-title {
+  .page-section h1,
+  .page-section .h1,
+  .h1-title {
     font-size: 1.7rem;
   }
 
@@ -76,7 +122,8 @@ IPAD landscape
     font-size: 1.5rem;
   }
 
-  .popular-destination-item, .main-stops .main-stops-item {
+  .popular-destination-item,
+  .main-stops .main-stops-item {
     width: 210px;
     height: 140px;
   }
@@ -98,11 +145,13 @@ IPAD landscape
     padding: 10px;
   }
 
-  .tour-detail .image-gallery-slide-wrapper.left, .image-gallery-slide-wrapper.right {
+  .tour-detail .image-gallery-slide-wrapper.left,
+  .image-gallery-slide-wrapper.right {
     width: calc(100% - 210px);
   }
 
-  .tour-detail .image-gallery-thumbnails-wrapper.left, .image-gallery-thumbnails-wrapper.right {
+  .tour-detail .image-gallery-thumbnails-wrapper.left,
+  .image-gallery-thumbnails-wrapper.right {
     width: 200px;
   }
 
@@ -115,7 +164,6 @@ IPAD landscape
 IPAD air
  */
 @include media-breakpoint-down(lg) {
-
   .main-navbar ul {
     background-color: rgba(0, 0, 0, 0.5);
   }
@@ -175,7 +223,8 @@ IPAD air
     height: 150px;
   }
 
-  .popular-destination-item, .main-stops .main-stops-item {
+  .popular-destination-item,
+  .main-stops .main-stops-item {
     width: 210px;
     height: 140px;
   }
@@ -184,11 +233,13 @@ IPAD air
     width: 100%;
   }
 
-  .tour-detail .image-gallery-slide-wrapper.left, .image-gallery-slide-wrapper.right {
+  .tour-detail .image-gallery-slide-wrapper.left,
+  .image-gallery-slide-wrapper.right {
     width: calc(100% - 110px);
   }
 
-  .tour-detail .image-gallery-thumbnails-wrapper.left, .image-gallery-thumbnails-wrapper.right {
+  .tour-detail .image-gallery-thumbnails-wrapper.left,
+  .image-gallery-thumbnails-wrapper.right {
     width: 100px;
   }
 
@@ -242,7 +293,6 @@ IPAD portrait, mobile landscape
 Mobile protrail
  */
 @include media-breakpoint-down(sm) {
-
   .navbar-brand img {
     width: auto;
     height: 70px;
@@ -336,21 +386,22 @@ Mobile protrail
     height: 200px;
   }
 
-  .title-section .cover .nav-block h1, .title-section .cover .nav-block .h1 {
+  .title-section .cover .nav-block h1,
+  .title-section .cover .nav-block .h1 {
     font-size: 1.5rem;
   }
 
-  .booking-contact{
+  .booking-contact {
     border: none;
   }
 
-  .booking-contact .booking-contact-item{
+  .booking-contact .booking-contact-item {
     display: flex;
     column-gap: 0.5rem;
     align-items: center;
   }
 
-  .booking-contact .booking-contact-item .bci-svg{
+  .booking-contact .booking-contact-item .bci-svg {
     height: 30px;
   }
 }

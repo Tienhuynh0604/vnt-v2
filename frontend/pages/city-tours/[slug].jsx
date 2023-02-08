@@ -38,12 +38,12 @@ const Index = (props) => {
             </Container>
             <DecorComponent/>
         </div>
-        <div className="bg-grey py-sm-4 py-lg-5">
+        <div className="bg-grey py-5">
             <Container>
                 <PopularDestination places={model?.attributes?.places}/>
             </Container>
         </div>
-        <div className="py-sm-4 py-lg-5">
+        <div className="py-5">
             <Container>
                 <h1 className="text-capitalize">{t("post about")} {model?.attributes?.name}</h1>
                 <Row>
