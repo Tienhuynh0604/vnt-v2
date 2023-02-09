@@ -133,3 +133,14 @@ TOUR DETAIL
 .tour-detail .image-gallery-thumbnail {
   width: 300px;
 }
+
+.booking-bar{
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+}
+
+.booking-bar .btn.btn-book{
+  width: 100%;
+  border-radius: 0;
+}

@@ -31,12 +31,12 @@ export const createCanonicalUrl = (path, req) => {
     return `${origin}${path}`;
 };
 
-export const createSeoFromFaq = (req, originalSeo, basePath = null, model = null) => {
+export const createSeoFromFaq = (req, originalSeo, basePath = null, model = null, locale = "en") => {
     let seo = originalSeo;
     if (!model || !req) {
         return seo;
     }
-    seo.canonicalURL = createCanonicalUrl(`${basePath ? basePath : ""}/${model.id}`, req);
+    seo.canonicalURL = createCanonicalUrl(`/${locale}${basePath ? basePath : ""}/faq/${model.id}`, req);
     if (model.seo) {
         return {
             ...model.seo,
@@ -49,12 +49,12 @@ export const createSeoFromFaq = (req, originalSeo, basePath = null, model = null
     return seo;
 };
 
-export const createSeoFromCategory = (req, originalSeo, basePath = null, model = null) => {
-    let seo = originalSeo;
+export const createSeoFromCategory = (req, basePath = null, model = null, locale = "en") => {
+    let seo = {};
     if (!model || !req) {
         return seo;
     }
-    seo.canonicalURL = createCanonicalUrl(`${basePath ? basePath : ""}/${model.attributes.slug}`, req);
+    seo.canonicalURL = createCanonicalUrl(`/${locale}${basePath ? basePath : ""}/${model.attributes.slug}`, req);
     if (model.seo) {
         return {
             ...model.seo,
@@ -62,8 +62,8 @@ export const createSeoFromCategory = (req, originalSeo, basePath = null, model =
         };
     }
 
-    seo.metaTitle = `${model.attributes.name}`;
-    seo.metaDescription = model.attributes.description ? model.attributes.description : originalSeo.metaDescription;
+    seo.metaTitle = `${locale === "en" ? model.attributes.name_en : model.attributes.name}`;
+    seo.metaDescription = `${locale === "en" ? model.attributes.shortDescription_en : model.attributes.shortDescription}`;
     if (model.attributes.thumb && model.attributes.thumb.data) {
         seo.metaImage = model.attributes.thumb;
     }
@@ -71,7 +71,11 @@ export const createSeoFromCategory = (req, originalSeo, basePath = null, model =
     return seo;
 };
 
-export const createSeoFromArticle = (req, originalSeo, basePath = null, model = null) => {
+export const createSeoFromTour = (req, originalSeo, basePath = null, model = null, locale = "en") => {
+
+};
+
+export const createSeoFromArticle = (req, originalSeo, basePath = null, model = null, locale = "en") => {
     let seo = originalSeo;
     if (model.categories && model.categories.data.length > 0) {
         seo.canonicalURL = createCanonicalUrl(
@@ -79,7 +83,7 @@ export const createSeoFromArticle = (req, originalSeo, basePath = null, model = 
             req
         );
     } else {
-        seo.canonicalURL = createCanonicalUrl(`${basePath}/single/${model.slug}`, req);
+        seo.canonicalURL = createCanonicalUrl(`/${locale}${basePath}/${model.slug}`, req);
     }
 
     if (model.seo) {

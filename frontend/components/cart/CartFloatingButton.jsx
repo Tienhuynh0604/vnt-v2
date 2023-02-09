@@ -7,6 +7,7 @@ const CartFloatingButton = () => {
 
     return <>
         <FloatingButton icon={"material-symbols:shopping-cart-outline"}
+                        className="circle"
                         badgeNum={cartModal.items.length}
                         onClick={() => setCartModal(prevState => ({
                             ...prevState,

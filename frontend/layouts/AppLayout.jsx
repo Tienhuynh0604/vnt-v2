@@ -1,12 +1,8 @@
 import React, {useEffect, useState} from "react";
-import Seo from "../components/Seo";
-import MainLayout from "./MainLayout";
 import {createContext, useContext} from 'react';
 import FacebookChatScript from "../components/AppScript/FacebookChatScript";
 import GaScript from "../components/AppScript/GaScript";
-import {isVisible} from "bootstrap/js/src/util";
 import {ToastContainer} from "react-toastify";
-import FloatingButton from "../components/FloatingButton";
 import CartFloatingButton from "../components/cart/CartFloatingButton";
 
 const AppContext = createContext({});

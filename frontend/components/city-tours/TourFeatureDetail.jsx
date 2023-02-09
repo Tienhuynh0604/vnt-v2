@@ -7,7 +7,7 @@ const TourFeatureDetail = ({name, id, children}) => {
     const {t} = useTranslation("common");
 
     return <div id={id}>
-        <Row className={"py-3"}>
+        <Row className={"py-2"}>
             <Col xs={12} md={3}>
                 <h3 className="text-uppercase">{t(name)}</h3>
             </Col>

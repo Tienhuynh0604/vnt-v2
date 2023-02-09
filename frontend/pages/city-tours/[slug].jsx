@@ -10,8 +10,10 @@ import PopularDestination from "../../components/city-tours/PopularDestination";
 import {Icon} from "@iconify/react";
 import Link from "next/link";
 import Error from "../_error";
-import {PATH_NEWS} from "../../ulti/appConst";
+import {PATH_CITY_TOURS, PATH_NEWS} from "../../ulti/appConst";
 import {useAppContext} from "../../layouts/AppLayout";
+import {createSeoFromCategory} from "../../ulti/appUtil";
+import App from "next/app";
 
 const Index = (props) => {
     const {locale} = useAppContext();
@@ -45,7 +47,7 @@ const Index = (props) => {
         </div>
         <div className="py-5">
             <Container>
-                <h1 className="text-capitalize">{t("post about")} {model?.attributes?.name}</h1>
+                <h1 className="text-capitalize">{t("post about")} {locale === "en" ? model.attributes.name_en : model.attributes.name}</h1>
                 <Row>
                     {articles.map((item, idx) => (
                         <Col xs={12} md={4}>
@@ -64,12 +66,13 @@ const Index = (props) => {
 };
 
 export const getServerSideProps = async (context) => {
-    const {locale, query, req} = context;
+    const {locale, query, req, res} = context;
     const {slug} = query;
     console.log(`City tours: `, slug, locale);
     let model = null;
     let articles = [];
     let tours = [];
+    let seoCustom = {};
     try {
         const res = await callGet("/destinations", {
             filters: {
@@ -105,6 +108,8 @@ export const getServerSideProps = async (context) => {
             }
         });
         articles = res2.data;
+
+        seoCustom = createSeoFromCategory(req , `/${PATH_CITY_TOURS}`, model, locale);
     } catch (e) {
         console.error(e);
     }
@@ -114,6 +119,7 @@ export const getServerSideProps = async (context) => {
             model,
             articles,
             tours,
+            seoCustom,
             ...(await serverSideTranslations(locale, ['common'])),
         },
     }

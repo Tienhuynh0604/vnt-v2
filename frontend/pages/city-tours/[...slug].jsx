@@ -66,7 +66,7 @@ const Page = ({model, paymentProduct}) => {
         </ol>
     };
 
-    const renderBookingButton = (hideBookingButton) => {
+    const renderBookingButton = (hideBookingButton, btnClass = "") => {
         if (!hideBookingButton) {
             return <Button type="button"
                            onClick={() => setBookingModal({
@@ -76,7 +76,7 @@ const Page = ({model, paymentProduct}) => {
                                    id: model.id
                                }
                            })}
-                           className="btn btn-primary btn-book">
+                           className={`btn btn-primary btn-book ${btnClass}`}>
                 {t('Book now')}
             </Button>
         } else {
@@ -88,7 +88,7 @@ const Page = ({model, paymentProduct}) => {
                                    productName: model.attributes.title
                                });
                            }}
-                           className="btn btn-primary btn-book">
+                           className={`btn btn-primary btn-book ${btnClass}`}>
                 {t("Contact us")}
             </Button>
         }
@@ -123,11 +123,13 @@ const Page = ({model, paymentProduct}) => {
         )
     };
 
-    return <PageLayout
+    return <><PageLayout
         title={model.attributes.title}
         breadcrumbs={[
             {
-                title: model.attributes?.destination?.data.attributes.name,
+                title: locale === "en" ? model.attributes?.destination?.data.attributes.name_en
+                    : model.attributes?.destination?.data.attributes.name
+                ,
                 link: `/city-tours/${model.attributes?.destination?.data.attributes.slug}`
             }
         ]}
@@ -149,7 +151,7 @@ const Page = ({model, paymentProduct}) => {
                         {renderPrices()}
                     </nav>
                 </div>
-                {renderBookingButton(model.attributes.hideBookingButton)}
+                {renderBookingButton(model?.attributes?.hideBookingButton)}
             </div>
             <ImageSlider images={model.attributes.images.data}/>
             <div className='mt-3 tour-detail-sticky'>
@@ -159,7 +161,7 @@ const Page = ({model, paymentProduct}) => {
             {model.attributes.tourCustom?.map((item, idx) => {
                 return (
                     <TourFeatureDetail key={`tfd_${idx}`}
-                                       id={`tfd-${idx+1}`}
+                                       id={`tfd-${idx + 1}`}
                                        name={item.title}>
                         {renderDynamicFeature(item)}
                     </TourFeatureDetail>
@@ -187,18 +189,22 @@ const Page = ({model, paymentProduct}) => {
                     ))}
                 </ul>
             </TourFeatureDetail>
-            <TourFeatureDetail id={"map"} name={"MAP"}>
+            {model.attributes.mapImage?.data && <TourFeatureDetail id={"map"} name={"MAP"}>
                 <div className="position-relative py-3">
                     {renderMapImage()}
                 </div>
                 <Button className="text-uppercase">{t("live tracking")}</Button>
-            </TourFeatureDetail>
+            </TourFeatureDetail>}
             <TourFeatureDetail id={"main-stop"} name={"main stops"}>
                 <MainStopSlider tourId={model.id}/>
             </TourFeatureDetail>
         </Container>
         <DecorComponent/>
-    </PageLayout>;
+    </PageLayout>
+        <div className="booking-bar d-block d-md-none">
+            {renderBookingButton(model?.attributes.hideBookingButton, "")}
+        </div>
+    </>
 };
 
 export const getServerSideProps = async (context) => {
@@ -222,7 +228,7 @@ export const getServerSideProps = async (context) => {
                     fields: ['name', 'className', 'slug']
                 },
                 destination: {
-                    fields: ['name', 'slug']
+                    fields: ['name', 'name_en', 'slug']
                 },
                 brochure: "*",
                 cover: imagePopulate(),

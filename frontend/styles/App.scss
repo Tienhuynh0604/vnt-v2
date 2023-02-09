@@ -80,10 +80,12 @@ BOOTSTRAPS
 
 html {
   scroll-behavior: smooth;
+  height: 100%;
 }
 
 body {
   background-color: white;
+  height: 100%;
 }
 
 hr {
@@ -226,28 +228,27 @@ Page section
 .h1-title {
   display: inline;
   --underline-width-scale: calc(
-    var(--underline-width) / var(--underline-intrinsic-width)
+          var(--underline-width) / var(--underline-intrinsic-width)
   );
   padding: 0;
   box-decoration-break: clone;
   background-repeat: no-repeat;
   background-image: linear-gradient(
-    180deg,
-    var(--underline-color),
-    var(--underline-color)
+                  180deg,
+                  var(--underline-color),
+                  var(--underline-color)
   );
   background-position-x: calc(
-      var(--underline-cap-width) * var(--underline-width-scale)
-    ),
-    0, 100%;
+          var(--underline-cap-width) * var(--underline-width-scale)
+  ),
+  0, 100%;
   background-position-y: calc(100% - var(--underline-offset-y) * -1);
   background-size: calc(
-        100% -
+          100% -
           calc(var(--underline-cap-width) * var(--underline-width-scale) * 2)
-      )
-      calc(var(--underline-width) * 1px),
-    auto calc(var(--underline-width) * 1px),
-    auto calc(var(--underline-width) * 1px);
+  ) calc(var(--underline-width) * 1px),
+  auto calc(var(--underline-width) * 1px),
+  auto calc(var(--underline-width) * 1px);
 }
 
 //.page-section h1 span:after {
@@ -273,27 +274,26 @@ Page section
   font-size: 1.5rem;
   display: inline;
   --underline-width-scale: calc(
-    var(--underline-width) / var(--underline-intrinsic-width)
+          var(--underline-width) / var(--underline-intrinsic-width)
   );
   padding: 0;
   box-decoration-break: clone;
   background-repeat: no-repeat;
   background-image: linear-gradient(
-    180deg,
-    var(--underline-color),
-    var(--underline-color)
+                  180deg,
+                  var(--underline-color),
+                  var(--underline-color)
   );
   background-position-x: calc(
-      var(--underline-cap-width) * var(--underline-width-scale)
-    ),
-    0, 100%;
+          var(--underline-cap-width) * var(--underline-width-scale)
+  ),
+  0, 100%;
   background-position-y: calc(100% - var(--underline-offset-y) * -1);
   background-size: calc(
-        100% -
+          100% -
           calc(var(--underline-cap-width) * var(--underline-width-scale) * 2)
-      )
-      calc(5px),
-    auto calc(1px), auto calc(1px);
+  ) calc(5px),
+  auto calc(1px), auto calc(1px);
 }
 
 /**
@@ -811,8 +811,8 @@ Booking table
 .accordion {
   --bs-accordion-bg: #fff;
   --bs-accordion-transition: color 0.15s ease-in-out,
-    background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
-    box-shadow 0.15s ease-in-out, border-radius 0.15s ease;
+  background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+  box-shadow 0.15s ease-in-out, border-radius 0.15s ease;
   --bs-accordion-btn-color: $blue;
   --bs-accordion-btn-focus-border-color: $blue;
   --bs-accordion-active-color: $blue;
@@ -866,6 +866,11 @@ Booking table
   font-size: 30px;
 }
 
+.btn.btn-floating:hover {
+  background-color: $yellow;
+  border-color: $yellow;
+}
+
 .line-3br {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -897,6 +902,7 @@ Booking table
 .booking-contact .booking-contact-item {
   text-align: center;
 }
+
 .booking-contact .booking-contact-item .bci-svg {
   height: 40px;
   display: block;
@@ -912,6 +918,46 @@ Booking table
 
 .disabled-link {
   pointer-events: none;
+}
+
+/* Circle */
+.circle {
+}
+
+.circle:before,
+.circle:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border: 1px solid $blue;
+  border-radius: 50%;
+}
+
+
+.circle:before {
+  animation: ripple 2s linear infinite;
+}
+
+.circle:after {
+  animation: ripple 2s linear 1s infinite;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
 }
 
 @import "Page";

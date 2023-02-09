@@ -2,24 +2,30 @@ import Head from "next/head";
 import React from "react";
 import {getImageUrl} from "../ulti/helper";
 
-const Seo = ({seo}) => {
+const Seo = ({seo = {}, seoCustom = {}}) => {
     // console.log("SEO", seo)
+    const structData1 = seo.structuredData ? seo.structuredData : [];
+    const structData2 = seoCustom.structuredData ? seoCustom.structuredData : [];
+    const structuredData = [
+        ...structData1,
+        ...structData2
+    ];
 
-    if (!seo) {
-        return <></>;
-    }
+    const finalSeo = {
+        ...seo,
+        ...seoCustom,
+    };
 
     const {
         metaTitle = "Seo default",
         metaDescription = "Seo default",
         metaRobots = "index, follow",
         keywords = "",
-        structuredData,
         metaViewport = "width=device-width, initial-scale=1",
         canonicalURL = "",
         metaImage,
         metaSocial
-    } = seo;
+    } = finalSeo;
 
     const metaImageData = metaImage && metaImage.data ? metaImage.data.attributes : null;
 
@@ -78,6 +84,9 @@ const Seo = ({seo}) => {
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(structuredData)}}/>
         }
         {SocialMetaTags().map(item => item)}
+        <link rel="apple-touch-icon" sizes="192x192" href="/favicon-192.png"/>
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"/>
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png"/>
     </Head>;
 };
 
