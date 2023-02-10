@@ -66,6 +66,22 @@
         "preset": "standard"
       },
       "customField": "plugin::ckeditor.CKEditor"
+    },
+    "address": {
+      "type": "string"
+    },
+    "address_en": {
+      "type": "string"
+    },
+    "contacts": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.list-contact"
+    },
+    "contacts_en": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.list-contact"
     }
   }
 }
