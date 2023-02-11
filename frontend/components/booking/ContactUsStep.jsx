@@ -1,11 +1,11 @@
 import React, {memo, useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {Button, Col, Form, Row, Tab, Table, Tabs} from "react-bootstrap";
-import Link from "next/link";
 import {useAppContext} from "../../layouts/AppLayout";
 import {toast} from "react-toastify";
 import {Icon} from "@iconify/react";
 import {renderContactItem} from "../../ulti/appUtil";
+import ContactForm from "../form/ContactForm";
 
 const ContactUsStep = ({productName, destinationId}) => {
     const {t} = useTranslation("common");
@@ -26,7 +26,6 @@ const ContactUsStep = ({productName, destinationId}) => {
         setBookingModal({
             isVisible: false,
         });
-
         toast(t("Đăng ký thông tin thành công"));
     };
 
@@ -99,44 +98,90 @@ const ContactUsStep = ({productName, destinationId}) => {
                             </div>
                         ) : ""}
                     </h5>
-                    <Form className="mt-2" onSubmit={() => onSendContact()}>
-                        <Row>
-                            <Col xs={12} md={12}>
-                                <Form.Group className="mb-3" controlId="formFullname">
-                                    <Form.Control type="text" placeholder={t("Nhập Họ và tên")}/>
-                                </Form.Group>
-                            </Col>
-                            <Col xs={12} md={6}>
-                                <Form.Group className="mb-3" controlId="formEmail">
-                                    <Form.Control type="email" placeholder={t("Nhập email")}/>
-                                </Form.Group>
-                            </Col>
-                            <Col xs={12} md={6}>
-                                <Form.Group className="mb-3" controlId="formPhone">
-                                    <Form.Control type="text" placeholder={t("Nhập số điện thoại")}/>
-                                </Form.Group>
-                            </Col>
-                            <Col xs={12}>
-                                <Form.Group className="mb-3" controlId="formMessage">
-                                    <Form.Control as="textarea"
+                    <ContactForm className="mt-2" initialValue={
+                        {
+                            message: `${t("form.contact.product")} "${productName}"`
+                        }
+                    }>
+                        {(handleSubmit, handleChange, values, touched, isValid, errors, isSuccess, loading, isSubmitting, handleBlur2) => (
+                            <Row style={{rowGap: "0.5rem"}}>
+                                <Col xs={12} md={12}>
+                                    <Form.Group className="" controlId="formFullname">
+                                        <Form.Control name="fullname"
+                                                      value={values.fullname}
+                                                      onChange={handleChange}
+                                                      onBlur={handleBlur2}
+                                                      required
+                                                      size="sm"
+                                                      type="text"
+                                                      isInvalid={!!errors.fullname}
+                                                      placeholder={`${t("form.plh1")} ${t("fullname")}`}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.fullname}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+                                </Col>
+                                <Col xs={12} md={6}>
+                                    <Form.Control name="email"
+                                                  value={values.email}
+                                                  onChange={handleChange}
+                                                  onBlur={handleBlur2}
+                                                  required
+                                                  size="sm"
+                                                  type="text"
+                                                  isInvalid={!!errors.email}
+                                                  placeholder={`${t("form.plh1")} ${t("email")}`}
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {errors.email}
+                                    </Form.Control.Feedback>
+                                </Col>
+                                <Col xs={12} md={6}>
+                                    <Form.Control name={"phone"}
+                                                  value={values.phone}
+                                                  onChange={handleChange}
+                                                  onBlur={handleBlur2}
+                                                  required
+                                                  size="sm"
+                                                  type="text"
+                                                  isInvalid={!!errors.phone}
+                                                  placeholder={`${t("form.plh1")} ${t("phone")}`}
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {errors.phone}
+                                    </Form.Control.Feedback>
+                                </Col>
+                                <Col xs={12}>
+                                    <Form.Control name="message"
+                                                  as="textarea"
                                                   rows={5}
-                                                  value={`Tôi muốn tìm hiểu thông tin về sản phẩm "${productName}"`}
-                                                  placeholder={t("Nhập nội dung")}/>
-                                </Form.Group>
-                            </Col>
-                            <Col xs={12} className="d-flex justify-content-end">
-                                <Button variant="secondary"
-                                        onClick={() => onCancel()}
-                                        className="text-capitalize me-3">
-                                    {t("Cancel")}
-                                </Button>
-                                <Button variant="primary"
-                                        type="submit" className="text-capitalize">
-                                    {t("send")}
-                                </Button>
-                            </Col>
-                        </Row>
-                    </Form>
+                                                  value={values.message}
+                                                  onChange={handleChange}
+                                                  onBlur={handleBlur2}
+                                                  required size="sm"
+                                                  type="text"
+                                                  isInvalid={!!errors.message}
+                                                  placeholder={`${t("form.plh1")} ${t("message")}`}
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {errors.message}
+                                    </Form.Control.Feedback>
+                                </Col>
+                                <Col xs={12} className="d-flex justify-content-end">
+                                    <Button variant="secondary"
+                                            onClick={() => onCancel()}
+                                            className="text-capitalize me-3">
+                                        {t("Cancel")}
+                                    </Button>
+                                    <Button variant="primary"
+                                            type="submit" className="text-capitalize">
+                                        {t("send")}
+                                    </Button>
+                                </Col>
+                            </Row>
+                        )}
+                    </ContactForm>
                 </Col>
             </Row>
 

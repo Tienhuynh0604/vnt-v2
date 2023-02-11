@@ -6,7 +6,7 @@ import {createContact} from "../../services/ContactService";
 import {useTranslation} from "react-i18next";
 import ReCAPTCHA from "react-google-recaptcha";
 
-const ContactForm = ({children, className}) => {
+const ContactForm = ({children, className, initialValue}) => {
 
     const reCaptchaRef = createRef();
     const {t} = useTranslation("common");
@@ -18,7 +18,7 @@ const ContactForm = ({children, className}) => {
             .min(3, t("form.inValid.min3char"))
             .required(t("form.inValid.name")),
         phone: Yup.string()
-            // .matches(/^(((\+|)84)|0)((3|5|7|8|9){1})([0-9]{8})\b$/, t("form.inValid.phone"))
+        // .matches(/^(((\+|)84)|0)((3|5|7|8|9){1})([0-9]{8})\b$/, t("form.inValid.phone"))
             .required(t("form.required.input")),
         email: Yup.string()
             .email(t("form.required.email"))
@@ -48,6 +48,7 @@ const ContactForm = ({children, className}) => {
                        phone: '',
                        email: '',
                        message: '',
+                       ...initialValue
                    }}
                    validateOnBlur={false}
                    className={`${className}`}
