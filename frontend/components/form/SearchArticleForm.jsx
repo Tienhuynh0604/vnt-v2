@@ -13,6 +13,8 @@ const SearchArticleForm = ({children, className}) => {
     const [loading, setLoading] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
 
+    console.log(process.env.NEXT_PUBLIC_RECAPTCHA_CLIENT);
+
     const schema = Yup.object().shape({
         s: Yup.string()
             .min(3, t("form.inValid.min3char"))
