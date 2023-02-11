@@ -66,6 +66,19 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::tour.tour"
+    },
+    "cartId": {
+      "type": "uid"
+    },
+    "destinations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::destination.destination"
+    },
+    "payment_vns_payment_products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "plugin::payment-vns.payment-product"
     }
   }
 }
