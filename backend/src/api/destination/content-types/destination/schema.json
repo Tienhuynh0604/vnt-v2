@@ -76,12 +76,12 @@
     "contacts": {
       "type": "component",
       "repeatable": true,
-      "component": "common.list-contact"
+      "component": "common.social-item"
     },
     "contacts_en": {
       "type": "component",
       "repeatable": true,
-      "component": "common.list-contact"
+      "component": "common.social-item"
     }
   }
 }
