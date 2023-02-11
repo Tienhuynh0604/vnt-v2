@@ -31,7 +31,8 @@ const ProductCard = ({destination, item, className}) => {
                                setBookingModal({
                                    isVisible: true,
                                    bookingType: "contact",
-                                   productName: item.attributes.tourCard?.title
+                                   productName: item.attributes.tourCard?.title,
+                                   destinationId: destination?.id,
                                });
                            }}
                            variant={'primary'}>

@@ -34,6 +34,8 @@ const AppLayout = (props) => {
         }))
     };
 
+    const [currentDes, setCurrentDes] = useState(null);
+
     let sharedState = {
         headerMenus,
         footerMenus,
@@ -48,6 +50,8 @@ const AppLayout = (props) => {
         checkOutItems,
         setCheckOutItems,
         openContactBooking,
+        setCurrentDes,
+        currentDes
     };
 
     useEffect(() => {

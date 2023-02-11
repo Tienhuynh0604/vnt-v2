@@ -1,15 +1,26 @@
-import React, {memo, useState} from "react";
+import React, {memo, useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {Button, Col, Form, Row, Tab, Table, Tabs} from "react-bootstrap";
 import Link from "next/link";
 import {useAppContext} from "../../layouts/AppLayout";
 import {toast} from "react-toastify";
 import {Icon} from "@iconify/react";
+import {renderContactItem} from "../../ulti/appUtil";
 
-const ContactUsStep = ({productName}) => {
+const ContactUsStep = ({productName, destinationId}) => {
     const {t} = useTranslation("common");
     const [selectedTab, setSelectedTab] = useState("contact-us");
-    const {common, setBookingModal} = useAppContext();
+    const [destination, setDestination] = useState(null);
+    const {common, setBookingModal, destinations} = useAppContext();
+
+    useEffect(() => {
+        const idx = destinations.findIndex(
+            item => item.id === destinationId
+        );
+        if (idx >= 0) {
+            setDestination(destinations[idx]);
+        }
+    }, [destinationId]);
 
     const onSendContact = () => {
         setBookingModal({
@@ -65,12 +76,28 @@ const ContactUsStep = ({productName}) => {
                 </Col>
                 <Col xs={12} md={8}>
                     <h5 className=''>
-                        {t("Liên hệ ngay với chúng tôi")}
+                        {t("contact.t1")}
                         <br/>
                         <small className="text-muted" style={{fontSize: "13px"}}>
-                            Bạn cần giải đáp thắc mắc, hoặc tìm hiểu thêm về các tour du lịch của chúng tôi. Bạn có thể
-                            liên hệ với chúng tôi ở đây. Chúng rất vui lòng được hỗ trợ bạn
+                            {t("contact.t2")}
                         </small>
+                        {destination ? (
+                            <div className="d-flex align-items-center justify-content-start">
+                                <strong style={{fontSize: "1rem", marginRight: "0.5rem"}}>
+                                    {t("contactUs")}:
+                                </strong>
+                                {destination.attributes.contacts?.map((item, idx) => {
+                                    return renderContactItem(item, `dc_${idx}`
+                                        , false
+                                        , {
+                                            style: {
+                                                fontSize: "1.5rem",
+                                                marginRight: "0.5rem"
+                                            }
+                                        })
+                                })}
+                            </div>
+                        ) : ""}
                     </h5>
                     <Form className="mt-2" onSubmit={() => onSendContact()}>
                         <Row>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {callGet, featurePopulate, getImageUrl, imagePopulate, initialProps, moneyFormat} from "../../ulti/helper";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {Button, Col, Container, Row} from "react-bootstrap";
@@ -13,15 +13,24 @@ import LightGallery from "lightgallery/react";
 import DecorComponent from "../../components/DecorComponent";
 import {useAppContext} from "../../layouts/AppLayout";
 import Error from "../_error";
-import {getMinPriceMaxPrice, renderDynamicFeature, renderImage} from "../../ulti/appUtil";
-import slugify from "slugify";
+import {getMinPriceMaxPrice, renderContactItem, renderDynamicFeature, renderImage} from "../../ulti/appUtil";
 import MainStopSlider from "../../components/city-tours/MainStopSlider";
 import Image from "next/image";
 
 const Page = ({model, paymentProduct}) => {
     const {t} = useTranslation("common");
-    const {setBookingModal} = useAppContext();
+    const {setBookingModal, currentDes, setCurrentDes, destinations} = useAppContext();
     const {common = {}, locale} = useAppContext();
+
+    useEffect(() => {
+        if (setCurrentDes) {
+            const idx = destinations.findIndex(item =>
+                item.id === model.attributes?.destination?.data.id);
+            if(idx >= 0){
+                setCurrentDes(destinations[idx]);
+            }
+        }
+    }, [model]);
 
     if (!model) {
         return <Error statusCode={404}/>
@@ -85,7 +94,8 @@ const Page = ({model, paymentProduct}) => {
                                setBookingModal({
                                    isVisible: true,
                                    bookingType: "contact",
-                                   productName: model.attributes.title
+                                   productName: model.attributes.title,
+                                   destinationId: model.attributes?.destination?.data.id,
                                });
                            }}
                            className={`btn btn-primary btn-book ${btnClass}`}>
@@ -158,6 +168,21 @@ const Page = ({model, paymentProduct}) => {
                 <TourFeatures id={"tour-feature"} features={model.attributes?.features}/>
             </div>
             <hr className="bold" style={{marginTop: 0}}/>
+            {currentDes ? (
+                <div className="d-flex align-items-center justify-content-start justify-content-md-end">
+                    <strong style={{marginRight: "0.5rem"}}>{t("Contact us")}:</strong>
+                    {currentDes.attributes.contacts?.map((item, idx) => {
+                        return renderContactItem(item, `dc_${idx}`
+                            , false
+                            , {
+                                style: {
+                                    fontSize: "1.8rem",
+                                    marginRight: "0.5rem"
+                                }
+                            })
+                    })}
+                </div>
+            ) : ""}
             {model.attributes.tourCustom?.map((item, idx) => {
                 return (
                     <TourFeatureDetail key={`tfd_${idx}`}

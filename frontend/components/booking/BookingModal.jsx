@@ -3,9 +3,6 @@ import {useTranslation} from "next-i18next";
 import {Modal} from "react-bootstrap";
 import {useAppContext} from "../../layouts/AppLayout";
 import TicketBookingStep from "./TicketBookingStep";
-import {callGet} from "../../ulti/helper";
-import Skeleton from 'react-loading-skeleton';
-import {toast} from "react-toastify";
 import ContactUsStep from "./ContactUsStep";
 
 const BookingModal = (props) => {
@@ -17,7 +14,8 @@ const BookingModal = (props) => {
         switch (bookingModal.bookingType) {
             case "contact":
                 return (
-                    <ContactUsStep productName={bookingModal?.productName}/>
+                    <ContactUsStep productName={bookingModal?.productName}
+                                   destinationId={bookingModal?.destinationId}/>
                 );
             default:
                 return (

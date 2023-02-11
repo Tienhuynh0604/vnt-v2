@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Col, Container, Row} from "react-bootstrap";
 import {callGet, getImageUrl, imagePopulate, seoPopulate} from "../../ulti/helper";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
@@ -12,11 +12,10 @@ import Link from "next/link";
 import Error from "../_error";
 import {PATH_CITY_TOURS, PATH_NEWS} from "../../ulti/appConst";
 import {useAppContext} from "../../layouts/AppLayout";
-import {createSeoFromCategory} from "../../ulti/appUtil";
-import App from "next/app";
+import {createSeoFromCategory, renderContactItem} from "../../ulti/appUtil";
 
 const Index = (props) => {
-    const {locale} = useAppContext();
+    const {locale, setCurrentDes, currentDes, destinations} = useAppContext();
     const {t} = useTranslation("common");
     const {model, articles = []} = props;
 
@@ -24,14 +23,41 @@ const Index = (props) => {
         return <Error statusCode={404}/>
     }
 
+    useEffect(() => {
+        if (setCurrentDes) {
+            const idx = destinations.findIndex(item => item.id === model.id);
+            if(idx >= 0){
+                setCurrentDes(destinations[idx]);
+            }
+        }
+    }, [model]);
+
     return <PageLayout title={locale === "en" ? model.attributes.name_en : model.attributes.name}
                        coverImage={getImageUrl(model?.attributes?.thumb.data.attributes.url)}
     >
         <div className="position-relative">
             <Container>
-                <div className="text-center">
-                    <h1 className="">{locale === "en" ? model.attributes.name_en : model.attributes.name} Traveling</h1>
-                </div>
+                <Row>
+                    <Col xs={12} md={6}>
+                        <h1 className="">{locale === "en" ? model.attributes.name_en : model.attributes.name} Traveling</h1>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        {currentDes ? (
+                            <div className="d-flex align-items-center justify-content-start justify-content-md-end">
+                                {currentDes.attributes.contacts?.map((item, idx) => {
+                                    return renderContactItem(item, `dc_${idx}`
+                                        , false
+                                        , {
+                                            style: {
+                                                fontSize: "1.8rem",
+                                                marginRight: "0.5rem"
+                                            }
+                                        })
+                                })}
+                            </div>
+                        ) : ""}
+                    </Col>
+                </Row>
                 <hr/>
                 <div className="" dangerouslySetInnerHTML={{
                     __html: model.attributes.content
@@ -109,7 +135,7 @@ export const getServerSideProps = async (context) => {
         });
         articles = res2.data;
 
-        seoCustom = createSeoFromCategory(req , `/${PATH_CITY_TOURS}`, model, locale);
+        seoCustom = createSeoFromCategory(req, `/${PATH_CITY_TOURS}`, model, locale);
     } catch (e) {
         console.error(e);
     }

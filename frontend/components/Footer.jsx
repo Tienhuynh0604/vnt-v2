@@ -8,7 +8,36 @@ import {nl2br, renderImage, renderContactItem} from "../ulti/appUtil";
 import moment from "moment";
 
 const Footer = () => {
-    const {common = {}} = useAppContext();
+    const {common = {}, currentDes = null, locale} = useAppContext();
+
+    const renderCurrentDesContacts = () => {
+        if (currentDes) {
+            return <>
+                <li className={"mb-2"} key={`f_c_add2`}>
+                    <Icon
+                        icon="ion:ticket-outline"/> {locale === 'en' ? currentDes.attributes.address_en : currentDes.attributes.address}
+                </li>
+                {currentDes.attributes.contacts?.filter(item => (item.type === "Phone" || item.type === "Email"))
+                    .map((item, idx) => {
+                        return <li className={"mb-2"} key={`fc_${idx}`}>
+                            {renderContactItem(item)}
+                        </li>
+                    })}
+            </>
+        } else {
+            return (
+                <>
+                    {common.email && <li className={"mb-2"} key={`f_c_e`}>
+                        {renderContactItem(common.email)}
+                    </li>}
+                    {common.phone && <li key={`f_c_p`}>
+                        {renderContactItem(common.phone)}
+                    </li>}
+                </>
+            )
+        }
+    };
+
     return <footer className="footer-section">
         <div className="bg-primary py-3 py-md-4">
             <Container>
@@ -23,14 +52,9 @@ const Footer = () => {
                         <h4 className="">Contact us</h4>
                         <ul className="list-unstyled">
                             <li className={"mb-2"} key={`f_c_add`}>
-                                <Icon icon="ion:map"/> {common.address}
+                                <Icon icon="material-symbols:location-on-outline"/> {common.address}
                             </li>
-                            {common.email && <li className={"mb-2"} key={`f_c_e`}>
-                                {renderContactItem(common.email)}
-                            </li>}
-                            {common.phone && <li key={`f_c_p`}>
-                                {renderContactItem(common.phone)}
-                            </li>}
+                            {renderCurrentDesContacts()}
                         </ul>
                     </Col>
                     <Col xs={6} md={3}>
