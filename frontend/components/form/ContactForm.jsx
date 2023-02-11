@@ -26,7 +26,7 @@ const ContactForm = ({children, className, initialValue}) => {
         message: Yup.string()
             .min(20, t("form.required.input"))
             .required(t("form.required.input")),
-        recaptcha: Yup.string().required(t("form.required.recaptcha")),
+        // recaptcha: Yup.string().required(t("form.required.recaptcha")),
     });
 
     const handleSubmit = async (values) => {
@@ -55,28 +55,28 @@ const ContactForm = ({children, className, initialValue}) => {
                    onSubmit={handleSubmit}>
         {({handleSubmit, setSubmitting, handleChange, handleBlur, values, touched, isValid, errors, setFieldValue, isSubmitting}) => {
             const handleBlur2 = (e) => {
-                if (!values.recaptcha) {
-                    reCaptchaRef.current.execute();
-                    setSubmitting(true);
-                }
+                // if (!values.recaptcha) {
+                //     reCaptchaRef.current.execute();
+                //     setSubmitting(true);
+                // }
                 handleBlur(e);
             };
 
             return (<Form noValidate onSubmit={handleSubmit}>
                 {children(handleSubmit, handleChange, values, touched, isValid, errors, isSuccess, loading, isSubmitting, handleBlur2)}
-                <Form.Control.Feedback type="invalid">
-                    {errors.recaptcha}
-                </Form.Control.Feedback>
-                <ReCAPTCHA
-                    ref={reCaptchaRef}
-                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_CLIENT}
-                    onChange={(value) => {
-                        setFieldValue("recaptcha", value);
-                        setSubmitting(false);
-                    }}
-                    size="invisible"
-                    badge="bottomleft"
-                />
+                {/*<Form.Control.Feedback type="invalid">*/}
+                {/*    {errors.recaptcha}*/}
+                {/*</Form.Control.Feedback>*/}
+                {/*<ReCAPTCHA*/}
+                {/*    ref={reCaptchaRef}*/}
+                {/*    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_CLIENT}*/}
+                {/*    onChange={(value) => {*/}
+                {/*        setFieldValue("recaptcha", value);*/}
+                {/*        setSubmitting(false);*/}
+                {/*    }}*/}
+                {/*    size="invisible"*/}
+                {/*    badge="bottomleft"*/}
+                {/*/>*/}
             </Form>)
         }}
     </Formik>
