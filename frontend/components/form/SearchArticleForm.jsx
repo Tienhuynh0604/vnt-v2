@@ -6,7 +6,7 @@ import {createContact} from "../../services/ContactService";
 import {useTranslation} from "react-i18next";
 import ReCAPTCHA from "react-google-recaptcha";
 
-const ContactForm = ({children, className}) => {
+const SearchArticleForm = ({children, className}) => {
 
     const reCaptchaRef = createRef();
     const {t} = useTranslation("common");
@@ -14,26 +14,16 @@ const ContactForm = ({children, className}) => {
     const [isSuccess, setIsSuccess] = useState(false);
 
     const schema = Yup.object().shape({
-        fullname: Yup.string()
+        s: Yup.string()
             .min(3, t("form.inValid.min3char"))
-            .required(t("form.inValid.name")),
-        phone: Yup.string()
-            // .matches(/^(((\+|)84)|0)((3|5|7|8|9){1})([0-9]{8})\b$/, t("form.inValid.phone"))
-            .required(t("form.required.input")),
-        email: Yup.string()
-            .email(t("form.required.email"))
-            .required(t("form.required.input")),
-        message: Yup.string()
-            .min(20, t("form.required.input"))
-            .required(t("form.required.input")),
-        recaptcha: Yup.string().required(t("form.required.recaptcha")),
+            .required(t("form.inValid.search")),
     });
 
     const handleSubmit = async (values) => {
         setLoading(true);
         setIsSuccess(false);
         try {
-            const res = await createContact(values);
+            // const res = await createContact(values);
             setIsSuccess(true);
         } catch (e) {
             console.error(e);
@@ -44,10 +34,7 @@ const ContactForm = ({children, className}) => {
 
     return <Formik validationSchema={schema}
                    initialValues={{
-                       fullname: '',
-                       phone: '',
-                       email: '',
-                       message: '',
+                       s: '',
                    }}
                    validateOnBlur={false}
                    className={`${className}`}
@@ -81,4 +68,4 @@ const ContactForm = ({children, className}) => {
     </Formik>
 };
 
-export default ContactForm;
+export default SearchArticleForm;

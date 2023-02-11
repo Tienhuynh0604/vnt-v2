@@ -31,6 +31,7 @@
   "form.inValid.min3char": "Please enter an account name that is at least 3 characters",
   "form.inValid.name": "Please enter your full name",
   "form.inValid.phone": "The phone number is in the wrong format",
+  "form.inValid.search": "Nhập nội dung tìm kiếm",
   "form.required.input": "Required Information",
   "form.required.email": "Please enter correct format of an email address",
   "form.booking.time": "Please select date and time after current",

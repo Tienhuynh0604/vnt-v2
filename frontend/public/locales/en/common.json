@@ -28,13 +28,15 @@
   "next": "Next",
   "previous": "Previous",
 
-  "form.inValid.min3char": "Please enter an account name that is at least 3 characters",
+  "form.inValid.min3char": "Please enter text that is at least 3 characters",
   "form.inValid.name": "Please enter your full name",
   "form.inValid.phone": "The phone number is in the wrong format",
+  "form.inValid.search": "Please enter search text",
   "form.required.input": "Required Information",
   "form.required.email": "Please enter correct format of an email address",
   "form.booking.time": "Please select date and time after current",
   "form.plh1": "Enter your",
+  "form.search.article": "Search news",
 
   "contact": "Contact",
   "contactUs": "Contact us",

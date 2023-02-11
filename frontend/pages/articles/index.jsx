@@ -1,4 +1,4 @@
-import React from "react";
+import React, {createRef} from "react";
 import PageLayout from "../../layouts/PageLayout";
 import {callGet, getImageUrl, imagePopulate, seoPopulate} from "../../ulti/helper";
 import {Container} from "react-bootstrap";
@@ -12,22 +12,20 @@ import {renderFillImage, renderImage} from "../../ulti/appUtil";
 import {Icon} from '@iconify/react';
 import {strapPagination} from "../../ulti/strapiHelper";
 import {PATH_NEWS} from "../../ulti/appConst";
+import RecentTours from "../../components/articles/RecentTours";
+import RecentPosts from "../../components/articles/RecentPost";
+import SearchArticleForm from "../../components/form/SearchArticleForm";
 
 const Index = ({articles, articlesPagination, query}) => {
     const {t} = useTranslation("common");
-
-    const onSubmitSearch = () => {
-
-    };
-
-    return <PageLayout className="pb-0">
+    return <PageLayout className="pb-0" title="News">
         <div className="position-relative">
             <Container>
                 <Row>
                     <Col xs={12} md={8}>
                         {articles.map((item, idx) => {
                             return (
-                                <div className="article-item" key={`a${idx}`}>
+                                <div className="article-items" key={`a${idx}`}>
                                     <div className="cover">
                                         {renderFillImage(item.attributes.cover)}
                                     </div>
@@ -54,18 +52,37 @@ const Index = ({articles, articlesPagination, query}) => {
                         {strapPagination(`${PATH_NEWS}`, articlesPagination, query)}
                     </Col>
                     <Col xs={12} md={4}>
-                        <Form onSubmit={}>
-                            <Form.Group className="mb-3" controlId="formFullname">
-                                <Form.Control type="text" placeholder="Search article ..."/>
-                            </Form.Group>
-                        </Form>
+                        <SearchArticleForm>
+                            {(handleSubmit, handleChange, values, touched, isValid, errors, isSuccess, loading, isSubmitting, handleBlur2) => (
+                                <Form.Group className="mb-3" controlId="formSearch">
+                                    <Form.Control name="s"
+                                                  type="text"
+                                                  value={values.s}
+                                                  onChange={handleChange}
+                                                  onBlur={handleBlur2}
+                                                  required
+                                                  size="sm"
+                                                  isInvalid={!!errors.s}
+                                                  placeholder={t("form.search.article")}/>
+                                    <Form.Control.Feedback type="invalid">
+                                        {errors.s}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                            )}
+                        </SearchArticleForm>
                         <hr/>
                         <div>
-                            <h2 className="h2-title text-capitalize">{t("Recent tours")}</h2>
+                            <h2 className="h2-title text-capitalize">{t("articles.recentTours")}</h2>
+                            <div className="mb-3"/>
+                            <RecentTours/>
                         </div>
                         <hr/>
                         <div>
-                            <h2 className="h2-title text-capitalize">{t("Recent posts")}</h2>
+                            <h2 className="h2-title text-capitalize">
+                                {t("articles.recentPosts")}
+                            </h2>
+                            <div className="mb-3"/>
+                            <RecentPosts exceptId={null}/>
                         </div>
                     </Col>
                 </Row>

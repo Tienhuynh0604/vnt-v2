@@ -13,6 +13,7 @@ import DecorComponent from "../../components/DecorComponent";
 import {PATH_NEWS} from "../../ulti/appConst";
 import RecentPosts from "../../components/articles/RecentPost";
 import RecentTours from "../../components/articles/RecentTours";
+import SearchArticleForm from "../../components/form/SearchArticleForm";
 
 const ArticleDetailPage = ({model, nModel, pModel}) => {
     const {t} = useTranslation("common");
@@ -84,11 +85,24 @@ const ArticleDetailPage = ({model, nModel, pModel}) => {
                         </div>
                     </Col>
                     <Col xs={12} md={4}>
-                        <Form>
-                            <Form.Group className="mb-3" controlId="formFullname">
-                                <Form.Control type="text" placeholder="Search article ..."/>
-                            </Form.Group>
-                        </Form>
+                        <SearchArticleForm>
+                            {(handleSubmit, handleChange, values, touched, isValid, errors, isSuccess, loading, isSubmitting, handleBlur2) => (
+                                <Form.Group className="mb-3" controlId="formSearch">
+                                    <Form.Control name="s"
+                                                  type="text"
+                                                  value={values.s}
+                                                  onChange={handleChange}
+                                                  onBlur={handleBlur2}
+                                                  required
+                                                  size="sm"
+                                                  isInvalid={!!errors.s}
+                                                  placeholder={t("form.search.article")}/>
+                                    <Form.Control.Feedback type="invalid">
+                                        {errors.s}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                            )}
+                        </SearchArticleForm>
                         <hr/>
                         <div>
                             <h2 className="h2-title text-capitalize">{t("articles.recentTours")}</h2>
