@@ -16,6 +16,10 @@ import {PATH_NEWS} from "../../ulti/appConst";
 const Index = ({articles, articlesPagination, query}) => {
     const {t} = useTranslation("common");
 
+    const onSubmitSearch = () => {
+
+    };
+
     return <PageLayout className="pb-0">
         <div className="position-relative">
             <Container>
@@ -50,15 +54,19 @@ const Index = ({articles, articlesPagination, query}) => {
                         {strapPagination(`${PATH_NEWS}`, articlesPagination, query)}
                     </Col>
                     <Col xs={12} md={4}>
-                        <Form>
+                        <Form onSubmit={}>
                             <Form.Group className="mb-3" controlId="formFullname">
                                 <Form.Control type="text" placeholder="Search article ..."/>
                             </Form.Group>
                         </Form>
                         <hr/>
-                        <h2 className="h2-title text-capitalize">{t("Recent tour")}</h2>
+                        <div>
+                            <h2 className="h2-title text-capitalize">{t("Recent tours")}</h2>
+                        </div>
                         <hr/>
-                        <h2 className="h2-title text-capitalize">{t("Recent post")}</h2>
+                        <div>
+                            <h2 className="h2-title text-capitalize">{t("Recent posts")}</h2>
+                        </div>
                     </Col>
                 </Row>
             </Container>

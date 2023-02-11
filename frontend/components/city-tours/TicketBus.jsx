@@ -25,7 +25,7 @@ const TicketBus = ({destination, query = {}}) => {
     const [currentSelect, setCurrentSelect] = useState(null);
 
     useEffect(() => {
-        getTourInformation();
+        getTourInformation().catch(e => console.error(e));
     }, [destination]);
 
     // const tabs = [
@@ -84,7 +84,7 @@ const TicketBus = ({destination, query = {}}) => {
             setLoadingTour(true);
             const res = await callGet("/tours", {
                 fields: [
-                    'title', 'slug', 'adultPrice', 'childPrice', 'isHot', 'discountLabel','hideBookingButton'
+                    'title', 'slug', 'adultPrice', 'childPrice', 'isHot', 'discountLabel', 'hideBookingButton'
                 ],
                 filters: {
                     destination: {
@@ -108,6 +108,7 @@ const TicketBus = ({destination, query = {}}) => {
                         fields: ['name', 'className', 'slug']
                     }
                 },
+                sort: ['id:desc'],
                 pagination: {
                     page
                 }

@@ -11,9 +11,13 @@ import Link from "next/link";
 import {strapPagination} from "../../ulti/strapiHelper";
 import DecorComponent from "../../components/DecorComponent";
 import {PATH_NEWS} from "../../ulti/appConst";
+import RecentPosts from "../../components/articles/RecentPost";
+import RecentTours from "../../components/articles/RecentTours";
 
-const ArticleDetailPage = ({model}) => {
+const ArticleDetailPage = ({model, nModel, pModel}) => {
     const {t} = useTranslation("common");
+
+    console.log(nModel, pModel);
 
     return <PageLayout className="pb-0"
                        title={model.attributes.title}
@@ -29,9 +33,9 @@ const ArticleDetailPage = ({model}) => {
             <Container>
                 <Row>
                     <Col xs={12} md={8}>
-                        <div className="article-item">
+                        <div className="article-items">
                             <div className="cover">
-                                {renderFillImage(model.attributes.thumb)}
+                                {renderFillImage(model.attributes.cover)}
                             </div>
                             <hr/>
                             <div
@@ -46,8 +50,37 @@ const ArticleDetailPage = ({model}) => {
                                 __html: model.attributes.content
                             }}/>
                         </div>
-                        <div className="article-item">
-
+                        <div className="article-items">
+                            <Row>
+                                <Col xs={12} md={6}>
+                                    {pModel && <div className="d-flex justify-content-start align-items-center"
+                                                    style={{columnGap: "0.5rem"}}>
+                                        <div className="img-warped">
+                                            {renderFillImage(pModel.attributes.thumb)}
+                                        </div>
+                                        <div>
+                                            <div className="text-muted">{t("previous")}</div>
+                                            <Link href={`/${PATH_NEWS}/${pModel.attributes.slug}`}>
+                                                <h3 className='line-2br'>{pModel.attributes.title}</h3>
+                                            </Link>
+                                        </div>
+                                    </div>}
+                                </Col>
+                                <Col xs={12} md={6}>
+                                    {nModel && <div className="d-flex justify-content-end align-items-center"
+                                                    style={{columnGap: "0.5rem"}}>
+                                        <div>
+                                            <div className="text-end text-muted">{t("next")}</div>
+                                            <Link href={`/${PATH_NEWS}/${nModel.attributes.slug}`}>
+                                                <h3 className='text-end line-2br'>{nModel.attributes.title}</h3>
+                                            </Link>
+                                        </div>
+                                        <div className="img-warped">
+                                            {renderFillImage(nModel.attributes.thumb)}
+                                        </div>
+                                    </div>}
+                                </Col>
+                            </Row>
                         </div>
                     </Col>
                     <Col xs={12} md={4}>
@@ -57,9 +90,19 @@ const ArticleDetailPage = ({model}) => {
                             </Form.Group>
                         </Form>
                         <hr/>
-                        <h2 className="h2-title text-capitalize">{t("Recent tour")}</h2>
+                        <div>
+                            <h2 className="h2-title text-capitalize">{t("articles.recentTours")}</h2>
+                            <div className="mb-3"/>
+                            <RecentTours/>
+                        </div>
                         <hr/>
-                        <h2 className="h2-title text-capitalize">{t("Recent post")}</h2>
+                        <div>
+                            <h2 className="h2-title text-capitalize">
+                                {t("articles.recentPosts")}
+                            </h2>
+                            <div className="mb-3"/>
+                            <RecentPosts exceptId={model.id}/>
+                        </div>
                     </Col>
                 </Row>
             </Container>
@@ -75,15 +118,14 @@ export const getServerSideProps = async (context) => {
     const {slug} = query;
     console.log(`Article slug: `, slug, locale);
     let model = null;
-    let articles = [];
-    let tours = [];
+    let nModel = null;
+    let pModel = null;
     try {
         const res = await callGet("/articles", {
             filters: {
                 slug
             },
             populate: {
-                thumb: imagePopulate(),
                 cover: imagePopulate(),
                 seo: seoPopulate(),
             },
@@ -94,6 +136,41 @@ export const getServerSideProps = async (context) => {
 
         model = res.data[0];
 
+        const p1 = callGet('/articles', {
+            fields: ["title", 'slug', 'shortDescription'],
+            filters: {
+                id: {
+                    $gt: model.id
+                }
+            },
+            populate: {
+                thumb: imagePopulate(),
+            },
+            pagination: {
+                pageSize: 1
+            }
+        }, locale, true);
+
+        const p2 = callGet('/articles', {
+            fields: ["title", 'slug', 'shortDescription'],
+            filters: {
+                id: {
+                    $lt: model.id
+                }
+            },
+            populate: {
+                thumb: imagePopulate(),
+            },
+            pagination: {
+                pageSize: 1
+            }
+        }, locale, true);
+
+        const [nextModel, preModel] = await Promise.all([p1, p2]);
+        console.log("Next articles: ", nextModel.data, preModel.data);
+        nModel = nextModel.data[0] || null;
+        pModel = preModel.data[0] || null;
+
     } catch (e) {
         console.error(e);
     }
@@ -101,6 +178,8 @@ export const getServerSideProps = async (context) => {
     return {
         props: {
             model,
+            nModel,
+            pModel,
             ...(await serverSideTranslations(locale, ['common'])),
         },
     }

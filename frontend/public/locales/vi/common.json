@@ -25,6 +25,8 @@
   "book.now": "Đặt chỗ",
   "home": "Trang chủ",
   "email": "Email",
+  "next": "Next",
+  "previous": "Previous",
 
   "form.inValid.min3char": "Please enter an account name that is at least 3 characters",
   "form.inValid.name": "Please enter your full name",
@@ -49,5 +51,8 @@
   "contact.wwu": "Working with us",
   "contact.faq": "For feedback and question",
   "contact.booking": "For booking",
-  "thanks.t1": "Cảm ơn bạn đã liên hệ. Chúng tôi đã nhận được yêu cầu và sẽ phản hồi bạn sớm nhất có thể"
+  "thanks.t1": "Cảm ơn bạn đã liên hệ. Chúng tôi đã nhận được yêu cầu và sẽ phản hồi bạn sớm nhất có thể",
+
+  "articles.recentTours": "Tour mới nhất",
+  "articles.recentPosts": "Bài viết gần đây"
 }
