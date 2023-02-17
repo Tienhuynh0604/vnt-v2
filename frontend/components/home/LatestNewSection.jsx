@@ -73,13 +73,13 @@ const LatestNewBlock = ({dataSource = []}) => {
 
     return <section className="page-section">
         <Container>
-            <h2>{t("our new feeds")}</h2>
-            <h1 className="text-capitalize">{t("latest news update")}</h1>
+            <h2>{t("news.t2")}</h2>
+            <h1 className="text-capitalize">{t("news.t1")}</h1>
             <div className="mb-4"/>
             <LatestSlider/>
             <div className="d-flex justify-content-center mt-3">
                 <Link href={`/${PATH_NEWS}`}>
-                    <Button className="text-capitalize" variant="primary">{t("view more")}</Button>
+                    <Button className="text-capitalize" variant="primary">{t("view.more")}</Button>
                 </Link>
             </div>
         </Container>

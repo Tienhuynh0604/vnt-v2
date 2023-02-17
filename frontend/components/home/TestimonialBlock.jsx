@@ -85,8 +85,8 @@ const TestimonialBlock = ({dataSource = {}}) => {
     return <section className="page-section unique-section bg-grey">
         <Container>
             <div className="text-center mb-4">
-                <h1 className="text-capitalize">{t("our happy customers")}</h1>
-                <h2 className="mt-2">{t("Why only hear from us? Let’s check more from our friends")}</h2>
+                <h1 className="text-capitalize">{t("testimonial.t1")}</h1>
+                <h2 className="mt-2">{t("testimonial.t2")}</h2>
             </div>
             <TestimonialSlider/>
         </Container>

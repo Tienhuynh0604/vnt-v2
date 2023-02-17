@@ -12,11 +12,11 @@ const TitleSection = ({
             <Image src={coverImage}
                    alt={title}
                    fill={true}
-                   objectFit="cover"
+                   style={{objectFit:"cover"}}
             />
             <div className="overlay"/>
             <div className="nav-block">
-                <h1 className="text-capitalize">{title}</h1>
+                <h1 className="text-uppercase" style={{fontWeight: "bold"}}>{title}</h1>
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item" aria-current="page">

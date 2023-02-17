@@ -19,7 +19,7 @@ const AboutUsBlock = ({dataSource = {}}) => {
                     <Col xs={12} lg={7}>
                         <h1 className="text-light">{dataSource.title}</h1>
                         <p className="mt-3" dangerouslySetInnerHTML={{__html: nl2br(dataSource.subTitle)}}/>
-                        <h6 className="mt-4 fw-bold text-capitalize">{t('follow us')}:</h6>
+                        <h6 className="mt-4 fw-bold text-capitalize">{t('follow.us')}:</h6>
                         <ul className="list-inline list-unstyled social-items">
                             {common.socials.map(item => (
                                 <li className="list-inline-item mb-2" key={`f_s_i${item.id}`}>
@@ -28,7 +28,7 @@ const AboutUsBlock = ({dataSource = {}}) => {
                             ))}
                         </ul>
                         <Link href={PATH_ABOUT_US}>
-                            <Button className="text-capitalize" variant="primary">{t("view more")}</Button>
+                            <Button className="text-capitalize" variant="primary">{t("view.more")}</Button>
                         </Link>
                     </Col>
                     <Col xs={12} lg={5}>

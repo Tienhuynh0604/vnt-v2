@@ -73,7 +73,7 @@ const Index = (props) => {
         </div>
         <div className="py-5">
             <Container>
-                <h1 className="text-capitalize">{t("post about")} {locale === "en" ? model.attributes.name_en : model.attributes.name}</h1>
+                <h1 className="text-capitalize">{t("city.post.about")} {locale === "en" ? model.attributes.name_en : model.attributes.name}</h1>
                 <Row>
                     {articles.map((item, idx) => (
                         <Col xs={12} md={4}>

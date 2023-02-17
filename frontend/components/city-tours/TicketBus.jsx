@@ -1,13 +1,11 @@
 import React, {memo, useEffect, useState} from "react";
-import {OurTourData} from "../../data/FakeData";
 import {Col, Row} from "react-bootstrap";
 import ProductCard from "../ProductCard";
-import Link from "next/link";
-import {Icon} from "@iconify/react";
 import {callGet, imagePopulate, seoPopulate} from "../../ulti/helper";
-import {strapPagination, strapPaginationWithOnChangePage} from "../../ulti/strapiHelper";
+import {strapPaginationWithOnChangePage} from "../../ulti/strapiHelper";
 import {toast} from "react-toastify";
 import {useAppContext} from "../../layouts/AppLayout";
+import Skeleton from 'react-loading-skeleton';
 
 const TicketBus = ({destination, query = {}}) => {
     const {locale} = useAppContext();
@@ -27,21 +25,6 @@ const TicketBus = ({destination, query = {}}) => {
     useEffect(() => {
         getTourInformation().catch(e => console.error(e));
     }, [destination]);
-
-    // const tabs = [
-    //     {
-    //         id: 1,
-    //         attributes: {
-    //             name: "Ticket Bus"
-    //         }
-    //     },
-    //     {
-    //         id: 2,
-    //         attributes: {
-    //             name: "City tours"
-    //         }
-    //     }
-    // ];
 
     const onChangeTab = (tab) => {
         if (tab !== currentSelect) {
@@ -137,7 +120,7 @@ const TicketBus = ({destination, query = {}}) => {
             })}
         </ol>
         <Row>
-            {tours.data.map((item, idx) => (
+            {loadingTour ? <p><Skeleton count={5}/></p> : tours.data.map((item, idx) => (
                 <Col key={`p-c${idx}`} xs={12} md={6} lg={4} xxl={3}>
                     <ProductCard destination={destination} item={item} className="city-tour-item"/>
                 </Col>

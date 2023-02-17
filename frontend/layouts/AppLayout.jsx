@@ -4,10 +4,13 @@ import FacebookChatScript from "../components/AppScript/FacebookChatScript";
 import GaScript from "../components/AppScript/GaScript";
 import {ToastContainer} from "react-toastify";
 import CartFloatingButton from "../components/cart/CartFloatingButton";
+import { useRouter } from "next/router";
+import NProgress from 'nprogress';
 
 const AppContext = createContext({});
 
 const AppLayout = (props) => {
+    const router = useRouter();
     const {headerMenus, footerMenus, seo, common, locale, children, destinations} = props;
     const [bookingModal, setBookingModal] = useState({
         isVisible: false,
@@ -55,6 +58,9 @@ const AppLayout = (props) => {
     };
 
     useEffect(() => {
+        router.events.on('routeChangeStart', () =>  NProgress.start());
+        router.events.on('routeChangeComplete', () =>  NProgress.done());
+        router.events.on('routeChangeError', () =>  NProgress.done());
         setCartModal(prevState => ({
             ...prevState,
             isVisible: false,

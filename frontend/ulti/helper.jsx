@@ -200,7 +200,7 @@ export const initialProps = async (ctx) => {
             type: 'TREE'
         }, locale, true);
         const p4 = callGet("/destinations", {
-            fields: ['name', 'slug', 'address', 'address_en'],
+            fields: ['name', 'name_en', 'slug', 'address', 'address_en'],
             populate: {
                 contacts: "*",
             },

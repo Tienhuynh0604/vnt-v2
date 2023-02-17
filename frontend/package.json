@@ -26,6 +26,7 @@
     "next-absolute-url": "^1.2.2",
     "next-i18next": "^13.0.0",
     "node-cache": "^5.1.2",
+    "nprogress": "^0.2.0",
     "numeral": "^2.0.6",
     "qs": "^6.11.0",
     "react": "18.2.0",

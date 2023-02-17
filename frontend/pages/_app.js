@@ -13,6 +13,7 @@ import 'hover.css/scss/hover.scss';
 import 'react-loading-skeleton/dist/skeleton.css'
 import "react-image-gallery/styles/scss/image-gallery.scss";
 import '../styles/App.scss';
+import 'nprogress/nprogress.css'
 import SSRProvider from 'react-bootstrap/SSRProvider';
 import {appWithTranslation} from 'next-i18next';
 import Seo from "../components/Seo";

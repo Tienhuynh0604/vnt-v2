@@ -23,7 +23,7 @@ const ProductCard = ({destination, item, className}) => {
                                });
                            }}
                            variant={'primary'}>
-                {t("book now")}
+                {t("book.now")}
             </Button>
         } else {
             return <Button type={"button"}
@@ -36,7 +36,7 @@ const ProductCard = ({destination, item, className}) => {
                                });
                            }}
                            variant={'primary'}>
-                {t("Contact us")}
+                {t("contactUs")}
             </Button>
         }
     };
@@ -101,13 +101,13 @@ const ProductCard = ({destination, item, className}) => {
                 </Card.Title>
                 <ul className="price">
                     <li>
-                        {t("Child")}: <strong>{moneyFormat(item.attributes.tourCard?.childPrice, locale)}</strong>
+                        {t("child")}: <strong>{moneyFormat(item.attributes.tourCard?.childPrice, locale)}</strong>
                     </li>
                     <li>
                         <div className="vr" style={{height: "100%"}}/>
                     </li>
                     <li>
-                        {t("Adult")}: <strong>{moneyFormat(item.attributes.tourCard?.adultPrice, locale)}</strong>
+                        {t("adult")}: <strong>{moneyFormat(item.attributes.tourCard?.adultPrice, locale)}</strong>
                     </li>
                 </ul>
                 <ul className="feature">

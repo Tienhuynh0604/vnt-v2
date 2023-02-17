@@ -65,7 +65,7 @@ const PopularDestination = ({places = []}) => {
 
     return <Row className="popular-destination">
         <Col xs={12} lg={3}>
-            <h1 className="text-capitalize">{t("popular destination")}</h1>
+            <h1 className="text-capitalize">{t("city.t1")}</h1>
             <div className="mb-3"/>
             <Slider {...settingDes} ref={slider => slider1 = slider} asNavFor={sliders.nav2}>
                 {places && places.map((item, idx) => (

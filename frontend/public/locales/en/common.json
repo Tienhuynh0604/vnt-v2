@@ -27,6 +27,11 @@
   "email": "Email",
   "next": "Next",
   "previous": "Previous",
+  "child": "Child",
+  "adult": "Adult",
+  "view": "View",
+  "view.more": "View more",
+  "follow.us": "Follow us",
 
   "form.inValid.min3char": "Please enter text that is at least 3 characters",
   "form.inValid.name": "Please enter your full name",
@@ -57,5 +62,24 @@
   "thanks.t1": "Thank you for contact with us. We received your request and will feedback you soon",
 
   "articles.recentTours": "Recent tours",
-  "articles.recentPosts": "Recent articles"
+  "articles.recentPosts": "Recent articles",
+  "news.t1": "Latest News Update",
+  "new.t2": "Our new feeds",
+
+  "our.tour": "Our tour",
+  "our.tour.t2": "Great choice to discover our city",
+
+  "testimonial.t1": "Our happy customers",
+  "testimonial.t2": "Why only hear from us? Let’s check more from our friends",
+
+  "city.t2": "Popular destination",
+  "city.post.about": "Post about",
+  
+  "Ticket bus": "Ticket bus",
+  "City tour": "City tour",
+  "Music tour": "Music tour",
+  "Bus tour": "Bus tour",
+  "Walking tour": "Walking tour",
+  "Photo tour": "Photo tour",
+  "Treking tour": "Treking tour"
 }

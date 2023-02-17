@@ -10,7 +10,7 @@ import {useAppContext} from "../../layouts/AppLayout";
 const OurTours = ({tours = []}) => {
     const {t} = useTranslation("common");
     const [currentTag, setCurrentTag] = useState(null);
-    const {destinations = []} = useAppContext();
+    const {destinations = [], locale} = useAppContext();
 
     const onClickFilter = (desSlug) => {
         console.log(desSlug);
@@ -20,8 +20,8 @@ const OurTours = ({tours = []}) => {
     return <section className="page-section our-tours-section">
         <Container style={{zIndex: 100}}>
             <div className="text-center">
-                <h2 className="mt-4">{t("Our tour")}</h2>
-                <h1 className="mb-4"><span>{t("Great choice to discover our city")}</span></h1>
+                <h2 className="mt-4">{t("our.tour")}</h2>
+                <h1 className="mb-4"><span>{t("our.tour.t2")}</span></h1>
             </div>
             <div className="d-flex justify-content-center text-center py-3">
                 <ul className="destination list-inline">
@@ -39,7 +39,7 @@ const OurTours = ({tours = []}) => {
                             <Button type="button"
                                     onClick={() => onClickFilter(item.attributes.slug)}
                                     variant={"link"}>
-                                {item.attributes.name}
+                                {locale === "en" ? item.attributes.name_en : item.attributes.name}
                             </Button>
                         </li>
                     })}
@@ -58,7 +58,7 @@ const OurTours = ({tours = []}) => {
             </div>
             <div className="d-flex justify-content-center mt-5">
                 {currentTag && <Link href={`/city-tours${currentTag ? `/${currentTag}` : ""}`}>
-                    <Button variant="primary">View all <Icon icon={"bi:chevron-right"}/> </Button>
+                    <Button variant="primary">{t("view.all")} <Icon icon={"bi:chevron-right"}/> </Button>
                 </Link>}
             </div>
         </Container>
