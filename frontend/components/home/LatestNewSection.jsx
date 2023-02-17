@@ -4,7 +4,7 @@ import {Button, Container} from "react-bootstrap";
 import {useTranslation} from "next-i18next";
 import {nl2br, SlickNextArrow, SlickPrevArrow} from "../../ulti/appUtil";
 import Slider from "@ant-design/react-slick";
-import Image from "next/image";
+// import Image from "next/image";
 import {formatDate} from "../../ulti/helper";
 import {PATH_NEWS} from "../../ulti/appConst";
 import Link from "next/link";

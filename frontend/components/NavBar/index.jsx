@@ -1,20 +1,20 @@
-import React, {useState} from "react";
-import NavHeader from "./nav-header";
-import {useRouter} from 'next/router'
-import {useAppContext} from "../../layouts/AppLayout";
+import React, { useState } from "react";
+// import NavHeader from "./nav-header";
+import { useRouter } from 'next/router'
+import { useAppContext } from "../../layouts/AppLayout";
 import Link from "next/link";
-import {Navbar as NavBarBs, NavbarBrand, Badge, Container, NavDropdown} from "react-bootstrap";
-import {renderImage} from "../../ulti/appUtil";
-import {useTranslation} from "react-i18next";
+import { Navbar as NavBarBs, NavbarBrand, Badge, Container, NavDropdown } from "react-bootstrap";
+import { renderImage } from "../../ulti/appUtil";
+import { useTranslation } from "react-i18next";
 import Image from "next/image";
-import {Icon} from "@iconify/react";
+import { Icon } from "@iconify/react";
 
 const NavBar = (props) => {
 
-    const {t} = useTranslation("common");
-    const {headerMenus, common, cartModal, setCartModal, locale} = useAppContext();
+    const { t } = useTranslation("common");
+    const { headerMenus, common, cartModal, setCartModal, locale } = useAppContext();
     const router = useRouter();
-    const {asPath} = router;
+    const { asPath } = router;
     const [expanded, setExpanded] = useState(false);
 
     let activeRoute = null;
@@ -82,7 +82,7 @@ const NavBar = (props) => {
     const renderItem = (item) => {
         return <li className="nav-item" key={`navc${item.id}`}>
             <Link href={item.path}
-                  className={`nav-link ${activeRoute && `/${activeRoute}` === item.path ? "active" : ""}`}
+                className={`nav-link ${activeRoute && `/${activeRoute}` === item.path ? "active" : ""}`}
             >
                 {item.title}
             </Link>
@@ -97,14 +97,14 @@ const NavBar = (props) => {
                 <NavbarBrand href="/">
                     {renderImage(common.logo)}
                 </NavbarBrand>
-                <NavBarBs.Toggle aria-controls="basic-navbar-nav"/>
+                <NavBarBs.Toggle aria-controls="basic-navbar-nav" />
                 <NavBarBs.Collapse className="d-lg-flex justify-content-end">
                     <ul className="navbar-nav">
                         <li className="nav-item">
                             <Link href="/"
-                                  className={`nav-link ${!activeRoute || activeRoute === "/" ? "active" : ""}`}
-                                  onClick={closeNav}
-                                  aria-current="page"
+                                className={`nav-link ${!activeRoute || activeRoute === "/" ? "active" : ""}`}
+                                onClick={closeNav}
+                                aria-current="page"
                             >
                                 {t("home")}
                             </Link>
@@ -113,14 +113,14 @@ const NavBar = (props) => {
                         <li className="nav-item">
                             <NavDropdown
                                 title={<span className="text-uppercase"><Image alt={locale}
-                                                                               src={`/images/${locale}.jpg`} width={27}
-                                                                               height={21}/> {locale}</span>}
+                                    src={`/images/${locale}.jpg`} width={27}
+                                    height={21} /> {locale}</span>}
                                 className="d-inline-block me-3">
                                 <NavDropdown.Item href="/en">
-                                    <Image alt={"English"} src="/images/en.jpg" width={27} height={21}/> EN
+                                    <Image alt={"English"} src="/images/en.jpg" width={27} height={21} /> EN
                                 </NavDropdown.Item>
                                 <NavDropdown.Item href="/vi">
-                                    <Image alt={"Tiếng Việt"} src="/images/vi.jpg" width={27} height={21}/> VI
+                                    <Image alt={"Tiếng Việt"} src="/images/vi.jpg" width={27} height={21} /> VI
                                 </NavDropdown.Item>
                             </NavDropdown>
                         </li>
@@ -133,9 +133,9 @@ const NavBar = (props) => {
                                 }}
                                 aria-current="page"
                             >
-                                <Icon icon={"bi:cart-fill"} height={24}/>
+                                <Icon icon={"bi:cart-fill"} height={24} />
                                 {cartModal.items?.length > 0 &&
-                                <Badge pill bg="danger">{cartModal.items.length}</Badge>}
+                                    <Badge pill bg="danger">{cartModal.items.length}</Badge>}
                             </a>
                         </li>
                     </ul>

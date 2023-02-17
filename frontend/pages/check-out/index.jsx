@@ -1,21 +1,24 @@
-import React from "react";
-import {Button, Container, Table, Form, Row, Col} from "react-bootstrap";
-import {useAppContext} from "../../layouts/AppLayout";
+import React, { useEffect } from "react";
+import { Button, Container, Form, Row, Col } from "react-bootstrap";
+import { useAppContext } from "../../layouts/AppLayout";
 import PageLayout from "../../layouts/PageLayout";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {useTranslation} from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 import Image from "next/image";
-import Link from "next/link";
-import InputNumberPlusMinus from "../../components/booking/InputNumberPlusMinus";
-import {Icon} from "@iconify/react";
 import DecorComponent from "../../components/DecorComponent";
 import moment from "moment";
-import {moneyFormat} from "../../ulti/helper";
+import { moneyFormat } from "../../ulti/helper";
+import PhoneCode from 'react-phone-code';
 
 const Page = () => {
-    const {checkOutItems, locale} = useAppContext();
+    const { checkOutItems, locale } = useAppContext();
+    const { t } = useTranslation("common");
+
     console.log("Checkout", checkOutItems);
-    const {t} = useTranslation("common");
+
+    useEffect(() => {
+
+    }, [checkOutItems]);
 
     const renderItem = (item, idx) => {
         return <div className='product-item' key={`pi${idx}`}>
@@ -61,30 +64,40 @@ const Page = () => {
             </div>
             <Row className="gy-3">
                 <Col xs={12} md={7}>
-                    <h5 className="mt-5 text-capitalize fw-bold">{t("booking information")}</h5>
+                    <h5 className="mt-3 text-capitalize fw-bold">{t("co.t1")}</h5>
                     <Form className="text-capitalize">
                         <Row>
-                            <Col xs={12}>
+                            <Col xs={12} md={6}>
                                 <Form.Group className="mb-3" controlId="fullname">
                                     <Form.Label>{t("fullname")}</Form.Label>
-                                    <Form.Control type="text" placeholder={t("your fullname here")}/>
+                                    <Form.Control type="text" placeholder={t("co.form1")} />
                                 </Form.Group>
                             </Col>
                             <Col xs={12} md={6}>
                                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                     <Form.Label>{t("email")}</Form.Label>
-                                    <Form.Control type="email" placeholder="name@example.com"/>
+                                    <Form.Control type="email" placeholder={t("co.form2")} />
                                 </Form.Group>
                             </Col>
                             <Col xs={12} md={6}>
                                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                    <Form.Label>{t("phone number")}</Form.Label>
-                                    <Form.Control type="email" placeholder={t("your phone here")}/>
+                                    <Form.Label>{t("country")}</Form.Label>
+                                    <PhoneCode
+                                        onSelect={code => console.log(code)} // required
+                                        showFirst={['US', 'VN', 'CN', 'KR', 'RU', 'JP']}
+                                        className="form-control"
+                                    />
+                                </Form.Group>
+                            </Col>
+                            <Col xs={12} md={6}>
+                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                    <Form.Label>{t("phone")}</Form.Label>
+                                    <Form.Control type="text" placeholder={t("co.form3")} />
                                 </Form.Group>
                             </Col>
                             <Col xs={12}>
-                                <h5 className="mt-3 text-capitalize fw-bold">{t("Choose payment options")}</h5>
-                                <div className="d-flex justify-content-between" style={{columnGap: "10px"}}>
+                                <h5 className="mt-3 text-capitalize fw-bold">{t("co.t2")}</h5>
+                                <div className="d-flex justify-content-between" style={{ columnGap: "10px" }}>
                                     <div className="payment-item">
                                         <Form.Check
                                             inline
@@ -94,10 +107,10 @@ const Page = () => {
                                             type={"radio"}
                                         />
                                         <Image src={"/images/payment/paypal.png"}
-                                               alt={"Paypal"}
-                                               width={75}
-                                               height={20}
-                                               className=""
+                                            alt={"Paypal"}
+                                            width={75}
+                                            height={20}
+                                            className=""
                                         />
                                     </div>
                                     <div className="payment-item">
@@ -109,10 +122,10 @@ const Page = () => {
                                             type={"radio"}
                                         />
                                         <Image src={"/images/payment/vnpay.png"}
-                                               alt={"Paypal"}
-                                               width={84}
-                                               height={20}
-                                               className=""
+                                            alt={"Paypal"}
+                                            width={84}
+                                            height={20}
+                                            className=""
                                         />
                                     </div>
                                 </div>
@@ -120,7 +133,7 @@ const Page = () => {
                             <Col xs={12}>
                                 <Form.Check
                                     inline
-                                    label={`${t("agree with term")}`}
+                                    label={`${t("co.t3")}`}
                                     name="agree"
                                     className="mt-3"
                                     id={`agree-term`}
@@ -131,12 +144,12 @@ const Page = () => {
                     </Form>
                 </Col>
                 <Col xs={12} md={5} className="bg-grey p-3 p-xl-5 rounded-3">
-                    <h5 className="text-capitalize">{t("booking summary")}</h5>
-                    <hr className="text-grey"/>
+                    <h5 className="text-capitalize">{t("co.t4")}</h5>
+                    <hr className="text-grey" />
                     {checkOutItems?.map((item, idx) => {
                         return renderItem(item, idx)
                     })}
-                    <hr className="text-grey dashed"/>
+                    <hr className="text-grey dashed" />
                     <div className='product-item'>
                         <div className="check-out-row">
                             <span className="title">{t("subtotal")}</span>
@@ -152,7 +165,7 @@ const Page = () => {
                         </div>
 
                     </div>
-                    <hr className="text-grey "/>
+                    <hr className="text-grey " />
                     <div className='product-item'>
                         <div className="check-out-row">
                             <span className="title text-black">{t("total")}</span>
@@ -160,17 +173,17 @@ const Page = () => {
                         </div>
                     </div>
                     <div className="d-flex justify-content-center mt-5">
-                        <Button className="w-75 text-capitalize">{t('make payment')}</Button>
+                        <Button className="w-75 text-capitalize">{t('co.t5')}</Button>
                     </div>
                 </Col>
             </Row>
         </Container>
-        <DecorComponent/>
+        <DecorComponent />
     </PageLayout>
 };
 
 export const getServerSideProps = async (context) => {
-    const {locale = 'en'} = context;
+    const { locale = 'en' } = context;
     return {
         props: {
             ...(await serverSideTranslations(locale, ['common'])),

@@ -1,6 +1,6 @@
 import React, {memo, useState} from "react";
 import {useTranslation} from "react-i18next";
-import {Col, Row, Container, Button} from "react-bootstrap";
+import {Container, Button} from "react-bootstrap";
 import ProductCard from "../ProductCard";
 import {Icon} from "@iconify/react";
 import DecorComponent from "../DecorComponent";

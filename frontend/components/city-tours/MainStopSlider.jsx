@@ -2,7 +2,7 @@ import Slider from "@ant-design/react-slick";
 import {useTranslation} from "next-i18next";
 import Image from "next/image";
 import React, {memo, useEffect, useState} from "react";
-import {imgGalleries} from "../../data/FakeData";
+// import {imgGalleries} from "../../data/FakeData";
 import {nl2br, SlickNextArrow, SlickPrevArrow} from "../../ulti/appUtil";
 import {Col, Row} from "react-bootstrap";
 import {callGet, getImageUrl} from "../../ulti/helper";

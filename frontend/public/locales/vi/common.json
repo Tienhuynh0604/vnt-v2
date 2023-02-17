@@ -33,6 +33,15 @@
   "view.more": "Xem thêm",
   "follow.us": "Follow us",
   "faq": "Câu hỏi thường gặp",
+  "payment": "Thanh toán",
+  "country": "Nước",
+  "subtotal": "Thành tiền",
+  "discount": "Giảm giá",
+  "taxes&fees": "Thuế và phụ phí",
+  "total": "Tổng",
+  "cart": "Giỏ hàng",
+  "product": "Sản phẩm",
+  "ticket": "Vé",
 
   "form.inValid.min3char": "Nội dung phải có ít nhất 3 ký tự",
   "form.inValid.name": "Nhập đầy đủ họ và tên",
@@ -82,5 +91,18 @@
   "Bus tour": "Bus tour",
   "Walking tour": "Walking tour",
   "Photo tour": "Photo tour",
-  "Treking tour": "Treking tour"
+  "Treking tour": "Treking tour",
+
+  "co.t1": "Thông tin",
+  "co.t2": "Choose Payment Options",
+  "co.t3": "Agree with our term",
+  "co.t4": "Booking summary",
+  "co.t5": "Thanh toán",
+  "co.form1": "Enter your fullname",
+  "co.form2": "Enter your email",
+  "co.form3": "Enter your phone",
+
+  "cart.t1": "Check out",
+  "cart.t2": "Continue shopping",
+  "cart.t3": "Your have {{itemNum}} tours/ tickets in your cart"
 }
