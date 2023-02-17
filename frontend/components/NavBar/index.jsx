@@ -106,7 +106,7 @@ const NavBar = (props) => {
                                   onClick={closeNav}
                                   aria-current="page"
                             >
-                                {t("Home")}
+                                {t("home")}
                             </Link>
                         </li>
                         {renderMenuItems()}

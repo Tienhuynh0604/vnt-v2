@@ -17,7 +17,7 @@ const Home = (props) => {
             <OurTours tours={tours}/>
             <AboutUsBlock dataSource={homeData.attributes.aboutUs}/>
             <LatestNewBlock dataSource={articlesData}/>
-            <TestimonialBlock/>
+            <TestimonialBlock dataSource={homeData.attributes.review}/>
         </>
     )
 };
@@ -83,7 +83,8 @@ export const getServerSideProps = async (context) => {
                 },
                 destination: {
                     fields: ['name', 'slug']
-                }
+                },
+                review: featurePopulate(),
             },
             pagination: {
                 page: 1,

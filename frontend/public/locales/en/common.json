@@ -32,6 +32,7 @@
   "view": "View",
   "view.more": "View more",
   "follow.us": "Follow us",
+  "faq": "FAQ",
 
   "form.inValid.min3char": "Please enter text that is at least 3 characters",
   "form.inValid.name": "Please enter your full name",
@@ -81,5 +82,8 @@
   "Bus tour": "Bus tour",
   "Walking tour": "Walking tour",
   "Photo tour": "Photo tour",
-  "Treking tour": "Treking tour"
+  "Treking tour": "Treking tour",
+
+  "footer.t1": "Term and conditions",
+  "footer.t2": "Support"
 }

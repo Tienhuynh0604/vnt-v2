@@ -947,6 +947,11 @@ Booking table
   animation: ripple 2s linear 1s infinite;
 }
 
+.faq-section .accordion-item{
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 @keyframes ripple {
   0% {
     transform: scale(1);

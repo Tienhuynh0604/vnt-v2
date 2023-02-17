@@ -16,7 +16,7 @@ const Page = ({model, query = {}}) => {
             link: "/faq"
         }
     ]}>
-        <Container className="gallery-section">
+        <Container className="faq-section">
             <div className="d-flex justify-content-between">
                 <h1><span className="text-uppercase">{t("faq")}</span></h1>
             </div>
@@ -53,7 +53,7 @@ export const getServerSideProps = async (context) => {
                 page: query.page ? query.page : 1,
                 pageSize: query.pageSize ? query.pageSize : 20
             }
-        });
+        }, locale);
         model = res;
     } catch (e) {
         console.error(e);

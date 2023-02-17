@@ -6,9 +6,11 @@ import {Col, Container, Row} from "react-bootstrap";
 import {useAppContext} from "../layouts/AppLayout";
 import {nl2br, renderImage, renderContactItem} from "../ulti/appUtil";
 import moment from "moment";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
     const {common = {}, currentDes = null, locale} = useAppContext();
+    const {t} = useTranslation("common");
 
     const renderCurrentDesContacts = () => {
         if (currentDes) {
@@ -49,7 +51,7 @@ const Footer = () => {
                         {renderImage(common.logoFooter)}
                     </Col>
                     <Col xs={12} md={3}>
-                        <h4 className="">Contact us</h4>
+                        <h4 className="">{t("contactUs")}</h4>
                         <ul className="list-unstyled">
                             <li className={"mb-2"} key={`f_c_add`}>
                                 <Icon icon="material-symbols:location-on-outline"/> {common.address}
@@ -58,7 +60,7 @@ const Footer = () => {
                         </ul>
                     </Col>
                     <Col xs={6} md={3}>
-                        <h4>Information</h4>
+                        <h4>{t("information")}</h4>
                         <ul className="list-unstyled">
                             <li>
                                 <a href={"/city-tours/ha-noi"}>Ha Noi</a>
@@ -78,7 +80,7 @@ const Footer = () => {
                         </ul>
                     </Col>
                     <Col xs={6} md={3}>
-                        <h4 className="">Follow us</h4>
+                        <h4 className="">{t("follow.us")}</h4>
                         <ul className="list-inline list-unstyled" style={{fontSize: "2rem"}}>
                             {common.socials.map(item => (
                                 <li className="list-inline-item mb-2" key={`f_s_i${item.id}`}>
@@ -102,13 +104,13 @@ const Footer = () => {
                     <ul className="mb-0 list-inline list-unstyled">
                         <li className="list-inline-item">
                             <Link href={"/"}>
-                                Terms of use and sale
+                                {t("footer.t1")}
                             </Link>
                         </li>
                         <li className="list-inline-item"> |</li>
                         <li className="list-inline-item">
-                            <Link href={"/"}>
-                                Support
+                            <Link href={"/faq"}>
+                                {t("footer.t2")}
                             </Link>
                         </li>
                     </ul>
