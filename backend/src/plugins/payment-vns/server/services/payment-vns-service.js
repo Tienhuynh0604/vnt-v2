@@ -1,4 +1,5 @@
 'use strict';
+
 const helper = require("./../util/request-helper");
 
 const pluginId = 'plugin::payment-vns.payment-product';
@@ -41,7 +42,7 @@ module.exports = ({strapi}) => ({
   async getCatalogs(ctx) {
     const {locale = "en"} = ctx.query;
     const axiosInstance = await helper.request({strapi});
-    return await axiosInstance.get(`/web-v1/catalog`, {
+    return await axiosInstance.get(`/web-v2/catalog`, {
       headers: {
         'x-language': locale
       }
@@ -52,7 +53,7 @@ module.exports = ({strapi}) => ({
       throw new Error("Missing city_id");
     }
     const axiosInstance = await helper.request({strapi});
-    return await axiosInstance.get(`/web-v1/services`, {
+    return await axiosInstance.get(`/web-v2/services`, {
       params: {
         city_id
       },
@@ -60,6 +61,41 @@ module.exports = ({strapi}) => ({
         'x-language': locale
       }
     });
+  },
+
+  async createOrder(locale, paymentMethod, data) {
+    const axiosIns = await helper.request({strapi});
+    let paymentUrl;
+    switch (paymentMethod) {
+      case "paypal":
+        paymentUrl = `/web-v2/order_create/paypal_url`;
+        break;
+      case "vnpay":
+        paymentUrl = `/web-v2/order_create/vnpay_url`;
+        break;
+      default:
+        throw new Error("Not supported payment");
+    }
+    return await axiosIns.post(paymentUrl, data, {
+      headers: {
+        'x-language': locale
+      }
+    })
+  },
+
+  async getOrder(token, locale) {
+    if (!token) {
+      throw new Error("Token null");
+    }
+    const axiosIns = await helper.request({strapi});
+    return await axiosIns.get("/web-v2/get-order", {
+      params: {
+        token
+      },
+      headers: {
+        'x-language': locale
+      }
+    })
   },
 
   async syncServices({data}) {

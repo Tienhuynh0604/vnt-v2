@@ -42,6 +42,8 @@
   "cart": "Cart",
   "product": "Product",
   "ticket": "Ticket",
+  "type": "Type",
+  "quantity": "Quantity",
 
   "form.inValid.min3char": "Please enter text that is at least 3 characters",
   "form.inValid.name": "Please enter your full name",
@@ -104,6 +106,7 @@
   "co.form1": "Enter your fullname",
   "co.form2": "Enter your email",
   "co.form3": "Enter your phone",
+  "co.form4": "Select your country",
 
   "cart.t1": "Check out",
   "cart.t2": "Continue shopping",

@@ -42,6 +42,8 @@
   "cart": "Giỏ hàng",
   "product": "Sản phẩm",
   "ticket": "Vé",
+  "type": "Loại",
+  "quantity": "Số lượng",
 
   "form.inValid.min3char": "Nội dung phải có ít nhất 3 ký tự",
   "form.inValid.name": "Nhập đầy đủ họ và tên",
@@ -101,6 +103,7 @@
   "co.form1": "Enter your fullname",
   "co.form2": "Enter your email",
   "co.form3": "Enter your phone",
+  "co.form4": "Select your country",
 
   "cart.t1": "Check out",
   "cart.t2": "Continue shopping",

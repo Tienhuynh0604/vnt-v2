@@ -11,7 +11,7 @@ module.exports.request = async ({strapi}) => {
     axiosInstance = axios.create({
       baseURL: apiUrl,
       headers: {
-        'x-access-srkey': apiKey
+        'x-secret-key': apiKey
       }
     });
   }
