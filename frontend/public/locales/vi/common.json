@@ -1,5 +1,5 @@
 {
-  "company" : "công ty cổ phần y dược vietlife",
+  "company" : "Công ty ngắm cảnh Viêt Nam",
   "byg.text1": "Xe bus thăm quan sẽ khởi hành theo bảng thời gian dưới đây:",
   "byg.text2": "Chú ý: Thời gian khởi hành có thể thay đổi dựa trên tình hình giao thông tại địa phương",
   "time_using": "Thời gian",
@@ -44,6 +44,8 @@
   "ticket": "Vé",
   "type": "Loại",
   "quantity": "Số lượng",
+  "name": "Họ tên",
+  "save.pdf": "Lưu về thiết bị",
 
   "form.inValid.min3char": "Nội dung phải có ít nhất 3 ký tự",
   "form.inValid.name": "Nhập đầy đủ họ và tên",
@@ -95,6 +97,7 @@
   "Photo tour": "Photo tour",
   "Treking tour": "Treking tour",
 
+  "co.t0": "Thanh toán",
   "co.t1": "Thông tin",
   "co.t2": "Choose Payment Options",
   "co.t3": "Agree with our term",
@@ -107,5 +110,10 @@
 
   "cart.t1": "Check out",
   "cart.t2": "Continue shopping",
-  "cart.t3": "Your have {{itemNum}} tours/ tickets in your cart"
+  "cart.t3": "Your have {{itemNum}} tours/ tickets in your cart",
+
+  "ticket.t1": "Vé của bạn",
+  "ticket.t2": "Cảm ơn bạn đã quan tâm đến dịch vụ của Công ty ngắm cảnh Việt Nam. Vé của bạn đã được gửi vào email đăng ký rồi nhé",
+
+  "error.t1": "Có lỗi xảy ra, xin vui lòng quay về trang chủ để bắt đầu lại"
 }

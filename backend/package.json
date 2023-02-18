@@ -20,6 +20,7 @@
     "@strapi/strapi": "^4.6.1",
     "mysql": "2.18.1",
     "patch-package": "^6.5.1",
+    "recaptcha-validator": "^2.0.0",
     "strapi-plugin-duplicate-button": "^1.1.7",
     "strapi-plugin-email-designer": "^2.1.2",
     "strapi-plugin-multi-select": "^1.1.0",

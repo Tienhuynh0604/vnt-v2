@@ -1,0 +1,135 @@
+div.ticket-container {
+  max-width: 1350px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.ticket-container .item {
+  padding: 0 20px;
+  background: #fff;
+  overflow: hidden;
+  margin: 10px;
+  display: flex;
+  border: 1px solid black;
+}
+
+.ticket-container .item-right, .ticket-container .item-left {
+}
+
+.ticket-container .item-right {
+  padding: 20px 20px;
+  margin-right: 20px;
+  position: relative;
+  flex-basis: 150px;
+  display: flex;
+  align-items: center;
+}
+
+.ticket-container .item-right .up-border, .ticket-container .item-right .down-border {
+  padding: 14px 15px;
+  background-color: #ddd;
+  border-radius: 50%;
+  position: absolute
+}
+
+.ticket-container .item-right .up-border {
+  top: -8px;
+  right: -35px;
+}
+
+.ticket-container .item-right .down-border {
+  bottom: -13px;
+  right: -35px;
+}
+
+.ticket-container .item-right .num {
+  font-size: 60px;
+  text-align: center;
+  color: #111
+}
+
+.ticket-container .item-right .day, .ticket-container .item-left .event {
+  color: #555;
+  font-size: 1rem;
+  margin-bottom: 9px;
+}
+
+.ticket-container .item-right .day {
+  text-align: center;
+  font-size: 1rem;
+}
+
+.ticket-container .item-left {
+  padding: 34px 0px 19px 46px;
+  border-left: 3px dotted #999;
+}
+
+.ticket-container .item-left .title {
+  color: #111;
+  font-size: 1rem;
+  margin-bottom: 12px
+}
+
+.ticket-container .item-left .sce {
+  margin-top: 5px;
+  display: block
+}
+
+.ticket-container .item-left .sce .icon, .ticket-container .item-left .sce p,
+.ticket-container .item-left .loc .icon, .ticket-container .item-left .loc p {
+  float: left;
+  word-spacing: 5px;
+  letter-spacing: 1px;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.ticket-container .item-left .sce .icon, .ticket-container .item-left .loc .icon {
+  margin-right: 10px;
+  font-size: 1rem;
+  color: #666
+}
+
+.ticket-container .item-left .loc {
+  display: block
+}
+
+.fix {
+  clear: both
+}
+
+.ticket-container .item .tickets, .booked, .cancel {
+  color: #fff;
+  padding: 6px 14px;
+  float: right;
+  margin-top: 10px;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer
+}
+
+.ticket-container .item .tickets {
+  background: #777
+}
+
+.ticket-container .item .booked {
+  background: #3D71E9
+}
+
+.ticket-container .item .cancel {
+  background: #DF5454
+}
+
+.linethrough {
+  text-decoration: line-through
+}
+
+@media only screen and (max-width: 1150px) {
+  .ticket-container .item {
+    width: 100%;
+    margin-right: 20px
+  }
+  div.ticket-container {
+    margin: 0 20px auto
+  }
+}

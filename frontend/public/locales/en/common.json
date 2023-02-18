@@ -1,5 +1,5 @@
 {
-  "company" : "công ty cổ phần y dược vietlife",
+  "company" : "VnSightseeing",
   "byg.text1": "Buses depart for Vietnam Sightseeing following timings:",
   "byg.text2": "Times are subject to change due to local traffic conditions.",
   "time_using": "Time using",
@@ -44,6 +44,8 @@
   "ticket": "Ticket",
   "type": "Type",
   "quantity": "Quantity",
+  "name": "Name",
+  "save.pdf": "Save to device",
 
   "form.inValid.min3char": "Please enter text that is at least 3 characters",
   "form.inValid.name": "Please enter your full name",
@@ -98,7 +100,8 @@
   "footer.t1": "Term and conditions",
   "footer.t2": "Support",
 
-  "co.t1": "Thông tin",
+  "co.t0": "Check out",
+  "co.t1": "Booking information",
   "co.t2": "Choose Payment Options",
   "co.t3": "Agree with our term",
   "co.t4": "Booking summary",
@@ -110,5 +113,10 @@
 
   "cart.t1": "Check out",
   "cart.t2": "Continue shopping",
-  "cart.t3": "Your have {{itemNum}} tours/ tickets in your cart"
+  "cart.t3": "Your have {{itemNum}} tours/ tickets in your cart",
+
+  "ticket.t1": "Your ticket",
+  "ticket.t2": "Thank you for purchasing. This is your ticket from Vn-sightseeing.com. Your ticket also sent to your email too.",
+
+  "error.t1": "Error occurred, please go back to homepage"
 }

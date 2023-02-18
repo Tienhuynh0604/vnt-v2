@@ -68,10 +68,10 @@ module.exports = ({strapi}) => ({
     let paymentUrl;
     switch (paymentMethod) {
       case "paypal":
-        paymentUrl = `/web-v2/order_create/paypal_url`;
+        paymentUrl = `/order_create/paypal_url`;
         break;
       case "vnpay":
-        paymentUrl = `/web-v2/order_create/vnpay_url`;
+        paymentUrl = `/order_create/vnpay_url`;
         break;
       default:
         throw new Error("Not supported payment");

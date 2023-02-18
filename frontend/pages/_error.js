@@ -3,17 +3,18 @@ import {Container, Button} from "react-bootstrap";
 import React from "react";
 import Link from "next/link";
 import EmptyLayout from "../layouts/EmptyLayouts";
+import {useTranslation} from "next-i18next";
 
 const Error = (props) => {
-    console.log("Error: ", props);
-    const {statusCode} = props;
+    const {t} = useTranslation("common");
+    const {statusCode, message} = props;
     return (
         <Container>
             <div className="d-flex align-items-center flex-column py-5">
                 <h1> {statusCode ? statusCode : '404'} </h1>
-                <div className="mb-5">Có lỗi xảy ra, xin vui lòng quay về trang chủ để bắt đầu lại</div>
+                <div className="mb-5">{message ? message : t("err.t1")}</div>
                 <Link href={'/'}>
-                    <Button color={"primary"}>Quay lại</Button>
+                    <Button color={"primary"}>{t("home")}</Button>
                 </Link>
             </div>
         </Container>

@@ -287,6 +287,18 @@ IPAD portrait, mobile landscape
   .tour-detail .image-slider-item .small-thumb {
     height: 90px;
   }
+
+  .ticket-container .item {
+    flex-direction: column;
+    margin: auto;
+    margin-bottom: 1rem;
+  }
+
+  .ticket-container .item-left{
+    border-top: 3px dotted #999;
+    border-left: none;
+    padding: 1rem 0;
+  }
 }
 
 /**

@@ -4,6 +4,9 @@ import {Formik} from "formik";
 import * as Yup from 'yup';
 import {useTranslation} from "react-i18next";
 import ReCAPTCHA from "react-google-recaptcha";
+import {createOrder} from "../../services/OrderService";
+import {useAppContext} from "../../layouts/AppLayout";
+import {toast} from "react-toastify";
 
 const CheckoutForm = ({children, className, initialValue}) => {
 
@@ -11,6 +14,7 @@ const CheckoutForm = ({children, className, initialValue}) => {
     const {t} = useTranslation("common");
     const [loading, setLoading] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+    const {locale} = useAppContext();
 
     const schema = Yup.object().shape({
         fullname: Yup.string()
@@ -29,17 +33,22 @@ const CheckoutForm = ({children, className, initialValue}) => {
         agreeWithTerm: Yup.bool()
             .oneOf([true], t("co.agree.term")),
         recaptcha: Yup.string().required(t("form.required.recaptcha")),
+        order: Yup.array().min(1, t("form.required.array")),
     });
 
     const handleSubmit = async (values) => {
         setLoading(true);
         setIsSuccess(false);
         try {
-            // const res = await createContact(values);
             console.log(values);
-            setIsSuccess(true);
+            const res = await createOrder(values, locale);
+            console.log(res.data);
+            window.location.href = res.data.data.url;
         } catch (e) {
-            console.error(e);
+            console.error(e.response?.data || e.message);
+            toast(e.message, {
+                type: "error"
+            })
         } finally {
             setLoading(false)
         }
