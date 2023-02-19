@@ -46,6 +46,7 @@
   "quantity": "Số lượng",
   "name": "Họ tên",
   "save.pdf": "Lưu về thiết bị",
+  "route": "Tuyến",
 
   "form.inValid.min3char": "Nội dung phải có ít nhất 3 ký tự",
   "form.inValid.name": "Nhập đầy đủ họ và tên",

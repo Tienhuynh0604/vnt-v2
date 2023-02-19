@@ -31,7 +31,7 @@ const Page = () => {
         try {
             setIsLoading(true);
             const res = await callGet(`/orders/get-payment/${token}`);
-            setData(res.data.data);
+            setData(res.data);
         } catch (e) {
             toast(e.message, {
                 type: "error"

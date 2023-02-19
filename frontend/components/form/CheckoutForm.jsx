@@ -43,13 +43,12 @@ const CheckoutForm = ({children, className, initialValue}) => {
             console.log(values);
             const res = await createOrder(values, locale);
             console.log(res.data);
-            window.location.href = res.data.data.url;
+            window.location.href = res.data.url;
         } catch (e) {
             console.error(e.response?.data || e.message);
             toast(e.message, {
                 type: "error"
-            })
-        } finally {
+            });
             setLoading(false)
         }
     };

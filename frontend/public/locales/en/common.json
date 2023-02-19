@@ -46,6 +46,7 @@
   "quantity": "Quantity",
   "name": "Name",
   "save.pdf": "Save to device",
+  "route": "Tuyến",
 
   "form.inValid.min3char": "Please enter text that is at least 3 characters",
   "form.inValid.name": "Please enter your full name",
