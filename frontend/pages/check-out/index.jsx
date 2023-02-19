@@ -263,7 +263,7 @@ const Page = () => {
                                     </div>
                                 </div>
                                 <div className="d-flex justify-content-center mt-5">
-                                    <Button disabled={loading || checkOutItems.length == 0}
+                                    <Button disabled={loading || checkOutItems.length === 0}
                                             type="submit"
                                             className="w-75 text-capitalize">
                                         {t('co.t5')}

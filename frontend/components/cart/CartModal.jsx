@@ -60,7 +60,6 @@ const CartModal = () => {
     };
 
     const addSelectedItem = (key, product, addIfNotExisted = true) => {
-        console.log("addSelectedItem", key, product);
         let newList = [...selectedItems];
         const idx = newList.findIndex(item => item.key === key);
         if (idx > -1) {

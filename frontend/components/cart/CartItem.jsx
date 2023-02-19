@@ -151,7 +151,6 @@ const CartItem = ({item, addSelectedItem, removeSelectedItem}) => {
                         name="sp1"
                         type={"checkbox"}
                         onChange={(e) => {
-                            console.log(e.target.checked, tour, priceList);
                             const productKey = genKeyProduct();
                             if (e.target.checked) {
                                 const itemAttrs = getItemAttributesArr();

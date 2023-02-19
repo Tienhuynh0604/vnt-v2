@@ -7,17 +7,66 @@ import {useAppContext} from "../../layouts/AppLayout";
 import {useTranslation} from "next-i18next";
 import moment from "moment";
 import {moneyFormat} from "../../ulti/helper";
+import Router, {useRouter} from "next/router";
+import {PATH_CHECK_OUT} from "../../ulti/appConst";
 
 const BookingConfirmStep = ({productData, productId, priceList, onBack}) => {
 
-    console.log(priceList);
     const {t} = useTranslation("common");
-    const {setBookingModal, locale, setCartModal} = useAppContext();
+    const {setBookingModal, locale, setCartModal, setCheckOutItems} = useAppContext();
+
+    const onCheckOut = async () => {
+        try {
+            const attributes = [];
+            let productKeys = priceList.map(item => item.product.rawProduct.price_id);
+            productKeys.sort((a, b) => b - a);
+
+            const temp = priceList[0].product.rawProduct;
+            Object.keys(temp).forEach(key => {
+                if (['price_id', 'price', 'usd_price', 'age_group'].indexOf(key) === -1
+                    && temp[key]) {
+                    const attText = t(`${key}_${temp[key]}`);
+                    if (attributes.findIndex(item => item === attText) === -1) {
+                        attributes.push(attText);
+                    }
+                }
+            });
+
+            const pl = [];
+            priceList.forEach(item => {
+                pl.push({
+                    priceId: item.priceId,
+                    quantity: item.quantity,
+                    price: item.product.rawProduct.price,
+                    usdPrice: item.product.rawProduct.usd_price,
+                })
+            });
+
+            const checkoutItem = {
+                tour: productData.tour,
+                key: `${productId}${productKeys.join("_")}`,
+                itemAttrs: attributes,
+                priceList: pl
+            };
+
+            setCheckOutItems([checkoutItem]);
+            await Router.push(`/${PATH_CHECK_OUT}`);
+            setBookingModal(prev => ({
+                ...prev,
+                isVisible: false
+            }));
+        } catch (e) {
+            console.error(e);
+            toast(e.message, {
+                type: "error"
+            })
+        }
+    };
 
     const onAddToCart = () => {
         try {
             const attributes = {};
-            let productKey = [];
+            let productKeys = [];
             const temp = priceList[0].product.rawProduct;
             Object.keys(temp).forEach(key => {
                 if (['price_id', 'price', 'usd_price', 'age_group'].indexOf(key) === -1
@@ -28,8 +77,8 @@ const BookingConfirmStep = ({productData, productId, priceList, onBack}) => {
                     if (attributes[key].indexOf(temp[key]) === -1) {
                         attributes[key].push(temp[key]);
                     }
-                    productKey.push(`${temp[key]}`);
-                    productKey.sort((a, b) => a - b);
+                    productKeys.push(`${temp[key]}`);
+                    productKeys.sort((a, b) => a - b);
                 }
             });
             const pl = [];
@@ -47,7 +96,7 @@ const BookingConfirmStep = ({productData, productId, priceList, onBack}) => {
 
             const cartItem = {
                 id: productId,
-                key: `${productId}_${productKey.join("_")}`,
+                key: `${productId}_${productKeys.join("_")}`,
                 type: productData.attributes.type,
                 routerId: productData.attributes.router_id,
                 cityId: productData.attributes.city_id,
@@ -120,7 +169,7 @@ const BookingConfirmStep = ({productData, productId, priceList, onBack}) => {
         <Table className="mt-4 booking-table" striped responsive>
             <tbody>
             <tr>
-                <th>{productData.rawProduct?.attributes.name}</th>
+                <th>{productData?.tour?.attributes?.title}</th>
                 <th className="text-end"></th>
             </tr>
             <tr>
@@ -155,18 +204,12 @@ const BookingConfirmStep = ({productData, productId, priceList, onBack}) => {
                 <span className="d-none d-md-block">Back</span>
                 <Icon icon={"eva:arrow-ios-back-fill"} className="d-sm-block d-md-none" height={24}/>
             </Button>
-            <Link href="/check-out"
-                  onClick={() => {
-                      setBookingModal(prevState => ({
-                          ...prevState,
-                          isVisible: false
-                      }));
-                  }}
-            >
-                <Button type="button" variant="outline-primary" className="px-md-3 py-md-2">
-                    {t("Check out now")}
-                </Button>
-            </Link>
+            <Button type="button"
+                    onClick={() => onCheckOut()}
+                    variant="outline-primary"
+                    className="px-md-3 py-md-2">
+                {t("Check out now")}
+            </Button>
             <Button type="button"
                     className="cart-btn px-md-5 py-md-2"
                     onClick={() => {

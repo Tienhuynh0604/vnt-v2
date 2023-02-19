@@ -2,7 +2,7 @@ import React, {memo, useEffect, useState} from "react";
 import {Button, Col, Form, Row, Table} from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import InputNumberPlusMinus from "../InputNumberPlusMinus";
-import {callGet, moneyFormat} from "../../../ulti/helper";
+import {callGet, imagePopulate, moneyFormat} from "../../../ulti/helper";
 import {toast} from "react-toastify";
 import Skeleton from 'react-loading-skeleton';
 import {useTranslation} from "next-i18next";
@@ -23,7 +23,7 @@ const TicketBusStep = ({
 
     useEffect(() => {
         if (productId) {
-            getPaymentDetail(productId).catch(e => console.error(e));
+            getTourDetail(productId).catch(e => console.error(e));
         }
     }, [productId]);
 
@@ -46,12 +46,32 @@ const TicketBusStep = ({
         setPriceList(newPriceList);
     };
 
-    const getPaymentDetail = async (productId) => {
+    const getTourDetail = async (productId) => {
         try {
             setIsLoading(true);
+            const res = await callGet(`/tours/${productId}`, {
+                fields: ['title', 'slug'],
+                pagination: {
+                    page: 1,
+                    pageSize: 1
+                },
+            }, locale, true);
+            const tour = res.data;
+            await getPaymentDetail(productId, tour);
+        } catch (e) {
+            console.error(e);
+            toast(e.message, {
+                type: "error"
+            });
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const getPaymentDetail = async (productId, tour) => {
+        try {
             console.log("getPaymentDetail");
             const res = await callGet(`/tours/payment-product/${productId}`);
-            console.log(res.data);
             //Collect ticket Attributes
             const {priceList} = res.data.attributes;
             let attributes = {};
@@ -82,14 +102,12 @@ const TicketBusStep = ({
             setProductData({
                 rawProduct: res.data,
                 products: ps,
-                attributes
+                attributes,
+                tour
             });
         } catch (e) {
-            toast(e.message, {
-                type: "error"
-            });
-        } finally {
-            setIsLoading(false);
+            console.error(e);
+            throw e;
         }
     };
 
@@ -154,7 +172,7 @@ const TicketBusStep = ({
         {isLoading ? <p><Skeleton count={3}/></p> : <>
             <Form>
                 <Form.Group as={Row} className="mb-3" controlId="bookingDate">
-                    <h5>{productData.rawProduct?.attributes.name}</h5>
+                    <h5>{productData.tour?.attributes?.title}</h5>
                     <Form.Label column sm="2">
                         {t("Choose date")}
                     </Form.Label>
@@ -168,7 +186,7 @@ const TicketBusStep = ({
                         />
                     </Col>
                 </Form.Group>
-                {Object.keys(productData?.attributes).map((key, idx) => {
+                {productData?.attributes && Object.keys(productData?.attributes).map((key, idx) => {
                     if (key !== "age_group") {
                         return (
                             <Form.Group as={Row}
