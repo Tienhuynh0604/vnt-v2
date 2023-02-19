@@ -58,6 +58,10 @@ module.exports = createCoreController('api::order.order', ({strapi}) => ({
       for (let o of order) {
         const {tourId} = o;
 
+        if (o.quantity <= 0) {
+          continue;
+        }
+
         const dupIdx = tourIds.findIndex(item => item === tourId);
         if (dupIdx < 0) {
           tourIds.push(tourId);
@@ -87,6 +91,10 @@ module.exports = createCoreController('api::order.order', ({strapi}) => ({
         }
         product['router_id'] = paymentProduct.routerId;
         finalOrder.push(product);
+      }
+
+      if (finalOrder.length === 0) {
+        throw ValidationError(`Final order empty`);
       }
 
       //Create customer
