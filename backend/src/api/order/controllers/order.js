@@ -11,7 +11,7 @@ const recaptchaValidator = require('recaptcha-validator');
 module.exports = createCoreController('api::order.order', ({strapi}) => ({
   async createOrder(ctx) {
     try {
-      console.log("createOrder Body", ctx.request.body);
+      strapi.log.info("createOrder Body: %s", JSON.stringify(ctx.request.body));
 
       const {data} = ctx.request.body;
       if (!data) {
@@ -75,7 +75,8 @@ module.exports = createCoreController('api::order.order', ({strapi}) => ({
         totalItem += o.quantity;
 
         const paymentProduct = await strapi.service('api::tour.tour').getPaymentProduct(tourId);
-        console.log(paymentProduct);
+        strapi.log.info(JSON.stringify(paymentProduct));
+
         const dupPaymentIdx = paymentVnss.findIndex(item => item === paymentProduct.id);
         if (dupPaymentIdx < 0) {
           paymentVnss.push(paymentProduct.id);
@@ -106,6 +107,8 @@ module.exports = createCoreController('api::order.order', ({strapi}) => ({
         });
       }
 
+      totalAmountUsd = parseFloat(totalAmountUsd.toFixed(2));
+
       let orderData = {
         customer: customer.id,
         tours: tourIds,
@@ -120,7 +123,7 @@ module.exports = createCoreController('api::order.order', ({strapi}) => ({
         status: "Waiting"
       };
 
-      console.log(orderData);
+      strapi.log.info(JSON.stringify(orderData));
       const orderModel = strapi.contentTypes[("api::order.order")];
       await strapi.entityValidator.validateEntityCreation(orderModel, orderData, {});
       let newOrder = await strapi.entityService.create('api::order.order', {
@@ -137,7 +140,7 @@ module.exports = createCoreController('api::order.order', ({strapi}) => ({
         order: finalOrder
       };
 
-      console.log(paymentData);
+      strapi.log.info(JSON.stringify(paymentData));
 
       let resData = null;
       try {
@@ -145,7 +148,14 @@ module.exports = createCoreController('api::order.order', ({strapi}) => ({
           .plugin('payment-vns')
           .service('paymentVnsService')
           .createOrder('en', paymentType, paymentData);
-        console.log(res.data);
+        strapi.log.info(JSON.stringify(res.data));
+        if (res.data.code !== 0) {
+          throw new Error(JSON.stringify({
+            message: res.data.message,
+            error: res.data,
+            params: paymentData,
+          }));
+        }
         resData = res.data;
       } catch (e) {
         if (e.response?.data) {
@@ -159,7 +169,7 @@ module.exports = createCoreController('api::order.order', ({strapi}) => ({
         } else {
           await strapi.entityService.update('api::order.order', newOrder.id, {
             data: {
-              paymentTokenRaw: JSON.stringify(e.message),
+              paymentTokenRaw: e.message,
               status: "Error"
             }
           });
@@ -168,15 +178,24 @@ module.exports = createCoreController('api::order.order', ({strapi}) => ({
       }
 
       const retParams = new URLSearchParams(resData.data.split("?")[1]);
-      const getToken = retParams.get("vnp_SecureHash");
+      let getToken;
+      switch (paymentType) {
+        case "paypal":
+          getToken = retParams.get("token");
+          break;
+        case "vnpay":
+          getToken = retParams.get("vnp_SecureHash");
+          break;
+        default:
+          getToken = `Unknown payment type: ${paymentType}`;
+          break;
+      }
       newOrder = await strapi.entityService.update('api::order.order', newOrder.id, {
         data: {
           paymentToken: getToken,
           paymentTokenRaw: resData,
         }
       });
-
-      console.log("Updated", newOrder);
 
       ctx.body = {
         data: {
@@ -185,7 +204,7 @@ module.exports = createCoreController('api::order.order', ({strapi}) => ({
         },
       }
     } catch (e) {
-      console.log(e);
+      strapi.log.error(e);
       ctx.throw(500, e);
     }
   },

@@ -62,11 +62,11 @@ export const callPost = async (urlPath, dataObj, locale = 'en', queryObj = {}) =
         let baseUrl = getBaseUrl();
         locale = getLocale(locale);
 
-        const query = qs.stringify(queryObj, {
-            encodeValuesOnly: true
-        });
+        // const query = qs.stringify(queryObj, {
+        //     encodeValuesOnly: true
+        // });
 
-        const url = `${baseUrl}${urlPath}?${query}`;
+        const url = `${baseUrl}${urlPath}`;
 
         dataObj = {
             ...dataObj,
@@ -83,7 +83,6 @@ export const callPost = async (urlPath, dataObj, locale = 'en', queryObj = {}) =
         });
         return res.data;
     } catch (e) {
-        console.error(url);
         throw e;
     }
 };
