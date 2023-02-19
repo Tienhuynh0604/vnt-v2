@@ -31,22 +31,11 @@ export const createCanonicalUrl = (path, req) => {
     return `${origin}${path}`;
 };
 
-export const createSeoFromFaq = (req, originalSeo, basePath = null, model = null, locale = "en") => {
-    let seo = originalSeo;
-    if (!model || !req) {
-        return seo;
-    }
-    seo.canonicalURL = createCanonicalUrl(`/${locale}${basePath ? basePath : ""}/faq/${model.id}`, req);
-    if (model.seo) {
-        return {
-            ...model.seo,
-            canonicalURL: seo.canonicalURL
-        };
-    }
-    seo.metaTitle = `${model.attributes.title}`;
-    seo.metaDescription = originalSeo.metaDescription;
-    seo.metaSocial = null;
-    return seo;
+export const createSimpleSeo = (req, basePath, title, locale = "en") => {
+    return {
+        canonicalURL: createCanonicalUrl(`/${locale}${basePath ? basePath : ""}`, req),
+        metaTitle: title
+    };
 };
 
 export const createSeoFromCategory = (req, basePath = null, model = null, locale = "en") => {
@@ -71,20 +60,12 @@ export const createSeoFromCategory = (req, basePath = null, model = null, locale
     return seo;
 };
 
-export const createSeoFromTour = (req, originalSeo, basePath = null, model = null, locale = "en") => {
-
-};
-
-export const createSeoFromArticle = (req, originalSeo, basePath = null, model = null, locale = "en") => {
-    let seo = originalSeo;
-    if (model.categories && model.categories.data.length > 0) {
-        seo.canonicalURL = createCanonicalUrl(
-            `${basePath ? basePath : "single"}/${model.categories.data[0].attributes.slug}/${model.slug}`,
-            req
-        );
-    } else {
-        seo.canonicalURL = createCanonicalUrl(`/${locale}${basePath}/${model.slug}`, req);
+export const createSeoFromTour = (req, basePath = null, model = null, locale = "en") => {
+    let seo = {};
+    if (!model || !req) {
+        return seo;
     }
+    seo.canonicalURL = createCanonicalUrl(`/${locale}${basePath ? basePath : ""}/${model.attributes.slug}`, req);
 
     if (model.seo) {
         return {
@@ -93,10 +74,35 @@ export const createSeoFromArticle = (req, originalSeo, basePath = null, model = 
         };
     }
 
-    seo.metaTitle = `${model.title}`;
-    seo.metaDescription = model.shortDescription ? model.shortDescription : originalSeo.metaDescription;
+    seo.metaTitle = `${model.attributes.title}`;
+    seo.metaDescription = `${model.attributes.shortDescription}`;
+    if (model.attributes?.images?.data?.length > 0) {
+        seo.metaImage = {
+            data: model.attributes?.images?.data[0]
+        };
+    }
+    seo.metaSocial = null;
+    return seo;
+};
 
-    if (model.thumbnail && model.thumbnail.data) {
+export const createSeoFromArticle = (req, basePath = null, model = null, locale = "en") => {
+    let seo = {};
+    seo.canonicalURL = createCanonicalUrl(
+        `/${locale}${basePath}/${model.attributes.slug}`,
+        req
+    );
+
+    if (model.seo) {
+        return {
+            ...model.seo,
+            canonicalURL: seo.canonicalURL
+        };
+    }
+
+    seo.metaTitle = `${model.attributes.title}`;
+    seo.metaDescription = model.attributes.shortDescription;
+
+    if (model.attributes.thumb?.data) {
         seo.metaImage = model.thumbnail;
     }
     seo.metaSocial = null;

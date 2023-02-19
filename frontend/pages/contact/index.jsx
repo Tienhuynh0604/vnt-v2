@@ -6,8 +6,9 @@ import { useTranslation } from "next-i18next";
 import DecorComponent from "../../components/DecorComponent";
 import { useAppContext } from "../../layouts/AppLayout";
 import ContactForm from "../../components/form/ContactForm";
-import { renderContactItem } from "../../ulti/appUtil";
+import {createSimpleSeo, renderContactItem} from "../../ulti/appUtil";
 import Link from "next/link";
+import {PATH_CONTACT, PATH_GALLERY} from "../../ulti/appConst";
 
 const Page = ({ models = [] }) => {
     const { t } = useTranslation("common");
@@ -179,9 +180,14 @@ const Page = ({ models = [] }) => {
 };
 
 export const getServerSideProps = async (context) => {
-    const { locale = 'en' } = context;
+    const { locale = 'en' , req} = context;
+    let seoCustom = createSimpleSeo(req,
+        `/${PATH_CONTACT}`,
+        "Vietnam Sightseeing - Contact",
+        locale);
     return {
         props: {
+            seoCustom,
             ...(await serverSideTranslations(locale, ['common'])),
         },
     }

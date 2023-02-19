@@ -27,7 +27,8 @@ const Seo = ({seo = {}, seoCustom = {}}) => {
         metaSocial
     } = finalSeo;
 
-    const metaImageData = metaImage && metaImage.data ? metaImage.data.attributes : null;
+    const metaImageData = metaImage?.data?.attributes ? metaImage.data.attributes
+        : null;
 
     const SocialMetaTags = () => {
         let metaTags = [];

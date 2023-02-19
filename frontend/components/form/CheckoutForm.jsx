@@ -14,7 +14,7 @@ const CheckoutForm = ({children, className, initialValue}) => {
     const {t} = useTranslation("common");
     const [loading, setLoading] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
-    const {locale} = useAppContext();
+    const {locale, setCheckOutItems} = useAppContext();
 
     const schema = Yup.object().shape({
         fullname: Yup.string()
@@ -44,6 +44,7 @@ const CheckoutForm = ({children, className, initialValue}) => {
             const res = await createOrder(values, locale);
             console.log(res.data);
             window.location.href = res.data.url;
+            setCheckOutItems([]);
         } catch (e) {
             console.error(e.response?.data || e.message);
             toast(e.message, {

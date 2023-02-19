@@ -8,10 +8,10 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useTranslation} from "next-i18next";
 import moment from "moment";
 import Link from "next/link";
-import {renderFillImage, renderImage} from "../../ulti/appUtil";
+import {createSimpleSeo, renderFillImage, renderImage} from "../../ulti/appUtil";
 import {Icon} from '@iconify/react';
 import {strapPagination} from "../../ulti/strapiHelper";
-import {PATH_NEWS} from "../../ulti/appConst";
+import {PATH_CONTACT, PATH_NEWS} from "../../ulti/appConst";
 import RecentTours from "../../components/articles/RecentTours";
 import RecentPosts from "../../components/articles/RecentPost";
 import SearchArticleForm from "../../components/form/SearchArticleForm";
@@ -96,6 +96,7 @@ export const getServerSideProps = async (context) => {
     const {locale, query, req} = context;
     const {s = null, page = 1} = query;
     let articles = [];
+    let seoCustom = {};
     let articlesPagination = {
         page,
         pageSize: 12
@@ -116,7 +117,10 @@ export const getServerSideProps = async (context) => {
             pagination: articlesPagination
         });
         articles = res2.data;
-
+        seoCustom = createSimpleSeo(req,
+            `/${PATH_NEWS}`,
+            "Vietnam Sightseeing - News",
+            locale);
     } catch (e) {
         console.error(e);
     }
@@ -126,6 +130,7 @@ export const getServerSideProps = async (context) => {
             articles,
             articlesPagination,
             query,
+            seoCustom,
             ...(await serverSideTranslations(locale, ['common'])),
         },
     }

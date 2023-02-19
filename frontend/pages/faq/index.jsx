@@ -6,6 +6,8 @@ import {useTranslation} from "next-i18next";
 import DecorComponent from "../../components/DecorComponent";
 import {callGet} from "../../ulti/helper";
 import AppPagination from "../../components/AppPagination";
+import {createSimpleSeo} from "../../ulti/appUtil";
+import {PATH_FAQ, PATH_NEWS} from "../../ulti/appConst";
 
 const Page = ({model, query = {}}) => {
     const {t} = useTranslation("common");
@@ -43,9 +45,10 @@ const Page = ({model, query = {}}) => {
 };
 
 export const getServerSideProps = async (context) => {
-    const {locale = 'en', query} = context;
+    const {locale = 'en', query, req} = context;
 
     let model = {};
+    let seoCustom = {};
     try {
         const res = await callGet("/faqs", {
             sortBy: ['id:desc'],
@@ -55,6 +58,10 @@ export const getServerSideProps = async (context) => {
             }
         }, locale);
         model = res;
+        seoCustom = createSimpleSeo(req,
+            `/${PATH_FAQ}`,
+            "Vietnam Sightseeing - FAQ",
+            locale);
     } catch (e) {
         console.error(e);
         model = {
@@ -72,6 +79,7 @@ export const getServerSideProps = async (context) => {
         props: {
             model,
             query,
+            seoCustom,
             ...(await serverSideTranslations(locale, ['common'])),
         },
     }

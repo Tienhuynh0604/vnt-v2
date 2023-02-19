@@ -4,11 +4,10 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useTranslation} from "react-i18next";
 import PageLayout from "../../layouts/PageLayout";
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
-import {renderFillImage} from "../../ulti/appUtil";
+import {createSeoFromArticle, renderFillImage} from "../../ulti/appUtil";
 import {Icon} from "@iconify/react";
 import moment from "moment";
 import Link from "next/link";
-import {strapPagination} from "../../ulti/strapiHelper";
 import DecorComponent from "../../components/DecorComponent";
 import {PATH_NEWS} from "../../ulti/appConst";
 import RecentPosts from "../../components/articles/RecentPost";
@@ -17,8 +16,6 @@ import SearchArticleForm from "../../components/form/SearchArticleForm";
 
 const ArticleDetailPage = ({model, nModel, pModel}) => {
     const {t} = useTranslation("common");
-
-    console.log(nModel, pModel);
 
     return <PageLayout className="pb-0"
                        title={model.attributes.title}
@@ -134,6 +131,7 @@ export const getServerSideProps = async (context) => {
     let model = null;
     let nModel = null;
     let pModel = null;
+    let seoCustom = {};
     try {
         const res = await callGet("/articles", {
             filters: {
@@ -181,9 +179,10 @@ export const getServerSideProps = async (context) => {
         }, locale, true);
 
         const [nextModel, preModel] = await Promise.all([p1, p2]);
-        console.log("Next articles: ", nextModel.data, preModel.data);
         nModel = nextModel.data[0] || null;
         pModel = preModel.data[0] || null;
+
+        seoCustom = createSeoFromArticle(req, `/${PATH_NEWS}`, model, locale);
 
     } catch (e) {
         console.error(e);
@@ -194,6 +193,7 @@ export const getServerSideProps = async (context) => {
             model,
             nModel,
             pModel,
+            seoCustom,
             ...(await serverSideTranslations(locale, ['common'])),
         },
     }

@@ -25,7 +25,8 @@ const CartModal = () => {
         setCartModal({
             ...cartModal,
             isVisible: false,
-        })
+        });
+        setSelectedItems([]);
     };
 
     const renderCartItems = () => {
@@ -69,12 +70,10 @@ const CartModal = () => {
                 newList.push(product);
             }
         }
-        console.log(newList);
         setSelectedItems(newList);
     };
 
     const removeSelectedItem = (key) => {
-        console.log("removeSelectedItem", key);
         let newList = [...selectedItems];
         setSelectedItems(newList.filter(item => {
             return item.key !== key;
@@ -83,13 +82,14 @@ const CartModal = () => {
 
     const checkOut = async () => {
         if (selectedItems.length > 0 && getSubTotal() > 0) {
-            console.log(selectedItems);
             setCheckOutItems(selectedItems);
-            setCartModal(prev => ({
-                ...prev,
-                isVisible: false,
-            }));
             await Router.push(`/${PATH_CHECK_OUT}`);
+            setCartModal({
+                ...cartModal,
+                isVisible: false,
+                items: [],
+            });
+            setSelectedItems([])
         } else {
             toast(t("check_out_no_product"), {
                 type: "error"
@@ -135,7 +135,8 @@ const CartModal = () => {
                         <span className="d-none d-lg-block text-capitalize">{t("continue shopping")}</span>
                         <Icon icon={"eva:arrow-back-outline"} className="d-sm-block d-lg-none" height={24}/>
                     </Button>
-                    <Button type="button" disabled={selectedItems.length === 0}
+                    <Button type="button"
+                            disabled={selectedItems.length === 0}
                             onClick={() => checkOut()}
                             className="cart-btn px-md-5 py-md-2">
                         <span className="text-capitalize">{t("check out")}</span>

@@ -9,10 +9,11 @@ import DecorComponent from "../../components/DecorComponent";
 import lgThumbnail from 'lightgallery/plugins/thumbnail';
 import lgZoom from 'lightgallery/plugins/zoom';
 import {callGet, getImageUrl, imagePopulate} from "../../ulti/helper";
-import {nl2br} from "../../ulti/appUtil";
+import {createSimpleSeo, nl2br} from "../../ulti/appUtil";
 import {useAppContext} from "../../layouts/AppLayout";
 import AppPagination from "../../components/AppPagination";
 import Router from 'next/router';
+import {PATH_FAQ, PATH_GALLERY} from "../../ulti/appConst";
 
 const Page = ({galleries = {}, destinations = [], query = {}}) => {
     const {t} = useTranslation("common");
@@ -143,7 +144,7 @@ const getGalleries = async (locale, filters = {}, pagination = {
 };
 
 export const getServerSideProps = async (context) => {
-    const {locale = 'en', query = {}} = context;
+    const {locale = 'en', query = {}, req} = context;
 
     let galleries = {
         data: [],
@@ -153,6 +154,7 @@ export const getServerSideProps = async (context) => {
         }
     };
     let destinations = [];
+    let seoCustom = {};
     try {
         const resDestinations = await callGet("/destinations", {
             sortBy: ['name:asc'],
@@ -173,6 +175,10 @@ export const getServerSideProps = async (context) => {
                 pageSize: query.pageSize ? query.pageSize : 20
             });
         destinations = resDestinations.data;
+        seoCustom = createSimpleSeo(req,
+            `/${PATH_GALLERY}`,
+            "Vietnam Sightseeing - Gallery",
+            locale);
     } catch (e) {
         console.error(e);
     }
@@ -181,6 +187,7 @@ export const getServerSideProps = async (context) => {
         props: {
             galleries,
             destinations,
+            seoCustom,
             query,
             ...(await serverSideTranslations(locale, ['common'])),
         },

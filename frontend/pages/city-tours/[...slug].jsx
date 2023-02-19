@@ -13,9 +13,16 @@ import LightGallery from "lightgallery/react";
 import DecorComponent from "../../components/DecorComponent";
 import {useAppContext} from "../../layouts/AppLayout";
 import Error from "../_error";
-import {getMinPriceMaxPrice, renderContactItem, renderDynamicFeature, renderImage} from "../../ulti/appUtil";
+import {
+    createSeoFromCategory, createSeoFromTour,
+    getMinPriceMaxPrice,
+    renderContactItem,
+    renderDynamicFeature,
+    renderImage
+} from "../../ulti/appUtil";
 import MainStopSlider from "../../components/city-tours/MainStopSlider";
 import Image from "next/image";
+import {PATH_CITY_TOURS} from "../../ulti/appConst";
 
 const Page = ({model, paymentProduct}) => {
     const {t} = useTranslation("common");
@@ -163,7 +170,7 @@ const Page = ({model, paymentProduct}) => {
                 </div>
                 {renderBookingButton(model?.attributes?.hideBookingButton)}
             </div>
-            <ImageSlider images={model.attributes.images.data}/>
+            <ImageSlider images={model.attributes?.images?.data}/>
             <div className='mt-3 tour-detail-sticky'>
                 <TourFeatures id={"tour-feature"} features={model.attributes?.features}/>
             </div>
@@ -240,6 +247,7 @@ export const getServerSideProps = async (context) => {
     // const {}
     let model = null;
     let paymentProduct = null;
+    let seoCustom = {};
     try {
         const res = await callGet("/tours", {
             filters: {
@@ -281,8 +289,11 @@ export const getServerSideProps = async (context) => {
             console.log(model);
             const res2 = await callGet(`/tours/payment-product/${model.id}`);
             paymentProduct = res2.data;
+            seoCustom = createSeoFromTour(req
+                , `/${PATH_CITY_TOURS}/${model.attributes?.destination?.data.attributes.slug}`
+                , model
+                , locale);
         }
-
     } catch (e) {
         console.error(e.message);
     }
@@ -291,6 +302,7 @@ export const getServerSideProps = async (context) => {
         props: {
             model,
             paymentProduct,
+            seoCustom,
             ...(await serverSideTranslations(locale, ['common'])),
         },
     }

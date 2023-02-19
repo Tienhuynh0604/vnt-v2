@@ -12,7 +12,7 @@ const Error = (props) => {
         <Container>
             <div className="d-flex align-items-center flex-column py-5">
                 <h1> {statusCode ? statusCode : '404'} </h1>
-                <div className="mb-5">{message ? message : t("err.t1")}</div>
+                <div className="mb-5">{message ? message : t("error.t1")}</div>
                 <Link href={'/'}>
                     <Button color={"primary"}>{t("home")}</Button>
                 </Link>
