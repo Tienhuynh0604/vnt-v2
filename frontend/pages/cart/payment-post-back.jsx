@@ -7,12 +7,12 @@ import React, {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import Skeleton from 'react-loading-skeleton';
 import {toast} from "react-toastify";
-import Error from "../_error";
 import QRCode from "react-qr-code";
 import {Icon} from "@iconify/react";
 import html2canvas from "html2canvas";
 import downloadjs from 'downloadjs';
 import {callGet} from "../../ulti/helper";
+import Error from "next/error";
 
 const Page = () => {
     const {t} = useTranslation("common");

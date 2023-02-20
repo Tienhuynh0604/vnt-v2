@@ -12,7 +12,6 @@ import TourFeatureDetail from "../../components/city-tours/TourFeatureDetail";
 import LightGallery from "lightgallery/react";
 import DecorComponent from "../../components/DecorComponent";
 import {useAppContext} from "../../layouts/AppLayout";
-import Error from "../_error";
 import {
     createSeoFromCategory, createSeoFromTour,
     getMinPriceMaxPrice,
@@ -23,6 +22,7 @@ import {
 import MainStopSlider from "../../components/city-tours/MainStopSlider";
 import Image from "next/image";
 import {PATH_CITY_TOURS} from "../../ulti/appConst";
+import Error from "next/error";
 
 const Page = ({model, paymentProduct}) => {
     const {t} = useTranslation("common");
@@ -286,7 +286,6 @@ export const getServerSideProps = async (context) => {
 
         if (res.data.length > 0) {
             model = res.data[0];
-            console.log(model);
             const res2 = await callGet(`/tours/payment-product/${model.id}`);
             paymentProduct = res2.data;
             seoCustom = createSeoFromTour(req
@@ -296,6 +295,7 @@ export const getServerSideProps = async (context) => {
         }
     } catch (e) {
         console.error(e.message);
+        model = null;
     }
 
     return {

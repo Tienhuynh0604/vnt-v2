@@ -5,8 +5,8 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useTranslation} from "next-i18next";
 import Image from "next/image";
 import {callGet, imagePopulate} from "../../ulti/helper";
-import Error from "../_error";
 import {strapiImg} from "../../ulti/strapiHelper";
+import Error from "next/error";
 
 const Page = ({model}) => {
     const {t} = useTranslation("common");
@@ -73,17 +73,23 @@ const Page = ({model}) => {
 export const getServerSideProps = async (context) => {
     const {locale = 'en'} = context;
 
-    const res = await callGet("/about-us", {
-        populate: {
-            images: imagePopulate()
-        }
-    });
+    let model = null;
+    try{
+        const res = await callGet("/about-us", {
+            populate: {
+                images: imagePopulate()
+            }
+        });
+    
+        model = res.data;
+    }catch(e){
+        console.log(e.response?.data || e.message);
 
-    console.log(res);
+    }
 
     return {
         props: {
-            model: res?.data,
+            model: model,
             ...(await serverSideTranslations(locale, ['common'])),
         },
     }

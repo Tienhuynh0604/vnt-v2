@@ -101,7 +101,7 @@ const Page = ({galleries = {}, destinations = [], query = {}}) => {
                                 // width={smallImg.width}
                                 // height={smallImg.height}
                                    fill
-                                   objectFit={"cover"}
+                                   style={{objectFit:"cover"}}
                                    alt={item.attributes.alternativeText ? item.attributes.alternativeText : item.attributes.name}/>
                         </div>
                     })}

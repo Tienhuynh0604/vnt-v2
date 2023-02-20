@@ -164,7 +164,7 @@ export const renderFillImage = (image, props = {}) => {
     return <Image alt={image.data.attributes.name}
                   src={getImageUrl(image.data.attributes.url)}
                   fill
-                  objectFit={"cover"}
+                  style={{objectFit:"cover"}}
                   {...props}
     />
 };

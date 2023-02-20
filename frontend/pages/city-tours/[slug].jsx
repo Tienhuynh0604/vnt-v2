@@ -9,10 +9,10 @@ import {useTranslation} from "next-i18next";
 import PopularDestination from "../../components/city-tours/PopularDestination";
 import {Icon} from "@iconify/react";
 import Link from "next/link";
-import Error from "../_error";
 import {PATH_CITY_TOURS, PATH_NEWS} from "../../ulti/appConst";
 import {useAppContext} from "../../layouts/AppLayout";
 import {createSeoFromCategory, renderContactItem} from "../../ulti/appUtil";
+import Error from "next/error";
 
 const Index = (props) => {
     const {locale, setCurrentDes, currentDes, destinations} = useAppContext();
@@ -118,6 +118,10 @@ export const getServerSideProps = async (context) => {
             }
         }, locale, true);
 
+        if(res.data.length === 0){
+            throw new Error(`Not found: ${slug}`);
+        }
+
         model = res.data[0];
 
         const res2 = await callGet("/articles", {
@@ -138,7 +142,10 @@ export const getServerSideProps = async (context) => {
         seoCustom = createSeoFromCategory(req, `/${PATH_CITY_TOURS}`, model, locale);
     } catch (e) {
         console.error(e);
+        model = null;
     }
+
+    console.log("ddddddđ",model);
 
     return {
         props: {
