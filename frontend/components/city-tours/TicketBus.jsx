@@ -26,18 +26,18 @@ const TicketBus = ({destination, query = {}}) => {
         getTourInformation().catch(e => console.error(e));
     }, [destination]);
 
-    const onChangeTab = (tab) => {
+    const onChangeTab = async (tab) => {
         if (tab !== currentSelect) {
             setCurrentSelect(tab);
-            getTourList(tab);
+            await getTourList(tab);
         }
     };
 
-    const onChangePage = (page) => {
-        getTourInformation(page);
+    const onChangePage = async (page) => {
+        await getTourInformation(page);
     };
 
-    const getTourInformation = async () => {
+    const getTourInformation = async (page) => {
         try {
             const res = await callGet("/categories", {
                 fields: ["name", "slug"],
@@ -55,7 +55,7 @@ const TicketBus = ({destination, query = {}}) => {
                 setCurrentSelect(selected);
             }
 
-            await getTourList(selected, 1);
+            await getTourList(selected, page);
         } catch (e) {
             console.error(e);
         }
@@ -96,7 +96,6 @@ const TicketBus = ({destination, query = {}}) => {
                     page
                 }
             }, locale);
-            console.log(res.data);
             setTours(res);
         } catch (e) {
             toast(e.message, {

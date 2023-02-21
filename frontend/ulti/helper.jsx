@@ -87,7 +87,7 @@ export const callPost = async (urlPath, dataObj, locale = 'en', queryObj = {}) =
     }
 };
 
-export const callGet = async (urlPath, queryObj, locale, cache = false) => {
+export const callGet = async (urlPath, queryObj, locale, cache = true) => {
     try {
         let baseUrl = getBaseUrl();
         locale = getLocale(locale);
