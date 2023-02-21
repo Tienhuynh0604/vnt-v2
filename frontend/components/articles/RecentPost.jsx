@@ -27,6 +27,9 @@ const RecentPosts = ({exceptId = null}) => {
                 filters: {
                     id: {
                         $ne: exceptId
+                    },
+                    type: {
+                        $ne: "System"
                     }
                 },
                 populate: {

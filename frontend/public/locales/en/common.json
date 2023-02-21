@@ -1,5 +1,5 @@
 {
-  "company" : "VnSightseeing",
+  "company" : "Vietnam Sightseeing",
   "byg.text1": "Buses depart for Vietnam Sightseeing following timings:",
   "byg.text2": "Times are subject to change due to local traffic conditions.",
   "time_using": "Time using",
@@ -61,8 +61,8 @@
 
   "contact": "Contact",
   "contactUs": "Contact us",
-  "contact.t1": "Liên hệ ngay với chúng tôi",
-  "contact.t2": "Bạn cần giải đáp thắc mắc, hoặc tìm hiểu thêm về các tour du lịch của chúng tôi. Bạn có thể liên hệ với chúng tôi ở đây. Chúng rất vui lòng được hỗ trợ bạn",
+  "contact.t1": "Contact us now!",
+  "contact.t2": "Need more information about our tour. You can contact with us here. We waiting for you now!",
   "contact.git": "Get in touch",
   "contact.t3": "If you are at your holiday destination and have questions, please contact our local operator. You will find their contact information on your voucher.",
   "contact.worktime": "Monday to Sunday 8:00 AM to 1  0:00 PM (+7.00 GMT)",
@@ -121,5 +121,11 @@
   "ticket.t1": "Your ticket",
   "ticket.t2": "Thank you for purchasing. This is your ticket from Vn-sightseeing.com. Your ticket also sent to your email too.",
 
-  "error.t1": "Error occurred, please go back to homepage"
+  "error.t1": "Error occurred, please go back to homepage",
+
+  "hn": "Ha Noi",
+  "hcm": "Ho Chi Minh",
+  "hl": "Ha Long",
+  "dl": "Da Lat",
+  "hue": "Hue"
 }

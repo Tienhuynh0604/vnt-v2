@@ -251,6 +251,8 @@ export const initialProps = async (ctx) => {
 };
 
 export const getImageUrl = (path) => {
+    if(!path) return null;
+
     if (fullUrlReg.test(path)) {
         return path;
     }

@@ -100,23 +100,29 @@
 
   "co.t0": "Thanh toán",
   "co.t1": "Thông tin",
-  "co.t2": "Choose Payment Options",
-  "co.t3": "Agree with our term",
-  "co.t4": "Booking summary",
+  "co.t2": "Chọn cổng thanh toán",
+  "co.t3": "Đồng ý với điều khoản",
+  "co.t4": "Thông tin",
   "co.t5": "Thanh toán",
-  "co.form1": "Enter your fullname",
-  "co.form2": "Enter your email",
-  "co.form3": "Enter your phone",
-  "co.form4": "Select your country",
+  "co.form1": "Nhập họ và tên",
+  "co.form2": "Nhập email",
+  "co.form3": "Nhập số điện thoại",
+  "co.form4": "Chọn đất nước",
   "co.pw": "Thanh toán",
-  "co.no.item": "Chưa có hàng trong giỏ hàng",
+  "co.no.item": "Chưa có sản phẩm nào",
 
-  "cart.t1": "Check out",
-  "cart.t2": "Continue shopping",
-  "cart.t3": "Your have {{itemNum}} tours/ tickets in your cart",
+  "cart.t1": "Thanh toán",
+  "cart.t2": "Tiếp tục mua",
+  "cart.t3": "Bạn đang có {{itemNum}} sản phẩm trong giỏ",
 
   "ticket.t1": "Vé của bạn",
   "ticket.t2": "Cảm ơn bạn đã quan tâm đến dịch vụ của Công ty ngắm cảnh Việt Nam. Vé của bạn đã được gửi vào email đăng ký rồi nhé",
 
-  "error.t1": "Có lỗi xảy ra, xin vui lòng quay về trang chủ để bắt đầu lại"
+  "error.t1": "Có lỗi xảy ra, xin vui lòng quay về trang chủ để bắt đầu lại",
+
+  "hn": "Hà Nội",
+  "hcm": "Hồ Chí Minh",
+  "hl": "Hạ Long",
+  "dl": "Đà Lạt",
+  "hue": "Huế"
 }

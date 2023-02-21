@@ -217,7 +217,8 @@ const Page = () => {
                                     <Col xs={12}>
                                         <Form.Check
                                             inline
-                                            label={`${t("co.t3")}`}
+                                            label={<>{t("co.t3")} <a href={locale === "vi" ? "/vi/articles/dieu-kien-giao-dich" : "/articles/terms-and-conditions"}
+                                                                        target={"_blank"}>{t("here")}</a></>}
                                             name="agreeWithTerm"
                                             className="mt-3"
                                             id={`agree-term`}

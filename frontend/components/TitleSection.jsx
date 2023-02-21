@@ -4,12 +4,12 @@ import Link from "next/link";
 
 const TitleSection = ({
                           title = "Hà Nội",
-                          coverImage = "/images/bg/bg-1.jpg",
+                          coverImage,
                           breadcrumbs = [],
                       }) => {
     return <section className="title-section">
         <div className={"cover"}>
-            <Image src={coverImage}
+            <Image src={coverImage ? coverImage : "/images/bg/bg-1.jpg"}
                    alt={title}
                    fill={true}
                    style={{objectFit:"cover"}}

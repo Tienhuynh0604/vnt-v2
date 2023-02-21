@@ -63,19 +63,19 @@ const Footer = () => {
                         <h4>{t("information")}</h4>
                         <ul className="list-unstyled">
                             <li>
-                                <a href={"/city-tours/ha-noi"}>Ha Noi</a>
+                                <a href={"/city-tours/ha-noi"}>{t("hn")}</a>
                             </li>
                             <li>
-                                <a href={"/city-tours/ho-chi-minh"}>Ho Chi Minh</a>
+                                <a href={"/city-tours/ho-chi-minh"}>{t("hcm")}</a>
                             </li>
                             <li>
-                                <a href={"/city-tours/hue"}>Hue</a>
+                                <a href={"/city-tours/hue"}>{t("hue")}</a>
                             </li>
                             <li>
-                                <a href={"/city-tours/da-lat"}>Da Lat</a>
+                                <a href={"/city-tours/da-lat"}>{t("dl")}</a>
                             </li>
                             <li>
-                                <a href={"/city-tours/ha-long"}>Ha Long</a>
+                                <a href={"/city-tours/ha-long"}>{t("hl")}</a>
                             </li>
                         </ul>
                     </Col>
@@ -103,7 +103,7 @@ const Footer = () => {
                      className="d-flex align-items-center justify-content-sm-center justify-content-lg-end">
                     <ul className="mb-0 list-inline list-unstyled">
                         <li className="list-inline-item">
-                            <Link href={"/"}>
+                            <Link href={locale === "vi" ? "/vi/articles/dieu-kien-giao-dich" : "/articles/terms-and-conditions"}>
                                 {t("footer.t1")}
                             </Link>
                         </li>

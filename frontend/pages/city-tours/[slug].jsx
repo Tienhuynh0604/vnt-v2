@@ -130,6 +130,9 @@ export const getServerSideProps = async (context) => {
                 destination: {
                     slug,
                 },
+                type: {
+                    $ne: "System"
+                }
             },
             sort: ["id:desc"],
             pagination: {

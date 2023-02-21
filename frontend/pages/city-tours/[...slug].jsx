@@ -13,7 +13,7 @@ import LightGallery from "lightgallery/react";
 import DecorComponent from "../../components/DecorComponent";
 import {useAppContext} from "../../layouts/AppLayout";
 import {
-    createSeoFromCategory, createSeoFromTour,
+    createSeoFromTour,
     getMinPriceMaxPrice,
     renderContactItem,
     renderDynamicFeature,
@@ -45,16 +45,6 @@ const Page = ({model, paymentProduct}) => {
 
     const renderPrices = () => {
         const ret = [];
-        if (!paymentProduct || !paymentProduct.attributes.priceList) {
-            ret.push(<li className="breadcrumb-item">
-                <Link href={common?.email?.link ? `mailto: ${common?.email?.link}`
-                    : "#"}>
-                    <i>{t("Liên hệ với chúng tôi")}</i>
-                </Link>
-            </li>);
-        }
-
-
         try {
             const [minChildPrice, minAdultPrice] = getMinPriceMaxPrice(
                 paymentProduct.attributes?.type,
@@ -69,12 +59,6 @@ const Page = ({model, paymentProduct}) => {
             </li>);
         } catch (e) {
             console.error(e);
-            ret.push(<li className="breadcrumb-item">
-                <Link href={common?.email?.link ? `mailto: ${common?.email?.link}`
-                    : "#"}>
-                    <i>{t("Liên hệ với chúng tôi")}</i>
-                </Link>
-            </li>);
         }
 
         return <ol className="breadcrumb">
@@ -286,12 +270,17 @@ export const getServerSideProps = async (context) => {
 
         if (res.data.length > 0) {
             model = res.data[0];
-            const res2 = await callGet(`/tours/payment-product/${model.id}`);
-            paymentProduct = res2.data;
-            seoCustom = createSeoFromTour(req
-                , `/${PATH_CITY_TOURS}/${model.attributes?.destination?.data.attributes.slug}`
-                , model
-                , locale);
+            try{
+                const res2 = await callGet(`/tours/payment-product/${model.id}`);
+                paymentProduct = res2.data;
+                seoCustom = createSeoFromTour(req
+                    , `/${PATH_CITY_TOURS}/${model.attributes?.destination?.data.attributes.slug}`
+                    , model
+                    , locale);
+            }catch (e) {
+                paymentProduct = null;
+            }
+
         }
     } catch (e) {
         console.error(e.message);

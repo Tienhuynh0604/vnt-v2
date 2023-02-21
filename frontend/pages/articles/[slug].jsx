@@ -13,9 +13,14 @@ import {PATH_NEWS} from "../../ulti/appConst";
 import RecentPosts from "../../components/articles/RecentPost";
 import RecentTours from "../../components/articles/RecentTours";
 import SearchArticleForm from "../../components/form/SearchArticleForm";
+import Error from "next/error";
 
 const ArticleDetailPage = ({model, nModel, pModel}) => {
     const {t} = useTranslation("common");
+
+    if (!model) {
+        return <Error statusCode={404}/>
+    }
 
     return <PageLayout className="pb-0"
                        title={model.attributes.title}
@@ -25,16 +30,17 @@ const ArticleDetailPage = ({model, nModel, pModel}) => {
                                link: `/${PATH_NEWS}`
                            }
                        ]}
-                       coverImage={getImageUrl(model?.attributes?.cover.data.attributes.url)}
+                       coverImage={getImageUrl(model?.attributes?.cover?.data?.attributes.url)}
     >
         <div className="position-relative">
             <Container>
                 <Row>
                     <Col xs={12} md={8}>
                         <div className="article-items">
-                            <div className="cover">
+                            {model.attributes.cover?.data && <div className="cover">
                                 {renderFillImage(model.attributes.cover)}
                             </div>
+                            }
                             <hr/>
                             <div
                                 className="date text-muted d-flex align-items-center">
@@ -147,7 +153,7 @@ export const getServerSideProps = async (context) => {
         }, locale, true);
 
 
-        if(res.data[0].length === 0){
+        if (res.data[0].length === 0) {
             throw new Error(`Not found: ${slug}`);
         }
 

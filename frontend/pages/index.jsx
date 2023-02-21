@@ -50,6 +50,11 @@ export const getServerSideProps = async (context) => {
         }, locale, true);
         const p3 = callGet("/articles", {
             fields: ['title', 'slug', 'shortDescription', 'createdAt'],
+            filters: {
+                type: {
+                    $ne: "System"
+                }
+            },
             sort: ['id:desc'],
             populate: {
                 thumb: imagePopulate(),
