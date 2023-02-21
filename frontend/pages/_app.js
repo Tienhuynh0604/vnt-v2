@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import App from "next/app";
 import AppLayout from "../layouts/AppLayout";
 import "slick-carousel/slick/slick.css";
@@ -15,13 +15,14 @@ import "react-image-gallery/styles/scss/image-gallery.scss";
 import '../styles/App.scss';
 import 'nprogress/nprogress.css'
 import SSRProvider from 'react-bootstrap/SSRProvider';
-import {appWithTranslation} from 'next-i18next';
+import { appWithTranslation } from 'next-i18next';
 import Seo from "../components/Seo";
 import MainLayout from "../layouts/MainLayout";
-import {initialProps} from "../ulti/helper";
+import { initialProps } from "../ulti/helper";
+import ErrorBoundary from "../layouts/ErrorBoundary";
 
 
-const MyApp = ({Component, pageProps}) => {
+const MyApp = ({ Component, pageProps }) => {
 
     const getLayout = Component.getLayout || ((page) => {
         return <MainLayout {...pageProps}>
@@ -30,10 +31,12 @@ const MyApp = ({Component, pageProps}) => {
     });
 
     return <SSRProvider>
-        <Seo {...pageProps} />
-        <AppLayout {...pageProps}>
-            {getLayout(<Component {...pageProps} />)}
-        </AppLayout>
+        {/* <ErrorBoundary> */}
+            <Seo {...pageProps} />
+            <AppLayout {...pageProps}>
+                {getLayout(<Component {...pageProps} />)}
+            </AppLayout>
+        {/* </ErrorBoundary> */}
     </SSRProvider>
 };
 
@@ -47,6 +50,7 @@ MyApp.getInitialProps = async (context) => {
         }
     } catch (e) {
         console.error(`MyApp.getInitialProps`, e);
+        return { notFound: true }
     }
 
     return {

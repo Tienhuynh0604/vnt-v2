@@ -146,6 +146,11 @@ export const getServerSideProps = async (context) => {
             }
         }, locale, true);
 
+
+        if(res.data[0].length === 0){
+            throw new Error(`Not found: ${slug}`);
+        }
+
         model = res.data[0];
 
         const p1 = callGet('/articles', {

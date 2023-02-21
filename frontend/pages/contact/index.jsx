@@ -6,9 +6,9 @@ import { useTranslation } from "next-i18next";
 import DecorComponent from "../../components/DecorComponent";
 import { useAppContext } from "../../layouts/AppLayout";
 import ContactForm from "../../components/form/ContactForm";
-import {createSimpleSeo, renderContactItem} from "../../ulti/appUtil";
+import { createSimpleSeo, renderContactItem } from "../../ulti/appUtil";
 import Link from "next/link";
-import {PATH_CONTACT, PATH_GALLERY} from "../../ulti/appConst";
+import { PATH_CONTACT, PATH_GALLERY } from "../../ulti/appConst";
 
 const Page = ({ models = [] }) => {
     const { t } = useTranslation("common");
@@ -32,23 +32,26 @@ const Page = ({ models = [] }) => {
                         <p>
                             <strong>{t("schedule")}:</strong> {t("contact.worktime")}
                         </p>
-                        {destinations?.map((currentDes, idx) => {
-                            return <p key={`contact_${idx}`}>
-                                <strong>{locale === "vi" ? currentDes.attributes.name : currentDes.attributes.name_en}</strong>
-                                {currentDes.attributes.contacts?.map((item, idx) => {
-                                    return <div>
-                                        {renderContactItem(item, `dc_${idx}`
-                                            , true
-                                            , {
-                                                style: {
-                                                    fontSize: "1rem",
-                                                    marginRight: "0.5rem"
-                                                }
-                                            })}
-                                    </div>
-                                })}
-                            </p>
-                        })}
+                        <Row>
+                            {destinations?.map((currentDes, idx) => {
+                                return <Col xs={12} md={6} key={`contact_${idx}`}><p>
+                                    <strong>{locale === "vi" ? currentDes.attributes.name : currentDes.attributes.name_en}</strong>
+                                    {currentDes.attributes.contacts?.map((item, idx) => {
+                                        return <div>
+                                            {renderContactItem(item, `dc_${idx}`
+                                                , true
+                                                , {
+                                                    style: {
+                                                        fontSize: "1rem",
+                                                        marginRight: "0.5rem"
+                                                    }
+                                                })}
+                                        </div>
+                                    })}
+                                </p>
+                                </Col>
+                            })}
+                        </Row>
                         <p>
                             <strong>{t("email")}:</strong>
                             <br />
@@ -180,7 +183,7 @@ const Page = ({ models = [] }) => {
 };
 
 export const getServerSideProps = async (context) => {
-    const { locale = 'en' , req} = context;
+    const { locale = 'en', req } = context;
     let seoCustom = createSimpleSeo(req,
         `/${PATH_CONTACT}`,
         "Vietnam Sightseeing - Contact",
