@@ -32,13 +32,13 @@ const Seo = ({seo = {}, seoCustom = {}}) => {
 
     const SocialMetaTags = () => {
         let metaTags = [];
-        if (!metaSocial) {
+        if (!metaSocial || metaSocial.length === 0) {
             metaTags.push(<meta key={"metaOgTitle"} property="og:title"
                                 content={metaTitle}/>);
             metaTags.push(<meta key={"metaOgDescription"} property="og:description"
                                 content={metaDescription}/>);
             metaTags.push(<meta key={"metaTwTitle"} name="twitter:title"
-                                content={metaTitle}/>)
+                                content={metaTitle}/>);
 
             if (metaImageData) {
                 metaTags.push(<meta key={"metaOgImage"} property="og:image"
@@ -48,12 +48,12 @@ const Seo = ({seo = {}, seoCustom = {}}) => {
             }
         } else {
             metaSocial.map(metaSocialItem => {
-                const customShareImage = metaSocialItem.image ? metaSocialItem.image.data.attributes : null;
+                const customShareImage = metaSocialItem.image?.data ? metaSocialItem.image?.data.attributes : null;
                 if (metaSocialItem.socialNetwork === 'Facebook') {
                     metaTags.push(<meta key={"metaOgTitle"} property="og:title"
                                         content={metaSocialItem.title}/>);
                     metaTags.push(<meta key={"metaOgDescription"} property="og:description"
-                                        content={metaSocialItem.description}/>)
+                                        content={metaSocialItem.description}/>);
                     if (customShareImage) {
                         metaTags.push(<meta key={"metaOgImage"} property="og:image"
                                             content={getImageUrl(customShareImage.url)}/>);

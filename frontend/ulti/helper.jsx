@@ -233,7 +233,6 @@ export const initialProps = async (ctx) => {
         headerMenus = data2;
         footerMenus = data3;
         destinations = data4.data;
-        console.log("initialProps SEO", seo);
     } catch (e) {
         console.error("initialProps", e);
         throw new Error(e.message);

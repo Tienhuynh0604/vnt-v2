@@ -8,7 +8,6 @@ import { Icon } from "@iconify/react";
 import { getImageUrl } from "../../ulti/helper";
 
 const TestimonialBlock = ({ dataSource = [] }) => {
-    console.log(dataSource);
     const { t } = useTranslation("common");
 
     const settings = {
@@ -17,8 +16,8 @@ const TestimonialBlock = ({ dataSource = [] }) => {
         infinite: true,
         speed: 500,
         lazyLoad: true,
-        slidesToShow: 2,
-        slidesToScroll: 2,
+        slidesToShow: 3,
+        slidesToScroll: 1,
         autoplay: true,
         nextArrow: <SlickNextArrow />,
         prevArrow: <SlickPrevArrow />,
@@ -28,7 +27,7 @@ const TestimonialBlock = ({ dataSource = [] }) => {
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1
-                }
+            }
             }
         ]
     };
@@ -38,12 +37,12 @@ const TestimonialBlock = ({ dataSource = [] }) => {
             {dataSource && dataSource.map((item, idx) => {
                 return <div key={`t_s_${idx}`}>
                     <div className="testimonial-item">
-                        <Image src={getImageUrl(item.avatar?.data?.attributes?.url)}
-                            alt={item.avatar?.data?.attributes?.name}
-                            width={160}
-                            height={160}
-                            className={"avatar"}
-                        />
+                        {/*<Image src={getImageUrl(item.avatar?.data?.attributes?.url)}*/}
+                        {/*    alt={item.avatar?.data?.attributes?.name}*/}
+                        {/*    width={160}*/}
+                        {/*    height={160}*/}
+                        {/*    className={"avatar"}*/}
+                        {/*/>*/}
                         <div>
                             <div className="rating">
                                 <Icon icon={"ant-design:star-filled"} width={20} height={20} />

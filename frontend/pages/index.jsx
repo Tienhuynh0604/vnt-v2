@@ -25,7 +25,6 @@ const Home = (props) => {
 export default Home;
 
 export const getServerSideProps = async (context) => {
-    console.log("Home.getServerSideProps");
     const {locale} = context;
     let homeData = {};
     let articlesData = {};
