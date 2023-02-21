@@ -5,6 +5,7 @@ import {Icon} from "@iconify/react";
 import Link from "next/link";
 import {useTranslation} from "react-i18next";
 import {useAppContext} from "../layouts/AppLayout";
+import {getStrapiMedia} from "../ulti/strapiHelper";
 
 const ProductCard = ({destination, item, className}) => {
     const {t} = useTranslation("common");
@@ -79,7 +80,7 @@ const ProductCard = ({destination, item, className}) => {
             </ul>
             <Card.Img variant="top"
                       alt={item.attributes.tourCard?.image?.data?.attributes?.name}
-                      src={getImageUrl(item.attributes.tourCard?.image?.data?.attributes?.url)}/>
+                      src={getImageUrl(getStrapiMedia(item.attributes.tourCard?.image.data, 'small')?.url)}/>
             <Card.Body>
                 <ul className="tag-list-2">
                     <li>
@@ -112,7 +113,7 @@ const ProductCard = ({destination, item, className}) => {
                 </ul>
                 <ul className="feature">
                     {item.attributes.tourCard?.features.map((f, idx) => {
-                        return <li key={`uhf${idx}`} className={`${idx === 0 ? "line-2br": "line-1br"}`}>
+                        return <li key={`uhf${idx}`} className={`${idx === 0 ? "line-2br" : "line-1br"}`}>
                             <Icon icon={f.iconClass}/> {f.displayText}
                         </li>
                     })}

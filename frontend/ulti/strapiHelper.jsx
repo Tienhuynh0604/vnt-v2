@@ -15,9 +15,40 @@ export const strapiImg = (img, className = ''
     if (!img) {
         return "";
     }
+
+    const {url, width, height} = getStrapiMedia(img, size);
+
+    let props = {
+        alt: img.attributes?.name,
+        src: getImageUrl(url),
+        priority,
+        quality
+    };
+    if (fill) {
+        props = {
+            ...props,
+            fill,
+            style: {objectFit: "cover"}
+        }
+    } else {
+        props = {
+            ...props,
+            width,
+            height
+        }
+    }
+
+    return <Image className={`${className}`} {...props}/>
+};
+
+export const getStrapiMedia = (img, size) => {
+    if (!img) {
+        return {};
+    }
+
     let url = img.attributes.url;
-    let width = staticWidth ? staticWidth : img.attributes.width;
-    let height = staticHeight ? staticHeight : img.attributes.height;
+    let width = img.attributes.width;
+    let height = img.attributes.height;
 
     switch (size) {
         case "large":
@@ -50,27 +81,11 @@ export const strapiImg = (img, className = ''
             break;
     }
 
-    let props = {
-        alt: img.attributes?.name,
-        src: getImageUrl(url),
-        priority,
-        quality
-    };
-    if (fill) {
-        props = {
-            ...props,
-            fill,
-            style: {objectFit:"cover"}
-        }
-    } else {
-        props = {
-            ...props,
-            width,
-            height
-        }
+    return {
+        url,
+        width,
+        height
     }
-
-    return <Image className={`${className}`} {...props}/>
 };
 
 export const strapPagination = (path, pagination, query) => {

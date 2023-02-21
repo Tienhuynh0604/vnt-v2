@@ -13,7 +13,6 @@ const OurTours = ({tours = []}) => {
     const {destinations = [], locale} = useAppContext();
 
     const onClickFilter = (desSlug) => {
-        console.log(desSlug);
         setCurrentTag(desSlug);
     };
 

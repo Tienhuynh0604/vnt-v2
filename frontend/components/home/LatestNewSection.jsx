@@ -50,7 +50,11 @@ const LatestNewBlock = ({dataSource = []}) => {
                 return <div key={`lns_${idx}`} className="news-item">
                     <div className={"thumb"}>
                         <Link href={`/${PATH_NEWS}/${item.attributes.slug}`}>
-                            {strapiImg(item.attributes.thumb.data, 'w-100 h-100 hvr-grow-rotate', true)}
+                            {strapiImg(item.attributes.thumb.data
+                                , 'w-100 h-100 hvr-grow-rotate'
+                                , true
+                                , false
+                                , "small")}
                         </Link>
                     </div>
                     <div className="info mt-4">
