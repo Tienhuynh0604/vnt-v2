@@ -45,22 +45,24 @@ const Page = ({model, paymentProduct}) => {
 
     const renderPrices = () => {
         const ret = [];
-        try {
-            const [minChildPrice, minAdultPrice] = getMinPriceMaxPrice(
-                paymentProduct.attributes?.type,
-                paymentProduct.attributes?.priceList,
-                locale
-            );
-            ret.push(<li className="breadcrumb-item">
-                {t("Adults")}: <strong>{moneyFormat(minAdultPrice, locale)}</strong>
-            </li>);
-            ret.push(<li className="breadcrumb-item">
-                {t("Child")}: <strong>{moneyFormat(minChildPrice, locale)}</strong>
-            </li>);
-        } catch (e) {
-            console.error(e);
-        }
+        if(paymentProduct){
+            try {
+                const [minChildPrice, minAdultPrice] = getMinPriceMaxPrice(
+                    paymentProduct.attributes?.type,
+                    paymentProduct.attributes?.priceList,
+                    locale
+                );
+                ret.push(<li className="breadcrumb-item">
+                    {t("Adults")}: <strong>{moneyFormat(minAdultPrice, locale)}</strong>
+                </li>);
+                ret.push(<li className="breadcrumb-item">
+                    {t("Child")}: <strong>{moneyFormat(minChildPrice, locale)}</strong>
+                </li>);
+            } catch (e) {
+                console.error(e);
+            }
 
+        }
         return <ol className="breadcrumb">
             {ret.map(item => item)}
         </ol>
