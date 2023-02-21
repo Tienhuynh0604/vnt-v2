@@ -21,22 +21,21 @@ const Page = ({galleries = {}, destinations = [], query = {}}) => {
 
     const lightGallery = useRef(null);
 
-
     useEffect(() => {
         if (galleries) {
             setImages(galleries.data);
         }
     }, [galleries]);
 
+    useEffect(() => {
+        lightGallery.current.refresh();
+    }, [images]);
+
     const onInit = useCallback((detail) => {
         if (detail) {
             lightGallery.current = detail.instance;
         }
     }, []);
-
-    useEffect(() => {
-        lightGallery.current.refresh();
-    }, [images]);
 
     const handleChange = async (value) => {
         let query = {
@@ -107,7 +106,9 @@ const Page = ({galleries = {}, destinations = [], query = {}}) => {
                     })}
                 </LightGallery>
                 <div className='d-flex justify-content-end mt-3'>
-                    <AppPagination {...galleries.meta.pagination} query={query} baseUrl={"/galleries"}/>
+                    <AppPagination {...galleries.meta.pagination}
+                                   query={query}
+                                   baseUrl={"/galleries"}/>
                 </div>
             </div>
         </Container>

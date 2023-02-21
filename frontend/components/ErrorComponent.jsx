@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 const ErrorComponent = () => {
     const { t } = useTranslation("common");
     return (
-        <div class="d-flex align-items-center flex-column py-5 bg-primary h-100">
+        <div className="d-flex align-items-center flex-column py-5 bg-primary h-100">
             <Image src="/404.png"
                 width={701}
                 height={446}

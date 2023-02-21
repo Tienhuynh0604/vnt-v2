@@ -1,6 +1,7 @@
 import Pagination from "react-bootstrap/Pagination";
 import Link from "next/link";
 import React from "react";
+import {Icon} from "@iconify/react";
 
 const AppPagination = ({
                            baseUrl,
@@ -21,7 +22,7 @@ const AppPagination = ({
             }
         }}
         >
-            <Pagination.Prev/>
+            <span><Icon icon={"material-symbols:chevron-left"} height={30}/></span>
         </Link>}
         <Pagination.Item active>{page}</Pagination.Item>
         {page < pageCount && <Link href={{
@@ -32,7 +33,7 @@ const AppPagination = ({
             }
         }}
         >
-            <Pagination.Next/>
+            <span><Icon icon={"material-symbols:chevron-right"} height={30}/></span>
         </Link>}
     </Pagination>
 
