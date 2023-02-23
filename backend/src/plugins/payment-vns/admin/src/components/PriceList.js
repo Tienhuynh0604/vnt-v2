@@ -29,14 +29,16 @@ const PriceList = (props) => {
   useEffect(() => {
     console.log(initialData);
     if (initialData?.paymentProduct[0]) {
-      console.log(initialData);
       getServices(initialData.paymentProduct[0].id);
     }
   }, [initialData]);
 
   useEffect(() => {
     if (modifiedData?.paymentProduct[0]) {
-      getServices(modifiedData.paymentProduct[0].id);
+      if (currentProductId !== modifiedData.paymentProduct[0].id) {
+        setPriceList([]);
+        getServices(modifiedData.paymentProduct[0].id);
+      }
     }
   }, [modifiedData]);
 
@@ -71,6 +73,13 @@ const PriceList = (props) => {
     updateValueChange(newList);
   };
 
+  const onChangeOptLblEn = (idx, value) => {
+    let newList = [...priceList];
+    newList[idx].optName_en = value;
+    setPriceList(newList);
+    updateValueChange(newList);
+  };
+
   const onChangeChecked = (parentIdx, checked, value) => {
     const newList = [...priceList];
     const idx = newList[parentIdx].priceList.findIndex(item => item.price_id === value.price_id);
@@ -87,6 +96,7 @@ const PriceList = (props) => {
     let newPriceList = [...priceList];
     newPriceList.push({
       optName: "",
+      optName_en: "",
       priceList: [],
       routerId: paymentProduct?.routerId,
     });
@@ -119,15 +129,31 @@ const PriceList = (props) => {
 
   const renderPriceOpt = (item, idx) => {
     return <div key={`popt${idx}`}>
-      <Field name="priceOpt" style={{marginBottom: "0.5rem"}}>
-        <FieldLabel>Name</FieldLabel>
-        <FieldInput type="text" placeholder="Price option name"
-                    value={item.optName}
-                    onChange={(e) => {
-                      onChangeOptLbl(idx, e.target.value)
-                    }}
-        />
-      </Field>
+      <Grid gap={3}>
+        <GridItem col={6}>
+
+          <Field name="priceOpt" style={{marginBottom: "0.5rem"}}>
+            <FieldLabel>Name</FieldLabel>
+            <FieldInput type="text" placeholder="Price option name"
+                        value={item.optName}
+                        onChange={(e) => {
+                          onChangeOptLbl(idx, e.target.value)
+                        }}
+            />
+          </Field>
+        </GridItem>
+        <GridItem col={6}>
+          <Field name="priceOpt_en" style={{marginBottom: "0.5rem"}}>
+            <FieldLabel>Name</FieldLabel>
+            <FieldInput type="text" placeholder="Price option name en"
+                        value={item.optName_en}
+                        onChange={(e) => {
+                          onChangeOptLblEn(idx, e.target.value)
+                        }}
+            />
+          </Field>
+        </GridItem>
+      </Grid>
       <Field name="priceList" style={{marginBottom: "0.5rem"}}>
         <FieldLabel>Choose PriceList</FieldLabel>
         <Grid gap={3}>
