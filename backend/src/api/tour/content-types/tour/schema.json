@@ -224,7 +224,7 @@
       "default": false,
       "required": true
     },
-    "VnsPriceList": {
+    "vnsPriceList": {
       "pluginOptions": {
         "i18n": {
           "localized": false
