@@ -36,7 +36,6 @@ const PriceList = (props) => {
   useEffect(() => {
     if (modifiedData?.paymentProduct[0]) {
       if (currentProductId !== modifiedData.paymentProduct[0].id) {
-        setPriceList([]);
         getServices(modifiedData.paymentProduct[0].id);
       }
     }
@@ -174,16 +173,24 @@ const PriceList = (props) => {
   };
 
   return (
-    <Stack spacing={3}>
-      <FieldLabel>Price List</FieldLabel>
-      {paymentProduct ? <Button onClick={() => onClickAddPrice()}>Thêm giá</Button> :
-        <i>No payment product selected</i>}
+    <div>
+      <FieldLabel style={{marginBottom: "1rem"}}>Price List</FieldLabel>
+      <div style={{display: "flex", justifyContent: "space-between"}}>
+        {paymentProduct ? <Button style={{marginBottom: "1rem"}} onClick={() => onClickAddPrice()}>
+            Thêm giá
+          </Button> :
+          <i>No payment product selected</i>}
+        <Button onClick={() => setPriceList([])}
+                variant="secondary">
+          Reset List
+        </Button>
+      </div>
       {priceList?.map((item, idx) => {
         return (
           renderPriceOpt(item, idx)
         )
       })}
-    </Stack>
+    </div>
   )
 };
 
