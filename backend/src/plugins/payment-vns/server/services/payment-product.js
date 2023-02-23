@@ -1,11 +1,6 @@
-// server/services/task.js
-'use strict';
-
-/**
- *  service.
- */
-
-const { createCoreService } = require('@strapi/strapi').factories;
-
-module.exports = createCoreService('plugin::payment-vns.payment-product', {
-});
+module.exports = ({ strapi }) => ({
+    async findOne(id) {
+        return await strapi.entityService.findOne('plugin::payment-vns.payment-product'
+            , id);
+    }
+})

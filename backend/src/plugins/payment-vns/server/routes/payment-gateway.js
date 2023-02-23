@@ -25,5 +25,13 @@ module.exports = {
         policies: [],
       },
     },
+    {
+      method: 'GET',
+      path: '/get-service/:id',
+      handler: 'paymentProductController.getPaymentProductAction',
+      config: {
+        policies: [],
+      },
+    },
   ]
 };

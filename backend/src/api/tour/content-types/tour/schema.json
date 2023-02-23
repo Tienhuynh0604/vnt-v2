@@ -223,6 +223,15 @@
       "type": "boolean",
       "default": false,
       "required": true
+    },
+    "VnsPriceList": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "customField",
+      "customField": "plugin::payment-vns.VnsPriceList"
     }
   }
 }

@@ -4,6 +4,7 @@ import pluginId from './pluginId';
 import Initializer from './components/Initializer';
 import PluginIcon from './components/PluginIcon';
 import SyncPopup from "./components/SyncPopup";
+import PriceList from './components/PriceList';
 
 const name = pluginPkg.strapi.name;
 
@@ -38,6 +39,24 @@ export default {
         },
       ]
     );
+    app.customFields.register({
+      name: "VnsPriceList",
+      type: "json",
+      pluginId: "payment-vns",
+      intlLabel: {
+        id: `${pluginId}.plugin.priceList`,
+        defaultMessage: 'VsnPriceList',
+      },
+      intlDescription: {
+        id: `${pluginId}.plugin.priceDes`,
+        defaultMessage: 'Select Price list',
+      },
+      components: {
+        Input: async () => {
+          return import('./components/PriceList');
+        }
+      },    
+    })
   },
 
   bootstrap(app) {

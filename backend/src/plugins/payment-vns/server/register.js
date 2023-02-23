@@ -1,6 +1,11 @@
 'use strict';
 
 module.exports = ({ strapi }) => {
+  strapi.customFields.register({
+    name: 'VnsPriceList',
+    plugin: 'payment-vns',
+    type: 'json',
+  });
   // registeration phase
   Object.values(strapi.contentTypes).forEach(contentType => {
     // If this is an api content-type
