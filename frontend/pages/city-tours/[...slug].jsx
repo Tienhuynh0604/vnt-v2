@@ -45,11 +45,10 @@ const Page = ({model, paymentProduct}) => {
 
     const renderPrices = () => {
         const ret = [];
-        if(paymentProduct){
+        if(model.attributes.vnsPriceList && model.attributes.vnsPriceList.length > 0){
             try {
                 const [minChildPrice, minAdultPrice] = getMinPriceMaxPrice(
-                    paymentProduct.attributes?.type,
-                    paymentProduct.attributes?.priceList,
+                    model.attributes.vnsPriceList,
                     locale
                 );
                 ret.push(<li className="breadcrumb-item">
@@ -272,17 +271,20 @@ export const getServerSideProps = async (context) => {
 
         if (res.data.length > 0) {
             model = res.data[0];
-            try{
-                const res2 = await callGet(`/tours/payment-product/${model.id}`);
-                paymentProduct = res2.data;
-                seoCustom = createSeoFromTour(req
-                    , `/${PATH_CITY_TOURS}/${model.attributes?.destination?.data.attributes.slug}`
-                    , model
-                    , locale);
-            }catch (e) {
-                paymentProduct = null;
-            }
-
+            seoCustom = createSeoFromTour(req
+                , `/${PATH_CITY_TOURS}/${model.attributes?.destination?.data.attributes.slug}`
+                , model
+                , locale);
+            // try{
+            //     const res2 = await callGet(`/tours/payment-product/${model.id}`);
+            //     paymentProduct = res2.data;
+            //     seoCustom = createSeoFromTour(req
+            //         , `/${PATH_CITY_TOURS}/${model.attributes?.destination?.data.attributes.slug}`
+            //         , model
+            //         , locale);
+            // }catch (e) {
+            //     paymentProduct = null;
+            // }
         }
     } catch (e) {
         console.error(e.message);
@@ -292,7 +294,6 @@ export const getServerSideProps = async (context) => {
     return {
         props: {
             model,
-            paymentProduct,
             seoCustom,
             ...(await serverSideTranslations(locale, ['common'])),
         },

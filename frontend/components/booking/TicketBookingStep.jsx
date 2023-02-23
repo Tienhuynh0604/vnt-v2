@@ -1,25 +1,16 @@
 import React, {memo, useState} from "react";
 import {useTranslation} from "react-i18next";
-import {Button, Col, Form, Row, Tab, Table, Tabs} from "react-bootstrap";
-import DatePicker from "react-datepicker";
-import InputNumberPlusMinus from "./InputNumberPlusMinus";
-import {Icon} from "@iconify/react";
-import Link from "next/link";
+import {Tab, Tabs} from "react-bootstrap";
 import BookingConfirmStep from "./BookingConfirmStep";
 import TicketBusStep from "./step/TicketBusStep";
 
 const TicketBookingStep = ({productId}) => {
-    const {t} = useTranslation("common");
     const [selectedTab, setSelectedTab] = useState({
         tabKey: "step-1",
         values: {}
     });
-    const [productData, setProductData] = useState({
-        rawProduct: null,
-        attributes: null,
-        products: []
-    });
-    const [priceList, setPriceList] = useState([]);
+    const [productData, setProductData] = useState(null);
+    const [vnsPriceList, setPriceList] = useState([]);
 
     const onClickNext = (values) => {
         setSelectedTab({
@@ -44,16 +35,14 @@ const TicketBookingStep = ({productId}) => {
     >
         <Tab eventKey="step-1" title={<>1. Select your ticket</>}>
             <TicketBusStep productId={productId}
-                           productData={productData}
                            setProductData={setProductData}
-                           priceList={priceList}
-                           setPriceList={setPriceList}
+                           productData={productData}
                            onClickNext={onClickNext}/>
         </Tab>
         <Tab eventKey="step-confirm" title={<>2. Verify information</>}>
-            <BookingConfirmStep productData={productData}
-                                productId={productId}
-                                priceList={priceList}
+            <BookingConfirmStep productId={productId}
+                                productData={productData}
+                                vnsPriceList={vnsPriceList}
                                 onBack={backToStep1}/>
         </Tab>
     </Tabs>

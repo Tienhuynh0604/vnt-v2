@@ -130,7 +130,6 @@ const PriceList = (props) => {
     return <div key={`popt${idx}`}>
       <Grid gap={3}>
         <GridItem col={6}>
-
           <Field name="priceOpt" style={{marginBottom: "0.5rem"}}>
             <FieldLabel>Name</FieldLabel>
             <FieldInput type="text" placeholder="Price option name"

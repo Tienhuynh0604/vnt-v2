@@ -47,6 +47,9 @@
   "name": "Họ tên",
   "save.pdf": "Lưu về thiết bị",
   "route": "Tuyến",
+  "date": "Ngày",
+  "price": "Giá",
+  "back": "Quay lại",
 
   "form.inValid.min3char": "Nội dung phải có ít nhất 3 ký tự",
   "form.inValid.name": "Nhập đầy đủ họ và tên",
@@ -124,5 +127,10 @@
   "hcm": "Hồ Chí Minh",
   "hl": "Hạ Long",
   "dl": "Đà Lạt",
-  "hue": "Huế"
+  "hue": "Huế",
+
+  "booking.t1": "Thông tin vé",
+  "booking.t2": "Chọn ngày",
+  "booking.t3": "Mua ngay",
+  "booking.t4": "Thêm vào giỏ"
 }

@@ -46,7 +46,10 @@
   "quantity": "Quantity",
   "name": "Name",
   "save.pdf": "Save to device",
-  "route": "Tuyến",
+  "route": "Route",
+  "date": "Date",
+  "price": "Price",
+  "back": "Back",
 
   "form.inValid.min3char": "Please enter text that is at least 3 characters",
   "form.inValid.name": "Please enter your full name",
@@ -127,5 +130,10 @@
   "hcm": "Ho Chi Minh",
   "hl": "Ha Long",
   "dl": "Da Lat",
-  "hue": "Hue"
+  "hue": "Hue",
+
+  "booking.t1": "Ticket information",
+  "booking.t2": "Choose date",
+  "booking.t3": "Check out now",
+  "booking.t4": "Add to cart"
 }

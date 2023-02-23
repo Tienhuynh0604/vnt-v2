@@ -164,7 +164,7 @@ export const renderFillImage = (image, props = {}) => {
     return <Image alt={image.data.attributes.name}
                   src={getImageUrl(image.data.attributes.url)}
                   fill
-                  style={{objectFit:"cover"}}
+                  style={{objectFit: "cover"}}
                   {...props}
     />
 };
@@ -196,35 +196,36 @@ export const SlickPrevArrow = (props) => {
     );
 };
 
-export const getMinPriceMaxPrice = (type, priceList, locale) => {
+export const getMinPriceMaxPrice = (vnsPriceList, locale) => {
     let minAdultPrice = 0;
     let minChildPrice = 0;
 
     try {
-
-        priceList.forEach((item) => {
-            if (item.age_group === AGE_GROUP_ADULT) {
-                if (locale === "vi") {
-                    if (minAdultPrice === 0 || item.price < minAdultPrice) {
-                        minAdultPrice = item.price;
+        vnsPriceList.map(vpl => {
+            vpl.priceList.forEach((item) => {
+                if (item.age_group === AGE_GROUP_ADULT) {
+                    if (locale === "vi") {
+                        if (minAdultPrice === 0 || item.price < minAdultPrice) {
+                            minAdultPrice = item.price;
+                        }
+                    } else if (locale === "en") {
+                        if (minAdultPrice === 0 || item.usd_price < minAdultPrice) {
+                            minAdultPrice = item.usd_price;
+                        }
                     }
-                } else if (locale === "en") {
-                    if (minAdultPrice === 0 || item.usd_price < minAdultPrice) {
-                        minAdultPrice = item.usd_price;
+                } else if (item.age_group === AGE_GROUP_CHILD) {
+                    if (locale === "vi") {
+                        if (minChildPrice === 0 || item.price < minChildPrice) {
+                            minChildPrice = item.price;
+                        }
+                    } else if (locale === "en") {
+                        if (minChildPrice === 0 || item.usd_price < minChildPrice) {
+                            minChildPrice = item.usd_price;
+                        }
                     }
                 }
-            } else if (item.age_group === AGE_GROUP_CHILD) {
-                if (locale === "vi") {
-                    if (minChildPrice === 0 || item.price < minChildPrice) {
-                        minChildPrice = item.price;
-                    }
-                } else if (locale === "en") {
-                    if (minChildPrice === 0 || item.usd_price < minChildPrice) {
-                        minChildPrice = item.usd_price;
-                    }
-                }
-            }
-        });
+            });
+        })
     } catch (e) {
         console.error(e.message);
     }
